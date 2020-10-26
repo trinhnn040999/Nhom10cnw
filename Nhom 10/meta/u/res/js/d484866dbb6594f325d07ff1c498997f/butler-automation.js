@@ -1,0 +1,1 @@
+$((function(){$document=$(document),$html=$("html"),$document.scroll((function(){$document.scrollTop()>99?$html.addClass("scroll"):$html.removeClass("scroll")})),$document.scroll(),$document.on("click","a[data-toggle]",(function(t){t.preventDefault(),$(this).toggleClass("open");var l=$(this).attr("data-toggle");$("#"+l).toggle()}))}));

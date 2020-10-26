@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Redirecter</title>
+  <script>
+    let redirects = {
+      '#actions': '/rest/#api-group-Actions',
+      '#applications': '/rest/#api-group-Applications',
+      '#batch': '/rest/#api-group-Batch',
+      '#boards': '/rest/#api-group-Boards',
+      '#cards': '/rest/#api-group-Cards',
+      '#checklists': '/rest/#api-group-Checklists',
+      '#customFields': '/rest/#api-group-CustomFields',
+      '#custom-fields': '/rest/#api-group-CustomFields',
+      '#emoji': '/rest/#api-group-Emoji',
+      '#enterprises': '/rest/#api-group-Enterprises',
+      '#labels': '/rest/#api-group-Labels',
+      '#lists': '/rest/#api-group-Lists',
+      '#members': '/rest/#api-group-Members',
+      '#notifications': '/rest/#api-group-Notifications',
+      '#organizations': '/rest/#api-group-Organizations',
+      '#plugins': '/rest/#api-group-Plugins',
+      '#search': '/rest/#api-group-Search',
+      '#tokens': '/rest/#api-group-Tokens',
+      '#webhooks': '/rest/#api-group-Webhooks',
+      '#power-ups-intro': '/power-ups/',
+      '#overview': '/scim/',
+      '#capabilities': '/power-ups/capabilities/',
+      '#client-library': '/power-ups/client-library/',
+      '#rest-api-client': '/power-ups/rest-api-client/',
+      '#ui-functions': '/power-ups/ui-functions/',
+      '#utils-and-helpers': '/power-ups/utils-and-helpers/',
+      '#attachment-sections': '/power-ups/capabilities/attachment-sections/',
+      '#attachment-thumbnail': '/power-ups/capabilities/attachment-thumbnail/',
+      '#authorization-status': '/power-ups/capabilities/authorization-status/',
+      '#board-buttons': '/power-ups/capabilities/board-buttons/',
+      '#card-back-section': '/power-ups/capabilities/card-back-section/',
+      '#card-badges': '/power-ups/capabilities/card-badges/',
+      '#card-buttons': '/power-ups/capabilities/card-buttons/',
+      '#card-detail-badges': '/power-ups/capabilities/card-detail-badges/',
+      '#card-from-url': '/power-ups/capabilities/card-from-url/',
+      '#format-url': '/power-ups/capabilities/format-url/',
+      '#list-actions': '/power-ups/capabilities/list-actions/',
+      '#list-sorters': '/power-ups/capabilities/list-sorters/',
+      '#on-enable': '/power-ups/capabilities/on-enable/',
+      '#on-disable': '/power-ups/capabilities/on-disable/',
+      '#remove-data': '/power-ups/capabilities/remove-data/',
+      '#show-authorization': '/power-ups/capabilities/show-authorization/',
+      '#show-settings': '/power-ups/capabilities/show-settings/'
+    };
+
+    if (redirects[window.location.hash]) {
+      window.location = 'https://developer.atlassian.com/cloud/trello' + redirects[window.location.hash];
+    } else if (window.location.pathname.indexOf('reference') > 0) {
+      window.location = `https://developer.atlassian.com/cloud/trello/rest`;
+    } else {
+      window.location = `https://developer.atlassian.com/cloud/trello/`;
+    }
+  </script>
+</head>
+
+<body>You are being redirected.</body>
+
+</html>

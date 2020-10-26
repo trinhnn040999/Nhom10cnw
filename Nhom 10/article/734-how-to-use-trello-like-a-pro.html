@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="utf-8"/>
+    <title>How to use Trello like a pro - Trello Help</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="The Help Guide is full of useful information when it comes to using Trello, but we’ve gathered some of our favorite tricks and tips here, along with the article"/>
+    <meta name="author" content="Trello"/>
+    <link rel="canonical" href="https://help.trello.com/article/734-how-to-use-trello-like-a-pro"/>
+    
+        
+   
+            <meta name="twitter:card" content="summary"/>
+            <meta name="twitter:title" content="How to use Trello like a pro" />
+            <meta name="twitter:description" content="The Help Guide is full of useful information when it comes to using Trello, but we’ve gathered some of our favorite tricks and tips here, along with the article"/>
+
+
+    
+
+    
+        <link rel="stylesheet" href="//d3eto7onm69fcz.cloudfront.net/assets/stylesheets/launch-1599134623393.css">
+    
+    <style>
+        body { background: #ffffff; }
+        .navbar .navbar-inner { background: #0079bf; }
+        .navbar .nav li a, 
+        .navbar .icon-private-w  { color: #c0c0c0; }
+        .navbar .brand, 
+        .navbar .nav li a:hover, 
+        .navbar .nav li a:focus, 
+        .navbar .nav .active a, 
+        .navbar .nav .active a:hover, 
+        .navbar .nav .active a:focus  { color: #ffffff; }
+        .navbar a:hover .icon-private-w, 
+        .navbar a:focus .icon-private-w, 
+        .navbar .active a .icon-private-w, 
+        .navbar .active a:hover .icon-private-w, 
+        .navbar .active a:focus .icon-private-w { color: #ffffff; }
+        #serp-dd .result a:hover,
+        #serp-dd .result > li.active,
+        #fullArticle strong a,
+        #fullArticle a strong,
+        .collection a,
+        .contentWrapper a,
+        .most-pop-articles .popArticles a,
+        .most-pop-articles .popArticles a:hover span,
+        .category-list .category .article-count,
+        .category-list .category:hover .article-count { color: #5e98ba; }
+        #fullArticle, 
+        #fullArticle p, 
+        #fullArticle ul, 
+        #fullArticle ol, 
+        #fullArticle li, 
+        #fullArticle div, 
+        #fullArticle blockquote, 
+        #fullArticle dd, 
+        #fullArticle table { color:#4d4d4d; }
+    </style>
+    
+        <link rel="stylesheet" href="//s3.amazonaws.com/helpscout.net/docs/assets/545804d8e4b09c5ca72525ce/attachments/555633a6e4b01a224b42483a/css.css">
+    
+    <link rel="apple-touch-icon-precomposed" href="//d3eto7onm69fcz.cloudfront.net/assets/ico/touch-152.png">
+    <link rel="shortcut icon" type="image/png" href="//d33v4339jhl8k0.cloudfront.net/docs/assets/545804d8e4b09c5ca72525ce/images/564f8f0290336053e408b893/favicon.ico">
+    <!--[if lt IE 9]>
+    
+        <script src="//d3eto7onm69fcz.cloudfront.net/assets/javascripts/html5shiv.min.js"></script>
+    
+    <![endif]-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+        <script type="application/ld+json">
+        {"@context":"https://schema.org","@type":"WebSite","url":"https://help.trello.com","potentialAction":{"@type":"SearchAction","target":"https://help.trello.com/search?query={query}","query-input":"required name=query"}}
+        </script>
+    
+        <script type="application/ld+json">
+        {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trello Help","item":"https://help.trello.com"},{"@type":"ListItem","position":2,"name":"Trello Public Help Documentation","item":"https://help.trello.com/collection/691-trello-public-help-documentation"},{"@type":"ListItem","position":3,"name":"How to use Trello like a pro","item":"https://help.trello.com/article/734-how-to-use-trello-like-a-pro"}]}
+        </script>
+    
+    
+        <script>
+// help.trello.com PANIC MODE
+// ==========================
+// 
+// Set the following variables to put help docs into panic mode.
+var fPanicMode = false; //either false or true, always lower case.
+var fPanicModeAndroid;  //leave undefined to inherit from fPanicMode
+var fPanicModeiOS;      //leave undefined to inherit from fPanicMode
+
+// Edit the copy you want to use when in panic mode
+var panicCopy = 'Trello is currently experiencing a service disruption. '
+var panicLink = '<a href="http://trellostatus.tumblr.com">Trello Status Blog</a>'
+
+// Edit the background color you want to use
+var panicBackgroundColor = '#EB5A46' //#EB5A46 is red. #F6E34C is yellow.
+
+// That's it! You don't need to edit anything else
+//
+//===================================================================================
+
+fPanicModeAndroid = typeof(fPanicModeAndroid) === 'undefined' ? fPanicMode : fPanicModeAndroid
+fPanicModeiOS = typeof(fPanicModeiOS) === 'undefined' ? fPanicMode : fPanicModeiOS
+var panicCSS = {'background-color': panicBackgroundColor}
+
+function getPreferredLocale(){
+  var identity = function(value) {
+    return value;
+  };
+
+  var compact = function(list) { 
+    var results = [];
+    for (var i = 0; i < list.length; i++){
+      if (identity(list[i])) results.push(list[i]);
+    }
+    return results;
+  };
+
+  var preferred = [].concat.apply([],compact([
+    (navigator.languages || []),   // Chrome, Firefox 
+    navigator.language,            // Safari, Chrome
+    navigator.userLanguage,        // Internet Explorer
+    navigator.browserLanguage,     // Fallback? Not sure.
+    'en-GB'                        // Just in case
+  ]));
+
+  return preferred[0].toLowerCase()
+}
+
+function mobileBanner(){
+
+  //isMobile via http://stackoverflow.com/a/12606298/166258
+  var isMobile = {
+      Android: function() {
+          return /Android/i.test(navigator.userAgent);
+      },
+      BlackBerry: function() {
+          return /BlackBerry/i.test(navigator.userAgent);
+      },
+      iOS: function() {
+          return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      },
+      Windows: function() {
+          return /IEMobile/i.test(navigator.userAgent);
+      },
+      any: function() {
+          return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+      }
+  };
+
+
+  function getCopy(device, link){
+    var copy = 'For general %s app troubleshooting, please see this ' +
+               '<a href="%link">public %s board</a>.'
+    copy = copy.replace(/\%s/g, device)
+    copy = copy.replace('%link', link)
+
+    if((device === 'Android' && fPanicModeAndroid) || (device === 'iOS' && fPanicModeiOS)){
+      copy = panicCopy + panicLink
+    }
+    return copy
+  }
+
+  if (isMobile.Android() || isMobile.iOS()) {
+    var device = ''
+    var link = ''
+
+    if (isMobile.Android()){
+      device = 'Android'
+      link = 'https://trello.com/b/ud59t1fL/trello-android-app'
+    } else if (isMobile.iOS()) {
+      device = 'iOS'
+      link = 'https://trello.com/b/5tj4qAvo/trello-ios-app'
+    }
+
+    var copy = getCopy(device, link)
+
+    $('header').before('<div class="mobile-banner">' + copy + '</div>')
+    $('.mobile-banner').css({'font-size': '18px', 
+                             'padding': '15px 20px', 
+                             'background-color': '#F6E34C', 
+                             'margin': '0 -20px'})
+    //add a 'mobile' class to where we are inserting the regular banners.
+    //CSS rules will hide them.
+    $('#docsSearch').addClass('mobile') //for the main search page
+    $('#fullArticle').addClass('mobile')    //for the article page
+    if ((device === 'Android' && fPanicModeAndroid) || (device === 'iOS' && fPanicModeiOS)){
+      $('.mobile-banner').css(panicCSS)
+    }
+
+  }
+
+}
+
+function gsgBanner() {
+  var gsgCopy = 'Looking for help getting started? Check out our ';
+  var gsgLink = '<a href="http://trello.com/guide" target="_blank">Getting Started Guide</a>.';
+  if (fPanicMode){
+    gsgCopy = panicCopy;
+    gsgLink = panicLink
+  }
+
+  $('#docsSearch').append('<div class="gsg-banner">' + gsgCopy + gsgLink + '</div>')
+
+  if (fPanicMode){
+    $('.gsg-banner').css(panicCSS)
+  }
+};
+
+function articleBanner(){
+  var bannerCopy = 'Looking for help getting started? Check out our ';
+  var bannerLink = '<a href="http://trello.com/guide" target="_blank">Getting Started Guide</a>.';
+  if (fPanicMode){
+    bannerCopy = panicCopy;
+    bannerLink = panicLink
+  }
+
+  $('#fullArticle').prepend('<div class="article-banner">' + bannerCopy + bannerLink + '</div>')
+
+  if (fPanicMode){
+    $('.article-banner').css(panicCSS)
+  }
+};
+function contactFooter(){
+  var footerCopy = 'Still can\'t find what you\'re looking for? ';
+  var footerLink = '<a href="http://trello.com/contact?nosearch=1&source=from%20helpsite%20beacon" onclick="ga(\'send\', \'pageview\', \'/contact\');"> Contact Us</a> or check out<a href="https://community.atlassian.com/t5/Trello/ct-p/trello" onclick="ga(\'send\', \'pageview\', \'/contact\');"> Our Community</a> .';
+
+  $('#fullArticle').append('<center><section class="callout-blue dashed">' + footerCopy + footerLink + '</section></center>')
+
+ 
+};
+function contactHeader(){
+var testing = "Contact Us";
+$('.container-fluid').append('<div style="float:right; padding: 20px 0px 20px 0px"><a style="color:white; font-size:14px" href="http://trello.com/contact?nosearch=1&source=from%20helpsite%20beacon" onclick="ga(\'send\', \'pageview\', \'/contact\');">' + testing + '</a></div>');
+  
+};
+function defer(method) {
+    if (window.$)
+        method();
+    else
+        setTimeout(function() { defer(method) }, 50);
+}
+
+defer(function() {
+  $(document).ready(mobileBanner());
+  $(document).ready(gsgBanner());
+  $(document).ready(articleBanner());
+  $(document).ready(contactFooter());
+  $(document).ready(contactHeader());
+});
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53826304-3', 'auto');
+  ga('send', 'pageview');
+(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+};p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//a.trellocdn.com/lib/snowplow/2.0.0.js","sp"));
+window.sp('newTracker','cf','c.trello.com',{appId:'help',cookieDomain:'.trello.com',respectDoNotTrack:true});window.sp('trackPageView');window.sp('enableLinkClickTracking');
+</script>
+
+<script src="https://d2uq3evf9h01ug.cloudfront.net/localize.js"></script>
+
+<script>!function(a){if(!a.Localize){a.Localize={};for(var e=["translate","untranslate","phrase","initialize","translatePage","setLanguage","getLanguage","detectLanguage","untranslatePage","bootstrap","prefetch","on","off"],t=0;t<e.length;t++)a.Localize[e[t]]=function(){}}}(window);</script>
+
+<script>
+var isLiveSite = (document.domain === 'help.trello.com');
+//We need to add localizejs tags so that localize knows what to translate,
+//at which point we can set translateBody to false. This is to hopefully
+//prevent injected text from getting into our database.
+
+defer(function(){
+  $(document).ready(function(){
+    $('header, section').addClass('localizejs');
+  });
+});
+
+
+Localize.initialize({
+  key: 'HCz4Tv7lNHSU5',
+  rememberLanguage: true,
+  saveNewPhrases: isLiveSite,
+  translateBody: false
+ });
+console.log(Localize.getLanguage());
+ga('send', 'pageview', {
+  'dimension1':  Localize.getLanguage()
+});
+</script>
+
+<script>
+"use strict"
+document.addEventListener("DOMContentLoaded",function(e){var o="gdpr-cookie-consent=",n=new Date
+n.setFullYear(n.getFullYear()+1)
+var i="; expires="+n.toUTCString(),s='\n\n.gdpr-cookie-consent-banner {\n  background-color: white;\n  position: fixed;\n  width: 100%;\n  min-height: 50px;\n  bottom: 0;\n  border: none;\n  z-index: 90001;\n\n  font-family: jaf-facitweb, "Helvetica Neue", Arial, sans-serif;\n  font-size: 15px;\n  font-weight: 300;\n}\n\n.gdpr-cookie-consent-banner .gdpr-cookie-consent-body {\n  position: static;\n  padding-left: 15px;\n  padding-top: 15px;\n  padding-bottom: 15px;\n  text-align: center;\n  margin-left: 25px;\n  margin-right: 25px;\n}\n\n.gdpr-cookie-consent-banner .gdpr-settings-link {\n  margin-left: 5px;\n  margin-right: 5px;\n  color: black;\n  cursor: pointer;\n  white-space: nowrap;\n}\n\na.gdpr-close-button {\n  padding: 5px 10px 5px 4px;\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  font-size: 15pt;\n  font-weight: 350;\n  color: #838C91;\n  text-decoration: none;\n}\n\na.gdpr-close-button:visited {\n  color: #838C91;\n}\n\n.gdpr-cookie-consent-button {\n  border: none;\n  border-radius: 3px;\n  cursor: pointer;\n  display: inline-block;\n  font-weight: 700;\n  line-height: 22px;\n  margin: 0 4px 0 10px;\n  padding: 5px 16px;\n  text-align: center;\n\n  background: #5AAC44;\n  box-shadow: 0 1px 0 #519839;\n  color: #fff;\n  -webkit-transition: background .3s ease; /* Safari */\n  transition: background .3s ease;\n}\n\nbutton.gdpr-cookie-consent-button:hover, button.gdpr-cookie-consent-button:focus {\n  background: #519839 100%;\n  color: #fff;\n}\n\nbutton.gdpr-cookie-consent-button:active {\n  background: #49852E 100%;\n}\n\n.gdpr-cookie-consent-dialog {\n  font-family: jaf-facitweb, "Helvetica Neue", Arial, sans-serif;\n  font-size: 15px;\n  font-weight: 300;\n}\n\n.gdpr-cookie-consent-dialog .gdpr-bg-shroud {\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  background: rgba(0,0,0,0.7);\n  z-index: 90002;\n}\n\n.gdpr-cookie-consent-dialog .gdpr-dialog {\n  position: fixed;\n  top: 20%;\n  left: 50%;\n  margin-left: -150px;\n  background: white;\n  height: 380px;\n  width: 330px;\n  z-index: 90003;\n  border-radius: 3px;\n  padding-top: 10px;\n}\n\n.gdpr-cookie-consent-dialog .gdpr-dialog .gdpr-header {\n  text-align: center;\n  border-bottom: 1px solid;\n  border-color: #d7dadc;\n  margin-left: 20px;\n  margin-right: 20px;\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n  color: #838C91;\n}\n\n.gdpr-cookie-consent-dialog .gdpr-dialog .gdpr-cookie-options {\n  height: 100%;\n  margin-left: 20px;\n  margin-right: 20px;\n}\n\n.gdpr-cookie-options .gdpr-cookie-consent-button {\n  position: absolute;\n  bottom: 0px;\n  margin-bottom: 20px;\n}\n\n.gdpr-cookie-item-text {\n  display: inline-block;\n  vertical-align: top;\n  font-weight: bold;\n}\n\n.gdpr-cookie-flavour-text {\n  display: block;\n  margin-left: 35px;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  font-size: 12px;\n}\n\n/* Checkmark */\n.checkmark {\n  display:inline-block;\n  width: 22px;\n  height:22px;\n  -ms-transform: rotate(45deg); /* IE 9 */\n  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */\n  transform: rotate(45deg);\n  padding-left: 8px;\n}\n\n.checkmark.hidden {\n  display: none;\n}\n\n.checkmark_stem {\n  position: absolute;\n  width:2px;\n  height:12px;\n  background-color:#838C91;\n  left:11px;\n  top:6px;\n}\n\n.checkmark_kick {\n  position: absolute;\n  width:4px;\n  height:2px;\n  background-color:#838C91;\n  left:7px;\n  top:16px;\n}\n\n/* Checkboxes */\n\n.gdpr-item-checkbox {\n  display: inline-block;\n  background: #fff;\n  border-radius: 3px;\n  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);\n  border: 1px solid #D6DADC;\n  border-bottom-color: #C4C9CC;\n  font-weight: bold;\n  line-height: 18px;\n  overflow: hidden;\n  text-align: center;\n  height: 21px;\n  width: 21px;\n  white-space: nowrap;\n  margin-right: 7px;\n}\n\n.gdpr-item-checkbox:hover {\n  background-color: #F8F9F9;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);\n  cursor: pointer;\n}\n\n.gdpr-item-checkbox:active {\n  background-color: #E2E4E6;\n  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);\n}\n',t={ru:{"other cookies":"Другие Cookie (необязательные)","cookie settings":"Настройки Cookie","accept cookies":"Принять Cookies","close banner":"Закрыть уведомление о принятии Cookie","necessary information":"Эти Cookie требуются для работы сайта, поэтому в наших системах их невозможно выключить. Эти Cookie не сохраняют персональные данные.","save settings":"Сохранить настройки","close dialog":"Закрыть диалоговое окно настроек Cookie.","other information":"Эти Cookie позволяют нам подсчитывать посетителей и ресурсы трафика, чтобы мы могли оценить и улучшить работу нашего сайта. Они помогают нам узнавать, какие страницы являются наиболее и наименее популярными, а также как пользователи перемещаются по сайту.","necessary cookies":"Необходимые Cookie (обязательные)","cookie information":"Мы используем Cookie для персонализации контента и рекламы, предоставления функций социальных сетей и анализа трафика."},fr:{"other cookies":"Autres cookies (en option)","cookie settings":"Paramètres de cookies","accept cookies":"Accepter les cookies","close banner":"Fermer l'avis de consentement pour les cookies.","necessary information":"Ces cookies sont indispensables au bon fonctionnement du site Web et ne peuvent pas être désactivés dans nos systèmes. Ils n'enregistrent pas les données personnelles. ","save settings":"Enregistrer les paramètres","close dialog":"Fermer la boîte de dialogue des paramètres de cookies.","other information":"Ces cookies nous permettent de compter le nombre de visites et les sources de trafic de manière à ce que nous puissions mesurer et améliorer les performances de notre site. Ils nous permettent de savoir quelles pages sont les plus et les moins populaires et de voir comment les visiteurs naviguent sur le site.","necessary cookies":"Cookies indispensables (requis)","cookie information":"Nous utilisons des cookies afin de personnaliser le contenu et les publicités, de fournir des fonctions relatives aux réseaux sociaux et d'analyser notre trafic."},en:{"other cookies":"Other Cookies (Optional)","cookie settings":"Cookie Settings","accept cookies":"Accept Cookies","close banner":"Close the cookie consent notice.","necessary information":"These cookies are necessary for the website to function and cannot be switched off in our systems. These cookies do not store any personally identifiable information.","save settings":"Save Settings","close dialog":"Close the cookie settings dialog.","other information":"These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site.","necessary cookies":"Necessary Cookies (Required)","cookie information":"We use cookies to personalize content and ads, to provide social media features and to analyze our traffic."},nl:{"other cookies":"Overige cookies (optioneel)","cookie settings":"Cookie-instellingen","accept cookies":"Cookies accepteren","close banner":"Venster met cookie-toestemming sluiten.","necessary information":"Deze cookies zijn noodzakelijk voor het functioneren van de website en kunnen niet uitgeschakeld worden in ons systeem. Deze cookies slaan geen persoonsgegevens op.","save settings":"Instellingen opslaan","close dialog":"Venster met cookie-instellingen sluiten.","other information":"Met deze cookies kunnen we de hoeveelheid bezoekers en de bronnen van traffic tellen, zodat we de prestatie van onze website kunnen meten en verbeteren. Deze cookies bieden ons inzicht in welke pagina's het minst en meest populair zijn en hoe gebruikers op onze site navigeren.","necessary cookies":"Benodigde cookies (verplicht)","cookie information":"We gebruiken cookies om content en advertenties te personaliseren, social media-functies aan te bieden en onze traffic te analyseren."},th:{"other cookies":"คุกกี้อื่น ๆ (เป็นตัวเลือก)","cookie settings":"การตั้งค่าคุกกี้","accept cookies":"ยอมรับคุกกี้","close banner":"ปิดการแจ้งเตือนเนื้อหาคุกกี้","necessary information":"คุกกี้เหล่านี้มีความจำเป็นสำหรับเว็บไซต์เพื่อให้ทำหน้าที่ได้และไม่สามารถปิดระบบของเราได้ คุกกี้เหล่านี้ไม่ได้จัดเก็บข้อมูลใดที่สามารถระบุถึงตัวบุคคลได้","save settings":"บันทึกการตั้งค่า","close dialog":"ปิดกล่องโต้ตอบการตั้งค่าคุกกี้","other information":"คุกกี้เหล่านี้ช่วยให้เราสามารถนับการเข้าชมและแหล่งที่มาของการเข้าชมเพื่อให้เราสามารถวัดและปรับปรุงผลการทำงานของไซต์ได้ คุกกี้เหล่านี้ช่วยให้เราทราบว่าหน้าใดที่ได้รับความนิยมมากที่สุดและเป็นที่นิยมน้อยที่สุด และดูว่าผู้เข้าชมเคลื่่อนไปทั่วไซต์อย่างไร","necessary cookies":"คุกกี้ต่าง ๆ ที่จำเป็น (จำเป็นต้องมี)","cookie information":"เราใช้คุกกี้เพื่อปรับแต่งเนื้อหาและโฆษณาให้เป็นส่วนตัว เพื่อให้บริการคุณลักษณะด้านโซเชียลมีเดียและวิเคราะห์การเข้าชมของเรา"},"zh-Hans":{"other cookies":"其他 Cookie（可选）","cookie settings":"Cookie 设置","accept cookies":"接受 Cookie","close banner":"关闭 cookie 同意通知。","necessary information":"这些 cookie 是网站运行所必须的，在我们的系统中无法关闭。这些 cookie 不会存储任何个人可识别信息。","save settings":"保存设置","close dialog":"关闭 cookie 设置对话框。","other information":"我们可通过这些 cookie 进行访问量和流量来源计数，以便我们衡量和改进我们网站的性能。它们有助于我们了解哪些页面最受欢迎、哪些最不受欢迎，并了解访问者在网站内的移动情况。","necessary cookies":"必要的 Cookie（必须使用）","cookie information":"我们使用 cookie 个性化内容和广告，以便提供社交媒体功能和分享我们的流量。"},vi:{"other cookies":"Các cookie khác (Không bắt buộc)","cookie settings":"Cài đặt Cookie","accept cookies":"Chấp nhận Cookie","close banner":"Đóng thông báo chấp nhận cookie.","necessary information":"Các cookie này là cần thiết để trang web hoạt động và không thể tắt trong hệ thống của chúng tôi. Các cookie này không lưu trữ bất kỳ thông tin nhận dạng cá nhân nào.","save settings":"Lưu Cài đặt","close dialog":"Đóng hộp thoại cài đặt cookie.","other information":"Những cookie này cho phép chúng tôi đếm số lần truy cập và nguồn lưu lượng truy cập để chúng tôi có thể đo lường và cải thiện hiệu suất của trang web của chúng tôi. Các cookie này giúp chúng tôi biết trang nào là phổ biến nhất và ít phổ biến nhất và xem cách khách truy cập di chuyển quanh trang web.","necessary cookies":"Cookie cần thiết (Bắt buộc)","cookie information":"Chúng tôi sử dụng cookie để cá nhân hóa nội dung và quảng cáo, để cung cấp các tính năng truyền thông xã hội và để phân tích lưu lượng truy cập của chúng tôi."},nb:{"other cookies":"Andre informasjonskapsler (Valgfrie)","cookie settings":"Innstillinger for informasjonskapsler","accept cookies":"Aksepter informasjonskapsler","close banner":"Lukk godkjenning av informasjonskapsler","necessary information":"Disse informasjonskapslene er nødvendige for at nettstedet skal fungere og kan ikke slås av i våre systemer. Informasjonskapslene lagrer ikke personlig identifiserbar informasjon.","save settings":"Lagre Innstillinger","close dialog":"Lukk dialogen for godkjenning av informasjonskapsler","other information":"Disse informasjonskapslene tillater oss å telle besøk og trafikkilder, slik at vi kan måle og forbedre ytelsen til nettstedet vårt. De hjelper oss å vite hvilke sider som er mest og minst populære, og se hvordan besøkende beveger seg rundt på nettstedet.","necessary cookies":"Nødvendige informasjonskapsler (Påkrevd)","cookie information":"Vi bruker informasjonskapsler for å tilpasse innhold og reklame, for innhold til sosiale media og for å analysere vår trafikk."},de:{"other cookies":"Sonstige Cookies (optional)","cookie settings":"Cookie-Einstellungen","accept cookies":"Cookies akzeptieren","close banner":"Hinweis zur Zustimmung zu Cookies schließen.","necessary information":"Diese Cookies sind für die Funktionalität der Website unerlässlich und können nicht deaktiviert werden. Mithilfe dieser Cookies werden keine personenbezogenen Daten gespeichert.","save settings":"Einstellungen speichern","close dialog":"Cookie-Einstellungen schließen.","other information":"Mithilfe dieser Cookies können wir Seitenaufrufe und Traffic-Ursprünge erfassen, um die Leistung unserer Website zu messen und zu verbessern. Außerdem erfahren wir so, welche Seiten am unbeliebtesten sind und wie die Besucher durch unsere Website navigieren.","necessary cookies":"Notwendige Cookies (erforderlich)","cookie information":"Mithilfe von Cookies personalisieren wir Inhalte und Werbeanzeigen, um Funktionen zu sozialen Netzwerken anzubieten und unseren Traffic analysieren zu können."},tr:{"other cookies":"Diğer Çerezler (İsteğe Bağlı)","cookie settings":"Çerez Ayarları","accept cookies":"Çerezleri Kabul Et","close banner":"Çerez onay bildirimini kapatın.","necessary information":"Bu çerezler web sitesinin düzgün çalışması için gereklidir ve sistemlerimizde kapatılamaz. Bu çerezlerde kişisel olarak tanımlayıcı bilgi saklanmaz.","save settings":"Ayarları Kaydet","close dialog":"Çerez ayarları iletişim penceresini kapatın.","other information":"Bu çerezler ziyaretlerin ve trafik kaynaklarının sayımını yaparak sitemizin performansını ölçmemize ve geliştirmemize imkan verir. Hangi sayfaların en çok ve en az popüler olduğunu bilmemize ve ziyaretçilerin sitede nasıl dolaştığını görmemize yardımcı olur.","necessary cookies":"Gerekli Çerezler (Şart)","cookie information":"İçeriği ve reklamları kişiye özel hale getirmek, sosyal medya özellikleri sunmak ve trafiğimizi analiz etmek için çerez kullanıyoruz."},it:{"other cookies":"Altri cookie (facoltativi)","cookie settings":"Impostazioni dei cookie","accept cookies":"Accetta cookie","close banner":"Chiudi l'informativa di consenso sui cookie.","necessary information":"Questi cookie sono necessari per il funzionamento del sito Web e non possono essere disattivati nei nostri sistemi. Questi cookie non memorizzano alcuna informazione personale identificativa.","save settings":"Salva impostazioni","close dialog":"Chiudi la finestra di dialogo delle impostazioni dei cookie.","other information":"Questi cookie ci consentono di contare le visite e le origini del traffico in modo da poter misurare e migliorare le prestazioni del nostro sito. Ci aiutano a sapere quali sono le pagine più e meno popolari e vedere come i visitatori si muovono nel sito.","necessary cookies":"Cookie necessari (obbligatori)","cookie information":"Utilizziamo i cookie per personalizzare contenuti e annunci, per fornire funzionalità di social media e per analizzare il nostro traffico."},"zh-Hant":{"other cookies":"其他 Cookie (選用)","cookie settings":"Cookie 設定","accept cookies":"接受使用 Cookie","close banner":"關閉 Cookie 同意通知。","necessary information":"此類 Cookie 是網站順利運作的必備元件，無法從系統中關閉。這些 Cookie 不會儲存任何個人身分識別資料。","save settings":"儲存設定","close dialog":"關閉 Cookie 設定對話。","other information":"此類 Cookie 有助於我們計算訪客人數及流量來源，據此測量及改善網站效能。這能幫助我們瞭解各頁面的瀏覽人次，找出最多或最少人查看的頁面，並掌握訪客在網站上的瀏覽軌跡。","necessary cookies":"必要 Cookie (必備)","cookie information":"我們使用 Cookie 為你打造個人化內容和廣告、提供社群媒體功能，以及分析流量。"},hu:{"other cookies":"Egyéb cookie-k (nem kötelező)","cookie settings":"Cookie-k beállításai","accept cookies":"Cookie-k elfogadása","close banner":"A cookie-k elfogadásával kapcsolatos értesítés bezárása.","necessary information":"Ezek a cookie-k szükségesek a webhely megfelelő működéséhez, ezért nem kapcsolhatók ki a rendszereinkben. Ezek a cookie-k nem tartalmaznak semmilyen személyazonosításra alkalmas adatot.","save settings":"Beállítások mentése","close dialog":"A cookie-k beállításával kapcsolatos párbeszédablak bezárása.","other information":"Ezek a cookie-k lehetővé teszik a látogatók és a forgalomforrások számlálását, hogy mérhessük és javíthassuk a webhelyünk teljesítményét. Az ő segítségükkel tudjuk meghatározni, hogy melyek a legnépszerűbb és a legkevésbé látogatott aloldalaink, és azt is láthatjuk, hogyan navigálnak a látogatók az oldalainkon.","necessary cookies":"Szükséges cookie-k (kötelező)","cookie information":"A rendszerünk cookie-kat használ a tartalmak és reklámok személyre szabásához, a közösségi médiás szolgáltatások megvalósításához, illetve az adatforgalmaink elemzéséhez."},"pt-BR":{"other cookies":"Outros cookies (opcionais)","cookie settings":"Configurações de cookies","accept cookies":"Aceitar cookies","close banner":"Fechar o aviso de consentimento de cookies.","necessary information":"Esses cookies são necessários para que o site funcione e não podem ser desligados em nossos sistemas. Esses cookies não armazenam informações pessoais identificáveis.","save settings":"Salvar configurações","close dialog":"Fechar a janela de configurações de cookies.","other information":"Esses cookies nos permitem contar visitas e origens do tráfego para que possamos mensurar e melhorar o desempenho do nosso site. Eles nos ajudam a saber quais páginas são mais ou menos populares e a ver como os visitantes navegam nos site.","necessary cookies":"Cookies necessários (obrigatórios)","cookie information":"Nós usamos cookies para personalizar conteúdos e anúncios, para oferecer recursos de redes sociais e para analisar nosso tráfego."},es:{"other cookies":"Otras cookies (opcional)","cookie settings":"Configuración de las cookies","accept cookies":"Aceptar cookies","close banner":"Cerrar el aviso de consentimiento de las cookies.","necessary information":"Estas cookies son necesarias para el correcto funcionamiento del sitio web y no es posible desactivarlas en nuestros sistemas. Estas cookies no almacenan ningún tipo de información personalmente identificable.","save settings":"Guardar configuración","close dialog":"Cerrar el diálogo de configuración de las cookies.","other information":"Estas cookies nos permiten contabilizar visitas y fuentes de tráfico, lo que nos ayuda a medir y mejorar el rendimiento de nuestro portal, así como conocer qué páginas son las más y las menos populares y cómo se mueven los visitantes por el mismo.","necessary cookies":"Cookies necesarias (obligatorio)","cookie information":"Utilizamos cookies para personalizar contenidos y anuncios a fin de ofrecer funciones de redes sociales y analizar nuestro tráfico."},uk:{"other cookies":"Інші cookie (не обов’язково)","cookie settings":"Налаштування файлів cookie","accept cookies":"Прийняти cookie","close banner":"Закрити сповіщення із запитом на приймання файлів cookie.","necessary information":"Ці файли cookie необхідні для роботи веб-сайту, їх використання неможливо вимкнути в нашій системі. У них не зберігається інформація, що дає можливість визначити особу.","save settings":"Зберегти налаштування","close dialog":"Закрити діалогове вікно з налаштуваннями файлів cookie.","other information":"Ці файли cookie дають нам можливість рахувати відвідування та джерела трафіку, щоб ми могли вимірювати й покращувати продуктивність нашого веб-сайту. Вони допомагають нам дізнатися, які сторінки є найбільш та найменш популярними, і побачити, як відвідувачі пересуваються веб-сайтом.","necessary cookies":"Необхідні cookie (обов’язкові)","cookie information":"Ми використовуємо файли cookie, щоб персоналізувати контент і рекламу, інтегрувати використання соціальних мереж та аналізувати свій трафік."},cs:{"other cookies":"Ostatní cookies (Volitelné)","cookie settings":"Nastavení cookies","accept cookies":"Přijmout cookies","close banner":"Zavřít poznámku o souhlasu s cookies.","necessary information":"Tyto cookies jsou nezbytné pro fungování webové stránky a nemohou být vypnuty v našich systémech. Tyto cookies neskladují žádná osobní data.","save settings":"Uložit nastavení","close dialog":"Zavřít dialog s nastavením cookies.","other information":"Tyto cookies nám umožňují počítat návštěvnost a vytíženost zdrojů, takže můžeme vylepšovat výkon naší aplikace. Pomáhají nám zjistit, které stránky jsou nejvíce a nejméně populární a jak se návštěvníci po stránce pohybují.","necessary cookies":"Nutné cookies (Požadované)","cookie information":"Používáme cookies pro personalizaci obsahu a reklam, pro poskytnutí funkcí týkajících se sociálních médií a pro analýzu našeho provozu."},fi:{"other cookies":"Muut evästeet (Valinnaiset)","cookie settings":"Evästeasetukset","accept cookies":"Hyväksy evästeet","close banner":"Sulje evästeiden hyväksymisikkuna.","necessary information":"Nämä evästeet ovat välttämättömiä sivuston toiminnan kannalta, eikä niitä voi kytkeä pois päältä järjestelmässä. Nämä evästeet eivät varastoi henkilötietoja.","save settings":"Tallenna asetukset","close dialog":"Sulje evästeiden asetusikkuna.","other information":"Näiden evästeiden ansiosta voimme laskea vierailut ja analysoida niiden lähteitä, mikä puolestaan mahdollistaa sivuston suorituskyvyn arvioinnin ja parantelun.","necessary cookies":"Tarvittavat evästeet (välttämättömät)","cookie information":"Käytämme evästeitä mukauttaaksemme sisällön ja mainokset juuri sinulle sopiviksi, tarjotaksemme ominaisuuksia sosiaalisessa mediasssa sekä analysoidaksemme sivuston käyttöä."},sv:{"other cookies":"Övriga cookies (valfria)","cookie settings":"Cookie-inställningar","accept cookies":"Acceptera cookies","close banner":"Stäng meddelandet om cookie-medgivande.","necessary information":"Dessa cookies är nödvändiga för att webbplatsen ska fungera och kan inte stängas av i våra system. Dessa cookies lagrar inte några uppgifter som kan identifiera en enskild person.","save settings":"Spara inställningar","close dialog":"Stäng dialogrutan för cooke-inställningar.","other information":"Dessa cookies ger oss möjlighet att räkna antal besök och mäta trafik så att vi kan förbättra vår webbplats. De hjälper oss att förstå vilka sidor som är mest och minst populära och hur besökare navigerar runt på webbplatsen.","necessary cookies":"Nödvändiga cookies (obligatoriska)","cookie information":"Vi använder cookies för att personalisera innehåll och annonser för att tillhandahålla funktioner för sociala medier och analysera din trafik."},ja:{"other cookies":"その他のCookie (任意)","cookie settings":"Cookie設定","accept cookies":"Cookieを受け入れる","close banner":"Cookie同意通知を閉じる。","necessary information":"これらのCookieはウェブサイトが機能するために必要であり、当社のシステムではオフにすることはできません。これらのCookieは個人を特定できる情報を一切保存しません。","save settings":"設定を保存","close dialog":"Cookie設定ダイアログを閉じる。","other information":"これらのCookieは、当社が訪問者やトラフィックを数え、サイトのパフォーマンスを計測して改善する役に立ちます。どのページが人気または不人気で、訪問者がサイト内でどのように移動しているかを知る助けになります。","necessary cookies":"必要なCookie (必須)","cookie information":"当社はコンテンツと広告をパーソナライズし、ソーシャルメディア機能を提供し、トラフィックを分析するためにCookieを使用しています。"},pl:{"other cookies":"Inne pliki cookies (opcjonalne)","cookie settings":"Ustawienia plików cookies","accept cookies":"Zezwól na korzystanie z plików cookies","close banner":"Zamknij powiadomienie o plikach cookies.","necessary information":"Te pliki cookies są konieczne do prawidłowego działania strony internetowej i nie można wyłączyć korzystania z nich w naszych systemach. Nie przechowują one żadnych informacji umożliwiających identyfikację użytkownika.","save settings":"Zapisz ustawienia","close dialog":"Zamknij okno dialogowe dotyczące plików cookies.","other information":"Te pliki cookies pozwalają nam na zliczanie wizyt i źródeł ruchu, dzięki czemu możemy mierzyć i poprawiać wydajność naszej witryny. Pomagają nam dowiedzieć się, które strony są najbardziej i najmniej popularne oraz zobaczyć, jak odwiedzający poruszają się po stronie.","necessary cookies":"Wymagane pliki cookies (konieczne)","cookie information":"Używamy plików cookies do personalizacji treści i reklam, udostępniania funkcji mediów społecznościowych i analizowania ruchu na naszej stronie internetowej."}},a=function(){return document.documentElement.hasAttribute("lang")?document.documentElement.getAttribute("lang"):void 0!==navigator.languages?navigator.languages[0]:void 0!==navigator.language?navigator.language:"en"},r=function z(e,o){if(t[o]&&t[o][e])return t[o][e]
+var n=o.indexOf("-")
+return n>=0?z(e,o.substring(0,n)):"en"!==o?z(o,"en"):e},c=function(e){var o=a()
+return r(e,o)},l=function(){var e=document.body.querySelector(".gdpr-cookie-consent-dialog")
+e.parentNode.removeChild(e)},k=function(){var e=this.querySelector(".checkmark")
+e.classList.contains("hidden")?e.classList.remove("hidden"):e.classList.add("hidden")},d=function(){var e=document.body.querySelector(".gdpr-cookie-consent-dialog"),n=!e.querySelector(".gdpr-item-checkbox .checkmark.hidden")
+n?document.cookie=o+"accepted"+i:document.cookie=o+"not-accepted"+i,l(),m()},p=function(){if(null===document.body.querySelector(".gdpr-cookie-consent-dialog")){var e=document.createElement("div")
+e.className="gdpr-cookie-consent-dialog",e.innerHTML='\n      <div class="gdpr-bg-shroud"></div>\n      <div class="gdpr-dialog">\n        <div class="gdpr-header">\n          <span>'+c("cookie settings")+'</span>\n        </div>\n        <a href="#" class="gdpr-close-button" title="'+c("close dialog")+'">×</a>\n        <div class="gdpr-cookie-options">\n          <span class="checkmark"><div class="checkmark_stem"></div><div class="checkmark_kick"></div></span>\n          <span class="gdpr-cookie-item-text">\n            '+c("necessary cookies")+'\n          </span>\n          <span class="gdpr-cookie-flavour-text">\n            '+c("necessary information")+'\n          </span>\n          <div class="gdpr-item-checkbox">\n            <span class="checkmark"><div class="checkmark_stem"></div><div class="checkmark_kick"></div></span>\n          </div>\n          <span class="gdpr-cookie-item-text">\n            '+c("other cookies")+'\n          </span>\n          <span class="gdpr-cookie-flavour-text">\n            '+c("other information")+'\n          </span>\n          <button class="gdpr-cookie-consent-button">'+c("save settings")+"</button>\n        </div>\n      </div>",e.querySelector(".gdpr-item-checkbox").addEventListener("click",k),e.querySelector(".gdpr-cookie-consent-button").addEventListener("click",d),e.querySelector(".gdpr-close-button").addEventListener("click",l),document.body.appendChild(e)}},g=function(){document.cookie=o+"accepted"+i,m()},m=function(){var e=document.body.querySelector(".gdpr-cookie-consent-banner")
+e.parentNode.removeChild(e)},u=function(){var e=document.createElement("div")
+e.className="gdpr-cookie-consent-banner",e.innerHTML='\n      <div class="gdpr-cookie-consent-body">\n        <span class="gdpr-flavour-text">'+c("cookie information")+'</span>\n        <a href="#" class="gdpr-settings-link" href="#">'+c("cookie settings")+'</a>\n        <button class="gdpr-cookie-consent-button">'+c("accept cookies")+'</button>\n      </div>\n      <a href="#" class="gdpr-close-button" title="'+c("close banner")+'">×</a>',e.querySelector("button").addEventListener("click",g),e.querySelector(".gdpr-close-button").addEventListener("click",m),e.querySelector(".gdpr-settings-link").addEventListener("click",p),document.body.appendChild(e)},h=function(){var e=document.createElement("style")
+e.type="text/css",e.innerHTML=s,document.head.appendChild(e)},f=function(){h(),u()},v=function(e){try{return window.JSON.parse(e)}catch(o){return null}},b=function(e,o){var n=new XMLHttpRequest
+n.open("GET",e,!0),n.setRequestHeader("Accept","application/json,text/plain"),n.onreadystatechange=function(){4==n.readyState&&(200!=n.status?o([n.status,n.responseText]):o(null,v(n.responseText)))},n.send(null)},y=function(){for(var e=document.cookie.split(";"),n=0;n<e.length;n++)if(e[n].indexOf(o+"testing")>=0&&f(),e[n].indexOf(o)>=0)return
+b("https://trello.com/1/cookieConsent",function(e,n){e||(n&&n.showBanner?(document.cookie=o+"not-accepted"+i,f()):document.cookie=o+"accepted"+i)})}
+y()})
+</script>
+
+<script>
+(function() {
+if (document.cookie.indexOf("gdpr-cookie-consent=accepted") === -1) { return; }
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create','UA-53826304-2',{cookieDomain:'trello.com',sampleRate:1});
+ if(location.pathname=="/"){ {{#me}}ga('send','pageview','/boards');{{/me}}{{^me}}{{#hasAccount}}ga('send','pageview','/landing-login');{{/hasAccount}}{{^hasAccount}}ga('send','pageview','/landing');{{/hasAccount}}{{/me}}}else{ga('send','pageview',location.pathname);}
+ {{#__snowplowCollectorHost}}
+ (function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+ p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+ };p[i].q=p[i].q||[];
+ n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+ n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","//a.trellocdn.com/lib/snowplow/2.9.0.js","sp"));
+ window.sp('newTracker','cf','{{__snowplowCollectorHost}}',{appId:'meta',{{#__snowplowCookieDomain}}cookieDomain:'{{__snowplowCookieDomain}}',{{/__snowplowCookieDomain}}respectDoNotTrack:true});{{#me}}window.sp('setUserId','{{_id}}');{{/me}}window.sp('trackPageView');window.sp('enableLinkClickTracking',{blacklist:'no-tracking'});
+ {{/__snowplowCollectorHost}}
+ {{#__googleTagManagerAuth}}
+ window.dataLayer=window.dataLayer||[];
+ dataLayer.push({
+   'isLoggedIn': {{#me}}true{{/me}}{{^me}}false{{/me}},
+   'inApp': false
+ });
+ window.sp(function() {
+   var cf = this.cf;
+   dataLayer.push({'event':'snowplow.loaded', 'snowplow': { 'domain_userid': cf.getDomainUserId() }});
+ });
+ (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+ 'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '>m_auth={{__googleTagManagerAuth}}>m_preview={{__googleTagManagerPreview}}>m_cookies_win=x';f.parentNode.insertBefore(j,f);
+ })(window,document,'script','dataLayer','GTM-PJ8M5SK');
+ {{/__googleTagManagerAuth}}
+}())
+ </script>
+<script src="https://h5frqhb041yq.statuspage.io/embed/script.js"></script>
+    
+</head>
+    
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UgMCUFZADAoGXFhUAA==",licenseKey:"248c08e607",applicationID:"4968967"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var i=e[n]={exports:{}};t[n][0].call(i.exports,function(e){var i=t[n][1][e];return r(i||e)},i,i.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(t,e,n){function r(t){try{c.console&&console.log(t)}catch(e){}}var i,o=t("ee"),a=t(23),c={};try{i=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(c.console=!0,i.indexOf("dev")!==-1&&(c.dev=!0),i.indexOf("nr_dev")!==-1&&(c.nrDev=!0))}catch(s){}c.nrDev&&o.on("internal-error",function(t){r(t.stack)}),c.dev&&o.on("fn-err",function(t,e,n){r(n.stack)}),c.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(c,function(t,e){return t}).join(", ")))},{}],2:[function(t,e,n){function r(t,e,n,r,c){try{p?p-=1:i(c||new UncaughtException(t,e,n),!0)}catch(f){try{o("ierr",[f,s.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function i(t,e){var n=e?null:s.now();o("err",[t,n])}var o=t("handle"),a=t(24),c=t("ee"),s=t("loader"),f=t("gos"),u=window.onerror,d=!1,l="nr@seenError",p=0;s.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(9),t(8),"addEventListener"in window&&t(5),s.xhrWrappable&&t(10),d=!0)}c.on("fn-start",function(t,e,n){d&&(p+=1)}),c.on("fn-err",function(t,e,n){d&&!n[l]&&(f(n,l,function(){return!0}),this.thrown=!0,i(n))}),c.on("fn-end",function(){d&&!this.thrown&&p>0&&(p-=1)}),c.on("internal-error",function(t){o("ierr",[t,s.now(),!0])})},{}],3:[function(t,e,n){t("loader").features.ins=!0},{}],4:[function(t,e,n){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var i=t("ee"),o=t("handle"),a=t(9),c=t(8),s="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",l="resource",p="-start",h="-end",m="fn"+p,w="fn"+h,v="bstTimer",g="pushState",y=t("loader");y.features.stn=!0,t(7),"addEventListener"in window&&t(5);var x=NREUM.o.EV;i.on(m,function(t,e){var n=t[0];n instanceof x&&(this.bstStart=y.now())}),i.on(w,function(t,e){var n=t[0];n instanceof x&&o("bst",[n,e,this.bstStart,y.now()])}),a.on(m,function(t,e,n){this.bstStart=y.now(),this.bstType=n}),a.on(w,function(t,e){o(v,[e,this.bstStart,y.now(),this.bstType])}),c.on(m,function(){this.bstStart=y.now()}),c.on(w,function(t,e){o(v,[e,this.bstStart,y.now(),"requestAnimationFrame"])}),i.on(g+p,function(t){this.time=y.now(),this.startPath=location.pathname+location.hash}),i.on(g+h,function(t){o("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+s]?window.performance[f](u,function(t){o(d,[window.performance.getEntriesByType(l)]),window.performance["c"+s]()},!1):window.performance[f]("webkit"+u,function(t){o(d,[window.performance.getEntriesByType(l)]),window.performance["webkitC"+s]()},!1)),document[f]("scroll",r,{passive:!0}),document[f]("keypress",r,!1),document[f]("click",r,!1)}},{}],5:[function(t,e,n){function r(t){for(var e=t;e&&!e.hasOwnProperty(u);)e=Object.getPrototypeOf(e);e&&i(e)}function i(t){c.inPlace(t,[u,d],"-",o)}function o(t,e){return t[1]}var a=t("ee").get("events"),c=t("wrap-function")(a,!0),s=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";e.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(i(window),i(f.prototype)),a.on(u+"-start",function(t,e){var n=t[1],r=s(n,"nr@wrapped",function(){function t(){if("function"==typeof n.handleEvent)return n.handleEvent.apply(n,arguments)}var e={object:t,"function":n}[typeof n];return e?c(e,"fn-",null,e.name||"anonymous"):n});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],6:[function(t,e,n){function r(t,e,n){var r=t[e];"function"==typeof r&&(t[e]=function(){var t=o(arguments),e={};i.emit(n+"before-start",[t],e);var a;e[m]&&e[m].dt&&(a=e[m].dt);var c=r.apply(this,t);return i.emit(n+"start",[t,a],c),c.then(function(t){return i.emit(n+"end",[null,t],c),t},function(t){throw i.emit(n+"end",[t],c),t})})}var i=t("ee").get("fetch"),o=t(24),a=t(23);e.exports=i;var c=window,s="fetch-",f=s+"body-",u=["arrayBuffer","blob","json","text","formData"],d=c.Request,l=c.Response,p=c.fetch,h="prototype",m="nr@context";d&&l&&p&&(a(u,function(t,e){r(d[h],e,f),r(l[h],e,f)}),r(c,"fetch",s),i.on(s+"end",function(t,e){var n=this;if(e){var r=e.headers.get("content-length");null!==r&&(n.rxSize=r),i.emit(s+"done",[null,e],n)}else i.emit(s+"done",[t],n)}))},{}],7:[function(t,e,n){var r=t("ee").get("history"),i=t("wrap-function")(r);e.exports=r;var o=window.history&&window.history.constructor&&window.history.constructor.prototype,a=window.history;o&&o.pushState&&o.replaceState&&(a=o),i.inPlace(a,["pushState","replaceState"],"-")},{}],8:[function(t,e,n){var r=t("ee").get("raf"),i=t("wrap-function")(r),o="equestAnimationFrame";e.exports=r,i.inPlace(window,["r"+o,"mozR"+o,"webkitR"+o,"msR"+o],"raf-"),r.on("raf-start",function(t){t[0]=i(t[0],"fn-")})},{}],9:[function(t,e,n){function r(t,e,n){t[0]=a(t[0],"fn-",null,n)}function i(t,e,n){this.method=n,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,n)}var o=t("ee").get("timer"),a=t("wrap-function")(o),c="setTimeout",s="setInterval",f="clearTimeout",u="-start",d="-";e.exports=o,a.inPlace(window,[c,"setImmediate"],c+d),a.inPlace(window,[s],s+d),a.inPlace(window,[f,"clearImmediate"],f+d),o.on(s+u,r),o.on(c+u,i)},{}],10:[function(t,e,n){function r(t,e){d.inPlace(e,["onreadystatechange"],"fn-",c)}function i(){var t=this,e=u.context(t);t.readyState>3&&!e.resolved&&(e.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,g,"fn-",c)}function o(t){y.push(t),h&&(b?b.then(a):w?w(a):(E=-E,R.data=E))}function a(){for(var t=0;t<y.length;t++)r([],y[t]);y.length&&(y=[])}function c(t,e){return e}function s(t,e){for(var n in t)e[n]=t[n];return e}t(5);var f=t("ee"),u=f.get("xhr"),d=t("wrap-function")(u),l=NREUM.o,p=l.XHR,h=l.MO,m=l.PR,w=l.SI,v="readystatechange",g=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],y=[];e.exports=u;var x=window.XMLHttpRequest=function(t){var e=new p(t);try{u.emit("new-xhr",[e],e),e.addEventListener(v,i,!1)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}return e};if(s(p,x),x.prototype=p.prototype,d.inPlace(x.prototype,["open","send"],"-xhr-",c),u.on("send-xhr-start",function(t,e){r(t,e),o(e)}),u.on("open-xhr-start",r),h){var b=m&&m.resolve();if(!w&&!m){var E=1,R=document.createTextNode(E);new h(a).observe(R,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===v||a()})},{}],11:[function(t,e,n){function r(t){if(!c(t))return null;var e=window.NREUM;if(!e.loader_config)return null;var n=(e.loader_config.accountID||"").toString()||null,r=(e.loader_config.agentID||"").toString()||null,f=(e.loader_config.trustKey||"").toString()||null;if(!n||!r)return null;var h=p.generateSpanId(),m=p.generateTraceId(),w=Date.now(),v={spanId:h,traceId:m,timestamp:w};return(t.sameOrigin||s(t)&&l())&&(v.traceContextParentHeader=i(h,m),v.traceContextStateHeader=o(h,w,n,r,f)),(t.sameOrigin&&!u()||!t.sameOrigin&&s(t)&&d())&&(v.newrelicHeader=a(h,m,w,n,r,f)),v}function i(t,e){return"00-"+e+"-"+t+"-01"}function o(t,e,n,r,i){var o=0,a="",c=1,s="",f="";return i+"@nr="+o+"-"+c+"-"+n+"-"+r+"-"+t+"-"+a+"-"+s+"-"+f+"-"+e}function a(t,e,n,r,i,o){var a="btoa"in window&&"function"==typeof window.btoa;if(!a)return null;var c={v:[0,1],d:{ty:"Browser",ac:r,ap:i,id:t,tr:e,ti:n}};return o&&r!==o&&(c.d.tk=o),btoa(JSON.stringify(c))}function c(t){return f()&&s(t)}function s(t){var e=!1,n={};if("init"in NREUM&&"distributed_tracing"in NREUM.init&&(n=NREUM.init.distributed_tracing),t.sameOrigin)e=!0;else if(n.allowed_origins instanceof Array)for(var r=0;r<n.allowed_origins.length;r++){var i=h(n.allowed_origins[r]);if(t.hostname===i.hostname&&t.protocol===i.protocol&&t.port===i.port){e=!0;break}}return e}function f(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.enabled}function u(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.exclude_newrelic_header}function d(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&NREUM.init.distributed_tracing.cors_use_newrelic_header!==!1}function l(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.cors_use_tracecontext_headers}var p=t(20),h=t(13);e.exports={generateTracePayload:r,shouldGenerateTrace:c}},{}],12:[function(t,e,n){function r(t){var e=this.params,n=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<l;r++)t.removeEventListener(d[r],this.listener,!1);e.aborted||(n.duration=a.now()-this.startTime,this.loadCaptureCalled||4!==t.readyState?null==e.status&&(e.status=0):o(this,t),n.cbTime=this.cbTime,u.emit("xhr-done",[t],t),c("xhr",[e,n,this.startTime]))}}function i(t,e){var n=s(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.parsedOrigin=s(e),t.sameOrigin=t.parsedOrigin.sameOrigin}function o(t,e){t.params.status=e.status;var n=w(e,t.lastSize);if(n&&(t.metrics.rxSize=n),t.sameOrigin){var r=e.getResponseHeader("X-NewRelic-App-Data");r&&(t.params.cat=r.split(", ").pop())}t.loadCaptureCalled=!0}var a=t("loader");if(a.xhrWrappable){var c=t("handle"),s=t(13),f=t(11).generateTracePayload,u=t("ee"),d=["load","error","abort","timeout"],l=d.length,p=t("id"),h=t(17),m=t(16),w=t(14),v=window.XMLHttpRequest;a.features.xhr=!0,t(10),t(6),u.on("new-xhr",function(t){var e=this;e.totalCbs=0,e.called=0,e.cbTime=0,e.end=r,e.ended=!1,e.xhrGuids={},e.lastSize=null,e.loadCaptureCalled=!1,t.addEventListener("load",function(n){o(e,t)},!1),h&&(h>34||h<10)||window.opera||t.addEventListener("progress",function(t){e.lastSize=t.loaded},!1)}),u.on("open-xhr-start",function(t){this.params={method:t[0]},i(this,t[1]),this.metrics={}}),u.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var n=f(this.parsedOrigin);if(n){var r=!1;n.newrelicHeader&&(e.setRequestHeader("newrelic",n.newrelicHeader),r=!0),n.traceContextParentHeader&&(e.setRequestHeader("traceparent",n.traceContextParentHeader),n.traceContextStateHeader&&e.setRequestHeader("tracestate",n.traceContextStateHeader),r=!0),r&&(this.dt=n)}}),u.on("send-xhr-start",function(t,e){var n=this.metrics,r=t[0],i=this;if(n&&r){var o=m(r);o&&(n.txSize=o)}this.startTime=a.now(),this.listener=function(t){try{"abort"!==t.type||i.loadCaptureCalled||(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof e.onload))&&i.end(e)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}};for(var c=0;c<l;c++)e.addEventListener(d[c],this.listener,!1)}),u.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),u.on("xhr-load-added",function(t,e){var n=""+p(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),u.on("xhr-load-removed",function(t,e){var n=""+p(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),u.on("addEventListener-end",function(t,e){e instanceof v&&"load"===t[0]&&u.emit("xhr-load-added",[t[1],t[2]],e)}),u.on("removeEventListener-end",function(t,e){e instanceof v&&"load"===t[0]&&u.emit("xhr-load-removed",[t[1],t[2]],e)}),u.on("fn-start",function(t,e,n){e instanceof v&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),u.on("fn-end",function(t,e){this.xhrCbStart&&u.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,e],e)}),u.on("fetch-before-start",function(t){function e(t,e){var n=!1;return e.newrelicHeader&&(t.set("newrelic",e.newrelicHeader),n=!0),e.traceContextParentHeader&&(t.set("traceparent",e.traceContextParentHeader),e.traceContextStateHeader&&t.set("tracestate",e.traceContextStateHeader),n=!0),n}var n,r=t[1]||{};"string"==typeof t[0]?n=t[0]:t[0]&&t[0].url&&(n=t[0].url),n&&(this.parsedOrigin=s(n),this.sameOrigin=this.parsedOrigin.sameOrigin);var i=f(this.parsedOrigin);if(i&&(i.newrelicHeader||i.traceContextParentHeader))if("string"==typeof t[0]){var o={};for(var a in r)o[a]=r[a];o.headers=new Headers(r.headers||{}),e(o.headers,i)&&(this.dt=i),t.length>1?t[1]=o:t.push(o)}else t[0]&&t[0].headers&&e(t[0].headers,i)&&(this.dt=i)})}},{}],13:[function(t,e,n){var r={};e.exports=function(t){if(t in r)return r[t];var e=document.createElement("a"),n=window.location,i={};e.href=t,i.port=e.port;var o=e.href.split("://");!i.port&&o[1]&&(i.port=o[1].split("/")[0].split("@").pop().split(":")[1]),i.port&&"0"!==i.port||(i.port="https"===o[0]?"443":"80"),i.hostname=e.hostname||n.hostname,i.pathname=e.pathname,i.protocol=o[0],"/"!==i.pathname.charAt(0)&&(i.pathname="/"+i.pathname);var a=!e.protocol||":"===e.protocol||e.protocol===n.protocol,c=e.hostname===document.domain&&e.port===n.port;return i.sameOrigin=a&&(!e.hostname||c),"/"===i.pathname&&(r[t]=i),i}},{}],14:[function(t,e,n){function r(t,e){var n=t.responseType;return"json"===n&&null!==e?e:"arraybuffer"===n||"blob"===n||"json"===n?i(t.response):"text"===n||""===n||void 0===n?i(t.responseText):void 0}var i=t(16);e.exports=r},{}],15:[function(t,e,n){function r(){}function i(t,e,n){return function(){return o(t,[f.now()].concat(c(arguments)),e?null:this,n),e?void 0:this}}var o=t("handle"),a=t(23),c=t(24),s=t("ee").get("tracer"),f=t("loader"),u=NREUM;"undefined"==typeof window.newrelic&&(newrelic=u);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",p=l+"ixn-";a(d,function(t,e){u[e]=i(l+e,!0,"api")}),u.addPageAction=i(l+"addPageAction",!0),u.setCurrentRouteName=i(l+"routeName",!0),e.exports=newrelic,u.interaction=function(){return(new r).get()};var h=r.prototype={createTracer:function(t,e){var n={},r=this,i="function"==typeof e;return o(p+"tracer",[f.now(),t,n],r),function(){if(s.emit((i?"":"no-")+"fn-start",[f.now(),r,i],n),i)try{return e.apply(this,arguments)}catch(t){throw s.emit("fn-err",[arguments,this,t],n),t}finally{s.emit("fn-end",[f.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){h[e]=i(p+e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),o("err",[t,f.now(),!1,e])}},{}],16:[function(t,e,n){e.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(e){return}}}},{}],17:[function(t,e,n){var r=0,i=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);i&&(r=+i[1]),e.exports=r},{}],18:[function(t,e,n){function r(){return c.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,c=t(25);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=i},{}],19:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?d("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&d("timing",["fcp",Math.floor(t.startTime)])})}function i(t,e){var n=t.getEntries();n.length>0&&d("lcp",[n[n.length-1]])}function o(t){t.getEntries().forEach(function(t){t.hadRecentInput||d("cls",[t])})}function a(t){if(t instanceof h&&!w){var e=Math.round(t.timeStamp),n={type:t.type};e<=l.now()?n.fid=l.now()-e:e>l.offset&&e<=Date.now()?(e-=l.offset,n.fid=l.now()-e):e=l.now(),w=!0,d("timing",["fi",e,n])}}function c(t){d("pageHide",[l.now(),t])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var s,f,u,d=t("handle"),l=t("loader"),p=t(22),h=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){s=new PerformanceObserver(r);try{s.observe({entryTypes:["paint"]})}catch(m){}f=new PerformanceObserver(i);try{f.observe({entryTypes:["largest-contentful-paint"]})}catch(m){}u=new PerformanceObserver(o);try{u.observe({type:"layout-shift",buffered:!0})}catch(m){}}if("addEventListener"in document){var w=!1,v=["click","keydown","mousedown","pointerdown","touchstart"];v.forEach(function(t){document.addEventListener(t,a,!1)})}p(c)}},{}],20:[function(t,e,n){function r(){function t(){return e?15&e[n++]:16*Math.random()|0}var e=null,n=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&(e=r.getRandomValues(new Uint8Array(31)));for(var i,o="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",a="",c=0;c<o.length;c++)i=o[c],"x"===i?a+=t().toString(16):"y"===i?(i=3&t()|8,a+=i.toString(16)):a+=i;return a}function i(){return a(16)}function o(){return a(32)}function a(t){function e(){return n?15&n[r++]:16*Math.random()|0}var n=null,r=0,i=window.crypto||window.msCrypto;i&&i.getRandomValues&&Uint8Array&&(n=i.getRandomValues(new Uint8Array(31)));for(var o=[],a=0;a<t;a++)o.push(e().toString(16));return o.join("")}e.exports={generateUuid:r,generateSpanId:i,generateTraceId:o}},{}],21:[function(t,e,n){function r(t,e){if(!i)return!1;if(t!==i)return!1;if(!e)return!0;if(!o)return!1;for(var n=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,s=c.match(a);s&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=s[1])}e.exports={agent:i,version:o,match:r}},{}],22:[function(t,e,n){function r(t){function e(){t(a&&document[a]?document[a]:document[i]?"hidden":"visible")}"addEventListener"in document&&o&&document.addEventListener(o,e,!1)}e.exports=r;var i,o,a;"undefined"!=typeof document.hidden?(i="hidden",o="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",o="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",o="webkitvisibilitychange",a="webkitVisibilityState")},{}],23:[function(t,e,n){function r(t,e){var n=[],r="",o=0;for(r in t)i.call(t,r)&&(n[o]=e(r,t[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],24:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,i=n-e||0,o=Array(i<0?0:i);++r<i;)o[r]=t[e+r];return o}e.exports=r},{}],25:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function i(t){function e(t){return t&&t instanceof r?t:t?s(t,c,o):o()}function n(n,r,i,o){if(!l.aborted||o){t&&t(n,r,i);for(var a=e(i),c=m(n),s=c.length,f=0;f<s;f++)c[f].apply(a,r);var d=u[y[n]];return d&&d.push([x,n,r,a]),a}}function p(t,e){g[t]=m(t).concat(e)}function h(t,e){var n=g[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return g[t]||[]}function w(t){return d[t]=d[t]||i(n)}function v(t,e){f(t,function(t,n){e=e||"feature",y[n]=e,e in u||(u[e]=[])})}var g={},y={},x={on:p,addEventListener:p,removeEventListener:h,emit:n,get:w,listeners:m,context:e,buffer:v,abort:a,aborted:!1};return x}function o(){return new r}function a(){(u.api||u.feature)&&(l.aborted=!0,u=l.backlog={})}var c="nr@context",s=t("gos"),f=t(23),u={},d={},l=e.exports=i();l.backlog=u},{}],gos:[function(t,e,n){function r(t,e,n){if(i.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return t[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){i.buffer([t],r),i.emit(t,e,n)}var i=t("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,o,function(){return i++})}var i=1,o="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!b++){var t=x.info=NREUM.info,e=l.getElementsByTagName("script")[0];if(setTimeout(f.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return f.abort();s(g,function(e,n){t[e]||(t[e]=n)});var n=a();c("mark",["onload",n+x.offset],null,"api"),c("timing",["load",n]);var r=l.createElement("script");r.src="https://"+t.agent,e.parentNode.insertBefore(r,e)}}function i(){"complete"===l.readyState&&o()}function o(){c("mark",["domContent",a()+x.offset],null,"api")}var a=t(18),c=t("handle"),s=t(23),f=t("ee"),u=t(21),d=window,l=d.document,p="addEventListener",h="attachEvent",m=d.XMLHttpRequest,w=m&&m.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:m,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var v=""+location,g={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1184.min.js"},y=m&&w&&w[p]&&!/CriOS/.test(navigator.userAgent),x=e.exports={offset:a.getLastTimestamp(),now:a,origin:v,features:{},xhrWrappable:y,userAgent:u};t(15),t(19),l[p]?(l[p]("DOMContentLoaded",o,!1),d[p]("load",r,!1)):(l[h]("onreadystatechange",i),d[h]("onload",r)),c("mark",["firstbyte",a.getLastTimestamp()],null,"api");var b=0},{}],"wrap-function":[function(t,e,n){function r(t){return!(t&&t instanceof Function&&t.apply&&!t[a])}var i=t("ee"),o=t(24),a="nr@original",c=Object.prototype.hasOwnProperty,s=!1;e.exports=function(t,e){function n(t,e,n,i){function nrWrapper(){var r,a,c,s;try{a=this,r=o(arguments),c="function"==typeof n?n(r,a):n||{}}catch(f){l([f,"",[r,a,i],c])}u(e+"start",[r,a,i],c);try{return s=t.apply(a,r)}catch(d){throw u(e+"err",[r,a,d],c),d}finally{u(e+"end",[r,a,s],c)}}return r(t)?t:(e||(e=""),nrWrapper[a]=t,d(t,nrWrapper),nrWrapper)}function f(t,e,i,o){i||(i="");var a,c,s,f="-"===i.charAt(0);for(s=0;s<e.length;s++)c=e[s],a=t[c],r(a)||(t[c]=n(a,f?c+i:i,o,c))}function u(n,r,i){if(!s||e){var o=s;s=!0;try{t.emit(n,r,i,e)}catch(a){l([a,n,r,i])}s=o}}function d(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){l([r])}for(var i in t)c.call(t,i)&&(e[i]=t[i]);return e}function l(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=i),n.inPlace=f,n.flag=a,n}},{}]},{},["loader",2,12,4,3]);</script>
+    <body>
+        
+<header id="mainNav" class="navbar">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="/">
+            
+                
+                    <img src="//d33v4339jhl8k0.cloudfront.net/docs/assets/545804d8e4b09c5ca72525ce/images/54876cdfe4b04581c47e9727/trello.png" alt="Trello Help" width="180" height="40">
+                
+
+            
+            </a>
+            
+            <div class="nav-collapse collapse">
+                <nav role="navigation"><!-- added for accessibility -->
+                <ul class="nav">
+                    
+                    
+                    
+                </ul>
+                </nav>
+            </div><!--/.nav-collapse -->
+        </div><!--/container-->
+    </div><!--/navbar-inner-->
+</header>
+        <section id="contentArea" class="container-fluid">
+            <div class="row-fluid">
+                <section id="main-content" class="span9">
+                    <div class="contentWrapper">
+                        
+                        
+    
+    <article id="fullArticle">
+        <h1 class="title">How to use Trello like a pro</h1>
+    
+        <a href="javascript:window.print()" class="printArticle" title="Print this article" aria-label="Print this Article"><i class="icon-print"></i></a>
+        <p> The Help Guide is full of useful information when it comes to using Trello, but we’ve gathered some of our favorite tricks and tips here, along with the articles they came from. These are most useful if you’re already familiar with how to use Trello–if you’re looking for basic information, check out the <a href="https://trello.com/guide">Getting Started Guide</a>.</p>
+<h3>Double click to add list</h3>
+<p> <em>from </em><a href="//help.trello.com/article/744-adding-lists-to-a-board"><em>Adding lists to a board</em></a></p>
+<p> You can double click any free space on a board to open the add list pop-over. Trello is smart enough to know where you clicked, and will default to that location.</p>
+<h3>Keyboard shortcuts</h3>
+<p> <em>from</em><em>&nbsp;</em><a href="//help.trello.com/article/798-using-keyboard-shortcuts-in-trello"><em>Using keyboard shortcuts in Trello</em></a></p>
+<p> Go to&nbsp; <a href="https://trello.com/shortcuts">https://trello.com/shortcuts</a> or press “?” on your keyboard while in Trello to view a list of keyboard shortcuts.</p>
+<h3>Drag and drop attachments</h3>
+<p> <em>from </em><a href="//help.trello.com/article/769-adding-attachments-to-cards"><em>Adding attachments to cards</em></a></p>
+<p> You can drag and drop multiple files from your desktop to a card to upload them. You can also drag images from other websites to your cards.</p>
+<h3>Submit multiple cards and checklist items</h3>
+<p> <em>from <a href="//help.trello.com/article/751-importing-data-into-trello">Importing data into Trello</a></em></p>
+<p> You can add multiple cards or checklist items all at once. Copy and paste from a spreadsheet column or list separated by new lines from a word processor. This will create a new card or checklist for each line in the list. This won’t interfere with the quick and easy press-enter-to-create-a-card method; it will only work when pasting text.</p>
+<h3>@ mentions</h3>
+<p> <em>from <a href="//help.trello.com/article/765-commenting-on-cards">Commenting on cards</a></em></p>
+<p> Need to get the attention of another board member? You can mention them in a card comment and it will generate a notification for them. It’s got autocomplete, too. Just start typing “@” and their name and you’ll get suggestions.</p>
+<h3>Drag board to scroll</h3>
+<p> <em>from <a href="//help.trello.com/article/719-adding-your-first-board">Adding your first board</a></em></p>
+<p> If you click and hold on a board’s background, you can drag the board around to scroll horizontally. You can also scroll horizontally by pressing "shift" and then scrolling with your mouse.</p>
+<h3>Re-order starred boards</h3>
+<p> <em>from <a href="//help.trello.com/article/965-starring-a-board">Starring a Board</a></em></p>
+<p> You can rearrange your starred boards by dragging them around. This way, you can put your most important board at the top of the list, making it even easier to access.</p>
+<h3>Reorder checklists and checklist items</h3>
+<p> <em>from <a href="//help.trello.com/article/737-adding-checklists-to-cards">Adding checklists to cards</a></em></p>
+<p> Click and hold a checklist’s title or a checklist item to drag it around. You can rearrange checklists, move items to the top, and even move items between checklists.</p>
+<h3>Create cards via email</h3>
+<p> <em>from <a href="//help.trello.com/article/809-creating-cards-by-email">Creating cards by email</a></em></p>
+<p> Each board has a unique email address you can mail to create cards. Get the address by going to the board menu, then clicking “Email-to-board Settings.”</p>
+<h3>Show total cards per list</h3>
+<p> <em>from&nbsp;<a href="//help.trello.com/article/787-filtering-cards-on-a-board">Filtering cards on a board</a></em></p>
+<p> You can filter cards on a board by pressing 'f'– try filtering for "*" or "/", without any other text, and you'll see the number of cards per list.</p>
+<h3>Copy boards, lists, cards, and checklists</h3>
+<p> <em>from <a href="//help.trello.com/article/802-copying-cards-lists-or-boards">Copying cards, lists, or boards</a></em></p>
+<p> Got a board or card you want to use as a template? You can copy an original card, list, or board to a new location instead of creating an empty one. You can also copy checklist items from other checklists on your board when creating a new checklist. Just click the “Add Checklist…” button in the card sidebar and select an option from “Copy Items From…”.</p>
+<h3>Trello Resources board</h3>
+<p> <em><a href="//help.trello.com/article/734-how-to-use-trello-like-a-pro"></a></em></p>
+<p> There are tons of usage examples, extensions, bookmarklets and more on the <a href="https://trello.com/b/nPNSBZjB/trello-resources">Trello Resources board</a>. Check it out! We’ll keep it updated as we find new stuff.</p>
+<h3>Bulk list actions</h3>
+<p> <em>from <a href="//help.trello.com/article/806-moving-cards-or-lists">Moving cards or lists</a></em></p>
+<p> You can move or archive all the cards in a list at once (like archiving everything in your “Done” list). Hover over the list title, click the menu button in the top right corner, and select “Move all Cards in this List…” or “Archive all Cards in this List…”.</p>
+<h3>Desktop notifications</h3>
+<p> <em>from <a href="//help.trello.com/article/793-receiving-trello-notifications">Receiving Trello Notifications</a></em></p>
+<p> If you’re using Chrome or Safari, your browser can generate desktop notifications, an emerging web standard. Just click the Notifications button in the header, and select “Allow Desktop Notifications…” from the menu.</p>
+<h3>Rearrange and rename attachments</h3>
+<p> After adding attachments to a card, you can rename the attachment by clicking on the text of the filename. This will allow you to edit the <em>display name</em>&nbsp;of the attachment. Note that the actual filename will not have been changed.</p>
+<p> If you'd like to reorder the attachments, simply click and hold, then drag the attachment to the position you'd like it to be in.</p>
+<h3>Further reading</h3>
+<p> Several members of the Trello team have written articles on our blog to help take your use of Trello to the next level:</p>
+<ul> 
+ <li><a href="http://blog.trello.com/how-to-use-trello-like-a-pro/">How to use Trello like a pro</a>: It covers cool things like keyboard shortcuts, double-clicking to add lists, magic with attachments, copying everything, and more.</li> 
+ <li><a href="http://blog.trello.com/using-trello-like-a-pro-part-2/">Using Trello like a Pro: Part 2</a>: New shortcuts, copy/paste to make multiple cards, and checklist updates.</li> 
+ <li><a href="http://blog.trello.com/using-trello-like-a-pro-part-3/">Using Trello like a Pro: Part 3</a>: Power-ups, create cards via email, Trello Gold and Business Class, board backgrounds, shortcuts, re-order starred boards</li> 
+ <li><a href="http://blog.trello.com/using-multiple-boards-for-a-super-flexible-workflow/">Using Multiple Boards for a Super-Flexible Workflow</a>: Is a single board getting long in the tooth? Use Trello's ability to move cards between boards to improve your workflow.</li> 
+ <li><a href="https://community.atlassian.com/trello" target="_blank">Trello Community</a>: It is made up of Trello experts and users, a great way to get an answer quickly - perfect for how-to’s, use case questions, or advice!</li>
+</ul>
+<center></center>
+    </article>
+    
+
+    <section class="articleFoot">
+    
+    
+    <time class="lu" datetime=2018-03-06 >Last updated on March 6, 2018</time>
+    </section>
+
+                    </div><!--/contentWrapper-->
+                    
+                </section><!--/content-->
+                <aside id="sidebar" class="span3">
+                 
+
+<form action="/search" method="GET" id="searchBar" class="sm" autocomplete="off">
+    
+                    <input type="hidden" name="collectionId" value="54875c47e4b08bfc37e2aa99"/>
+                    <input type="text" name="query" title="search-query" class="search-query" placeholder="Search" value=""/>
+                    <button type="submit">
+                        <span class="sr-only">Toggle Search</span>
+                        <i class="icon-search"></i>
+                    </button>
+                    <div id="serp-dd" style="display: none;" class="sb">
+                        <ul class="result">
+                        </ul>
+                    </div>
+                
+</form>
+
+                
+                    <h3>Categories</h3>
+                    <ul class="nav nav-list">
+                    
+                        
+                            <li ><a href="/category/1205-archived-updates">Archived Updates  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/1201-atlassian-access">Atlassian Access  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/1200-atlassian-account">Atlassian account  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/1134-butler">Butler  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li  class="active" ><a href="/category/694-category">Getting Started  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/1202-templates">Templates  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/698-category">Using Trello  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/696-category">My Trello Account  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/1006-power-ups">Power-Ups  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/703-category">Trello Business Class  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/700-category">Trello Teams  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/701-category">Troubleshooting  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/1047-trello-enterprise">Trello Enterprise  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/697-category">About Trello  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/699-category">Apps  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/845-trello-for-android">Trello for Android  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                        
+                            <li ><a href="/category/846-trello-for-ios">Trello for iOS  <i class="icon-arrow"></i></a></li>
+                        
+                    
+                    </ul>
+                
+                </aside><!--/span-->
+            </div><!--/row-->
+            <div id="noResults" style="display:none;">No results found</div>
+            <footer>
+                
+
+<p>&copy;
+    
+        <a href="https://trello.com">Trello</a>
+    
+    2020. <span>Powered by <a rel="nofollow" href="https://www.helpscout.com/knowledge-base/?utm_source=docs&utm_medium=footerlink&utm_campaign=Docs+Branding" target="_blank">Help Scout</a></span>
+    
+    
+        
+    
+</p>
+
+            </footer>
+        </section><!--/.fluid-container-->
+        
+
+<section id="contactModal" class="modal hide" tabindex="-1">
+	<h2>Contact Us</h2>
+	<a href="#" id="closeBtn" data-dismiss="modal"><i
+		class="icon-close"></i></a>
+	<div class="modal-body">
+		<form data-parsley-validate novalidate method="post"
+			action="/contact" enctype="multipart/form-data"
+			class="form-horizontal contact">
+			<div class="control-group">
+				<label for="md-name" class="control-label">Name</label>
+				<div class="controls">
+					<input type="text" name="name" id="md-name"
+						placeholder="(optional)">
+				</div>
+				<!--/controls-->
+			</div>
+			<!--/control-group-->
+			<div class="control-group">
+				<label for="md-email" class="control-label">Email</label>
+				<div class="controls">
+					<input type="email" name="email" id="md-email"
+						data-parsley-required="true" data-parsley-type="email"
+						data-parsley-notblank="true"
+                        data-parsley-trigger="change"
+						data-parsley-required-message="Email is required">
+					<input type="text" name="phone" id="phone" value="">
+				</div>
+				<!--/controls-->
+			</div>
+			<!--/control-group-->
+			<div class="control-group">
+				<label for="md-subject" class="control-label">Subject</label>
+				<div class="controls">
+					<input type="text" name="subject" id="md-subject"
+						data-parsley-required="true" data-parsley-notblank="true"
+						data-parsley-required-message="Subject is required">
+				</div>
+				<!--/controls-->
+			</div>
+			<!--/control-group-->
+			<div class="control-group">
+				<label for="md-message" class="control-label">Message</label>
+				<div class="controls">
+					<textarea name="message" id="md-message" data-parsley-required="true"
+						data-parsley-notblank="true"
+						data-parsley-required-message="Message is required"></textarea>
+				</div>
+				<!--/controls-->
+			</div>
+			<!-- /control-group -->
+			<div class="control-group">
+				<label for="file-upload" class="control-label">Upload file</label>
+				<div class="controls">
+					<input id="file-upload" type="file" name="upload" data-parsley-max-file-size="10" />
+				</div>
+			</div>
+			<!--/control-group-->
+			<div class="form-actions">
+				
+				<input type="submit" class="btn" value="Send">
+			</div>
+			<!--/form-actions-->
+		</form>
+	</div>
+	<!--/modal-body-->
+</section>
+
+        
+        
+    <script src="//d3eto7onm69fcz.cloudfront.net/assets/javascripts/app3.min.js"></script>
+
+<script>
+// keep iOS links from opening safari
+if(("standalone" in window.navigator) && window.navigator.standalone){
+// If you want to prevent remote links in standalone web apps opening Mobile Safari, change 'remotes' to true
+var noddy, remotes = false;
+document.addEventListener('click', function(event) {
+noddy = event.target;
+while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+noddy = noddy.parentNode;
+}
+
+if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)){
+event.preventDefault();
+document.location.href = noddy.href;
+}
+
+},false);
+}
+$('#contactModal').on('shown', function () {
+  $('#md-name').focus();
+});
+</script>
+        
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"errorBeacon":"bam-cell.nr-data.net","licenseKey":"248c08e607","agent":"","beacon":"bam-cell.nr-data.net","applicationTime":115,"applicationID":"4968967","transactionName":"YlUGMhMECxBTWkJaW1sfNAoAHCYMXE1EXFhZVRYnAhEMDFwWVVxaQUILCg0AFxAceERHXVZcARVPEwwGRQ==","queueTime":0}</script>
+    </body>
+</html>
+
+
