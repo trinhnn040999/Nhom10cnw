@@ -1,9 +1,4 @@
 module.exports = {
-    /*
-     * This file contains the configurations information of Twitter login app.
-     * It consists of Twitter app information, database information.
-     */
-
     facebook_api_key: "432037537804697",
     facebook_api_secret: "1fa230cfb4b98e301dd97de2ec20f71e",
     callback_url: "http://localhost:3000/auth/facebook/callback",

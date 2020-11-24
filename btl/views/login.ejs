@@ -36,6 +36,10 @@
         <div class="forms-container">
             <div class="signin-signup">
                 <form action="auth" class="sign-in-form" method="POST">
+                    <% if(thongBao) { %>
+                    <h1 style='color:<%= color %>'><%= thongBao %></h1>
+                    
+                    <% } %>
                     <h2 class="title">Sign in</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>

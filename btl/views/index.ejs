@@ -55,7 +55,12 @@
                             <p class="p-large"><%= username %></p>
                             <% } %>
 
+                            <!-- sử dụng biển check để xem đã đăng nhập chưa -->
+                            <% if(!check) { %>
                             <a class="btn-solid-lg page-scroll" href="./login.html">LOGIN</a>
+                            <% } %>
+
+                            
                         </div>
                         <!-- end of text-container -->
                     </div>
