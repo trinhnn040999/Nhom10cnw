@@ -26,7 +26,7 @@
     <meta property="og:type" content="article" />
 
     <!-- Website Title -->
-    <title>Evolo - StartUp HTML Landing Page Template</title>
+    <title>10-DTP</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext"
@@ -36,12 +36,13 @@
     <link href="../public/stylesheets/swiper.css" rel="stylesheet">
     <link href="../public/stylesheets/magnific-popup.css" rel="stylesheet">
     <link href="../public/stylesheets/styles.css" rel="stylesheet">
+    <link href="../public/stylesheets/scroll.css" rel="stylesheet">
 
     <!-- Favicon  -->
     <link rel="icon" href="../public/images/icon.svg">
 </head>
 
-<body data-spy="scroll" data-target=".fixed-top">
+<body data-spy="scroll" data-target=".fixed-top" data-target="#myScrollspy" data-offset="20">
 
     <!-- Preloader -->
     <div class="spinner-wrapper">
@@ -52,8 +53,6 @@
         </div>
     </div>
     <!-- end of preloader -->
-
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <!-- Text Logo - Use this if you don't have a graphic logo -->
@@ -73,10 +72,12 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#header"><button class="btn btn-primary icon-menu"><i class="fas fa-home"></i></button> <span class="sr-only">(current)</span></a>
+                    <a class="nav-link page-scroll" href="#header"><button class="btn btn-primary icon-menu"><i
+                                class="fas fa-home"></i></button> <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#header"><button class="btn btn-primary icon-menu"><i class="fas fa-bell"></i></button> <span class="sr-only">(current)</span></a>
+                    <a class="nav-link page-scroll" href="#header"><button class="btn btn-primary icon-menu"><i
+                                class="fas fa-bell"></i></button> <span class="sr-only">(current)</span></a>
                 </li>
                 <!-- Dropdown Menu -->
                 <li class="nav-item dropdown">
@@ -111,172 +112,67 @@
     <!-- end of navbar -->
     <!-- end of navigation -->
 
-
-    <!-- Header -->
-    <header id="header" class="header">
-        <div class="header-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="text-container">
-                            <h1><span class="turquoise">StartUp Landing</span> Page Template Free</h1>
-                            <p class="p-large">Use Evolo free landing page template to promote your business startup and
-                                generate leads for the offered services</p>
-                            <a class="btn-solid-lg page-scroll" href="#services">DISCOVER</a>
-                        </div>
-                        <!-- end of text-container -->
-                    </div>
-                    <!-- end of col -->
-                    <div class="col-lg-6">
-                        <div class="image-container">
-                            <img class="img-fluid" src="../public/images/header-teamwork.svg" alt="alternative">
-                        </div>
-                        <!-- end of image-container -->
-                    </div>
-                    <!-- end of col -->
-                </div>
-                <!-- end of row -->
-            </div>
-            <!-- end of container -->
-        </div>
-        <!-- end of header-content -->
-    </header>
-    <!-- end of header -->
-    <!-- end of header -->
-
-
-    <!-- Customers -->
-    <div class="slider-1">
+    <div class="content">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <h5>Trusted By</h5>
-
-                    <!-- Image Slider -->
-                    <div class="slider-container">
-                        <div class="swiper-container image-slider">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="images/customer-logo-1.png" alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="images/customer-logo-2.png" alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="images/customer-logo-3.png" alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="images/customer-logo-4.png" alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="images/customer-logo-5.png" alt="alternative">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="image-container">
-                                        <img class="img-responsive" src="images/customer-logo-6.png" alt="alternative">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end of swiper-wrapper -->
-                        </div>
-                        <!-- end of swiper container -->
-                    </div>
-                    <!-- end of slider-container -->
-                    <!-- end of image slider -->
-
-                </div>
-                <!-- end of col -->
-            </div>
-            <!-- end of row -->
-        </div>
-        <!-- end of container -->
-    </div>
-    <!-- end of slider-1 -->
-    <!-- end of customers -->
-
-    <!-- Footer -->
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="footer-col">
-                        <h4>About Evolo</h4>
-                        <p>We're passionate about offering some of the best business growth services for startups</p>
-                    </div>
-                </div>
-                <!-- end of col -->
-                <div class="col-md-4">
-                    <div class="footer-col middle">
-                        <h4>Important Links</h4>
-                        <ul class="list-unstyled li-space-lg">
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Our business partners <a class="turquoise"
-                                        href="#your-link">startupguide.com</a></div>
+                <div class="col-sm-3">
+                    <nav id="myScrollspy">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="select-menu"><a href="#">
+                                    <Button class="btn btn-light"><i class="fas fa-columns"></i> Boards</Button>
+                                </a></li>
+                            <li class="select-menu"><a href="#">
+                                    <Button class="btn btn-light"><i class="fas fa-newspaper"></i> Templates</Button>
+                                </a></li>
+                            <li class="select-menu"><a href="#">
+                                    <Button class="btn btn-light"><i class="fas fa-home"></i> Home</Button>
+                                </a></li>
+                            <li class="title-select">
+                                TEAMS
                             </li>
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Read our <a class="turquoise" href="terms-conditions.html">Terms
-                                        & Conditions</a>, <a class="turquoise" href="privacy-policy.html">Privacy
-                                        Policy</a></div>
-                            </li>
+                            <li class="select-menu"><a href="#">
+                                <Button class="btn"><i class="fas fa-plus"></i>
+                                    Create a team</Button>
+                            </a></li>
                         </ul>
+                    </nav>
+                </div>
+
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-8 content-main">
+                            <img src="../public/images/header-background.jpg" alt="">
+                            <img src="../public/images/header-background.jpg" alt="">
+                            <img src="../public/images/header-background.jpg" alt="">
+                        </div>
+                        <div class="col-sm-4 recommend">
+                            <nav id="myScrollspy">
+                                <ul class="nav  nav-stacked">
+                                    <li class="title-select "><i class="far fa-clock"></i> Recently Viewed</li>
+                                    <li class="select-menu"><a href="#">
+                                            <Button class="btn btn-light"><img  width="30" height="30" src="../public/images/header-background.jpg"> CNWeb nhóm 10</Button>
+                                        </a></li>
+                                        <li class="select-menu"><a href="#">
+                                            <Button class="btn btn-light"><img  width="30" height="30" src="../public/images/header-background.jpg"> CNWeb nhóm 10</Button>
+                                        </a></li>  
+                                        <li class="select-menu"><a href="#">
+                                            <Button class="btn btn-light"><img  width="30" height="30" src="../public/images/header-background.jpg"> CNWeb nhóm 10</Button>
+                                        </a></li>  
+                                        <li class="title-select">
+                                            LINKS
+                                        </li>
+                                        <li class="select-menu"><a href="#">
+                                            <Button class="btn"><i class="fas fa-plus"></i>
+                                                Create a board</Button>
+                                        </a></li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-                <!-- end of col -->
-                <div class="col-md-4">
-                    <div class="footer-col last">
-                        <h4>Social Media</h4>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-facebook-f fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-twitter fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-google-plus-g fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-instagram fa-stack-1x"></i>
-                            </a>
-                        </span>
-                        <span class="fa-stack">
-                            <a href="#your-link">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
-                            </a>
-                        </span>
-                    </div>
-                </div>
-                <!-- end of col -->
             </div>
-            <!-- end of row -->
         </div>
-        <!-- end of container -->
     </div>
-    <!-- end of footer -->
-    <!-- end of footer -->
 
     <!-- Scripts -->
     <script src="../public/javascripts/jquery.min.js"></script>
@@ -295,6 +191,8 @@
     <!-- Validator.js - Bootstrap plugin that validates forms -->
     <script src="../public/javascripts/scripts.js"></script>
     <script src="../public/javascripts/leteravatar.js"></script>
+
+    <script src="../public/javascripts/scroll.js"></script>
     <!-- Custom scripts -->
 </body>
 

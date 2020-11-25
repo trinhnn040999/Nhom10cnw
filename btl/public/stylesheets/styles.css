@@ -2207,4 +2207,44 @@ pre {
 .infor .name {
   font-size: 14px;
 }
+.content{
+  position: relative;
+}
+ul.nav-pills {
+  top: 150px;
+  position: fixed;
+}
+div.col-sm-9 div {
+  top: 150px;
+  font-size: 28px;
+}
+.select-menu{
+  width: 100%;
+}
+.title-select{
+  margin-top: 10px;
+  padding-left: 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.title-select i{
+  margin-right: 15px;
+  margin-left: 5px;
+}
+.select-menu button{
+  width: 100%;
+  text-align: left;
+  margin-top: 3px;
+}
+.select-menu button i{
+  margin-right: 15px;
+  margin-left: 5px;
+}
+.content-main{
+
+}
+.content-main img{
+  width: 100%;
+}
+
 /* end of min-width width 1200px */
