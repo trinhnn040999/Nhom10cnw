@@ -725,13 +725,12 @@ input[type="checkbox"] {
 }
 
 /* Dropdown Menu */
-
 .navbar-custom .dropdown:hover > .dropdown-menu {
   display: block;
   /* this makes the dropdown menu stay open while hovering it */
   min-width: auto;
-  animation: fadeDropdown 0.2s;
-  /* required for the fade animation */
+  animation: fadeDropdown 1s; 
+  /* required for the fade animation*/
 }
 
 @keyframes fadeDropdown {
@@ -2187,25 +2186,25 @@ pre {
 .round {
   border-radius: 50%;
 }
-.icon-menu{
-    width: 40px;
-    height: 40px;
+.icon-menu {
+  width: 40px;
+  height: 40px;
 }
-.intro{
-    height: 40px;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 40px;
-}
-
-.infor .email{
-    font-size: 12px;
+.intro {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 40px;
 }
 
-.infor .name{
-    font-size: 14px;
+.infor .email {
+  font-size: 12px;
+}
+
+.infor .name {
+  font-size: 14px;
 }
 /* end of min-width width 1200px */
