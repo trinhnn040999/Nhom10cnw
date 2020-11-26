@@ -1822,6 +1822,12 @@ a:hover.back-to-top {
     margin-right: auto;
     margin-left: auto;
   }
+
+/*   
+  .recommend{
+    width: 0px !important;
+    height: 0px !important;
+  } */
   /* end of extra pages */
 }
 
@@ -1869,6 +1875,7 @@ a:hover.back-to-top {
     border-top: 0.75rem solid rgba(0, 0, 0, 0);
     border-radius: 0.25rem;
   }
+
   .navbar-custom.top-nav-collapse .dropdown-menu {
     border-top: 0.5rem solid rgba(0, 0, 0, 0);
     box-shadow: 0 0.375rem 0.375rem 0 rgba(0, 0, 0, 0.02);
@@ -2194,7 +2201,7 @@ pre {
   height: 40px;
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: left;
   padding-left: 10px;
   padding-right: 10px;
   line-height: 40px;
@@ -2206,6 +2213,7 @@ pre {
 
 .infor .name {
   font-size: 14px;
+  margin-left: 10px;
 }
 .content{
   position: relative;
@@ -2246,5 +2254,12 @@ div.col-sm-9 div {
 .content-main img{
   width: 100%;
 }
+/* Search */
+.search{
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+
+}
+/* end search */
 
 /* end of min-width width 1200px */
