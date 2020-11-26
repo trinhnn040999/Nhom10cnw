@@ -31,7 +31,7 @@ CREATE DATABASE IF NOT EXISTS `nodelogin` DEFAULT CHARACTER SET utf8 COLLATE utf
 USE `nodelogin`;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL

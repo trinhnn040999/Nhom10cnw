@@ -87,7 +87,7 @@ app.get('/facebook', function(req, res) {
 });
 
 // xử lý phần đăng nhập bằng facebook
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['profile', 'email'] }));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { successRedirect: '/facebook', failureRedirect: '/login' }),
     function(req, res) {
@@ -97,19 +97,41 @@ app.get('/auth/facebook/callback',
 // xử lý phần đăng nhập bằng Gmail
 app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
 app.get('/auth/google/callback',
-    passport.authenticate('google')
+    passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }),
+    function(req, res) {
+        res.redirect('/');
+    }
 );
-passport.use(
-    new GoogleStrategy({
-            clientID: config.googleClientID,
-            clientSecret: config.googleClientSecret,
-            callbackURL: config.callback_url_gmail
-        },
-        (profile, done) => {
-            console.log(profile);
-        }
-    )
-);
+passport.use(new GoogleStrategy({
+        clientID: config.googleClientID,
+        clientSecret: config.googleClientSecret,
+        callbackURL: config.callback_url_gmail
+    },
+    function(accessToken, refreshToken, profile, done) {
+        connection.query("SELECT * from accounts where id = ?", profile.id, (error, results, fields) => {
+            console.log(profile.emails[0]['value'])
+            console.log(profile.id)
+            if (error) throw error;
+            var user = {
+                'id': profile.id,
+                'username': 'h',
+                'password': '123456789',
+                'email': profile.emails[0]['value']
+            }
+            if (results.length == 0) {
+                connection.query("INSERT INTO accounts SET ?", user, function(error, results, fields) {
+                    if (error) throw error;
+                });
+
+            }
+            // Nếu  tồn tại
+            else {
+                // console.log("User already exists in database");
+            }
+        });
+        return done(null, profile);
+    }
+));
 
 app.get('/logout', function(req, res) {
     req.logout();
