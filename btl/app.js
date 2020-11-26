@@ -1,6 +1,7 @@
 var express = require('express')
 var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var session = require('express-session')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
@@ -94,21 +95,21 @@ app.get('/auth/facebook/callback',
     }
 );
 // xử lý phần đăng nhập bằng Gmail
-// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-// app.get('/auth/google/callback',
-//     passport.authenticate('google')
-// );
-// passport.use(
-//     new GoogleStrategy({
-//             clientID: config.googleClientID,
-//             clientSecret: config.googleClientSecret,
-//             callbackURL: config.callback_url_gmail
-//         },
-//         accessToken => {
-//             console.log(accessToken);
-//         }
-//     )
-// );
+app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
+app.get('/auth/google/callback',
+    passport.authenticate('google')
+);
+passport.use(
+    new GoogleStrategy({
+            clientID: config.googleClientID,
+            clientSecret: config.googleClientSecret,
+            callbackURL: config.callback_url_gmail
+        },
+        (profile, done) => {
+            console.log(profile);
+        }
+    )
+);
 
 app.get('/logout', function(req, res) {
     req.logout();
