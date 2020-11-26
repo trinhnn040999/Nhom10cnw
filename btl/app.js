@@ -1,4 +1,3 @@
-// 
 var express = require('express')
 var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy
@@ -33,7 +32,7 @@ passport.use(new FacebookStrategy({
         // thiết lập các cấu hình cần thiết
         clientID: config.facebook_api_key,
         clientSecret: config.facebook_api_secret,
-        callbackURL: config.callback_url
+        callbackURL: config.callback_url_facebook
     },
     function(req, res, profile, done) {
         process.nextTick(function() {
@@ -78,12 +77,12 @@ app.use(express.static(__dirname + '/public'));
 
 // 
 app.get('/', function(req, res) {
-    res.render('index', { username: '', check: '' });
+    res.render('index', { username: '' });
 });
 
 // thiết lập sau khi đăng nhập bằng facebook
 app.get('/facebook', function(req, res) {
-    res.render('index', { username: req.user.displayName, check: 'ok' });
+    res.render('home', { username: req.user.displayName });
 });
 
 // xử lý phần đăng nhập bằng facebook
@@ -94,6 +93,22 @@ app.get('/auth/facebook/callback',
         res.redirect('/');
     }
 );
+// xử lý phần đăng nhập bằng Gmail
+// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+// app.get('/auth/google/callback',
+//     passport.authenticate('google')
+// );
+// passport.use(
+//     new GoogleStrategy({
+//             clientID: config.googleClientID,
+//             clientSecret: config.googleClientSecret,
+//             callbackURL: config.callback_url_gmail
+//         },
+//         accessToken => {
+//             console.log(accessToken);
+//         }
+//     )
+// );
 
 app.get('/logout', function(req, res) {
     req.logout();
@@ -112,7 +127,8 @@ app.post('/auth', function(req, res) {
         connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
             if (error) throw error;
             if (results.length > 0) {
-                res.render('index', { username: username, check: 'OK' })
+                console.log(username)
+                res.render('home', { username: username })
             } else {
                 res.render('login', { thongBao: 'Error login, please try again', color: 'red' })
             }
