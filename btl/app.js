@@ -17,6 +17,14 @@ var connection = mysql.createConnection({
     database: config.database
 });
 
+function check_email(email) {
+    connection.query("SELECT * from accounts where email = ?", email, (error, results, fields) => {
+        console.log(results)
+        console.log(results.length)
+        return results.length
+    })
+};
+
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
@@ -67,6 +75,8 @@ passport.use(new FacebookStrategy({
 ));
 
 
+
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(cookieParser());
@@ -86,6 +96,21 @@ app.get('/facebook', function(req, res) {
     res.render('home', { username: req.user.displayName });
 });
 
+// thiết lập sau khi đăng nhập bằng gmail
+app.get('/gmail', function(req, res) {
+    connection.query("SELECT * from accounts where email = ?", req.user.emails[0]['value'], (error, results, fields) => {
+        console.log(results)
+        console.log(results.length)
+        if (results.length > 0) {
+            //tai khoan da ton tai
+            res.render('home', { username: results[0]['username'] })
+        } else {
+            // tai khoan chua ton tai
+            res.render('loginGmail')
+        }
+    })
+});
+
 // xử lý phần đăng nhập bằng facebook
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['profile', 'email'] }));
 app.get('/auth/facebook/callback',
@@ -97,7 +122,7 @@ app.get('/auth/facebook/callback',
 // xử lý phần đăng nhập bằng Gmail
 app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
 app.get('/auth/google/callback',
-    passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }),
+    passport.authenticate('google', { successRedirect: '/gmail', failureRedirect: '/login' }),
     function(req, res) {
         res.redirect('/');
     }
@@ -108,27 +133,28 @@ passport.use(new GoogleStrategy({
         callbackURL: config.callback_url_gmail
     },
     function(accessToken, refreshToken, profile, done) {
-        connection.query("SELECT * from accounts where id = ?", profile.id, (error, results, fields) => {
-            console.log(profile.emails[0]['value'])
-            console.log(profile.id)
-            if (error) throw error;
-            var user = {
-                'id': profile.id,
-                'username': 'h',
-                'password': '123456789',
-                'email': profile.emails[0]['value']
-            }
-            if (results.length == 0) {
-                connection.query("INSERT INTO accounts SET ?", user, function(error, results, fields) {
-                    if (error) throw error;
-                });
-
-            }
-            // Nếu  tồn tại
-            else {
-                // console.log("User already exists in database");
-            }
-        });
+        // connection.query("SELECT * from accounts where email = ?", profile.emails[0]['value'], (error, results, fields) => {
+        //     console.log(profile.emails[0]['value'])
+        //     console.log(profile.id)
+        //     if (error) throw error;
+        //     // var user = {
+        //     //     'username': 'h',
+        //     //     'password': '123456789',
+        //     //     'email': profile.emails[0]['value']
+        //     // }
+        //     // if (results.length == 0) {
+        //         // connection.query("INSERT INTO accounts SET ?", user, function(error, results, fields) {
+        //         //     if (error) throw error;
+        //         //     else {
+        //         //         console.log("insert success")
+        //         //     }
+        //         // });
+        //     }
+        //     // Nếu  tồn tại
+        //     else {
+        //         // console.log("User already exists in database");
+        //     }
+        // });
         return done(null, profile);
     }
 ));
@@ -170,12 +196,28 @@ app.post('/register', function(req, res) {
     }
     connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
         if (error) {
-            res.render('login', { thongBao: 'Error register!', color: 'red' })
+            res.render('login', { thongBao: 'Error register, email already exists!', color: 'red' })
         } else {
             res.render('login', { thongBao: 'Success register, please login.', color: 'green' })
         }
     })
-})
+});
+
+app.post('/update/gmail', function(req, res) {
+    var user = {
+        'username': req.body.username,
+        'password': req.body.password,
+        'email': req.user.emails[0]['value']
+    }
+    connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
+        if (error) {
+            res.render('login', { thongBao: 'Error, please try again', color: 'red' })
+        } else {
+            res.render('home', { username: req.user.emails[0]['value'] })
+        }
+    })
+
+});
 
 
 app.listen(3000);
