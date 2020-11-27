@@ -2287,6 +2287,15 @@ div.col-sm-9 div {
 a {
   text-decoration: none;
 }
+/* setting */
+.setting .acount-setting{
+  
+}
+.setting button{
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid #CCCCCC;
+}
 /* end search */
 
 /* end of min-width width 1200px */
