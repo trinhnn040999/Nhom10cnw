@@ -32,8 +32,10 @@ USE `nodelogin`;
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` bigint(35) NOT NULL,
   `username` varchar(50) NOT NULL,
+  `fullname` varchar(50) NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `sdt` bigint(20)  NULL,
   PRIMARY KEY (`id`,`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');

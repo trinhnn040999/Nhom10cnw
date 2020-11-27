@@ -86,8 +86,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
-// 
+
 app.get('/', function(req, res) {
+    res.clearCookie('username')
+    res.clearCookie('email')
+    res.clearCookie('sdt')
+    res.clearCookie('fullname')
     res.render('index', { username: '' });
 });
 
@@ -103,10 +107,13 @@ app.get('/gmail', function(req, res) {
         console.log(results.length)
         if (results.length > 0) {
             //tai khoan da ton tai
+            res.cookie('username', results[0]['username'])
+            res.cookie('email', results[0]['email'])
+            res.cookie('sdt', results[0]['sdt'])
             res.render('home', { username: results[0]['username'] })
         } else {
             // tai khoan chua ton tai
-            res.render('loginGmail')
+            res.render('loginGmail', { check: '' })
         }
     })
 });
@@ -159,14 +166,21 @@ passport.use(new GoogleStrategy({
     }
 ));
 
+// thiet lap chuc nang dang suat
 app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
 
+// thiet lap chuc nang login
 app.get('/login.html', function(req, res) {
     res.render('login', { thongBao: '' });
 })
+
+// thiet lap chuc nang xem profile
+app.get('/profile', function(req, res) {
+    res.render('profile', { username: req.cookies.username, email: req.cookies.email, sdt: req.cookies.sdt })
+});
 
 // xử lý phần đăng nhập
 app.post('/auth', function(req, res) {
@@ -177,7 +191,12 @@ app.post('/auth', function(req, res) {
             if (error) throw error;
             if (results.length > 0) {
                 console.log(username)
-                res.render('home', { username: username })
+                    // luu username va email vao cookie
+                res.cookie('username', results[0]['username']);
+                res.cookie('email', results[0]['email']);
+                res.cookie('sdt', results[0]['sdt']);
+                res.cookie('fullname', results[0]['fullname']);
+                res.render('home', { username: username });
             } else {
                 res.render('login', { thongBao: 'Error login, please try again', color: 'red' })
             }
@@ -192,7 +211,8 @@ app.post('/register', function(req, res) {
     var user = {
         'username': req.body.username,
         'password': req.body.password,
-        'email': req.body.email
+        'email': req.body.email,
+        'fullname': req.body.username
     }
     connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
         if (error) {
@@ -204,18 +224,42 @@ app.post('/register', function(req, res) {
 });
 
 app.post('/update/gmail', function(req, res) {
-    var user = {
-        'username': req.body.username,
-        'password': req.body.password,
-        'email': req.user.emails[0]['value']
-    }
-    connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
-        if (error) {
-            res.render('login', { thongBao: 'Error, please try again', color: 'red' })
+
+    connection.query('SELECT * FROM accounts WHERE username = ?', req.body.username, function(error, results, fields) {
+        if (error) throw error;
+        if (results.length > 0) {
+            // kiem tra username da ton tai chua
+            // neu da ton tai
+            res.render('loginGmail', { check: 'Username already exitsts!' })
         } else {
-            res.render('home', { username: req.user.emails[0]['value'] })
+            // neu chua ton tai
+            var user = {
+                    'username': req.body.username,
+                    'password': req.body.password,
+                    'email': req.user.emails[0]['value'],
+                    'fullname': req.body.username
+                }
+                // insert vao database
+            connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
+                if (error) {
+                    res.render('login', { thongBao: 'Error, please try again', color: 'red' })
+                } else {
+                    connection.query('SELECT * FROM accounts WHERE username = ?', req.body.username, function(error, results, fields) {
+                        if (error) throw error;
+                        if (results.length > 0) {
+                            res.cookie('username', req.body.username)
+                            res.cookie('email', req.body.password)
+                            res.cookie('sdt', results[0]['sdt'])
+                            res.render('home', { username: req.body.username })
+
+                        } else {
+                            res.render('login', { thongBao: 'Error login, please try again', color: 'red' })
+                        }
+                    });
+                }
+            })
         }
-    })
+    });
 
 });
 
