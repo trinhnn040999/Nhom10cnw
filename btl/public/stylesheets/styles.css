@@ -2263,8 +2263,7 @@ div.col-sm-9 div {
   width: 100%;
   margin-top: 150px;
   position: relative;
-  height: 250px;
-  background: cornflowerblue;
+  height: 150px;
   position: relative;
 }
 .header-intro .intro {
@@ -2284,6 +2283,9 @@ div.col-sm-9 div {
   left: 0;
   right: 0;
   text-align: center;
+}
+a {
+  text-decoration: none;
 }
 /* end search */
 
