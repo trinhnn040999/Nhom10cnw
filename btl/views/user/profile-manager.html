@@ -106,7 +106,7 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs menu-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link profile" data-toggle="tab" href="#profile">Profile and Visibility</a>
+                    <a class="nav-link active" data-toggle="tab" href="#profile">Profile and Visibility</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#activity">Activity</a>
@@ -125,7 +125,25 @@
         <br>
         <div class="tab-content">
             <div id="profile" class="container tab-pane active"><br>
-                helo
+                <form action="../edit" method="POST">
+                    <div class="form-group">
+                        <label for="usr">Email:</label>
+                        <input type="text" class="form-control" id="usr" name="email" value="tai@gmail.com" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Fullname:</label>
+                        <input type="text" class="form-control" id="usr" name="fullname" value="Lee MeenHoo">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Phone number:</label>
+                        <input type="number" class="form-control" id="usr" name="phone" value="0900080886">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Bio:</label>
+                        <textarea name="overview" placeholder="Overview" class=" form-input inputTextArea"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
             <div id="activity" class="container tab-pane fade"><br>
                 <h3>Menu 1</h3>
