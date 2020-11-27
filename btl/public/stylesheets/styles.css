@@ -729,7 +729,7 @@ input[type="checkbox"] {
   display: block;
   /* this makes the dropdown menu stay open while hovering it */
   min-width: auto;
-  animation: fadeDropdown 1s; 
+  animation: fadeDropdown 1s;
   /* required for the fade animation*/
 }
 
@@ -1823,7 +1823,7 @@ a:hover.back-to-top {
     margin-left: auto;
   }
 
-/*   
+  /*   
   .recommend{
     width: 0px !important;
     height: 0px !important;
@@ -2215,7 +2215,7 @@ pre {
   font-size: 14px;
   margin-left: 10px;
 }
-.content{
+.content {
   position: relative;
 }
 ul.nav-pills {
@@ -2226,39 +2226,64 @@ div.col-sm-9 div {
   top: 150px;
   font-size: 28px;
 }
-.select-menu{
+.select-menu {
   width: 100%;
 }
-.title-select{
+.title-select {
   margin-top: 10px;
   padding-left: 15px;
   margin-bottom: 10px;
   font-size: 14px;
 }
-.title-select i{
+.title-select i {
   margin-right: 15px;
   margin-left: 5px;
 }
-.select-menu button{
+.select-menu button {
   width: 100%;
   text-align: left;
   margin-top: 3px;
 }
-.select-menu button i{
+.select-menu button i {
   margin-right: 15px;
   margin-left: 5px;
 }
-.content-main{
-
+.content-main {
 }
-.content-main img{
+.content-main img {
   width: 100%;
 }
 /* Search */
-.search{
+.search {
   margin-top: 0.75rem;
   margin-bottom: 0.5rem;
-
+}
+.header-intro {
+  padding: 20px;
+  width: 100%;
+  margin-top: 150px;
+  position: relative;
+  height: 250px;
+  background: cornflowerblue;
+  position: relative;
+}
+.header-intro .intro {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.header-intro .menu-tab {
+  display: flex;
+  justify-content: center;
+}
+.header-intro .header-content{
+  position: absolute;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
 }
 /* end search */
 
