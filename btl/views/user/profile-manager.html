@@ -21,8 +21,8 @@
 </head>
 
 <body>
-     <!-- Preloader -->
-     <div class="spinner-wrapper">
+    <!-- Preloader -->
+    <div class="spinner-wrapper">
         <div class="spinner">
             <div class="bounce1"></div>
             <div class="bounce2"></div>
@@ -36,7 +36,8 @@
         <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Evolo</a> -->
 
         <!-- Image Logo -->
-        <a class="navbar-brand logo-image" href="index.html"><img src="../../public/images/logo.svg" alt="alternative"></a>
+        <a class="navbar-brand logo-image" href="index.html"><img src="../../public/images/logo.svg"
+                alt="alternative"></a>
 
         <!-- Mobile Menu Toggle Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -140,7 +141,7 @@
                     </div>
                     <div class="form-group">
                         <label for="usr">Bio:</label>
-                        <textarea name="overview"  class="form-control"></textarea>
+                        <textarea name="overview" class="form-control"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
@@ -150,37 +151,65 @@
                     <div class="setting-account">
                         <h4>Account</h4>
                         <hr>
-                        <button type="button" class="btn btn-light">Change Password</button>
+                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">Change
+                            Password</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Change password</h4>
+                                        <button type="button" class="close" data-dismiss="modal" style="float: left; width: 40px;">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="#" method="POST" class="">
+                                            <div class="form-group">
+                                                <label for="usr">Old Password:</label>
+                                                <input type="password" class="form-control" id="password"
+                                                    name="password-old">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="usr">New Password:</label>
+                                                <input type="password" class="form-control" id="password"
+                                                    name="password-new">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="usr">Confirm Password:</label>
+                                                <input type="password" class="form-control" id="password"
+                                                    name="confirm">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" data-dismiss="modal" style="text-align: center;">Submit</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-            </div>
-            <div id="card" class="container tab-pane fade"><br>
-                <h3>Menu 2</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam.</p>
-            </div>
-        </div>
-    </div>
-    <script src="../../public/javascripts/jquery.min.js"></script>
-    <!-- jQuery for Bootstrap's JavaScript plugins -->
-    <script src="../../public/javascripts/popper.min.js"></script>
-    <!-- Popper tooltip library for Bootstrap -->
-    <script src="../../public/javascripts/bootstrap.min.js"></script>
-    <!-- Bootstrap framework -->
-    <script src="../../public/javascripts/jquery.easing.min.js"></script>
-    <!-- jQuery Easing for smooth scrolling between anchors -->
-    <script src="../../public/javascripts/swiper.min.js"></script>
-    <!-- Swiper for image and text sliders -->
-    <script src="../../public/javascripts/jquery.magnific-popup.js"></script>
-    <!-- Magnific Popup for lightboxes -->
-    <script src="../../public/javascripts/validator.min.js"></script>
-    <!-- Validator.js - Bootstrap plugin that validates forms -->
-    <script src="../../public/javascripts/scripts.js"></script>
-    <script src="../../public/javascripts/leteravatar.js"></script>
+                <script src="../../public/javascripts/jquery.min.js"></script>
+                <!-- jQuery for Bootstrap's JavaScript plugins -->
+                <script src="../../public/javascripts/popper.min.js"></script>
+                <!-- Popper tooltip library for Bootstrap -->
+                <script src="../../public/javascripts/bootstrap.min.js"></script>
+                <!-- Bootstrap framework -->
+                <script src="../../public/javascripts/jquery.easing.min.js"></script>
+                <!-- jQuery Easing for smooth scrolling between anchors -->
+                <script src="../../public/javascripts/swiper.min.js"></script>
+                <!-- Swiper for image and text sliders -->
+                <script src="../../public/javascripts/jquery.magnific-popup.js"></script>
+                <!-- Magnific Popup for lightboxes -->
+                <script src="../../public/javascripts/validator.min.js"></script>
+                <!-- Validator.js - Bootstrap plugin that validates forms -->
+                <script src="../../public/javascripts/scripts.js"></script>
+                <script src="../../public/javascripts/leteravatar.js"></script>
 
-    <script src="../../public/javascripts/scroll.js"></script>
-    <!-- Custom scripts -->
+                <script src="../../public/javascripts/scroll.js"></script>
+                <!-- Custom scripts -->
 </body>
 
 </html>
