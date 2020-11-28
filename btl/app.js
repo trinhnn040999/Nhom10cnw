@@ -105,12 +105,16 @@ app.get('/gmail', function(req, res) {
             res.cookie('email', results[0]['email'])
             res.cookie('sdt', results[0]['sdt'])
             res.cookie('fullname', results[0]['fullname'])
-            res.render('home', { username: results[0]['fullname'] })
+            res.render('home', { fullname: results[0]['fullname'] })
         } else {
             // tai khoan chua ton tai
             res.render('loginGmail', { check: '' })
         }
     })
+});
+
+app.get('/home', function(req, res) {
+    res.render('home', { fullname: req.cookies.fullname })
 });
 
 // xử lý phần đăng nhập bằng facebook
