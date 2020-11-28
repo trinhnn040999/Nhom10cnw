@@ -179,7 +179,7 @@ app.post('/auth', function(req, res) {
                 res.cookie('email', results[0]['email']);
                 res.cookie('sdt', results[0]['sdt']);
                 res.cookie('fullname', results[0]['fullname']);
-                res.render('home', { username: username });
+                res.render('home', { fullname: results[0]['fullname'] });
             } else {
                 res.render('login', { thongBao: 'Error login, please try again', color: 'red' })
             }
@@ -275,6 +275,41 @@ app.post('/saveProfile', function(req, res, next) {
         res.render('profile', { fullname: fullname, email: req.cookies.email, sdt: sdt })
     })
 });
+
+app.post('/changePassword', function(req, res, next) {
+    var passwordOld = req.body.passwordOld
+    console.log(passwordOld)
+
+    var passwordNew = req.body.passwordNew
+    console.log(passwordNew)
+
+    var email = req.cookies.email
+    console.log(email)
+
+
+    connection.query('SELECT accounts.password FROM accounts WHERE email = ?', email, function(error, results, fields) {
+        // neu khong thanh cong
+        if (error) throw error;
+
+        var password = results[0]['password']
+        console.log(passwordNew)
+        console.log(results)
+        if (password === passwordOld) {
+            connection.query('update accounts set password = ? where email = ?', [passwordNew, email], function(error, results) {
+                // neu khong thanh cong
+                if (error) throw Error
+                    // neu thanh cong
+                res.render('login', { thongBao: 'Please login again to confirm', color: 'green' })
+            })
+
+        } else {
+            console.log('Password not correct')
+        }
+
+    });
+
+});
+
 
 
 app.listen(3000);
