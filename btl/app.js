@@ -141,28 +141,6 @@ passport.use(new GoogleStrategy({
         callbackURL: config.callback_url_gmail
     },
     function(accessToken, refreshToken, profile, done) {
-        // connection.query("SELECT * from accounts where email = ?", profile.emails[0]['value'], (error, results, fields) => {
-        //     console.log(profile.emails[0]['value'])
-        //     console.log(profile.id)
-        //     if (error) throw error;
-        //     // var user = {
-        //     //     'username': 'h',
-        //     //     'password': '123456789',
-        //     //     'email': profile.emails[0]['value']
-        //     // }
-        //     // if (results.length == 0) {
-        //         // connection.query("INSERT INTO accounts SET ?", user, function(error, results, fields) {
-        //         //     if (error) throw error;
-        //         //     else {
-        //         //         console.log("insert success")
-        //         //     }
-        //         // });
-        //     }
-        //     // Nếu  tồn tại
-        //     else {
-        //         // console.log("User already exists in database");
-        //     }
-        // });
         return done(null, profile);
     }
 ));
@@ -210,15 +188,19 @@ app.post('/auth', function(req, res) {
 // xử lý phần đăng kí
 app.post('/register', function(req, res) {
     var user = {
-        'username': req.body.username,
-        'password': req.body.password,
-        'email': req.body.email,
-        'fullname': req.body.username
-    }
+            'username': req.body.username,
+            'password': req.body.password,
+            'email': req.body.email,
+            'fullname': req.body.username
+        }
+        // them thong tin vao co so du lieu
     connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
+        // neu co loi xay ra
         if (error) {
+            // thong bao loi
             res.render('login', { thongBao: 'Error register, email already exists!', color: 'red' })
         } else {
+            // thong bao thanh cong
             res.render('login', { thongBao: 'Success register, please login.', color: 'green' })
         }
     })
@@ -242,12 +224,19 @@ app.post('/update/gmail', function(req, res) {
                 }
                 // insert vao database
             connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
+                // neu khong thanh cong
                 if (error) {
                     res.render('login', { thongBao: 'Error, please try again', color: 'red' })
                 } else {
+                    // neu thanh cong
+                    // tim kiem bang co username va luu nhung gia tri cookie
                     connection.query('SELECT * FROM accounts WHERE username = ?', req.body.username, function(error, results, fields) {
+                        // neu khong thanh cong
                         if (error) throw error;
+
+                        // neu thanh cong va co ton tai tai khoan
                         if (results.length > 0) {
+                            // luu vao cookie
                             res.cookie('username', req.body.username)
                             res.cookie('email', req.body.password)
                             res.cookie('sdt', results[0]['sdt'])
@@ -255,6 +244,7 @@ app.post('/update/gmail', function(req, res) {
                             res.render('home', { username: req.body.username })
 
                         } else {
+                            // neu tai khong ton tai bao loi
                             res.render('login', { thongBao: 'Error login, please try again', color: 'red' })
                         }
                     });
@@ -265,12 +255,16 @@ app.post('/update/gmail', function(req, res) {
 
 });
 
+// xu ly phan luu profile
 app.post('/saveProfile', function(req, res, next) {
     var sdt = req.body.phone
     var fullname = req.body.fullname
     var email = req.cookies.email
+        // update co so du lieu
     connection.query('update accounts set fullname = ?, sdt = ? where email = ?', [fullname, sdt, email], function(error, results) {
+        // neu khong thanh cong
         if (error) throw Error
+            // neu thanh cong
         console.log('update success')
         res.cookie('sdt', sdt)
         res.cookie('fullname', fullname)
