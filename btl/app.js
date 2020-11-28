@@ -52,15 +52,13 @@ passport.use(new FacebookStrategy({
                 connection.query("SELECT * from accounts_FB where id = ?", profile.id, (error, results, fields) => {
                     if (error) throw error;
                     var user = {
-                            'id': profile.id,
-                            'username': profile.displayName
-                        }
-                        // console.log(profile.id)
-                        // console.log(profile.displayName)
-                        // kiểm tra tài khoản đã tồn tại chưa,...
+                        'id': profile.id,
+                        'username': profile.displayName
+                    }
+
                     if (results.length == 0) {
                         // nếu chưa tồn tại
-                        // console.log("There is no such user, adding now");
+                        // thi them tai khoan moi
                         connection.query("INSERT INTO accounts_FB SET ?", user, function(error, results, fields) {});
                     }
                     // Nếu  tồn tại
@@ -95,10 +93,6 @@ app.get('/', function(req, res) {
     res.render('index', { username: '' });
 });
 
-// thiết lập sau khi đăng nhập bằng facebook
-app.get('/facebook', function(req, res) {
-    res.render('home', { username: req.user.displayName });
-});
 
 // thiết lập sau khi đăng nhập bằng gmail
 app.get('/gmail', function(req, res) {
@@ -110,7 +104,8 @@ app.get('/gmail', function(req, res) {
             res.cookie('username', results[0]['username'])
             res.cookie('email', results[0]['email'])
             res.cookie('sdt', results[0]['sdt'])
-            res.render('home', { username: results[0]['username'] })
+            res.cookie('fullname', results[0]['fullname'])
+            res.render('home', { username: results[0]['fullname'] })
         } else {
             // tai khoan chua ton tai
             res.render('loginGmail', { check: '' })
@@ -126,6 +121,12 @@ app.get('/auth/facebook/callback',
         res.redirect('/');
     }
 );
+
+// thiết lập sau khi đăng nhập bằng facebook
+app.get('/facebook', function(req, res) {
+    res.render('home', { username: req.user.displayName });
+});
+
 // xử lý phần đăng nhập bằng Gmail
 app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
 app.get('/auth/google/callback',
@@ -179,7 +180,7 @@ app.get('/login.html', function(req, res) {
 
 // thiet lap chuc nang xem profile
 app.get('/profile', function(req, res) {
-    res.render('profile', { username: req.cookies.username, email: req.cookies.email, sdt: req.cookies.sdt })
+    res.render('profile', { fullname: req.cookies.fullname, email: req.cookies.email, sdt: req.cookies.sdt })
 });
 
 // xử lý phần đăng nhập
@@ -250,6 +251,7 @@ app.post('/update/gmail', function(req, res) {
                             res.cookie('username', req.body.username)
                             res.cookie('email', req.body.password)
                             res.cookie('sdt', results[0]['sdt'])
+                            res.cookie('fullname', req.body.username)
                             res.render('home', { username: req.body.username })
 
                         } else {
@@ -261,6 +263,19 @@ app.post('/update/gmail', function(req, res) {
         }
     });
 
+});
+
+app.post('/saveProfile', function(req, res, next) {
+    var sdt = req.body.phone
+    var fullname = req.body.fullname
+    var email = req.cookies.email
+    connection.query('update accounts set fullname = ?, sdt = ? where email = ?', [fullname, sdt, email], function(error, results) {
+        if (error) throw Error
+        console.log('update success')
+        res.cookie('sdt', sdt)
+        res.cookie('fullname', fullname)
+        res.render('profile', { fullname: fullname, email: req.cookies.email, sdt: sdt })
+    })
 });
 
 

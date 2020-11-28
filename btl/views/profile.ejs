@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title><%= username %></title>
+    <title><%= fullname %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -68,13 +68,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle page-scroll" href="#about" id="navbarDropdown" role="button"
                         aria-haspopup="true" aria-expanded="false">
-                        <img class="round icon-menu" width="60" height="60" avatar="<%= username %>">
+                        <img class="round icon-menu" width="60" height="60" avatar="<%= fullname %>">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <div class="intro dropdown-item">
-                            <img class="round icon-menu" width="60" height="60" avatar="<%= username %>">
+                            <img class="round icon-menu" width="60" height="60" avatar="<%= fullname %>">
                             <div class="infor">
-                                <div class="name"><%= username %></div>
+                                <div class="name"><%= fullname %></div>
                             </div>
                         </div>
                         <div class="dropdown-items-divide-hr"></div>
@@ -98,9 +98,9 @@
     <div class="header-intro">
         <div class="header-content">
             <div class="intro">
-                <img class="round icon-menu" width="40" height="40" avatar="<%= username %>">
+                <img class="round icon-menu" width="40" height="40" avatar="<%= fullname %>">
                 <div class="infor">
-                    <div class="name"><%= username %></div>
+                    <div class="name"><%= fullname %></div>
                 </div>
             </div>
             <!-- Nav tabs -->
@@ -125,14 +125,14 @@
         <div class="tab-content">
             <div id="profile" class="tab-pane active"><br>
                 <h3>About</h3>
-                <form action="#" method="POST" class="">
+                <form action="saveProfile" method="POST" class="">
                     <div class="form-group">
                         <label for="usr">Email:</label>
                         <input type="text" class="form-control" id="email" name="email" value="<%= email %>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="usr">Fullname:</label>
-                        <input type="text" class="form-control" id="fullname" name="fullname" value="<%= username %>">
+                        <input type="text" class="form-control" id="fullname" name="fullname" value="<%= fullname %>">
                     </div>
                     <div class="form-group">
                         <label for="usr">Phone number:</label>
