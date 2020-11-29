@@ -90,7 +90,10 @@ app.get('/', function(req, res) {
     res.clearCookie('email')
     res.clearCookie('sdt')
     res.clearCookie('fullname')
-    res.render('index', { username: '' });
+    res.render('index', {
+        username: '10-DTP helps teams be more collaborative and do more' +
+            '10-DTP boards, lists, and cards enable fun, flexible, and worthy project organizations to team and prioritize project'
+    });
 });
 
 
@@ -217,23 +220,30 @@ app.post('/auth', function(req, res) {
 
 // xử lý phần đăng kí
 app.post('/register', function(req, res) {
-    var user = {
-            'username': req.body.username,
-            'password': req.body.password,
-            'email': req.body.email,
-            'fullname': req.body.username
-        }
-        // them thong tin vao co so du lieu
-    connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
-        // neu co loi xay ra
-        if (error) {
-            // thong bao loi
-            res.render('login', { thongBao: 'Error register, email already exists!', color: 'red' })
-        } else {
-            // thong bao thanh cong
-            res.render('login', { thongBao: 'Success register, please login.', color: 'green' })
-        }
-    })
+    var confirm = req.body.confirm
+    var password = req.body.password
+    if (confirm === password) {
+        var user = {
+                'username': req.body.username,
+                'password': req.body.password,
+                'email': req.body.email,
+                'fullname': req.body.username,
+            }
+            // them thong tin vao co so du lieu
+        connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
+            // neu co loi xay ra
+            if (error) {
+                // thong bao loi
+                res.render('login', { thongBao: 'Error register, email already exists!', color: 'red' })
+            } else {
+                // thong bao thanh cong
+                res.render('login', { thongBao: 'Success register, please login.', color: 'green' })
+            }
+        })
+
+    } else {
+        res.render('login', { thongBao: 'Error register, password confirm incorrect!', color: 'red' })
+    }
 });
 
 app.post('/update/gmail', function(req, res) {
