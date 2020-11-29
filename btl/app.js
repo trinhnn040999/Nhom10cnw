@@ -162,7 +162,16 @@ app.get('/login.html', function(req, res) {
 
 // thiet lap chuc nang xem profile
 app.get('/profile', function(req, res) {
-    res.render('profile', { fullname: req.cookies.fullname, email: req.cookies.email, sdt: req.cookies.sdt })
+    res.render('profile', {
+        fullname: req.cookies.fullname,
+        email: req.cookies.email,
+        sdt: req.cookies.sdt,
+        profile: '',
+        activity: 'active',
+        card: '',
+        setting: '',
+        err: ''
+    })
 });
 
 // xử lý phần đăng nhập
@@ -303,7 +312,16 @@ app.post('/changePassword', function(req, res, next) {
             })
 
         } else {
-            console.log('Password not correct')
+            res.render('profile', {
+                fullname: req.cookies.fullname,
+                email: req.cookies.email,
+                sdt: req.cookies.sdt,
+                profile: '',
+                activity: 'active',
+                card: '',
+                setting: '',
+                err: 'error'
+            })
         }
 
     });

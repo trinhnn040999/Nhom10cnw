@@ -106,16 +106,16 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs menu-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#profile">Profile and Visibility</a>
+                    <a class="nav-link <%= profile %>" data-toggle="tab" href="#profile">Profile and Visibility</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#activity">Activity</a>
+                    <a class="nav-link <%= activity %>" data-toggle="tab" href="#activity">Activity</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#card">Cards</a>
+                    <a class="nav-link <%= card %>" data-toggle="tab" href="#card">Cards</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#setting">Setting</a>
+                    <a class="nav-link <%= setting %>" data-toggle="tab" href="#setting">Setting</a>
                 </li>
             </ul>
             <!-- Tab panes -->
@@ -145,6 +145,7 @@
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
+
             <div id="activity" class="container tab-pane fade"><br>
                 <div class="setting">
                     <div class="setting-account">
@@ -152,6 +153,7 @@
                         <hr>
                         <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">Change
                             Password</button>
+                        <span type='color:red' ><%= err %></span>
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" role="dialog">
                             <div class="modal-dialog">
@@ -167,7 +169,7 @@
                                             <div class="form-group">
                                                 <label for="usr">Old Password:</label>
                                                 <input type="password" class="form-control" id="password" name="passwordOld">
-                                                <span type='color:red'></span>
+                                                
                                             </div>
                                             <div class="form-group">
                                                 <label for="usr">New Password:</label>
