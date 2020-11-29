@@ -166,13 +166,30 @@ app.get('/profile', function(req, res) {
         fullname: req.cookies.fullname,
         email: req.cookies.email,
         sdt: req.cookies.sdt,
+        profile: 'active',
+        activity: '',
+        card: '',
+        setting: '',
+        err: '',
+        classProfile: 'tab-pane active',
+        classActivity: 'container tab-pane fade'
+    })
+});
+// thiet lap chuc nang activity
+app.get('/activity', function(req, res) {
+    res.render('profile', {
+        fullname: req.cookies.fullname,
+        email: req.cookies.email,
+        sdt: req.cookies.sdt,
         profile: '',
         activity: 'active',
         card: '',
         setting: '',
-        err: ''
+        err: '',
+        classProfile: 'container tab-pane fade',
+        classActivity: 'tab-pane active'
     })
-});
+})
 
 // xử lý phần đăng nhập
 app.post('/auth', function(req, res) {
@@ -295,6 +312,10 @@ app.post('/changePassword', function(req, res, next) {
     var email = req.cookies.email
     console.log(email)
 
+    var confirm = req.body.cconfirm
+    console.log(confirm)
+
+
 
     connection.query('SELECT accounts.password FROM accounts WHERE email = ?', email, function(error, results, fields) {
         // neu khong thanh cong
@@ -308,7 +329,23 @@ app.post('/changePassword', function(req, res, next) {
                 // neu khong thanh cong
                 if (error) throw Error
                     // neu thanh cong
-                res.render('login', { thongBao: 'Please login again to confirm', color: 'green' })
+                if (confirm === passwordNew) {
+                    res.render('login', { thongBao: 'Please login again to confirm', color: 'green' })
+                } else {
+                    res.render('profile', {
+                        fullname: req.cookies.fullname,
+                        email: req.cookies.email,
+                        sdt: req.cookies.sdt,
+                        profile: '',
+                        activity: 'active',
+                        card: '',
+                        setting: '',
+                        err: 'Password confirm incorrect, please try again!',
+                        classProfile: 'container tab-pane fade',
+                        classActivity: 'tab-pane active'
+                    })
+                }
+
             })
 
         } else {
@@ -320,14 +357,15 @@ app.post('/changePassword', function(req, res, next) {
                 activity: 'active',
                 card: '',
                 setting: '',
-                err: 'error'
+                err: 'Password incorrect, please try again!',
+                classProfile: 'container tab-pane fade',
+                classActivity: 'tab-pane active'
             })
         }
 
     });
 
 });
-
 
 
 app.listen(3000);
