@@ -9,6 +9,8 @@ var config = require('./configuration/config')
 var mysql = require('mysql')
 var app = express()
 var register = require('./routes/register')
+var logout = require('./routes/logout')
+var changePassword = require('./routes/changePassword')
 
 //Define MySQL parameter in Config.js file.
 var connection = mysql.createConnection({
@@ -154,10 +156,11 @@ passport.use(new GoogleStrategy({
 ));
 
 // thiet lap chuc nang dang suat
-app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-});
+app.use('/logout', logout)
+    // app.get('/logout', function(req, res) {
+    //     req.logout();
+    //     res.redirect('/');
+    // });
 
 // thiet lap chuc nang login
 app.get('/login.html', function(req, res) {
@@ -221,7 +224,6 @@ app.post('/auth', function(req, res) {
 
 // xử lý phần đăng kí
 app.use('/register', register)
-
 
 app.post('/update/gmail', function(req, res) {
 
@@ -300,74 +302,8 @@ app.post('/saveProfile', function(req, res, next) {
     })
 });
 
-app.post('/changePassword', function(req, res, next) {
-    var passwordOld = req.body.passwordOld
-    console.log(passwordOld)
-
-    var passwordNew = req.body.passwordNew
-    console.log(passwordNew)
-
-    var email = req.cookies.email
-    console.log(email)
-
-    var confirm = req.body.confirm
-    console.log(confirm)
-
-
-
-    connection.query('SELECT accounts.password FROM accounts WHERE email = ?', email, function(error, results, fields) {
-        // neu khong thanh cong
-        if (error) throw error;
-
-        var password = results[0]['password']
-        console.log(password)
-        console.log(results)
-            // kiem tra password co giong password old khong
-        if (password === passwordOld) {
-            // neu bang kiem tra tiep password confirm co bang password new khong
-            if (confirm === passwordNew) {
-                // neu bang thi update du lieu
-                connection.query('update accounts set password = ? where email = ?', [passwordNew, email], function(error, results) {
-                    // neu khong thanh cong
-                    if (error) throw Error
-                        // neu thanh cong
-                })
-                res.render('login', { thongBao: 'Please login again to confirm', color: 'green' })
-            } else {
-                // neu khong bang thong bao loi
-                res.render('profile', {
-                    fullname: req.cookies.fullname,
-                    email: req.cookies.email,
-                    sdt: req.cookies.sdt,
-                    profile: '',
-                    activity: 'active',
-                    card: '',
-                    setting: '',
-                    err: 'Password confirm incorrect, please try again!',
-                    classProfile: 'container tab-pane fade',
-                    classActivity: 'tab-pane active'
-                })
-            }
-        } else {
-            // password khong giong password old 
-            res.render('profile', {
-                fullname: req.cookies.fullname,
-                email: req.cookies.email,
-                sdt: req.cookies.sdt,
-                profile: '',
-                activity: 'active',
-                card: '',
-                setting: '',
-                err: 'Password incorrect, please try again!',
-                classProfile: 'container tab-pane fade',
-                classActivity: 'tab-pane active'
-            })
-        }
-
-    });
-
-});
-
+// xu ly phan change password
+app.use('/changePassword', changePassword)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
