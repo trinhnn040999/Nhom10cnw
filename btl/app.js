@@ -8,6 +8,7 @@ var bodyParser = require('body-parser')
 var config = require('./configuration/config')
 var mysql = require('mysql')
 var app = express()
+var register = require('./routes/register')
 
 //Define MySQL parameter in Config.js file.
 var connection = mysql.createConnection({
@@ -219,32 +220,8 @@ app.post('/auth', function(req, res) {
 });
 
 // xử lý phần đăng kí
-app.post('/register', function(req, res) {
-    var confirm = req.body.confirm
-    var password = req.body.password
-    if (confirm === password) {
-        var user = {
-                'username': req.body.username,
-                'password': req.body.password,
-                'email': req.body.email,
-                'fullname': req.body.username,
-            }
-            // them thong tin vao co so du lieu
-        connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
-            // neu co loi xay ra
-            if (error) {
-                // thong bao loi
-                res.render('login', { thongBao: 'Error register, email already exists!', color: 'red' })
-            } else {
-                // thong bao thanh cong
-                res.render('login', { thongBao: 'Success register, please login.', color: 'green' })
-            }
-        })
+app.use('/register', register)
 
-    } else {
-        res.render('login', { thongBao: 'Error register, password confirm incorrect!', color: 'red' })
-    }
-});
 
 app.post('/update/gmail', function(req, res) {
 
@@ -308,7 +285,18 @@ app.post('/saveProfile', function(req, res, next) {
         console.log('update success')
         res.cookie('sdt', sdt)
         res.cookie('fullname', fullname)
-        res.render('profile', { fullname: fullname, email: req.cookies.email, sdt: sdt })
+        res.render('profile', {
+            fullname: fullname,
+            email: email,
+            sdt: sdt,
+            profile: 'active',
+            activity: '',
+            card: '',
+            setting: '',
+            err: '',
+            classProfile: 'tab-pane active',
+            classActivity: 'container tab-pane fade'
+        })
     })
 });
 
@@ -322,7 +310,7 @@ app.post('/changePassword', function(req, res, next) {
     var email = req.cookies.email
     console.log(email)
 
-    var confirm = req.body.cconfirm
+    var confirm = req.body.confirm
     console.log(confirm)
 
 
@@ -332,33 +320,36 @@ app.post('/changePassword', function(req, res, next) {
         if (error) throw error;
 
         var password = results[0]['password']
-        console.log(passwordNew)
+        console.log(password)
         console.log(results)
+            // kiem tra password co giong password old khong
         if (password === passwordOld) {
-            connection.query('update accounts set password = ? where email = ?', [passwordNew, email], function(error, results) {
-                // neu khong thanh cong
-                if (error) throw Error
-                    // neu thanh cong
-                if (confirm === passwordNew) {
-                    res.render('login', { thongBao: 'Please login again to confirm', color: 'green' })
-                } else {
-                    res.render('profile', {
-                        fullname: req.cookies.fullname,
-                        email: req.cookies.email,
-                        sdt: req.cookies.sdt,
-                        profile: '',
-                        activity: 'active',
-                        card: '',
-                        setting: '',
-                        err: 'Password confirm incorrect, please try again!',
-                        classProfile: 'container tab-pane fade',
-                        classActivity: 'tab-pane active'
-                    })
-                }
-
-            })
-
+            // neu bang kiem tra tiep password confirm co bang password new khong
+            if (confirm === passwordNew) {
+                // neu bang thi update du lieu
+                connection.query('update accounts set password = ? where email = ?', [passwordNew, email], function(error, results) {
+                    // neu khong thanh cong
+                    if (error) throw Error
+                        // neu thanh cong
+                })
+                res.render('login', { thongBao: 'Please login again to confirm', color: 'green' })
+            } else {
+                // neu khong bang thong bao loi
+                res.render('profile', {
+                    fullname: req.cookies.fullname,
+                    email: req.cookies.email,
+                    sdt: req.cookies.sdt,
+                    profile: '',
+                    activity: 'active',
+                    card: '',
+                    setting: '',
+                    err: 'Password confirm incorrect, please try again!',
+                    classProfile: 'container tab-pane fade',
+                    classActivity: 'tab-pane active'
+                })
+            }
         } else {
+            // password khong giong password old 
             res.render('profile', {
                 fullname: req.cookies.fullname,
                 email: req.cookies.email,
@@ -378,4 +369,20 @@ app.post('/changePassword', function(req, res, next) {
 });
 
 
-app.listen(3000);
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
+
+module.exports = app;
