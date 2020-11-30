@@ -89,7 +89,6 @@
 </style>
 
 <body>
-    <h1>Trello Like Drag and Drop Cards for Project Management Software</h1>
     <div class="task-board">
         <div class="status-card">
             <div class="card-header">
@@ -104,6 +103,16 @@
             <div class="card-header">
                 <span class="card-header-text">Xin chao</span>
             </div>
+            <ul class="sortable ui-sortable" id="sort1">
+                <li class="text-row ui-sortable-handle">Mình là lest</li>
+            </ul>
+        </div>
+
+
+        <div class="status-card">
+            <div class="card-header">
+                <span class="card-header-text">Xin chao</span>
+            </div>
             <ul class="sortable ui-sortable" id="sort1" data-status-id="status-id">
                 <li class="text-row ui-sortable-handle" data-task-id="task-id">Mình là lest</li>
                 <li class="text-row ui-sortable-handle" data-task-id="task-id">Mình là lest</li>
@@ -115,7 +124,6 @@
                 <li class="text-row ui-sortable-handle" data-task-id="task-id">Mình là lest</li>
             </ul>
         </div>
-
     </div>
     <script>
         $(function () {
@@ -126,9 +134,7 @@
                         var status_id = $(ui.item).parent(".sortable").data(
                             "status-id");
                         var task_id = $(ui.item).data("task-id");
-
                     }
-
                 }).disableSelection();
         });
     </script>
