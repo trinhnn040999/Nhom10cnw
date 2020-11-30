@@ -34,6 +34,7 @@ class todoList{
         // ul bao card
         this.div = document.createElement('ul');
         this.div.classList.add('sortable');
+        this.div.classList.add('ui-sortable');
         this.div.id ='sort';
         // bao ngoài cùng
         this.todoListElement = document.createElement('div');
@@ -71,7 +72,7 @@ class Card{
 
     render(){
         this.card = document.createElement('li');
-        this.card.classList.add("card");
+        this.card.classList.add("card-item");
         this.card.addEventListener('click', (e)=>{
             if(e.target != this.deleteButton){
                 this.showMenu.call(this);

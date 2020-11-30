@@ -25,15 +25,6 @@
     </div>
     
     <div id="root"></div>
-    <script>
-        $(function () {
-            $('#sort').sortable(
-                {
-                    connectWith: "ul.sortable",
-                }).disableSelection();
-        });
-    </script>
-
 
     <script src="../../public/javascripts/broad.js"></script>
     <script src="../../public/javascripts/jquery.min.js"></script>
@@ -58,5 +49,14 @@
     <script src="../../public/javascripts/broad.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $('ul[id^="sort"]').sortable(
+                {
+                    connectWith: ".sortable",
+                }).disableSelection();
+        });
+    </script>
+
 </body>
 </html>
