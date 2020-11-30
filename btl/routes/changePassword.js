@@ -8,14 +8,29 @@ var mysql = require('mysql');
 var app = express()
 
 
-app.set('views', '/home/phucnq/Nhom10cnw/btl/views');
+// thiet lap views va public
+var dirname = __dirname
+var notRoutes = dirname.split('/')
+notRoutes = notRoutes.filter(function(x) {
+    return x != 'routes'
+})
+var file = ''
+notRoutes.forEach(element => {
+    file = file + element
+    file = file + '/'
+});
+var views = file + 'views'
+var public = file + 'public'
+
+
+app.set('views', views);
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'keyboard cat', key: 'sid' }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static('/home/phucnq/Nhom10cnw/btl/public'));
+app.use(express.static(public));
 
 var connection = mysql.createConnection({
     host: config.host,
