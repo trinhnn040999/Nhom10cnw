@@ -2,7 +2,7 @@ let root = document.getElementById("root");
 
 
 class todoList{
-    constructor(place, title = "to-do list"){
+    constructor(place, title = "List"){
 
         this.place = place;
         this.title = title;
@@ -111,17 +111,39 @@ class Card{
         this.commentsButton = document.createElement('button');
         this.menuComments = document.createElement("div");
 
-
+        this.menuLeft = document.createElement("div");
+        this.menuRight = document.createElement("div");
+        
         //Add class names
-        this.menu.className = "menu";
+        this.menu.className = "menu row";
         this.menuContainer.className = "menuContainer";
         this.menuTitle.className = "menuTitle";
         this.menuDescription.className = "menuDescription";
         this.menuComments.className = "menuComments";
         this.commentsInput.className = "commentsInput comment";
         this.commentsButton.className = "commentsButton btn-save";
+        this.menuRight.className = "menu-right col-sm-4";
+        this.menuRight.className = "menu-left col-sm-8";
+
 
         //Add inner Text
+        this.menuRight.innerHTML =` <nav>
+        <ul>
+            <li class="title-select">
+                ADD TO CARD
+            </li>
+            <li class="select-menu">
+                <Button class="btn btn-light"><i class="fas fa-user"></i> Members</Button>
+            </li>
+            <li class="select-menu">
+                <Button class="btn btn-light"><i class="fas fa-calendar-check"></i> Checklist</Button>
+            </li>
+            <li class="select-menu">
+                <Button class="btn btn-light"><i class="far fa-calendar-alt"></i> Due Date</Button>
+            </li>
+
+        </ul>
+    </nav>`;
         this.commentsButton.innerText = "Add";
         this.commentsInput.placeholder = "Write a comment...";
 
@@ -142,11 +164,15 @@ class Card{
         })
 
         //Append
-        this.menu.append(this.menuTitle);
-        this.menu.append(this.menuDescription);
-        this.menu.append(this.commentsInput);
-        this.menu.append(this.commentsButton);
-        this.menu.append(this.menuComments);
+        this.menu.append(this.menuLeft);
+        this.menu.append(this.menuRight);
+
+        this.menuLeft.append(this.menuTitle);
+        this.menuLeft.append(this.menuDescription);
+        this.menuLeft.append(this.commentsInput);
+        this.menuLeft.append(this.commentsButton);
+        this.menuLeft.append(this.menuComments);
+
         this.menuContainer.append(this.menu);
         root.append(this.menuContainer);
 
@@ -258,7 +284,6 @@ class Comment{
 }
 
 
-
 //-------------main------------
 
 let addTodoListInput = document.getElementById("addTodoListInput");
@@ -268,18 +293,24 @@ addTodoListButton.addEventListener('click',()=>{
    if ( addTodoListInput.value.trim() != ""){
     new todoList(root, addTodoListInput.value);
     addTodoListInput.value = "";
+    $(function () {
+        $('ul[id^="sort"]').sortable(
+            {
+                connectWith: ".sortable",
+            }).disableSelection();
+    });
    }
 });
 
 
 
-let todoList1 = new todoList(root);
-let todoList2 = new todoList(root);
-let todoList3 = new todoList(root);
+// let todoList1 = new todoList(root);
+// let todoList2 = new todoList(root);
+// let todoList3 = new todoList(root);
 
 
-todoList1.input.value = "asdasds";
-todoList1.addToDo();
+// todoList1.input.value = "Xin chào";
+// todoList1.addToDo();
 
 // check box
 $(document).ready(function() {
