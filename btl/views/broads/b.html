@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,15 +18,24 @@
     <link href="../../public/stylesheets/magnific-popup.css" rel="stylesheet">
     <link href="../../public/stylesheets/styles.css" rel="stylesheet">
 </head>
+
 <body>
-    
+
     <div id="addTodoListDiv">
         <input id="addTodoListInput" class="comment">
-        <button id="addTodoListButton" class="btn-save">Add new list</button>
+        <button id="addTodoListButton" class="btn-save" onclick="updateSord()">Add new list</button>
     </div>
-    
-    <div id="root"></div>
 
+    <div id="root"></div>
+    <script>
+        $(function () {
+            $('ul[id^="sort"]').sortable(
+                {
+                    connectWith: ".sortable",
+                }).disableSelection();
+        });
+        
+    </script>
     <script src="../../public/javascripts/broad.js"></script>
     <script src="../../public/javascripts/jquery.min.js"></script>
     <!-- jQuery for Bootstrap's JavaScript plugins -->
@@ -49,14 +59,7 @@
     <script src="../../public/javascripts/broad.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $('ul[id^="sort"]').sortable(
-                {
-                    connectWith: ".sortable",
-                }).disableSelection();
-        });
-    </script>
 
 </body>
+
 </html>
