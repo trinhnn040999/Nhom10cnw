@@ -20,37 +20,36 @@
 </head>
 
 <body>
+    <div class="menuContainer">
+        <div class="container">
+            <div class="menu row">
+                <div class="menu-left col-sm-8">
+                    xin chao
+                </div>
+                <div class="menu-right col-sm-4">
+                    <nav>
+                        <ul>
+                            <li class="title-select">
+                                ADD TO CARD
+                            </li>
+                            <li class="select-menu">
+                                <Button class="btn btn-light"><i class="fas fa-user"></i> Members</Button>
+                            </li>
+                            <li class="select-menu">
+                                <Button class="btn btn-light"><i class="fas fa-calendar-check"></i> Checklist</Button>
+                            </li>
+                            <li class="select-menu">
+                                <Button class="btn btn-light"><i class="far fa-calendar-alt"></i> Due Date</Button>
+                            </li>
 
-    <div id="addTodoListDiv">
-        <input id="addTodoListInput" class="comment">
-        <button id="addTodoListButton" class="btn-save" onclick="updateSord()">Add new list</button>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <h1>Progress bar for counting checkboxes</h1>
-    <form>
-        <p>
-            <input type="checkbox" name="box1" />
-            <input type="checkbox" name="box2" />
-            <input type="checkbox" name="box3" />
-            <input type="checkbox" name="box2" />
-            <input type="checkbox" name="box3" />
-        </p>
-    </form>
-    <div class="progressbar-container">
-        <div class="progressbar-bar"></div>
-        <div class="progressbar-label"></div>
-    </div>
-    <div class="ready"></div>
-    <div id="root"></div>
-    <script>
-        $(function () {
-            $('ul[id^="sort"]').sortable(
-                {
-                    connectWith: ".sortable",
-                }).disableSelection();
-        });
 
-    </script>
     <script src="../../public/javascripts/broad.js"></script>
     <script src="../../public/javascripts/jquery.min.js"></script>
     <!-- jQuery for Bootstrap's JavaScript plugins -->
