@@ -1,5 +1,4 @@
-let root = document.getElementById("root");
-
+ let root = document.getElementById("root");
 
 class todoList{
     constructor(place, title = "List"){
@@ -124,7 +123,7 @@ class Card{
         this.commentsButton.className = "commentsButton btn-save";
         this.menuRight.className = "menu-right col-sm-4";
         this.menuLeft.className = "menu-left col-sm-8";
-
+        // this.
 
         //Add inner Text
         this.menuRight.innerHTML =` <nav>
@@ -181,16 +180,19 @@ class Card{
         
         this.renderComments();
     }
-
+//Chỉnh comment
     renderComments(){
         let currentCommentsDOM = Array.from(this.menuComments.childNodes);
         currentCommentsDOM.forEach(commentDOM =>{
             commentDOM.remove();
         });
         this.state.comments.forEach(comment =>{
-            new Comment(comment, this.menuComments, this);
+            // new Comment(comment, this.menuComments, this);
+
+            new Comment(comment, this.menuComments, this,"Lê Đình Tài","12/12/2020");
         });
     }
+    
 }
 
 class EditableText{
@@ -267,19 +269,33 @@ class EditableText{
 }
 
 class Comment{
-    constructor(text, place, card){
+    //chưa code xong, cần tạo đối tượng user 
+    constructor(text, place, card,user,date){
         this.text = text;
         this.place = place;
         this.card = card;
+        this.user = user;
+        this.date = date;
         this.render();
     }
 
     render(){
         this.div = document.createElement('div');
         this.div.className = "comment";
-        this.div.innerText = this.text;
-        
+        this.div.innerHTML = this.formatComment();
+        console.log(this.formatComment());
         this.place.append(this.div);
+    }
+    formatComment () {
+        return `<div class="media p-3">
+        <img class="round mr-3 mt-3" width="30" height="30" avatar="`+this.user+`">
+        <div class="media-body">
+            <h6>`+this.user+`<small><i>   `+this.date+`</i></small></h6>
+            <p>
+            `+this.text+`
+            </p>
+        </div>
+    </div>`;
     }
 }
 
@@ -341,3 +357,4 @@ $(document).ready(function() {
     countChecked();
     $(":checkbox").click(countChecked);
   });
+  
