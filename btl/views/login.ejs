@@ -35,7 +35,7 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form action="auth" class="sign-in-form" method="POST">
+                <form action="/auth" class="sign-in-form" method="POST">
                     <% if(thongBao) { %>
                     <h1 style='color:<%= color %>'><%= thongBao %></h1>
                     
@@ -85,15 +85,6 @@
                         <span class="form-message"></span>
                     </div>
                     <input type="submit" class="btn" value="Sign up" />
-                    <p class="social-text">Or</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-google"></i>
-                        </a>
-                    </div>
                 </form>
             </div>
         </div>

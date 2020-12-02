@@ -2,13 +2,13 @@ var express = require('express')
 var passport = require('passport')
 var session = require('express-session')
 var cookieParser = require('cookie-parser')
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy
 var bodyParser = require('body-parser')
 var config = require('../configuration/config')
 var mysql = require('mysql');
 var app = express()
-
-
-// thiet lap views va public
+    // thiet lap views va public
 var dirname = __dirname
 var notRoutes = dirname.split('/')
 notRoutes = notRoutes.filter(function(x) {
@@ -21,7 +21,6 @@ notRoutes.forEach(element => {
 });
 var views = file + 'views'
 var public = file + 'public'
-
 
 app.set('views', views);
 app.set('view engine', 'ejs');
@@ -39,8 +38,56 @@ var connection = mysql.createConnection({
     database: config.database
 });
 
+app.post('/gmail', function(req, res) {
 
-app.post('/', function(req, res, next) {
+    connection.query('SELECT * FROM accounts WHERE username = ?', req.body.username, function(error, results, fields) {
+        if (error) throw error;
+        if (results.length > 0) {
+            // kiem tra username da ton tai chua
+            // neu da ton tai
+            res.render('loginGmail', { check: 'Username already exitsts!' })
+        } else {
+            // neu chua ton tai
+            var user = {
+                    'username': req.body.username,
+                    'password': req.body.password,
+                    'email': req.user.emails[0]['value'],
+                    'fullname': req.body.username
+                }
+                // insert vao database
+            connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
+                // neu khong thanh cong
+                if (error) {
+                    res.render('login', { thongBao: 'Error, please try again', color: 'red' })
+                } else {
+                    // neu thanh cong
+                    // tim kiem bang co username va luu nhung gia tri cookie
+                    connection.query('SELECT * FROM accounts WHERE username = ?', req.body.username, function(error, results, fields) {
+                        // neu khong thanh cong
+                        if (error) throw error;
+
+                        // neu thanh cong va co ton tai tai khoan
+                        if (results.length > 0) {
+                            // luu vao cookie
+                            res.cookie('username', req.body.username)
+                            res.cookie('email', req.body.password)
+                            res.cookie('sdt', results[0]['sdt'])
+                            res.cookie('fullname', req.body.username)
+                            res.render('home', { fullname: req.body.username })
+
+                        } else {
+                            // neu tai khong ton tai bao loi
+                            res.render('login', { thongBao: 'Error login, please try again', color: 'red' })
+                        }
+                    });
+                }
+            })
+        }
+    });
+
+});
+
+app.post('/changePassword', function(req, res, next) {
     var passwordOld = req.body.passwordOld
     var passwordNew = req.body.passwordNew
     var email = req.cookies.email
