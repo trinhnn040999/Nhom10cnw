@@ -150,23 +150,27 @@ ul.sortable {
   margin: 10px;
 }
 
-input[type="checkbox"] { 
-  height: 20px; 
-  width: 20px; 
+input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
   margin-right: 10px;
-}	
-
-.ready { font-size: 1.5em; }
-.ui-progressbar-value { background: lightgreen; }
-.progressbar-container {
-  position: relative;
-  width: 350px; 
 }
 
-.progressbar-bar { 
+.ready {
+  font-size: 1.5em;
+}
+.ui-progressbar-value {
+  background: lightgreen;
+}
+.progressbar-container {
+  position: relative;
+  width: 350px;
+}
+
+.progressbar-bar {
   height: 25px;
-margin: 10px 0;
-border-radius: 7px;
+  margin: 10px 0;
+  border-radius: 7px;
 }
 
 .progressbar-label {
@@ -174,4 +178,10 @@ border-radius: 7px;
   top: 2px;
   left: 45%;
   z-index: 2;
+}
+.row {
+  margin: auto;
+}
+.content {
+  padding-top: 150px;
 }

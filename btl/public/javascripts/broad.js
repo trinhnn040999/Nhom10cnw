@@ -123,7 +123,7 @@ class Card{
         this.commentsInput.className = "commentsInput comment";
         this.commentsButton.className = "commentsButton btn-save";
         this.menuRight.className = "menu-right col-sm-4";
-        this.menuRight.className = "menu-left col-sm-8";
+        this.menuLeft.className = "menu-left col-sm-8";
 
 
         //Add inner Text
