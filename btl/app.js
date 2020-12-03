@@ -10,7 +10,11 @@ var mysql = require('mysql')
 var app = express()
 var register = require('./routes/register')
 var logout = require('./routes/logout')
-var changePassword = require('./routes/changePassword')
+var saveProfile = require('./routes/saveProfile');
+var auth = require('./routes/auth')
+var update = require('./routes/update')
+const { authenticate } = require('passport');
+
 
 //Define MySQL parameter in Config.js file.
 var connection = mysql.createConnection({
@@ -28,7 +32,6 @@ function check_email(email) {
     })
 };
 
-
 // Passport session setup.
 passport.serializeUser(function(user, done) {
     done(null, user);
@@ -37,46 +40,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
-
-
-// sử dụng  FacebookStrategy trong Passport.
-passport.use(new FacebookStrategy({
-        // thiết lập các cấu hình cần thiết
-        clientID: config.facebook_api_key,
-        clientSecret: config.facebook_api_secret,
-        callbackURL: config.callback_url_facebook
-    },
-    function(req, res, profile, done) {
-        process.nextTick(function() {
-            console.log(profile.displayName)
-
-            if (config.use_database) {
-                // if sets to true
-                connection.query("SELECT * from accounts_FB where id = ?", profile.id, (error, results, fields) => {
-                    if (error) throw error;
-                    var user = {
-                        'id': profile.id,
-                        'username': profile.displayName
-                    }
-
-                    if (results.length == 0) {
-                        // nếu chưa tồn tại
-                        // thi them tai khoan moi
-                        connection.query("INSERT INTO accounts_FB SET ?", user, function(error, results, fields) {});
-                    }
-                    // Nếu  tồn tại
-                    else {
-                        // console.log("User already exists in database");
-                    }
-                });
-            }
-            return done(null, profile);
-        });
-    }
-));
-
-
-
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -137,30 +100,11 @@ app.get('/facebook', function(req, res) {
     res.render('home', { username: req.user.displayName });
 });
 
-// xử lý phần đăng nhập bằng Gmail
-app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
-app.get('/auth/google/callback',
-    passport.authenticate('google', { successRedirect: '/gmail', failureRedirect: '/login' }),
-    function(req, res) {
-        res.redirect('/');
-    }
-);
-passport.use(new GoogleStrategy({
-        clientID: config.googleClientID,
-        clientSecret: config.googleClientSecret,
-        callbackURL: config.callback_url_gmail
-    },
-    function(accessToken, refreshToken, profile, done) {
-        return done(null, profile);
-    }
-));
+// xử lý phần đăng nhập
+app.use('/auth', auth)
 
 // thiet lap chuc nang dang suat
 app.use('/logout', logout)
-    // app.get('/logout', function(req, res) {
-    //     req.logout();
-    //     res.redirect('/');
-    // });
 
 // thiet lap chuc nang login
 app.get('/login.html', function(req, res) {
@@ -198,127 +142,14 @@ app.get('/activity', function(req, res) {
     })
 })
 
-// xử lý phần đăng nhập
-app.post('/auth', function(req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
-    if (username && password) {
-        connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-            if (error) throw error;
-            if (results.length > 0) {
-                console.log(username)
-                    // luu username va email vao cookie
-                res.cookie('username', results[0]['username']);
-                res.cookie('email', results[0]['email']);
-                res.cookie('sdt', results[0]['sdt']);
-                res.cookie('fullname', results[0]['fullname']);
-                res.render('home', { fullname: results[0]['fullname'] });
-            } else {
-                res.render('login', { thongBao: 'Error login, please try again', color: 'red' })
-            }
-        });
-    } else {
-        res.render("login", { thongBao: '' })
-    }
-});
 
 // xử lý phần đăng kí
 app.use('/register', register)
 
-app.post('/update/gmail', function(req, res) {
-
-    connection.query('SELECT * FROM accounts WHERE username = ?', req.body.username, function(error, results, fields) {
-        if (error) throw error;
-        if (results.length > 0) {
-            // kiem tra username da ton tai chua
-            // neu da ton tai
-            res.render('loginGmail', { check: 'Username already exitsts!' })
-        } else {
-            // neu chua ton tai
-            var user = {
-                    'username': req.body.username,
-                    'password': req.body.password,
-                    'email': req.user.emails[0]['value'],
-                    'fullname': req.body.username
-                }
-                // insert vao database
-            connection.query('INSERT INTO accounts SET ?', user, function(error, results, fields) {
-                // neu khong thanh cong
-                if (error) {
-                    res.render('login', { thongBao: 'Error, please try again', color: 'red' })
-                } else {
-                    // neu thanh cong
-                    // tim kiem bang co username va luu nhung gia tri cookie
-                    connection.query('SELECT * FROM accounts WHERE username = ?', req.body.username, function(error, results, fields) {
-                        // neu khong thanh cong
-                        if (error) throw error;
-
-                        // neu thanh cong va co ton tai tai khoan
-                        if (results.length > 0) {
-                            // luu vao cookie
-                            res.cookie('username', req.body.username)
-                            res.cookie('email', req.body.password)
-                            res.cookie('sdt', results[0]['sdt'])
-                            res.cookie('fullname', req.body.username)
-                            res.render('home', { username: req.body.username })
-
-                        } else {
-                            // neu tai khong ton tai bao loi
-                            res.render('login', { thongBao: 'Error login, please try again', color: 'red' })
-                        }
-                    });
-                }
-            })
-        }
-    });
-
-});
+// xu ly phan update
+app.use('/update', update)
 
 // xu ly phan luu profile
-app.post('/saveProfile', function(req, res, next) {
-    var sdt = req.body.phone
-    var fullname = req.body.fullname
-    var email = req.cookies.email
-        // update co so du lieu
-    connection.query('update accounts set fullname = ?, sdt = ? where email = ?', [fullname, sdt, email], function(error, results) {
-        // neu khong thanh cong
-        if (error) throw Error
-            // neu thanh cong
-        console.log('update success')
-        res.cookie('sdt', sdt)
-        res.cookie('fullname', fullname)
-        res.render('profile', {
-            fullname: fullname,
-            email: email,
-            sdt: sdt,
-            profile: 'active',
-            activity: '',
-            card: '',
-            setting: '',
-            err: '',
-            classProfile: 'tab-pane active',
-            classActivity: 'container tab-pane fade'
-        })
-    })
-});
-
-// xu ly phan change password
-app.use('/changePassword', changePassword)
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-});
+app.use('/saveProfile', saveProfile)
 
 module.exports = app;
