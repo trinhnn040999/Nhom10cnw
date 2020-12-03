@@ -142,6 +142,9 @@ app.get('/activity', function(req, res) {
     })
 })
 
+app.get('/broad', function(req, res, next) {
+    res.render('broad', { fullname: req.cookies.fullname })
+})
 
 // xử lý phần đăng kí
 app.use('/register', register)

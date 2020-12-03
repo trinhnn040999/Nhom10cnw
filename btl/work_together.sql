@@ -40,15 +40,25 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
 ALTER TABLE `accounts` MODIFY `id` bigint(35) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
-
+------
 CREATE TABLE IF NOT EXISTS `accounts_FB` (
   `id` bigint(20) NOT NULL,
   `username` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+-----
+
+CREATE TABLE IF NOT EXISTS `broad` (
+  `id` bigint(20) NOT NULL,
+  `email` varchar(100) NOT NULL, 
+  'BroadName' varchar(50) NOT NULL,
+  PRIMARY KEY (`id`,`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Cấu trúc bảng cho bảng `project`
 --
+
+
 
 CREATE TABLE `project` (
   `proj_id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -57,6 +67,8 @@ CREATE TABLE `project` (
   `name` varchar(400) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
 
 -- --------------------------------------------------------
 

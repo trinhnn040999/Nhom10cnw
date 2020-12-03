@@ -324,14 +324,9 @@
      todo.addToDo()
      todo.input.value = ''
  }
-
-
-
  //  let todoList1 = new todoList(root);
  //  let todoList2 = new todoList(root);
  //  let todoList3 = new todoList(root);
-
-
  //  todoList1.input.value = "Xin chào";
  //  todoList1.addToDo();
 
