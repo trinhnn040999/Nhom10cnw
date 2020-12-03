@@ -1,4 +1,4 @@
- let root = document.getElementById("root");
+let root = document.getElementById("root");
 
  class todoList {
      constructor(place, title = "List") {
@@ -140,7 +140,6 @@
             <li class="select-menu">
                 <Button class="btn btn-light"><i class="far fa-calendar-alt"></i> Due Date</Button>
             </li>
-
         </ul>
     </nav>`;
              this.commentsButton.innerText = "Add";
