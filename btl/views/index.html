@@ -125,7 +125,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <nav id="myScrollspy">
-                        <ul class="nav nav-pills nav-stacked">
+                        <ul class="nav nav-pills nav-stacked" style="display: block;">
                             <li class="select-menu"><a href="#">
                                     <Button class="btn btn-light"><i class="fas fa-columns"></i> Boards</Button>
                                 </a></li>
@@ -145,40 +145,99 @@
                         </ul>
                     </nav>
                 </div>
-
                 <div class="col-sm-9">
                     <div class="row">
                         <div class="col-sm-8 content-main">
-                            <img src="../public/images/header-background.jpg" alt="">
-                            <img src="../public/images/header-background.jpg" alt="">
-                            <img src="../public/images/header-background.jpg" alt="">
+                            <!-- bảng hiển thị -->
+                            <div class="personal-broad">
+                                <h3 style="margin-bottom: -80px; margin-top: 60px;">Personal broad</h3>
+                                <div class="broads">
+                                    <div class="card">
+                                        <b>Siêu nhân đỏdxddddddddddddddddd Lorem ipsum dolor sit amet consectetur,
+                                            adipisicing elit. Itaque, maiores! Odit ex nemo sit architecto libero
+                                            quisquam expedita sunt, eaque, debitis itaque qui similique, rem inventore.
+                                            Ipsa est maxime animi.</b>
+                                    </div>
+                                    <div class="card">
+                                        <b>Siêu nhân đỏdxddddddddddddddddd Lorem ipsum dolor sit amet consectetur,
+                                            adipisicing elit. Itaque, maiores! Odit ex nemo sit architecto libero
+                                            quisquam expedita sunt, eaque, debitis itaque qui similique, rem inventore.
+                                            Ipsa est maxime animi.</b>
+                                    </div>
+                                    <div class="card">
+                                        <b>Siêu nhân đỏdxddddddddddddddddd Lorem ipsum dolor sit amet consectetur,
+                                            adipisicing elit. Itaque, maiores! Odit ex nemo sit architecto libero
+                                            quisquam expedita sunt, eaque, debitis itaque qui similique, rem inventore.
+                                            Ipsa est maxime animi.</b>
+                                    </div>
+                                    <div class="card">
+                                        <b>Siêu nhân đỏdxddddddddddddddddd Lorem ipsum dolor sit amet consectetur,
+                                            adipisicing elit. Itaque, maiores! Odit ex nemo sit architecto libero
+                                            quisquam expedita sunt, eaque, debitis itaque qui similique, rem inventore.
+                                            Ipsa est maxime animi.</b>
+                                    </div>
+                                </div>
+                                <div class="card"
+                                    style="background: #cccccc3d; text-align: center; position: relative;">
+                                    <b style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">Create
+                                        a new broad</b>
+                                </div>
+                            </div>
                         </div>
-                        <div class="recommend col-sm-4">
-                            <nav id="myScrollspy" class=" ">
+                        <div class="col-sm-4 recommend">
+                            <nav id="myScrollspy">
                                 <ul class="nav  nav-stacked">
                                     <li class="title-select "><i class="far fa-clock"></i> Recently Viewed</li>
                                     <li class="select-menu"><a href="#">
                                             <Button class="btn btn-light"><img width="30" height="30"
-                                                    src="../public/images/header-background.jpg"> CNWeb nhóm 10</Button>
+                                                    src="/images/header-background.jpg"> CNWeb nhóm 10</Button>
                                         </a></li>
                                     <li class="select-menu"><a href="#">
                                             <Button class="btn btn-light"><img width="30" height="30"
-                                                    src="../public/images/header-background.jpg"> CNWeb nhóm 10</Button>
+                                                    src="/images/header-background.jpg"> CNWeb nhóm 10</Button>
                                         </a></li>
                                     <li class="select-menu"><a href="#">
                                             <Button class="btn btn-light"><img width="30" height="30"
-                                                    src="../public/images/header-background.jpg"> CNWeb nhóm 10</Button>
+                                                    src="/images/header-background.jpg"> CNWeb nhóm 10</Button>
                                         </a></li>
                                     <li class="title-select">
                                         LINKS
                                     </li>
-                                    <li class="select-menu"><a href="#">
-                                            <Button class="btn"><i class="fas fa-plus"></i>
-                                                Create a board</Button>
-                                        </a></li>
+                                    <li class="select-menu">
+                                        <Button class="btn" data-toggle="modal"
+                                        data-target="#createBroad"><i class="fas fa-plus"></i>
+                                            Create a board
+                                        </Button>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <!-- The Modal -->
+            <div class="modal" id="createBroad">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Create a new broad</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Title ...">
+                              </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" >Create</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
