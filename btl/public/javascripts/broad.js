@@ -1,132 +1,132 @@
  let root = document.getElementById("root");
 
-class todoList{
-    constructor(place, title = "List"){
+ class todoList {
+     constructor(place, title = "List") {
 
-        this.place = place;
-        this.title = title;
-        this.cardArray = [];
+         this.place = place;
+         this.title = title;
+         this.cardArray = [];
 
-        this.render();
-    }
+         this.render();
+     }
 
-    addToDo(){
-        let text = this.input.value;
-        this.cardArray.push(new Card(text, this.div, this));
-    }
+     addToDo() {
+         let text = this.input.value;
+         this.cardArray.push(new Card(text, this.div, this));
+     }
 
-    render(){
-        this.createToDoListElement();
-        this.place.append(this.todoListElement);
-    }
+     render() {
+         this.createToDoListElement();
+         this.place.append(this.todoListElement);
+     }
 
-    createToDoListElement(){
-        //Create elements
-        this.h2 = document.createElement('h2');
-        this.h2.innerText = this.title;
-        this.input = document.createElement('input');
-        this.input.classList.add("comment");
-        this.button = document.createElement('button');
-        this.button.innerText = 'Add';
-        this.button.classList.add("btn-save");
-        this.button.id = "to-do-list-button";
-        // ul bao card
-        this.div = document.createElement('ul');
-        this.div.classList.add('sortable');
-        this.div.classList.add('ui-sortable');
-        this.div.id ='sort';
-        // bao ngoài cùng
-        this.todoListElement = document.createElement('div');
+     createToDoListElement() {
+         //Create elements
+         this.h2 = document.createElement('h2');
+         this.h2.innerText = this.title;
+         this.input = document.createElement('input');
+         this.input.classList.add("comment");
+         this.button = document.createElement('button');
+         this.button.innerText = 'Add';
+         this.button.classList.add("btn-save");
+         this.button.id = "to-do-list-button";
+         // ul bao card
+         this.div = document.createElement('ul');
+         this.div.classList.add('sortable');
+         this.div.classList.add('ui-sortable');
+         this.div.id = 'sort';
+         // bao ngoài cùng
+         this.todoListElement = document.createElement('div');
 
-        //Add Event listener
-        this.button.addEventListener('click', ()=>{
-            if(this.input.value != ""){
-                this.addToDo.call(this);
-                this.input.value = "";
-            }
-        });
+         //Add Event listener
+         this.button.addEventListener('click', () => {
+             if (this.input.value != "") {
+                 this.addToDo.call(this);
+                 this.input.value = "";
+             }
+         });
 
-        //Append elements to the to-do list element
-        this.todoListElement.append(this.h2);
-        this.todoListElement.append(this.input);
-        this.todoListElement.append(this.button);
-        this.todoListElement.append(this.div);
-        this.todoListElement.classList.add("todoList");
-    }
-}
+         //Append elements to the to-do list element
+         this.todoListElement.append(this.h2);
+         this.todoListElement.append(this.input);
+         this.todoListElement.append(this.button);
+         this.todoListElement.append(this.div);
+         this.todoListElement.classList.add("todoList");
+     }
+ }
 
 
-class Card{
-    constructor(text, place, todoList){
+ class Card {
+     constructor(text, place, todoList) {
 
-        this.place = place;
-        this.todoList = todoList;
-        this.state = {
-            text: text,
-            description: "Click to write a description...",
-            comments: []
-        }
-        this.render();
-    }
+         this.place = place;
+         this.todoList = todoList;
+         this.state = {
+             text: text,
+             description: "Click to write a description...",
+             comments: []
+         }
+         this.render();
+     }
 
-    render(){
-        this.card = document.createElement('li');
-        this.card.classList.add("card-item");
-        this.card.addEventListener('click', (e)=>{
-            if(e.target != this.deleteButton){
-                this.showMenu.call(this);
-            }
-        });
+     render() {
+         this.card = document.createElement('li');
+         this.card.classList.add("card-item");
+         this.card.addEventListener('click', (e) => {
+             if (e.target != this.deleteButton) {
+                 this.showMenu.call(this);
+             }
+         });
 
-        this.p = document.createElement('p');
-        this.p.innerText = this.state.text;
+         this.p = document.createElement('p');
+         this.p.innerText = this.state.text;
 
-        this.deleteButton = document.createElement('button');
-        this.deleteButton.innerText = "X";
-        this.deleteButton.addEventListener('click', ()=>{
-            this.deleteCard.call(this);
-        });
+         this.deleteButton = document.createElement('button');
+         this.deleteButton.innerText = "X";
+         this.deleteButton.addEventListener('click', () => {
+             this.deleteCard.call(this);
+         });
 
-        this.card.append(this.p);
-        this.card.append(this.deleteButton);
-        
-        this.place.append(this.card);
-    }
+         this.card.append(this.p);
+         this.card.append(this.deleteButton);
 
-    deleteCard(){
-        this.card.remove();
-        let i = this.todoList.cardArray.indexOf(this);
-        this.todoList.cardArray.splice(i,1);
-    }
+         this.place.append(this.card);
+     }
 
-    showMenu(){
+     deleteCard() {
+         this.card.remove();
+         let i = this.todoList.cardArray.indexOf(this);
+         this.todoList.cardArray.splice(i, 1);
+     }
 
-        //Create elements
-        this.menu = document.createElement("div");
-        this.menuContainer = document.createElement("div");
-        this.menuTitle = document.createElement("div");
-        this.menuDescription = document.createElement("div");
-        this.commentsInput = document.createElement("input");
-        this.commentsButton = document.createElement('button');
-        this.menuComments = document.createElement("div");
+     showMenu() {
 
-        this.menuLeft = document.createElement("div");
-        this.menuRight = document.createElement("div");
-        
-        //Add class names
-        this.menu.className = "menu row";
-        this.menuContainer.className = "menuContainer";
-        this.menuTitle.className = "menuTitle";
-        this.menuDescription.className = "menuDescription";
-        this.menuComments.className = "menuComments";
-        this.commentsInput.className = "commentsInput comment";
-        this.commentsButton.className = "commentsButton btn-save";
-        this.menuRight.className = "menu-right col-sm-4";
-        this.menuLeft.className = "menu-left col-sm-8";
-        // this.
+             //Create elements
+             this.menu = document.createElement("div");
+             this.menuContainer = document.createElement("div");
+             this.menuTitle = document.createElement("div");
+             this.menuDescription = document.createElement("div");
+             this.commentsInput = document.createElement("input");
+             this.commentsButton = document.createElement('button');
+             this.menuComments = document.createElement("div");
 
-        //Add inner Text
-        this.menuRight.innerHTML =` <nav>
+             this.menuLeft = document.createElement("div");
+             this.menuRight = document.createElement("div");
+
+             //Add class names
+             this.menu.className = "menu row";
+             this.menuContainer.className = "menuContainer";
+             this.menuTitle.className = "menuTitle";
+             this.menuDescription.className = "menuDescription";
+             this.menuComments.className = "menuComments";
+             this.commentsInput.className = "commentsInput comment";
+             this.commentsButton.className = "commentsButton btn-save";
+             this.menuRight.className = "menu-right col-sm-4";
+             this.menuLeft.className = "menu-left col-sm-8";
+             // this.
+
+             //Add inner Text
+             this.menuRight.innerHTML = ` <nav>
         <ul>
             <li class="title-select">
                 ADD TO CARD
@@ -143,218 +143,225 @@ class Card{
 
         </ul>
     </nav>`;
-        this.commentsButton.innerText = "Add";
-        this.commentsInput.placeholder = "Write a comment...";
+             this.commentsButton.innerText = "Add";
+             this.commentsInput.placeholder = "Write a comment...";
 
-        //Event listeners
-        this.menuContainer.addEventListener('click', (e)=>{
-            console.log(e.target);
-            if(e.target.classList.contains("menuContainer")){
-                this.menuContainer.remove();
-            }
-        });
-        
-        this.commentsButton.addEventListener('click', ()=>{
-            if(this.commentsInput.value != ""){
-            this.state.comments.push(this.commentsInput.value);
-            this.renderComments();
-            this.commentsInput.value = "";
-            }
-        })
+             //Event listeners
+             this.menuContainer.addEventListener('click', (e) => {
+                 console.log(e.target);
+                 if (e.target.classList.contains("menuContainer")) {
+                     this.menuContainer.remove();
+                 }
+             });
 
-        //Append
-        this.menu.append(this.menuLeft);
-        this.menu.append(this.menuRight);
+             this.commentsButton.addEventListener('click', () => {
+                 if (this.commentsInput.value != "") {
+                     this.state.comments.push(this.commentsInput.value);
+                     this.renderComments();
+                     this.commentsInput.value = "";
+                 }
+             })
 
-        this.menuLeft.append(this.menuTitle);
-        this.menuLeft.append(this.menuDescription);
-        this.menuLeft.append(this.commentsInput);
-        this.menuLeft.append(this.commentsButton);
-        this.menuLeft.append(this.menuComments);
+             //Append
+             this.menu.append(this.menuLeft);
+             this.menu.append(this.menuRight);
 
-        this.menuContainer.append(this.menu);
-        root.append(this.menuContainer);
+             this.menuLeft.append(this.menuTitle);
+             this.menuLeft.append(this.menuDescription);
+             this.menuLeft.append(this.commentsInput);
+             this.menuLeft.append(this.commentsButton);
+             this.menuLeft.append(this.menuComments);
 
-        this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea");
-        this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
-        
-        this.renderComments();
-    }
-//Chỉnh comment
-    renderComments(){
-        let currentCommentsDOM = Array.from(this.menuComments.childNodes);
-        currentCommentsDOM.forEach(commentDOM =>{
-            commentDOM.remove();
-        });
-        this.state.comments.forEach(comment =>{
-            // new Comment(comment, this.menuComments, this);
+             this.menuContainer.append(this.menu);
+             root.append(this.menuContainer);
 
-            new Comment(comment, this.menuComments, this,"Lê Đình Tài","12/12/2020");
-        });
-    }
-    
-}
+             this.editableDescription = new EditableText(this.state.description, this.menuDescription, this, "description", "textarea");
+             this.editableTitle = new EditableText(this.state.text, this.menuTitle, this, "text", "input");
 
-class EditableText{
-    constructor(text, place, card, property, typeOfInput){
-        this.text = text;
-        this.place = place;
-        this.card = card;
-        this.property = property;
-        this.typeOfInput = typeOfInput;
-        this.render();
-    }
+             this.renderComments();
+         }
+         //Chỉnh comment
+     renderComments() {
+         let currentCommentsDOM = Array.from(this.menuComments.childNodes);
+         currentCommentsDOM.forEach(commentDOM => {
+             commentDOM.remove();
+         });
+         this.state.comments.forEach(comment => {
+             // new Comment(comment, this.menuComments, this);
 
-    render(){
-        this.div = document.createElement("div");
-        this.p = document.createElement("p");
+             new Comment(comment, this.menuComments, this, "Lê Đình Tài", "12/12/2020");
+         });
+     }
+ }
 
-        this.p.innerText = this.text;
+ class EditableText {
+     constructor(text, place, card, property, typeOfInput) {
+         this.text = text;
+         this.place = place;
+         this.card = card;
+         this.property = property;
+         this.typeOfInput = typeOfInput;
+         this.render();
+     }
 
-        this.p.addEventListener('click', ()=>{
-            this.showEditableTextArea.call(this);
-        });
+     render() {
+         this.div = document.createElement("div");
+         this.p = document.createElement("p");
 
-        this.div.append(this.p);
-        this.place.append(this.div);
-    }
+         this.p.innerText = this.text;
 
-    showEditableTextArea(){
-        let oldText = this.text;
+         this.p.addEventListener('click', () => {
+             this.showEditableTextArea.call(this);
+         });
 
-        this.input = document.createElement(this.typeOfInput);
-        this.saveButton = document.createElement("button");
+         this.div.append(this.p);
+         this.place.append(this.div);
+     }
 
-        this.p.remove();
-        this.input.value = oldText;
-        this.saveButton.innerText = "Save";
-        this.saveButton.className = "btn-save";
-        this.input.classList.add("comment");
+     showEditableTextArea() {
+         let oldText = this.text;
 
-        this.saveButton.addEventListener('click', ()=>{
-            this.text = this.input.value;
-            this.card.state[this.property] = this.input.value;
-            if(this.property == "text"){
-                this.card.p.innerText = this.input.value;
-            }
-            this.div.remove();
-            this.render();
-        });
+         this.input = document.createElement(this.typeOfInput);
+         this.saveButton = document.createElement("button");
 
-        function clickSaveButton(event, object){
-            // Number 13 is the "Enter" key on the keyboard
-            if (event.keyCode === 13) {
-                // Cancel the default action, if needed
-                event.preventDefault();
-                // Trigger the button element with a click
-                object.saveButton.click();
-              }
-        }
+         this.p.remove();
+         this.input.value = oldText;
+         this.saveButton.innerText = "Save";
+         this.saveButton.className = "btn-save";
+         this.input.classList.add("comment");
 
-        this.input.addEventListener("keyup", (e)=>{
-            if(this.typeOfInput == "input"){
-                clickSaveButton(e, this);
-            }
-        });
+         this.saveButton.addEventListener('click', () => {
+             this.text = this.input.value;
+             this.card.state[this.property] = this.input.value;
+             if (this.property == "text") {
+                 this.card.p.innerText = this.input.value;
+             }
+             this.div.remove();
+             this.render();
+         });
 
-        this.div.append(this.input);
+         function clickSaveButton(event, object) {
+             // Number 13 is the "Enter" key on the keyboard
+             if (event.keyCode === 13) {
+                 // Cancel the default action, if needed
+                 event.preventDefault();
+                 // Trigger the button element with a click
+                 object.saveButton.click();
+             }
+         }
 
-        if(this.typeOfInput == "textarea"){
-            this.div.append(this.saveButton);
-        }
+         this.input.addEventListener("keyup", (e) => {
+             if (this.typeOfInput == "input") {
+                 clickSaveButton(e, this);
+             }
+         });
 
-        this.input.select();
-    }
+         this.div.append(this.input);
 
-}
+         if (this.typeOfInput == "textarea") {
+             this.div.append(this.saveButton);
+         }
 
-class Comment{
-    //chưa code xong, cần tạo đối tượng user 
-    constructor(text, place, card,user,date){
-        this.text = text;
-        this.place = place;
-        this.card = card;
-        this.user = user;
-        this.date = date;
-        this.render();
-    }
+         this.input.select();
+     }
 
-    render(){
-        this.div = document.createElement('div');
-        this.div.className = "comment";
-        this.div.innerHTML = this.formatComment();
-        console.log(this.formatComment());
-        this.place.append(this.div);
-    }
-    formatComment () {
-        return `<div class="media p-3">
-        <img class="round mr-3 mt-3" width="30" height="30" avatar="`+this.user+`">
+ }
+
+ class Comment {
+     //chưa code xong, cần tạo đối tượng user 
+     constructor(text, place, card, user, date) {
+         this.text = text;
+         this.place = place;
+         this.card = card;
+         this.user = user;
+         this.date = date;
+         this.render();
+     }
+
+     render() {
+         this.div = document.createElement('div');
+         this.div.className = "comment";
+         this.div.innerHTML = this.formatComment();
+         console.log(this.formatComment());
+         this.place.append(this.div);
+     }
+     formatComment() {
+         return `<div class="media p-3">
+        <img class="round mr-3 mt-3" width="30" height="30" avatar="` + this.user + `">
         <div class="media-body">
-            <h6>`+this.user+`<small><i>   `+this.date+`</i></small></h6>
+            <h6>` + this.user + `<small><i>   ` + this.date + `</i></small></h6>
             <p>
-            `+this.text+`
+            ` + this.text + `
             </p>
         </div>
     </div>`;
-    }
-}
+     }
+ }
 
 
-//-------------main------------
+ //-------------main------------
 
-let addTodoListInput = document.getElementById("addTodoListInput");
-let addTodoListButton = document.getElementById("addTodoListButton");
+ let addTodoListInput = document.getElementById("addTodoListInput");
+ let addTodoListButton = document.getElementById("addTodoListButton");
 
-addTodoListButton.addEventListener('click',()=>{
-   if ( addTodoListInput.value.trim() != ""){
-    new todoList(root, addTodoListInput.value);
-    addTodoListInput.value = "";
-    $(function () {
-        $('ul[id^="sort"]').sortable(
-            {
-                connectWith: ".sortable",
-            }).disableSelection();
-    });
-   }
-});
+ addTodoListButton.addEventListener('click', () => {
+     if (addTodoListInput.value.trim() != "") {
+         new todoList(root, addTodoListInput.value);
+         addTodoListInput.value = "";
+         $(function() {
+             $('ul[id^="sort"]').sortable({
+                 connectWith: ".sortable",
+             }).disableSelection();
+         });
+     }
+ });
+
+ var a = { 'Todo': 'nhan dang chu viet tay', 'Doing': 'deeplearning', 'Done': 'lap trinh C co ban' }
+ for (i in a) {
+     let todo = new todoList(root, i);
+     console.log(a[i])
+     todo.input.value = a[i]
+     todo.addToDo()
+     todo.input.value = ''
+ }
 
 
 
-// let todoList1 = new todoList(root);
-// let todoList2 = new todoList(root);
-// let todoList3 = new todoList(root);
+ //  let todoList1 = new todoList(root);
+ //  let todoList2 = new todoList(root);
+ //  let todoList3 = new todoList(root);
 
 
-// todoList1.input.value = "Xin chào";
-// todoList1.addToDo();
+ //  todoList1.input.value = "Xin chào";
+ //  todoList1.addToDo();
 
-// check box
-$(document).ready(function() {
-  
-    // get box count
-    var count = 0;
-    var checked = 0;
-    function countBoxes() { 
-      count = $("input[type='checkbox']").length;
-      console.log(count);
-    }
-    
-    countBoxes();
-    $(":checkbox").click(countBoxes);
-    
-    // count checks
-    
-    function countChecked() {
-      checked = $("input:checked").length;
-      
-      var percentage = parseInt(((checked / count) * 100),10);
-      $(".progressbar-bar").progressbar({
-              value: percentage
-          });
-      $(".progressbar-label").text(percentage + "%");
-    }
-    
-    countChecked();
-    $(":checkbox").click(countChecked);
-  });
-  
+ // check box
+ $(document).ready(function() {
+
+     // get box count
+     var count = 0;
+     var checked = 0;
+
+     function countBoxes() {
+         count = $("input[type='checkbox']").length;
+         console.log(count);
+     }
+
+     countBoxes();
+     $(":checkbox").click(countBoxes);
+
+     // count checks
+
+     function countChecked() {
+         checked = $("input:checked").length;
+
+         var percentage = parseInt(((checked / count) * 100), 10);
+         $(".progressbar-bar").progressbar({
+             value: percentage
+         });
+         $(".progressbar-label").text(percentage + "%");
+     }
+
+     countChecked();
+     $(":checkbox").click(countChecked);
+ });
