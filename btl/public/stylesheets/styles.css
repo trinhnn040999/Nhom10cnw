@@ -2223,7 +2223,7 @@ ul.nav-pills {
   position: fixed;
 }
 div.col-sm-9 div {
-  top: 150px;
+  top: 90px;
   font-size: 28px;
 }
 .select-menu {
@@ -2249,9 +2249,7 @@ div.col-sm-9 div {
   margin-left: 5px;
 }
 .content-main {
-}
-.content-main img {
-  width: 100%;
+  position: relative;
 }
 /* Search */
 .search {
@@ -2264,7 +2262,6 @@ div.col-sm-9 div {
   margin-top: 150px;
   position: relative;
   height: 150px;
-  position: relative;
 }
 .header-intro .intro {
   display: flex;
@@ -2275,7 +2272,7 @@ div.col-sm-9 div {
   display: flex;
   justify-content: center;
 }
-.header-intro .header-content{
+.header-intro .header-content {
   position: absolute;
   bottom: 0;
   margin-left: auto;
@@ -2288,13 +2285,37 @@ a {
   text-decoration: none;
 }
 /* setting */
-.setting .acount-setting{
-  
+.setting .acount-setting {
 }
-.setting button{
+.setting button {
   width: 100%;
   text-align: left;
-  border-bottom: 1px solid #CCCCCC;
+  border-bottom: 1px solid #cccccc;
+}
+/* broad */
+.content-main .personal-broad{
+  
+}
+.personal-broad .card{
+  width: 200px;
+  height: 100px;
+  background: url("../../public/images/header-teamwork.svg") no-repeat center;
+  font-size: 12px;
+  overflow: hidden;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.recent-broad .card{
+  width: 200px;
+  height: 100px;
+  background: url("../../public/images/header-teamwork.svg") no-repeat center;
+  font-size: 12px;
+  overflow: hidden;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 20px;
 }
 /* end search */
 
