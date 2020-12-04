@@ -14,6 +14,7 @@ var saveProfile = require('./routes/saveProfile');
 var auth = require('./routes/auth')
 var update = require('./routes/update')
 const { authenticate } = require('passport');
+var broad = require('./routes/broad')
 
 
 //Define MySQL parameter in Config.js file.
@@ -154,5 +155,5 @@ app.use('/update', update)
 
 // xu ly phan luu profile
 app.use('/saveProfile', saveProfile)
-
+app.use('/api', broad)
 module.exports = app;

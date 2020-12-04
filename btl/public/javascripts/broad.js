@@ -1,4 +1,4 @@
-let root = document.getElementById("root");
+ let root = document.getElementById("root");
 
  class todoList {
      constructor(place, title = "List") {
@@ -140,6 +140,7 @@ let root = document.getElementById("root");
             <li class="select-menu">
                 <Button class="btn btn-light"><i class="far fa-calendar-alt"></i> Due Date</Button>
             </li>
+
         </ul>
     </nav>`;
              this.commentsButton.innerText = "Add";
@@ -315,18 +316,56 @@ let root = document.getElementById("root");
      }
  });
 
- var a = { 'Todo': 'nhan dang chu viet tay', 'Doing': 'deeplearning', 'Done': 'lap trinh C co ban' }
+ //   var config = require('../../configuration/config')
+ //   var mysql = require('mysql');
+
+ //   var connection = mysql.createConnection({
+ //       host: config.host,
+ //       user: config.username,
+ //       password: config.password,
+ //       database: config.database
+
+ //   });
+
+ //   connection.query("SELECT * from broad where email = ?", 'nguyenthithuan1591999@gmail.com', (error, results, fields) => {
+ //       var id = results[0]['id']
+ //       connection.query("SELECT * from title where id = ?", id, (error, results, fields) => {
+ //           results.forEach(element => {
+ //               var id_card = element['id_card']
+ //               connection.query("SELECT * from card where id_card = ?", id_card, (error, results, fields) => {
+ //                   results.forEach(element => {
+ //                       console.log(element)
+ //                   });
+ //               });
+ //           });
+ //       });
+ //   });
+
+ var a = {
+     'Todo': ['nhan dang chu viet tay', 'adc'],
+     'Doing': ['deeplearning'],
+     'Done': ['lap trinh C co ban']
+ }
  for (i in a) {
      let todo = new todoList(root, i);
-     console.log(a[i])
-     todo.input.value = a[i]
-     todo.addToDo()
+     a[i].forEach(element => {
+         console.log(element)
+         todo.input.value = element
+         todo.addToDo()
+     });
      todo.input.value = ''
  }
+
  //  let todoList1 = new todoList(root);
  //  let todoList2 = new todoList(root);
  //  let todoList3 = new todoList(root);
+
+
  //  todoList1.input.value = "Xin chào";
+ //  todoList1.addToDo();
+ //  todoList1.input.value = "Xinchào";
+ //  todoList1.addToDo();
+ //  todoList1.input.value = "Xin _chào";
  //  todoList1.addToDo();
 
  // check box

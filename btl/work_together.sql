@@ -45,7 +45,8 @@ CREATE TABLE IF NOT EXISTS `accounts_FB` (
   `id` bigint(20) NOT NULL,
   `username` varchar(50) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
------
+-----------------
+----- broad -----
 
 CREATE TABLE IF NOT EXISTS `broad` (
   `id` bigint(20) NOT NULL,
@@ -53,8 +54,28 @@ CREATE TABLE IF NOT EXISTS `broad` (
   'BroadName' varchar(50) NOT NULL,
   PRIMARY KEY (`id`,`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+ALTER TABLE `broad` MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+------------------
+------ title -----
+CREATE TABLE IF NOT EXISTS `title` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(100) NOT NULL, 
+  'id_card' bigint(20) NOT NULL,
+  PRIMARY KEY (`id_card`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+ALTER TABLE `title` MODIFY `id_card` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 
---
+------------------
+------- card -----
+CREATE TABLE IF NOT EXISTS `card` (
+  `id_card` bigint(20) NOT NULL,
+  `text_card` varchar(200) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+ALTER TABLE `card` MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--------------
+
 -- Cấu trúc bảng cho bảng `project`
 --
 
