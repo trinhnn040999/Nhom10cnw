@@ -66,21 +66,27 @@ app.get('/', function(req, res) {
 
 // thiết lập sau khi đăng nhập bằng gmail
 app.get('/gmail', function(req, res) {
-    connection.query("SELECT * from accounts where email = ?", req.user.emails[0]['value'], (error, results, fields) => {
-        console.log(results)
-        console.log(results.length)
-        if (results.length > 0) {
-            //tai khoan da ton tai
-            res.cookie('username', results[0]['username'])
-            res.cookie('email', results[0]['email'])
-            res.cookie('sdt', results[0]['sdt'])
-            res.cookie('fullname', results[0]['fullname'])
-            res.render('home', { fullname: results[0]['fullname'] })
-        } else {
-            // tai khoan chua ton tai
-            res.render('loginGmail', { check: '' })
-        }
-    })
+    try {
+        connection.query("SELECT * from accounts where email = ?", req.user.emails[0]['value'], (error, results, fields) => {
+            console.log(results)
+            console.log(results.length)
+            if (results.length > 0) {
+                //tai khoan da ton tai
+                res.cookie('username', results[0]['username'])
+                res.cookie('email', results[0]['email'])
+                res.cookie('sdt', results[0]['sdt'])
+                res.cookie('fullname', results[0]['fullname'])
+                res.render('home', { fullname: results[0]['fullname'] })
+            } else {
+                // tai khoan chua ton tai
+                res.render('loginGmail', { check: '' })
+            }
+        })
+    } catch {
+        res.render("login", { thongBao: '', color: 'red' })
+    }
+
+
 });
 
 app.get('/home', function(req, res) {
@@ -156,4 +162,5 @@ app.use('/update', update)
 // xu ly phan luu profile
 app.use('/saveProfile', saveProfile)
 app.use('/api', broad)
+
 module.exports = app;

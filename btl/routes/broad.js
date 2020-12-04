@@ -37,19 +37,54 @@ var connection = mysql.createConnection({
 });
 
 app.get('/', function(req, res, next) {
-    connection.query("SELECT * from broad where email = ?", 'nguyenthithuan1591999@gmail.com', (error, results, fields) => {
+    connection.query("SELECT broad.id, broad.email, broad.broadName, title.title, title.id_card, " +
+        "card.text_card FROM broad, title, card WHERE broad.id = title.id " +
+        "and card.id_card = title.id_card and broad.email = ?",
+        'nguyenthithuan1591999@gmail.com', (error, results, fields) => {
+            var task = []
 
-        var id = results[0]['id']
-        connection.query("SELECT * from title where id = ?", id, (error, results, fields) => {
-
+            var id = {}
+            var id_card = {}
             results.forEach(element => {
-                var id_card = element['id_card']
-                connection.query("SELECT * from card where id_card = ?", id_card, (error, results, fields) => {
-                    res.json(results)
-                });
+                id[element['id']] = 0
+                id_card[element['id_card']] = 0
             });
+
+            for (i in id) {
+                var same_id = results.filter(function(x) {
+                    return x['id'] == i
+                })
+                var obj = {}
+                obj['id'] = i
+                obj['email'] = same_id[0]['email']
+                obj['broadName'] = same_id[0]['broadName']
+                obj['title'] = []
+
+                for (j in id_card) {
+                    var same_id_card = same_id.filter(function(x) {
+                            return x['id_card'] == j
+                        })
+                        // console.log(j)
+                    var obj_title = {}
+
+                    try {
+                        obj_title['title'] = same_id_card[0]['title']
+                        obj_title['id_card'] = same_id_card[0]['id_card']
+                        obj_title['text_card'] = []
+                        same_id_card.forEach(element => {
+                            obj_title['text_card'].push(element['text_card'])
+                        });
+                        obj['title'].push(obj_title)
+                    } catch {
+                        continue
+                    }
+                }
+
+                task.push(obj)
+            }
+            console.log(task)
+            res.json(task)
         });
-    });
 })
 
 module.exports = app;

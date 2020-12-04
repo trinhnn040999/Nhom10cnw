@@ -56,7 +56,7 @@ app.post('/', function(req, res) {
             }
         });
     } else {
-        res.render("login", { thongBao: '' })
+        res.render("login", { thongBao: '', color: 'red' })
     }
 });
 
