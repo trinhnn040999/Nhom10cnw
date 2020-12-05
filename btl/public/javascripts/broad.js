@@ -315,46 +315,47 @@
          });
      }
  });
+ $.ajax({
+         url: '/api/broad',
+         type: 'get'
+     })
+     .then(data => {
 
- //   var config = require('../../configuration/config')
- //   var mysql = require('mysql');
 
- //   var connection = mysql.createConnection({
- //       host: config.host,
- //       user: config.username,
- //       password: config.password,
- //       database: config.database
+         var title = data['title']
+         console.log(title)
+         title.forEach(element => {
+             let todo = new todoList(root, element['title'])
+             var text_card = element['text_card']
 
- //   });
+             text_card.forEach(element => {
+                 todo.input.value = element
+                 todo.addToDo()
+                 todo.input.value = ''
+             });
+         });
 
- //   connection.query("SELECT * from broad where email = ?", 'nguyenthithuan1591999@gmail.com', (error, results, fields) => {
- //       var id = results[0]['id']
- //       connection.query("SELECT * from title where id = ?", id, (error, results, fields) => {
- //           results.forEach(element => {
- //               var id_card = element['id_card']
- //               connection.query("SELECT * from card where id_card = ?", id_card, (error, results, fields) => {
- //                   results.forEach(element => {
- //                       console.log(element)
- //                   });
- //               });
- //           });
- //       });
- //   });
+     })
+     .catch(err => {
+         console.log(err)
+     })
 
- var a = {
-     'Todo': ['nhan dang chu viet tay', 'adc'],
-     'Doing': ['deeplearning'],
-     'Done': ['lap trinh C co ban']
- }
- for (i in a) {
-     let todo = new todoList(root, i);
-     a[i].forEach(element => {
-         console.log(element)
-         todo.input.value = element
-         todo.addToDo()
-     });
-     todo.input.value = ''
- }
+ //  var a = {
+ //      'Todo': ['nhan dang chu viet tay', 'adc'],
+ //      'Doing': ['deeplearning'],
+ //      'Done': ['lap trinh C co ban']
+ //  }
+ //  for (i in a) {
+ //      let todo = new todoList(root, i);
+ //      a[i].forEach(element => {
+ //          console.log(element)
+ //          todo.input.value = element
+ //          todo.addToDo()
+ //      });
+ //      todo.input.value = ''
+ //  }
+
+
 
  //  let todoList1 = new todoList(root);
  //  let todoList2 = new todoList(root);

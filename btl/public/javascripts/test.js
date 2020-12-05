@@ -17,7 +17,6 @@ var email =
         email, (error, results, fields) => {
             var task = []
 
-
             var id = {}
             var id_card = {}
             results.forEach(element => {

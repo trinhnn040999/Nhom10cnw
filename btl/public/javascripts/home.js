@@ -6,9 +6,9 @@ let broads = document.getElementById('broads');
 // createBroad('ML-intership_1')
 
 
-function createBroad(broadName) {
+function createBroad(broadName, id) {
     let a = document.createElement('a')
-    a.setAttribute("href", '/home')
+    a.setAttribute("href", '/broad/' + id)
 
     let div = document.createElement('div')
     div.classList.add("card")
@@ -28,7 +28,7 @@ $.ajax({
     .then(data => {
         console.log(data)
         data.forEach(element => {
-            createBroad(element['broadName'])
+            createBroad(element['broadName'], element['id'])
         });
     })
     .catch(err => {

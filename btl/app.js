@@ -14,6 +14,7 @@ var saveProfile = require('./routes/saveProfile');
 var auth = require('./routes/auth')
 var update = require('./routes/update')
 const { authenticate } = require('passport');
+var broads_home = require('./routes/broads_home')
 var broad = require('./routes/broad')
 
 
@@ -85,8 +86,6 @@ app.get('/gmail', function(req, res) {
     } catch {
         res.render("login", { thongBao: '', color: 'red' })
     }
-
-
 });
 
 app.get('/home', function(req, res) {
@@ -133,6 +132,7 @@ app.get('/profile', function(req, res) {
         classActivity: 'container tab-pane fade'
     })
 });
+
 // thiet lap chuc nang activity
 app.get('/activity', function(req, res) {
     res.render('profile', {
@@ -149,9 +149,9 @@ app.get('/activity', function(req, res) {
     })
 })
 
-app.get('/broad', function(req, res, next) {
-    res.render('broad', { fullname: req.cookies.fullname })
-})
+
+// bang
+app.use('/broad', broad)
 
 // xử lý phần đăng kí
 app.use('/register', register)
@@ -161,6 +161,7 @@ app.use('/update', update)
 
 // xu ly phan luu profile
 app.use('/saveProfile', saveProfile)
-app.use('/api', broad)
+app.use('/api', broads_home)
+
 
 module.exports = app;
