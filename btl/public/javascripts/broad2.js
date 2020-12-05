@@ -105,11 +105,12 @@ class Card {
     this.commentsInput = document.createElement("input");
     this.commentsButton = document.createElement("button");
     this.menuComments = document.createElement("div");
-
+    this.menuChecklist = document.createElement("div");
     this.menuLeft = document.createElement("div");
     this.menuRight = document.createElement("div");
 
     //Add class names
+    this.menuChecklist.className = "menuChecklist";
     this.menu.className = "menu row";
     this.menuContainer.className = "menuContainer";
     this.menuTitle.className = "menuTitle";
@@ -119,9 +120,6 @@ class Card {
     this.commentsButton.className = "commentsButton btn-save";
     this.menuRight.className = "menu-right col-sm-4";
     this.menuLeft.className = "menu-left col-sm-8";
-
-    // right
-
     //Add inner Text
     this.menuRight.innerHTML = ` <nav>
         <ul>
@@ -136,7 +134,7 @@ class Card {
             <div class="dropdown-menu" style= "width :100%;">
                     <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                     <input type="text" class="form-control" placeholder="Search members" id="searchUser">
-                    </div>
+                    </div> 
                     <ul id="users">
                       <li class="dropdown-item">Link 1</li>
                       <li class="dropdown-item">Siêu nhân đỏ</li>
@@ -146,7 +144,17 @@ class Card {
           </div>
             </li>
             <li class="select-menu">
-                <Button class="btn btn-light" id="btn-check"><i class="fas fa-calendar-check"></i> Checklist</Button>
+            <div class="dropdown">
+                <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                <i class="fas fa-calendar-check"></i> Checklist
+                </button>
+              <div class="dropdown-menu">
+                  <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                      <input type="text" class="form-control" placeholder="Title..." id="checklistInput">
+                      <button class="btn btn-success" style="text-align: center;" id="addChecklist">Add checklist</button>
+                  </div>
+              </div>
+            </div>
             </li>
             <li class="select-menu">
                 <Button class="btn btn-light" id="btn-due"><i class="far fa-calendar-alt"></i> Due Date</Button>
@@ -155,6 +163,7 @@ class Card {
         </ul>
     </nav>`;
 
+    
     this.commentsButton.innerText = "Add";
     this.commentsInput.placeholder = "Write a comment...";
 
@@ -206,12 +215,21 @@ class Card {
 
     $(document).ready(function () {
       $("#searchUser").on("keyup", function () {
-          var value = $(this).val().toLowerCase();
-          $("#users li").filter(function () {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-          });
+        var value = $(this).val().toLowerCase();
+        $("#users li").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
       });
-  });
+
+      $("#addChecklist").click(function() {
+        if($("#checklistInput").val().trim() != ""){
+          alert( "Handler for .click() called." );
+        }
+        
+      });
+    });
+
+    
   }
   //Chỉnh comment
   renderComments() {
