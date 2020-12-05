@@ -136,7 +136,7 @@ class Card {
             <div class="dropdown-menu" style= "width :100%;">
                     <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                     <input type="text" class="form-control" placeholder="Search members" id="searchUser">
-                    </div>
+                    </div> 
                     <ul id="users">
                       <li class="dropdown-item">Link 1</li>
                       <li class="dropdown-item">Siêu nhân đỏ</li>
@@ -146,7 +146,17 @@ class Card {
           </div>
             </li>
             <li class="select-menu">
-                <Button class="btn btn-light" id="btn-check"><i class="fas fa-calendar-check"></i> Checklist</Button>
+            <div class="dropdown">
+                <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                <i class="fas fa-calendar-check"></i> Checklist
+                </button>
+              <div class="dropdown-menu">
+                  <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                      <input type="text" class="form-control" placeholder="Title..." id="checklist">
+                      <button class="btn btn-success" style="text-align: center;">Add checklist</button>
+                  </div>
+              </div>
+            </div>
             </li>
             <li class="select-menu">
                 <Button class="btn btn-light" id="btn-due"><i class="far fa-calendar-alt"></i> Due Date</Button>
