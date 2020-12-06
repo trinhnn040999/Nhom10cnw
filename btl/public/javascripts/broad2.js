@@ -108,7 +108,7 @@ class Card {
     this.menuChecklist = document.createElement("div");
     this.menuLeft = document.createElement("div");
     this.menuRight = document.createElement("div");
-
+    this.checklist = document.createElement("div");
     //Add class names
     this.menuChecklist.className = "menuChecklist";
     this.menu.className = "menu row";
@@ -120,6 +120,8 @@ class Card {
     this.commentsButton.className = "commentsButton btn-save";
     this.menuRight.className = "menu-right col-sm-4";
     this.menuLeft.className = "menu-left col-sm-8";
+    this.checklist.className = "checklist"
+    this.menuChecklist.className = "menuChecklist";
     //Add inner Text
     this.menuRight.innerHTML = ` <nav>
         <ul>
@@ -182,7 +184,6 @@ class Card {
         </ul>
     </nav>`;
 
-    
     this.commentsButton.innerText = "Add";
     this.commentsInput.placeholder = "Write a comment...";
 
@@ -211,6 +212,7 @@ class Card {
     this.menuLeft.append(this.commentsInput);
     this.menuLeft.append(this.commentsButton);
     this.menuLeft.append(this.menuComments);
+    this.menuChecklist.append(this.checklist);
 
     this.menuContainer.append(this.menu);
     root.append(this.menuContainer);
@@ -240,36 +242,35 @@ class Card {
         });
       });
 
-      $("#addChecklist").click(function() {
-        if($("#checklistInput").val().trim() != ""){
-          alert( "Handler for .click() called." );
+      $("#addChecklist").click(function () {
+        if ($("#checklistInput").val().trim() != "") {
+          alert("Handler for .click() called.");
         }
-        
       });
     });
 
     // due time
     $(function () {
-      var sd = new Date(), ed = new Date();
-    
-      $('#startDate').datetimepicker({ 
-        pickTime: false, 
-        format: "YYYY/MM/DD", 
-        defaultDate: sd, 
-        maxDate: ed 
+      var sd = new Date(),
+        ed = new Date();
+
+      $("#startDate").datetimepicker({
+        pickTime: false,
+        format: "YYYY/MM/DD",
+        defaultDate: sd,
+        maxDate: ed,
       });
-    
-      $('#endDate').datetimepicker({ 
-        pickTime: false, 
-        format: "YYYY/MM/DD", 
-        defaultDate: ed, 
-        minDate: sd 
+
+      $("#endDate").datetimepicker({
+        pickTime: false,
+        format: "YYYY/MM/DD",
+        defaultDate: ed,
+        minDate: sd,
       });
-  
+
       //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
-      bindDateRangeValidation($("#form"), 'startDate', 'endDate');
-  });
-    
+      bindDateRangeValidation($("#form"), "startDate", "endDate");
+    });
   }
   //Chỉnh comment
   renderComments() {
@@ -288,9 +289,10 @@ class Card {
         "12/12/2020"
       );
     });
+    
   }
 }
-
+// để chỉnh sửa khi click vào text
 class EditableText {
   constructor(text, place, card, property, typeOfInput) {
     this.text = text;
@@ -405,6 +407,22 @@ class Comment {
   }
 }
 
+class Checklist{
+  constructor(text, place,card, user) {
+    this.text = text;
+    this.place = place;
+    this.card = card;
+    this.user = user;
+    this.render();
+  }
+  render() {
+    this.div = document.createElement("div");
+    this.div.className = "checklist";
+    this.div.innerHTML = this.formatComment();
+    this.place.append(this.div);
+    LetterAvatar.transform();
+  }
+}
 //-------------main------------
 
 let addTodoListInput = document.getElementById("addTodoListInput");
@@ -433,32 +451,3 @@ addTodoListButton.addEventListener("click", () => {
 
 // todoList1.input.value = "Xin chào";
 // todoList1.addToDo();
-
-// check box
-$(document).ready(function () {
-  // get box count
-  var count = 0;
-  var checked = 0;
-  function countBoxes() {
-    count = $("input[type='checkbox']").length;
-    console.log(count);
-  }
-
-  countBoxes();
-  $(":checkbox").click(countBoxes);
-
-  // count checks
-
-  function countChecked() {
-    checked = $("input:checked").length;
-
-    var percentage = parseInt((checked / count) * 100, 10);
-    $(".progressbar-bar").progressbar({
-      value: percentage,
-    });
-    $(".progressbar-label").text(percentage + "%");
-  }
-
-  countChecked();
-  $(":checkbox").click(countChecked);
-});

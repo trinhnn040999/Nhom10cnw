@@ -12,11 +12,17 @@
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <link rel='stylesheet prefetch'
+        href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+
     <link href="../../public/stylesheets/bootstrap.css" rel="stylesheet">
     <link href="../../public/stylesheets/fontawesome-all.css" rel="stylesheet">
     <link href="../../public/stylesheets/swiper.css" rel="stylesheet">
     <link href="../../public/stylesheets/magnific-popup.css" rel="stylesheet">
     <link href="../../public/stylesheets/styles.css" rel="stylesheet">
+    <link href="../../public/stylesheets/broad-add.css" rel="stylesheet">
 </head>
 
 <body>
@@ -25,19 +31,26 @@
         <input id="addTodoListInput" class="comment">
         <button id="addTodoListButton" class="btn-save" onclick="updateSord()">Add new list</button>
     </div>
-
-    <h1>Progress bar for counting checkboxes</h1>
-    <form>
-            <input type="checkbox" name="box1" /> <br>
-            <input type="checkbox" name="box2" /><br>
-            <input type="checkbox" name="box3" /><br>
-            <input type="checkbox" name="box2" /><br>
-            <input type="checkbox" name="box3" />
-    </form>
-    <div class="progressbar-container" style="background-color: aqua;"> 
-        <div class="progressbar-bar" style="background-color: red;"></div>
-        <div class="progressbar-label" style="background-color: rgb(38, 0, 255);"></div>
+    <div class="progressbar-container">
+        <div class="progressbar-bar"></div>
+        <div class="progressbar-label"></div>
     </div>
+    <form>
+        <ul>
+            <li class="row">
+                <input type="checkbox" name="box1" class="col-sm-1"/>
+                <p class="col-sm-6" style="margin-left: -20px;">Xin chào Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi eligendi omnis vitae accusamus id dolore debitis? Enim officia nam facere provident, deserunt quis, voluptatibus adipisci saepe exercitationem aliquam, similique et.</p>
+            </li>
+            <li class="row">
+                <input type="checkbox" name="box1" class="col-sm-1"/>
+                <p class="col-sm-6" style="margin-left: -20px;">Xin chào Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi eligendi omnis vitae accusamus id dolore debitis? Enim officia nam facere provident, deserunt quis, voluptatibus adipisci saepe exercitationem aliquam, similique et.</p>
+            </li>
+            <li class="row">
+                <input type="checkbox" name="box1" class="col-sm-1"/>
+                <p class="col-sm-6" style="margin-left: -20px;">Xin chào Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi eligendi omnis vitae accusamus id dolore debitis? Enim officia nam facere provident, deserunt quis, voluptatibus adipisci saepe exercitationem aliquam, similique et.</p>
+            </li>
+        </ul>
+    </form>
     <div class="ready"></div>
     <div id="root"></div>
     <script>
@@ -49,8 +62,6 @@
         });
 
     </script>
-    <script src="../../public/javascripts/broad.js"></script>
-    <script src="../../public/javascripts/jquery.min.js"></script>
     <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="../../public/javascripts/popper.min.js"></script>
     <!-- Popper tooltip library for Bootstrap -->
@@ -69,10 +80,9 @@
     <!-- Validator.js - Bootstrap plugin that validates forms -->
     <script src="../../public/javascripts/scripts.js"></script>
     <script src="../../public/javascripts/leteravatar.js"></script>
-    <script src="../../public/javascripts/broad.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+    <script src="../../public/javascripts/broad2.js"></script>
 </body>
 
 </html>
