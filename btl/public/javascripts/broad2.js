@@ -151,13 +151,32 @@ class Card {
               <div class="dropdown-menu">
                   <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                       <input type="text" class="form-control" placeholder="Title..." id="checklistInput">
-                      <button class="btn btn-success" style="text-align: center;" id="addChecklist">Add checklist</button>
+                      <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addChecklist">Add checklist</button>
                   </div>
               </div>
             </div>
             </li>
             <li class="select-menu">
-                <Button class="btn btn-light" id="btn-due"><i class="far fa-calendar-alt"></i> Due Date</Button>
+            <div class="dropdown">
+              <button type="button" class="btn btn-light dropdown-toggle" id="btn-due" data-toggle="dropdown">
+                  <i class="far fa-calendar-alt"></i> Due Date
+              </button>
+              <div class="dropdown-menu">
+                  <form id="form" name="form" class="form-inline">
+                      <ul style="flex: 1 0 220px; text-align: left;">
+                          <li>
+                              <label for="startDate" style="justify-content: left; margin-left: 10px;">Start Date:</label>
+                              <input id="startDate" name="startDate" type="text" class="form-control" style="margin:10px; " />
+                          </li>
+                          <li>
+                              <label for="endDate" style="justify-content: left; margin-left: 10px;">End Date:</label>
+                              <input id="endDate" name="endDate" type="text" class="form-control" style="margin: 10px;" />
+                          </li>
+                      </ul>
+                      <button type="submit" class="btn btn-success" style="text-align: center; margin: 10px;">Ok</button>
+                  </form>
+              </div>
+            </div>
             </li>
 
         </ul>
@@ -229,6 +248,27 @@ class Card {
       });
     });
 
+    // due time
+    $(function () {
+      var sd = new Date(), ed = new Date();
+    
+      $('#startDate').datetimepicker({ 
+        pickTime: false, 
+        format: "YYYY/MM/DD", 
+        defaultDate: sd, 
+        maxDate: ed 
+      });
+    
+      $('#endDate').datetimepicker({ 
+        pickTime: false, 
+        format: "YYYY/MM/DD", 
+        defaultDate: ed, 
+        minDate: sd 
+      });
+  
+      //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
+      bindDateRangeValidation($("#form"), 'startDate', 'endDate');
+  });
     
   }
   //Chỉnh comment

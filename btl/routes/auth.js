@@ -17,7 +17,7 @@ notRoutes = notRoutes.filter(function(x) {
 var file = ''
 notRoutes.forEach(element => {
     file = file + element
-    file = file + '/'
+    file = file + "/"
 });
 var views = file + 'views'
 var public = file + 'public'
