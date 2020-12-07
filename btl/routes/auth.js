@@ -8,19 +8,6 @@ var bodyParser = require('body-parser')
 var config = require('../configuration/config')
 var mysql = require('mysql');
 var app = express()
-    // thiet lap views va public
-    // var dirname = __dirname
-    // var notRoutes = dirname.split('/')
-    // notRoutes = notRoutes.filter(function(x) {
-    //     return x != 'routes'
-    // })
-    // var file = ''
-    // notRoutes.forEach(element => {
-    //     file = file + element
-    //     file = file + "/"
-    // });
-    // var views = file + 'views'
-    // var public = file + 'public'
 
 app.set('views', __dirname + '/../views');
 app.set('view engine', 'ejs');
