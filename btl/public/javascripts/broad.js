@@ -321,7 +321,6 @@
      })
      .then(data => {
 
-
          var title = data['title']
          console.log(title)
          title.forEach(element => {
@@ -333,6 +332,12 @@
                  todo.addToDo()
                  todo.input.value = ''
              });
+         });
+
+         $(function() {
+             $('ul[id^="sort"]').sortable({
+                 connectWith: ".sortable",
+             }).disableSelection();
          });
 
      })

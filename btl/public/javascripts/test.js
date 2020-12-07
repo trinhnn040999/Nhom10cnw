@@ -58,14 +58,3 @@ var email =
             }
             console.log(task)
         });
-
-
-// let data = [{
-//     'id': '',
-//     'email': '',
-//     'broadName': '',
-//     'title': [
-//         { 'title': 'Todo', 'id_card': '1', 'text_card': ['nhan dang chu viet tay', 'abc'] },
-//         { 'title': 'Doing', 'id_card': '2', 'text_card': ['xml', 'nhulantruoc'] }
-//     ]
-// }]

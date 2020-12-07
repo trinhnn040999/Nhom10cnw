@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 04, 2020 at 02:12 PM
+-- Generation Time: Dec 07, 2020 at 02:08 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -41,10 +41,10 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `fullname`, `password`, `email`, `sdt`) VALUES
-(1, 'test', NULL, 'test', 'test@test.com', NULL),
-(2, 'nguyenquyphuc', 'nguyen quy phuc yeu Goi', '12', 'nguyenquyphuc1591999@gmail.com', 9735813424),
-(10, 'phucnq', 'me oi con yeu bo me', '12', 'nguyenthithuan1591999@gmail.com', 3377685700),
-(16, 'quy duc', 'quy duc con yeu bo', '1', 'nguyenquyduc1591999@gmail.com', 12312343);
+(2, 'nguyenquyphuc', 'nguyen quy phuc ', '1', 'nguyenquyphuc1591999@gmail.com', 12),
+(10, 'phucnq', 'me oi con yeu bo me1', '12', 'nguyenthithuan1591999@gmail.com', 33776857004),
+(16, 'quy duc', 'quy duc con yeu bo', '1', 'nguyenquyduc1591999@gmail.com', 12312343),
+(19, 'test', 'test', '123456', 'test1@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,9 @@ CREATE TABLE `broad` (
 
 INSERT INTO `broad` (`id`, `email`, `broadName`) VALUES
 (1, 'nguyenthithuan1591999@gmail.com', 'ML-intership'),
-(2, 'nguyenthithuan1591999@gmail.com', 'ML-intership_1');
+(2, 'nguyenthithuan1591999@gmail.com', 'ML-intership_1'),
+(3, 'nguyenquyphuc1591999@gmail.com', 'Học tiếng anh'),
+(4, 'nguyenquyphuc1591999@gmail.com', 'Học tiếng nhật');
 
 -- --------------------------------------------------------
 
@@ -124,7 +126,12 @@ INSERT INTO `title` (`id`, `title`, `id_card`) VALUES
 (1, 'Doing', 2),
 (1, 'Done', 3),
 (2, 'Doing', 4),
-(2, 'Todo', 5);
+(2, 'Todo', 5),
+(3, 'học tiếng pháp', 6),
+(3, 'học tiếng đức', 7),
+(4, 'Học lập trình python cơ bản', 8),
+(4, 'Học lập trình nodejs cơ bản', 9),
+(4, 'học lập trình C#', 10);
 
 --
 -- Indexes for dumped tables
@@ -162,13 +169,13 @@ ALTER TABLE `title`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` bigint(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `broad`
 --
 ALTER TABLE `broad`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `card`
@@ -180,7 +187,7 @@ ALTER TABLE `card`
 -- AUTO_INCREMENT for table `title`
 --
 ALTER TABLE `title`
-  MODIFY `id_card` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_card` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
