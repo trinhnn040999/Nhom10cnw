@@ -212,7 +212,7 @@ class Card {
     this.menuLeft.append(this.commentsInput);
     this.menuLeft.append(this.commentsButton);
     this.menuLeft.append(this.menuComments);
-    this.menuChecklist.append(this.checklist);
+    // this.menuChecklist.append(this.checklist);
 
     this.menuContainer.append(this.menu);
     root.append(this.menuContainer);
@@ -280,7 +280,6 @@ class Card {
     });
     this.state.comments.forEach((comment) => {
       // new Comment(comment, this.menuComments, this);
-
       new Comment(
         comment,
         this.menuComments,
@@ -380,7 +379,6 @@ class Comment {
     this.div = document.createElement("div");
     this.div.className = "comment";
     this.div.innerHTML = this.formatComment();
-    console.log(this.formatComment());
     this.place.append(this.div);
     LetterAvatar.transform();
   }
@@ -408,19 +406,35 @@ class Comment {
 }
 
 class Checklist{
-  constructor(text, place,card, user) {
-    this.text = text;
+  constructor(title, place,card) {
+    this.title = title;
     this.place = place;
     this.card = card;
-    this.user = user;
     this.render();
   }
   render() {
     this.div = document.createElement("div");
+    this.title = document.createElement("div");
     this.div.className = "checklist";
-    this.div.innerHTML = this.formatComment();
+    this.processBar= `
+    <h3 class="title-checklist">`+this.title+`/h3>
+    <div class="progressbar-container">
+      <div class="progressbar-bar"></div>
+      <div class="progressbar-label"></div>
+    </div>
+    `;
+    this.buttonAddCheck = document.createElement("button");
+    this.div.innerHTML = this.formatChecklist();
     this.place.append(this.div);
-    LetterAvatar.transform();
+  }
+
+
+  formatChecklist() {
+    return (
+      `
+
+      `
+    );
   }
 }
 //-------------main------------
@@ -451,3 +465,33 @@ addTodoListButton.addEventListener("click", () => {
 
 // todoList1.input.value = "Xin chào";
 // todoList1.addToDo();
+ // check box
+ $(document).ready(function() {
+
+  // get box count
+  var count = 0;
+  var checked = 0;
+
+  function countBoxes() {
+      count = $("input[type='checkbox']").length;
+      console.log(count);
+  }
+
+  countBoxes();
+  $(":checkbox").click(countBoxes);
+
+  // count checks
+
+  function countChecked() {
+      checked = $("input:checked").length;
+
+      var percentage = parseInt(((checked / count) * 100), 10);
+      $(".progressbar-bar").progressbar({
+          value: percentage
+      });
+      $(".progressbar-label").text(percentage + "%");
+  }
+
+  countChecked();
+  $(":checkbox").click(countChecked);
+});

@@ -31,11 +31,12 @@
         <input id="addTodoListInput" class="comment">
         <button id="addTodoListButton" class="btn-save" onclick="updateSord()">Add new list</button>
     </div>
+    <h3 class="title-checklist">Xin chào</h3>
     <div class="progressbar-container">
         <div class="progressbar-bar"></div>
         <div class="progressbar-label"></div>
     </div>
-    <form>
+    <form>        
         <ul>
             <li class="row">
                 <input type="checkbox" name="box1" class="col-sm-1"/>
@@ -52,6 +53,8 @@
         </ul>
     </form>
     <div class="ready"></div>
+    <input type="text" class="form-control" placeholder="Title..." id="checklistInput">
+    <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addChecklist">Add</button>
     <div id="root"></div>
     <script>
         $(function () {
