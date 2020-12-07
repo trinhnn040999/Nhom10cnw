@@ -53,8 +53,18 @@
         </ul>
     </form>
     <div class="ready"></div>
-    <input type="text" class="form-control" placeholder="Title..." id="checklistInput">
-    <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addChecklist">Add</button>
+    <div class="dropdown">
+        <button type="button"  id="btnAddCheckbox" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+            Add item
+        </button>
+      <div class="dropdown-menu">
+          <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+            <input type="text" class="form-control" placeholder="title item" id="checkboxInput">
+            <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add an item</button>
+          </div>
+      </div>
+    </div>
+    
     <div id="root"></div>
     <script>
         $(function () {
