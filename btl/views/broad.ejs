@@ -26,8 +26,12 @@
 
 <div class="content"></div>
 <div id="addTodoListDiv">
-    <input id="addTodoListInput" class="comment">
-    <button id="addTodoListButton" class="btn-save">Add new list</button>
+    
+    <form action="/broad/createTodo" method="POST">
+        <input id="addTodoListInput" type="text" class="comment" name='titleName'/>
+        <button type="submit" id="addTodoListButton" class="btn-save">Add new list</button>
+    </form>
+    
 </div>
 
 <div id="root">

@@ -1,12 +1,12 @@
  let root = document.getElementById("root");
 
  class todoList {
-     constructor(place, title = "List") {
+     constructor(place, title = "List", id) {
 
          this.place = place;
          this.title = title;
          this.cardArray = [];
-
+         this.id = id
          this.render();
      }
 
@@ -22,21 +22,29 @@
 
      createToDoListElement() {
          //Create elements
+         this.form = document.createElement('form')
+         this.form.setAttribute('method', 'POST')
+
          this.h2 = document.createElement('h2');
          this.h2.innerText = this.title;
          this.input = document.createElement('input');
          this.input.classList.add("comment");
+         this.input.setAttribute('type', 'text')
+         this.input.setAttribute('name', 'textCard')
          this.button = document.createElement('button');
          this.button.innerText = 'Add';
          this.button.classList.add("btn-save");
          this.button.id = "to-do-list-button";
-         // ul bao card
+         this.button.setAttribute('type', 'submit')
+             // ul bao card
          this.div = document.createElement('ul');
          this.div.classList.add('sortable');
          this.div.classList.add('ui-sortable');
          this.div.id = 'sort';
          // bao ngoài cùng
          this.todoListElement = document.createElement('div');
+         this.todoListElement.classList.add("todoList");
+         //  
 
          //Add Event listener
          this.button.addEventListener('click', () => {
@@ -47,11 +55,14 @@
          });
 
          //Append elements to the to-do list element
+         this.todoListElement.append(this.form);
+
          this.todoListElement.append(this.h2);
-         this.todoListElement.append(this.input);
-         this.todoListElement.append(this.button);
+         this.form.append(this.input)
+             //  this.todoListElement.append(this.input);
+         this.form.append(this.button)
+             //  this.todoListElement.append(this.button);
          this.todoListElement.append(this.div);
-         this.todoListElement.classList.add("todoList");
      }
  }
 
@@ -307,7 +318,7 @@
  addTodoListButton.addEventListener('click', () => {
      if (addTodoListInput.value.trim() != "") {
          new todoList(root, addTodoListInput.value);
-         addTodoListInput.value = "";
+         //  addTodoListInput.value = "";
          $(function() {
              $('ul[id^="sort"]').sortable({
                  connectWith: ".sortable",
@@ -315,64 +326,66 @@
          });
      }
  });
+
+
+ // dua du lieu vao broad
  $.ajax({
          url: '/api/broad',
          type: 'get'
      })
      .then(data => {
+         // lay du lieu tu textCard
+         $.ajax({
+                 url: '/api/textCard',
+                 type: 'get'
+             })
+             .then(data1 => {
+                 console.log(data1)
+                 var data_task = data
+                     // dua textCard vao data_task['title']
+                 for (var i = 0; i < data_task['title'].length; i++) {
+                     var id_card = data_task['title'][i]['id_card']
+                         // bien a de chua thong tien cac task cung id_card
+                     var a = data1.filter(function(x) {
+                         return x['id_card'] == id_card
+                     })
+                     data_task['title'][i]['text_card'] = a[0]['text_card']
+                 }
 
-         var title = data['title']
-         console.log(title)
-         title.forEach(element => {
-             let todo = new todoList(root, element['title'])
-             var text_card = element['text_card']
+                 var title = data_task['title']
 
-             text_card.forEach(element => {
-                 todo.input.value = element
-                 todo.addToDo()
-                 todo.input.value = ''
-             });
-         });
+                 title.forEach(element => {
+                     // tao cac todolist
+                     let todo = new todoList(root, element['title'])
 
-         $(function() {
-             $('ul[id^="sort"]').sortable({
-                 connectWith: ".sortable",
-             }).disableSelection();
-         });
+                     try {
+                         var text_card = element['text_card']
+                         text_card.forEach(element => {
+                             todo.input.value = element
+                             todo.addToDo()
+                             todo.input.value = ''
+                         });
+                     } catch {}
 
+                 });
+
+                 // ham de bo sung class cho the ul
+                 $(function() {
+                     $('ul[id^="sort"]').sortable({
+                         connectWith: ".sortable",
+                     }).disableSelection();
+                 });
+             })
+             .catch(err => {
+                 console.log(err)
+             })
+
+         console.log(data)
      })
      .catch(err => {
          console.log(err)
      })
 
- //  var a = {
- //      'Todo': ['nhan dang chu viet tay', 'adc'],
- //      'Doing': ['deeplearning'],
- //      'Done': ['lap trinh C co ban']
- //  }
- //  for (i in a) {
- //      let todo = new todoList(root, i);
- //      a[i].forEach(element => {
- //          console.log(element)
- //          todo.input.value = element
- //          todo.addToDo()
- //      });
- //      todo.input.value = ''
- //  }
-
-
-
- //  let todoList1 = new todoList(root);
- //  let todoList2 = new todoList(root);
- //  let todoList3 = new todoList(root);
-
-
- //  todoList1.input.value = "Xin chào";
- //  todoList1.addToDo();
- //  todoList1.input.value = "Xinchào";
- //  todoList1.addToDo();
- //  todoList1.input.value = "Xin _chào";
- //  todoList1.addToDo();
 
  // check box
  $(document).ready(function() {

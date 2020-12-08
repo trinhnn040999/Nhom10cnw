@@ -21,6 +21,8 @@ function createBroad(broadName, id) {
     broads.append(a)
 }
 
+
+
 $.ajax({
         url: '/api',
         type: 'get'

@@ -33,5 +33,21 @@ app.get('/:id', function(req, res, next) {
     res.render('broad', { fullname: req.cookies.fullname })
 })
 
+app.post('/createTodo', function(req, res, next) {
+    var titleName = req.body.titleName
+    var id_broad = req.cookies.id_broad
+    var title = {
+        'id': id_broad,
+        'title': titleName
+    }
+    connection.query('INSERT INTO title SET ?', title, function(error, results, fields) {
+        if (error) throw error
+        else {
+            console.log('insert title success!')
+            res.render('broad', { fullname: req.cookies.fullname })
+        }
+    })
+})
+
 
 module.exports = app;

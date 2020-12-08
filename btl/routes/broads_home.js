@@ -49,66 +49,140 @@ app.get('/', function(req, res, next) {
 })
 
 
-app.get('/broad', function(req, res, next) {
-    connection.query("SELECT broad.id, broad.email, broad.broadName, title.title, title.id_card, " +
-        "card.text_card FROM broad, title, card WHERE broad.id = title.id " +
-        "and card.id_card = title.id_card and broad.email = ?",
-        req.cookies['email'], (error, results, fields) => {
-            var task = []
+// app.get('/broad', function(req, res, next) {
+//     connection.query("SELECT broad.id, broad.email, broad.broadName, title.title, title.id_card, " +
+//         "card.text_card FROM broad, title, card WHERE broad.id = title.id " +
+//         "and card.id_card = title.id_card and broad.email = ?",
+//         req.cookies['email'], (error, results, fields) => {
+//             if (results.length == 0) {
+//                 connection.query('SELECT broad.id, broad.email , broad.broadName, title.title FROM broad, title WHERE broad.id = title.id and broad.email = ? ',
+//                     req.cookies['email'], (error, results, fields) => {
+//                         let task = []
+//                         var same_id = {}
+//                         console.log(results)
 
-            var id = {}
-            var id_card = {}
-            results.forEach(element => {
-                id[element['id']] = 0
-                id_card[element['id_card']] = 0
-            });
+//                         results.forEach(element => {
+//                             same_id[element['id']] = 0
+//                         });
 
-            for (i in id) {
-                var same_id = results.filter(function(x) {
-                    return x['id'] == i
-                })
-                var obj = {}
-                obj['id'] = i
-                obj['email'] = same_id[0]['email']
-                obj['broadName'] = same_id[0]['broadName']
-                obj['title'] = []
+//                         for (var id_ in same_id) {
+//                             let obj_same_id = results.filter(function(x) {
+//                                 return x['id'] == id_
+//                             })
+//                             let obj = {}
+//                             obj['id'] = obj_same_id[0]['id']
+//                             obj['broadName'] = obj_same_id[0]['broadName']
+//                             obj['email'] = obj_same_id[0]['email']
+//                             obj['title'] = []
+//                             obj_same_id.forEach(element => {
+//                                 let obj_title = {}
+//                                 obj_title['title'] = element['title']
+//                                 obj_title['id_card'] = ''
+//                                 obj_title['text_card'] = []
 
-                for (j in id_card) {
-                    var same_id_card = same_id.filter(function(x) {
-                            return x['id_card'] == j
-                        })
-                        // console.log(j)
-                    var obj_title = {}
+//                                 obj['title'].push(obj_title)
+//                             });
+//                             task.push(obj)
+//                         }
+//                         task.forEach(element => {
+//                             if (element['id'] == req.cookies['id_broad']) {
+//                                 res.json(element)
+//                             }
+//                         });
+//                     });
+//             }
+//             var task = []
+//             var id = {}
+//             var id_card = {}
+//             results.forEach(element => {
+//                 id[element['id']] = 0
+//                 id_card[element['id_card']] = 0
+//             });
 
-                    try {
-                        obj_title['title'] = same_id_card[0]['title']
-                        obj_title['id_card'] = same_id_card[0]['id_card']
-                        obj_title['text_card'] = []
-                        same_id_card.forEach(element => {
-                            obj_title['text_card'].push(element['text_card'])
-                        });
-                        obj['title'].push(obj_title)
-                    } catch {
-                        continue
-                    }
-                }
-                task.push(obj)
-            }
-            task.forEach(element => {
-                if (element['id'] == req.cookies['id_broad']) {
-                    res.json(element)
-                }
-            });
-        });
-})
+//             for (i in id) {
+//                 var same_id = results.filter(function(x) {
+//                     return x['id'] == i
+//                 })
+//                 var obj = {}
+//                 obj['id'] = i
+//                 obj['email'] = same_id[0]['email']
+//                 obj['broadName'] = same_id[0]['broadName']
+//                 obj['title'] = []
+
+//                 for (j in id_card) {
+//                     var same_id_card = same_id.filter(function(x) {
+//                             return x['id_card'] == j
+//                         })
+//                         // console.log(j)
+//                     var obj_title = {}
+
+//                     try {
+//                         obj_title['title'] = same_id_card[0]['title']
+//                         obj_title['id_card'] = same_id_card[0]['id_card']
+//                         obj_title['text_card'] = []
+//                         same_id_card.forEach(element => {
+//                             obj_title['text_card'].push(element['text_card'])
+//                         });
+//                         obj['title'].push(obj_title)
+//                     } catch {
+//                         continue
+//                     }
+//                 }
+//                 task.push(obj)
+//             }
+//             task.forEach(element => {
+//                 if (element['id'] == req.cookies['id_broad']) {
+//                     res.json(element)
+//                 }
+//             });
+//         });
+// })
+
+// test api 
 
 app.get('/test', function(req, res, next) {
     connection.query("SELECT broad.id, broad.email, broad.broadName, title.title, title.id_card, " +
         "card.text_card FROM broad, title, card WHERE broad.id = title.id " +
         "and card.id_card = title.id_card and broad.email = ?",
         'nguyenthithuan1591999@gmail.com', (error, results, fields) => {
-            var task = []
+            if (results.length == 0) {
+                connection.query('SELECT broad.id, broad.email , broad.broadName, title.title FROM broad, title WHERE broad.id = title.id and broad.email = ? ',
+                    'nguyenthithuan1591999@gmail.com', (error, results, fields) => {
+                        let task = []
+                        var same_id = {}
+                        console.log(results)
 
+                        results.forEach(element => {
+                            same_id[element['id']] = 0
+                        });
+
+                        for (var id_ in same_id) {
+                            let obj_same_id = results.filter(function(x) {
+                                return x['id'] == id_
+                            })
+                            let obj = {}
+                            obj['id'] = obj_same_id[0]['id']
+                            obj['broadName'] = obj_same_id[0]['broadName']
+                            obj['email'] = obj_same_id[0]['email']
+                            obj['title'] = []
+                            obj_same_id.forEach(element => {
+                                let obj_title = {}
+                                obj_title['title'] = element['title']
+                                obj_title['id_card'] = ''
+                                obj_title['text_card'] = []
+
+                                obj['title'].push(obj_title)
+                            });
+                            task.push(obj)
+                        }
+                        task.forEach(element => {
+                            if (element['id'] == 1) {
+                                res.json(element)
+                            }
+                        });
+                    });
+            }
+            var task = []
             var id = {}
             var id_card = {}
             results.forEach(element => {
@@ -155,60 +229,73 @@ app.get('/test', function(req, res, next) {
         });
 })
 
-app.get('/test1', function(req, res, next) {
-    connection.query("SELECT broad.id, broad.email, broad.broadName, title.title, title.id_card, " +
-        "card.text_card FROM broad, title, card WHERE broad.id = title.id " +
-        "and card.id_card = title.id_card and broad.email = ?",
-        'nguyenquyphuc1591999@gmail.com', (error, results, fields) => {
+app.get('/broad', function(req, res, next) {
+    connection.query('SELECT broad.id, broad.email , broad.broadName, title.title, title.id_card FROM broad, title WHERE broad.id = title.id and broad.email = ? ',
+        req.cookies['email'], (error, results, fields) => {
+            let task = []
+            var same_id = {}
+            console.log(results)
 
-            console.log(results.length)
-
-            var task = []
-
-            var id = {}
-            var id_card = {}
             results.forEach(element => {
-                id[element['id']] = 0
-                id_card[element['id_card']] = 0
+                same_id[element['id']] = 0
             });
 
-            for (i in id) {
-                var same_id = results.filter(function(x) {
-                    return x['id'] == i
+            for (var id_ in same_id) {
+                let obj_same_id = results.filter(function(x) {
+                    return x['id'] == id_
                 })
-                var obj = {}
-                obj['id'] = i
-                obj['email'] = same_id[0]['email']
-                obj['broadName'] = same_id[0]['broadName']
+                let obj = {}
+                obj['id'] = obj_same_id[0]['id']
+                obj['broadName'] = obj_same_id[0]['broadName']
+                obj['email'] = obj_same_id[0]['email']
                 obj['title'] = []
 
-                for (j in id_card) {
-                    var same_id_card = same_id.filter(function(x) {
-                            return x['id_card'] == j
-                        })
-                        // console.log(j)
-                    var obj_title = {}
+                obj_same_id.forEach(element => {
+                    let obj_title = {}
+                    obj_title['title'] = element['title']
+                    obj_title['id_card'] = element['id_card']
 
-                    try {
-                        obj_title['title'] = same_id_card[0]['title']
-                        obj_title['id_card'] = same_id_card[0]['id_card']
-                        obj_title['text_card'] = []
-                        same_id_card.forEach(element => {
-                            obj_title['text_card'].push(element['text_card'])
-                        });
-                        obj['title'].push(obj_title)
-                    } catch {
-                        continue
-                    }
-                }
+                    obj_title['text_card'] = []
+
+                    obj['title'].push(obj_title)
+                });
+
                 task.push(obj)
             }
             task.forEach(element => {
-                if (element['id'] == 3) {
+                if (element['id'] == req.cookies['id_broad']) {
+                    let title = element['title']
+                    var id_cards = []
+                    title.forEach(element => {
+                        id_cards.push(element['id_card'])
+                    });
+                    res.cookie('id_cards', id_cards)
                     res.json(element)
                 }
             });
         });
 })
 
+app.get('/textCard', function(req, res, next) {
+
+    connection.query('SELECT * FROM card ',
+        req.cookies['email'], (error, results, fields) => {
+            var id_cards = req.cookies['id_cards']
+            let task = []
+            id_cards.forEach(element => {
+                let same_id_card = results.filter(function(x) {
+                    return x['id_card'] == element
+                })
+                let obj = {}
+                obj['id_card'] = element
+                obj['text_card'] = []
+                same_id_card.forEach(element => {
+                    obj['text_card'].push(element['text_card'])
+                });
+                task.push(obj)
+            });
+
+            res.json(task)
+        });
+})
 module.exports = app;
