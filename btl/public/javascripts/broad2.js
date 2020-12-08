@@ -61,6 +61,7 @@ class Card {
     this.state = {
       text: text,
       description: "Click to write a description...",
+      checklist:[],
       comments: [],
     };
     this.render();
@@ -120,7 +121,6 @@ class Card {
     this.commentsButton.className = "commentsButton btn-save";
     this.menuRight.className = "menu-right col-sm-4";
     this.menuLeft.className = "menu-left col-sm-8";
-    this.checklist.className = "checklist"
     this.menuChecklist.className = "menuChecklist";
     //Add inner Text
     this.menuRight.innerHTML = ` <nav>
@@ -206,7 +206,7 @@ class Card {
     //Append
     this.menu.append(this.menuLeft);
     this.menu.append(this.menuRight);
-
+    this.menuLeft.append(this.menuChecklist);
     this.menuLeft.append(this.menuTitle);
     this.menuLeft.append(this.menuDescription);
     this.menuLeft.append(this.commentsInput);
@@ -233,7 +233,7 @@ class Card {
     );
 
     this.renderComments();
-
+    this.renderChecklist();
     $(document).ready(function () {
       $("#searchUser").on("keyup", function () {
         var value = $(this).val().toLowerCase();
@@ -241,10 +241,12 @@ class Card {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
       });
-
+// mới chỉnh chỗ này chú ý
       $("#addChecklist").click(function () {
         if ($("#checklistInput").val().trim() != "") {
-          alert("Handler for .click() called.");
+          this.state.checklist.push($("#checklistInput").val());
+          this.renderChecklist();
+          $("#checklistInput").val("");
         }
       });
     });
@@ -277,6 +279,24 @@ class Card {
     let currentCommentsDOM = Array.from(this.menuComments.childNodes);
     currentCommentsDOM.forEach((commentDOM) => {
       commentDOM.remove();
+    });
+    this.state.comments.forEach((comment) => {
+      // new Comment(comment, this.menuComments, this);
+      new Comment(
+        comment,
+        this.menuComments,
+        this,
+        "Lê Đình Tài",
+        "12/12/2020"
+      );
+    });  
+  }
+
+  //Chỉnh comment
+  renderChecklist() {
+    let currentChecklistDOM = Array.from(this.menuChecklist.childNodes);
+    currentChecklistDOM.forEach((item) => {
+      item.remove();
     });
     this.state.comments.forEach((comment) => {
       // new Comment(comment, this.menuComments, this);
@@ -411,16 +431,30 @@ class Checklist{
     this.place = place;
     this.card = card;
     this.render();
+
   }
   render() {
     this.div = document.createElement("div");
     this.title = document.createElement("div");
     this.div.className = "checklist";
-    this.processBar= `
+    this.progressBar= `
     <h3 class="title-checklist">`+this.title+`/h3>
     <div class="progressbar-container">
       <div class="progressbar-bar"></div>
       <div class="progressbar-label"></div>
+    </div>
+    `;
+    this.checkbox = `
+    <div class="dropdown">
+      <button type="button"  id="btnAddCheckbox" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+        Add item
+      </button>
+      <div class="dropdown-menu">
+          <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+            <input type="text" class="form-control" placeholder="title item" id="checkboxInput">
+            <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add an item</button>
+          </div>
+      </div>
     </div>
     `;
     this.buttonAddCheck = document.createElement("button");
