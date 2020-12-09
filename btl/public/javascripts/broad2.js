@@ -52,7 +52,6 @@ class todoList {
     this.todoListElement.append(this.button);
     this.todoListElement.append(this.div);
     this.todoListElement.classList.add("todoList");
-    this.todoListElement.id ="2";
   }
 }
 
@@ -63,7 +62,7 @@ class Card {
     this.state = {
       text: text,
       description: "Click to write a description...",
-      checklist: ["xin chào","alo"],
+      checklist: ["xin chào"],
       comments: [],
     };
     this.render();
@@ -111,9 +110,12 @@ class Card {
     this.menuChecklist = document.createElement("div");
     this.menuLeft = document.createElement("div");
     this.menuRight = document.createElement("div");
+    this.progressBar = document.createElement("div");
     this.checklist = document.createElement("div");
+    this.formCheckbox = document.createElement("form");
+    this.ulCheckbox = document.createElement("ul");
     //Add class names
-    this.menuChecklist.className = "menuChecklist";
+    this.menuChecklist.className = "menuChecklist checklist";
     this.menu.className = "menu row";
     this.menuContainer.className = "menuContainer";
     this.menuTitle.className = "menuTitle";
@@ -124,6 +126,11 @@ class Card {
     this.menuRight.className = "menu-right col-sm-4";
     this.menuLeft.className = "menu-left col-sm-8";
     //Add inner Text
+    this.progressBar.innerHTML = `
+      <div class="progressbar-container">
+        <div class="progressbar-bar"></div>
+        <div class="progressbar-label"></div>
+      </div> `;
     this.menuRight.innerHTML = ` <nav>
         <ul>
             <li class="title-select">
@@ -153,8 +160,8 @@ class Card {
                 </button>
               <div class="dropdown-menu">
                   <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                      <input type="text" class="form-control" placeholder="Title..." id="checklistInput">
-                      <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addChecklist">Add checklist</button>
+                      <input type="text" class="form-control" placeholder="Title..." id="checkboxInput">
+                      <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add checklist</button>
                   </div>
               </div>
             </div>
@@ -205,16 +212,18 @@ class Card {
     });
 
     //Append
+
     this.menu.append(this.menuLeft);
     this.menu.append(this.menuRight);
     this.menuLeft.append(this.menuTitle);
+    this.menuLeft.append(this.progressBar);
     this.menuLeft.append(this.menuDescription);
     this.menuLeft.append(this.menuChecklist);
     this.menuLeft.append(this.commentsInput);
     this.menuLeft.append(this.commentsButton);
     this.menuLeft.append(this.menuComments);
-    // this.menuChecklist.append(this.checklist);
-
+    this.formCheckbox.append(this.ulCheckbox);
+    this.menuChecklist.append(this.formCheckbox);
     this.menuContainer.append(this.menu);
     root.append(this.menuContainer);
 
@@ -244,37 +253,94 @@ class Card {
       });
       // mới chỉnh chỗ này chú ý
     });
-    this.btnChecklist = document.getElementById("addChecklist");
-    this.checklistInput = document.getElementById("checklistInput");
+    this.btnChecklist = document.getElementById("addCheckbox");
+    this.checklistInput = document.getElementById("checkboxInput");
 
     this.btnChecklist.addEventListener("click", () => {
       if (this.checklistInput.value.trim() != "") {
         this.state.checklist.push(this.checklistInput.value);
         this.renderChecklist();
         this.checklistInput.value = "";
-        this.btnCheckbox = document.getElementById("addCheckbox");
-        this.checkboxInput = document.getElementById("checkboxInput");
+
+        $(document).ready(function () {
+          // get box count
+          var count = 0;
+          var checked = 0;
+    
+          function countBoxes() {
+            count = $("input[type='checkbox']").length;
+            console.log(count);
+          }
+    
+          countBoxes();
+          $(":checkbox").click(countBoxes);
+          // count checks
+          function countChecked() {
+            checked = $("input:checked").length;
+    
+            var percentage = parseInt((checked / count) * 100, 10);
+            $(".progressbar-bar").progressbar({
+              value: percentage,
+            });
+            $(".progressbar-label").text(percentage + "%");
+          }
+    
+          countChecked();
+          $(":checkbox").click(countChecked);
+        });
+
       }
     });
     this.btnCheckbox = document.getElementById("addCheckbox");
     this.checkboxInput = document.getElementById("checkboxInput");
     function checkboxCard(params) {
-      return `
+      return (
+        `
       <li class="row">
         <input type="checkbox" name="box1" class="col-sm-1"/>
-        <p class="col-sm-6" style="margin-left: -20px;">`+params+`</p>
+        <p class="col-sm-6" style="margin-left: -20px;">` +
+        params +
+        `</p>
       </li>
-      `;
+      `
+      );
     }
     // $("#addCheckbox").onclick = function (params) {
-      
+
     // }
 
-    this.btnCheckbox.addEventListener("click", () => {
-      if (this.checkboxInput.value != "") {
-        $("form ul").append(checkboxCard(this.checkboxInput.value));
-        this.checkboxInput.value = "";
+    // this.btnCheckbox.addEventListener("click", () => {
+    //   if (this.checkboxInput.value != "") {
+    //     $("form ul").append(checkboxCard(this.checkboxInput.value));
+    //     this.checkboxInput.value = "";
+    //   }
+    // });
+    // check box
+    $(document).ready(function () {
+      // get box count
+      var count = 0;
+      var checked = 0;
+
+      function countBoxes() {
+        count = $("input[type='checkbox']").length;
+        console.log(count);
       }
+
+      countBoxes();
+      $(":checkbox").click(countBoxes);
+      // count checks
+      function countChecked() {
+        checked = $("input:checked").length;
+
+        var percentage = parseInt((checked / count) * 100, 10);
+        $(".progressbar-bar").progressbar({
+          value: percentage,
+        });
+        $(".progressbar-label").text(percentage + "%");
+      }
+
+      countChecked();
+      $(":checkbox").click(countChecked);
     });
     // due time
     $(function () {
@@ -319,13 +385,13 @@ class Card {
 
   //Chỉnh comment
   renderChecklist() {
-    let currentChecklistDOM = Array.from(this.menuChecklist.childNodes);
+    let currentChecklistDOM = Array.from(this.ulCheckbox.childNodes);
     currentChecklistDOM.forEach((item) => {
       item.remove();
     });
     this.state.checklist.forEach((checkbox) => {
       // new Comment(comment, this.menuComments, this);
-      new Checklist(checkbox, this.menuChecklist, this);
+      new Checklist(checkbox, this.ulCheckbox, this);
     });
   }
 }
@@ -451,19 +517,16 @@ class Checklist {
     this.render();
   }
   render() {
-    this.div = document.createElement("div");
-    this.div.className = "checklist";
-    var progressBar =
-      `
-    <h5 class="title-checklist">` +
+    this.li = document.createElement("li");
+    this.li.className = "row";
+    this.li.innerHTML = `
+      <input type="checkbox" name="box1" class="col-sm-1"/>
+      <p class="col-sm-6" style="margin-left: -20px;">` +
       this.title +
-      `</h5>
-    <div class="progressbar-container">
-      <div class="progressbar-bar"></div>
-      <div class="progressbar-label"></div>
-    </div>
+      `</p>
     `;
-    var checkbox = `
+    console.log(this.li)
+    var checkbox1 = `
     <div class="dropdown">
       <button type="button" id="btnAddCheckbox" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
         Add item
@@ -477,20 +540,17 @@ class Checklist {
     </div>
     `;
     // checkbox of checklist
-    
-    this.formCheckbox = document.createElement("form");
-    this.ulCheckbox = document.createElement("ul");
-
-    this.div.innerHTML = progressBar + checkbox;
-    this.div.append(this.formCheckbox);
-    // this.div.append(progressBar.innerHTML,checkbox.innerHTML);
-    this.buttonAddCheck = document.createElement("button");
-    this.formCheckbox.append(this.ulCheckbox);
-
-    
-    this.place.append(this.div);
+    // this.div = document.createElement("div");
+    // this.div.className = "checklist";
+    // this.formCheckbox = document.createElement("form");
+    // this.ulCheckbox = document.createElement("ul");
+    // this.ulCheckbox.innerHTML = liCheckbox;
+    // this.formCheckbox.append(this.ulCheckbox);
+    // this.div.append(this.formCheckbox);
+    this.place.append(this.li);
   }
 }
+
 //-------------main------------
 
 let addTodoListInput = document.getElementById("addTodoListInput");
