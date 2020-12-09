@@ -54,10 +54,6 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/', function(req, res) {
-    res.clearCookie('username')
-    res.clearCookie('email')
-    res.clearCookie('sdt')
-    res.clearCookie('fullname')
     res.render('index', {
         username: '10-DTP helps teams be more collaborative and do more' +
             '10-DTP boards, lists, and cards enable fun, flexible, and worthy project organizations to team and prioritize project'
@@ -73,10 +69,10 @@ app.get('/gmail', function(req, res) {
             console.log(results.length)
             if (results.length > 0) {
                 //tai khoan da ton tai
-                res.cookie('username', results[0]['username'])
-                res.cookie('email', results[0]['email'])
-                res.cookie('sdt', results[0]['sdt'])
-                res.cookie('fullname', results[0]['fullname'])
+                res.cookie('username', results[0]['username'], {expire: 900000 + Date.now()});
+                res.cookie('email', results[0]['email'], {expire: 900000 + Date.now()});
+                res.cookie('sdt', results[0]['sdt'], {expire: 900000 + Date.now()});
+                res.cookie('fullname', results[0]['fullname'], {expire: 900000 + Date.now()});
                 res.render('home', { fullname: results[0]['fullname'] })
             } else {
                 // tai khoan chua ton tai

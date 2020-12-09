@@ -30,13 +30,13 @@ app.post('/', function(req, res) {
     if (username && password) {
         connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
             if (error) throw error;
-            if (results.length > 0) {
+            else if (results.length > 0) {
                 console.log(username)
                     // luu username va email vao cookie
-                res.cookie('username', results[0]['username']);
-                res.cookie('email', results[0]['email']);
-                res.cookie('sdt', results[0]['sdt']);
-                res.cookie('fullname', results[0]['fullname']);
+                res.cookie('username', results[0]['username'], {expire: 900000 + Date.now()});
+                res.cookie('email', results[0]['email'], {expire: 900000 + Date.now()});
+                res.cookie('sdt', results[0]['sdt'], {expire: 900000 + Date.now()});
+                res.cookie('fullname', results[0]['fullname'], {expire: 900000 + Date.now()});
                 res.render('home', { fullname: results[0]['fullname'] });
             } else {
                 res.render('login', { thongBao: 'Error login, please try again', color: 'red' })
