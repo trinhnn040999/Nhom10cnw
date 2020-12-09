@@ -54,10 +54,15 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/', function(req, res) {
-    res.render('index', {
-        username: '10-DTP helps teams be more collaborative and do more' +
-            '10-DTP boards, lists, and cards enable fun, flexible, and worthy project organizations to team and prioritize project'
-    });
+    if(req.cookies.username === undefined){
+        res.render('index', {
+            username: '10-DTP helps teams be more collaborative and do more' +
+                '10-DTP boards, lists, and cards enable fun, flexible, and worthy project organizations to team and prioritize project'
+        });
+    }
+    else{
+        res.redirect("/home");
+    }
 });
 
 
@@ -85,7 +90,12 @@ app.get('/gmail', function(req, res) {
 });
 
 app.get('/home', function(req, res) {
-    res.render('home', { fullname: req.cookies.fullname })
+    if(req.cookies.username === undefined){
+        res.redirect("/");
+    }
+    else{
+        res.render('home', { fullname: req.cookies.fullname });
+    }
 });
 
 // xử lý phần đăng nhập bằng facebook
