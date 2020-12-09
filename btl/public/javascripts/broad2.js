@@ -2,6 +2,7 @@ let root = document.getElementById("root");
 
 class todoList {
   constructor(place, title = "List") {
+    // this.id =id;
     this.place = place;
     this.title = title;
     this.cardArray = [];
@@ -51,6 +52,7 @@ class todoList {
     this.todoListElement.append(this.button);
     this.todoListElement.append(this.div);
     this.todoListElement.classList.add("todoList");
+    this.todoListElement.id ="2";
   }
 }
 
@@ -61,7 +63,7 @@ class Card {
     this.state = {
       text: text,
       description: "Click to write a description...",
-      checklist:[],
+      checklist: ["xin chào","alo"],
       comments: [],
     };
     this.render();
@@ -121,7 +123,6 @@ class Card {
     this.commentsButton.className = "commentsButton btn-save";
     this.menuRight.className = "menu-right col-sm-4";
     this.menuLeft.className = "menu-left col-sm-8";
-    this.menuChecklist.className = "menuChecklist";
     //Add inner Text
     this.menuRight.innerHTML = ` <nav>
         <ul>
@@ -206,9 +207,9 @@ class Card {
     //Append
     this.menu.append(this.menuLeft);
     this.menu.append(this.menuRight);
-    this.menuLeft.append(this.menuChecklist);
     this.menuLeft.append(this.menuTitle);
     this.menuLeft.append(this.menuDescription);
+    this.menuLeft.append(this.menuChecklist);
     this.menuLeft.append(this.commentsInput);
     this.menuLeft.append(this.commentsButton);
     this.menuLeft.append(this.menuComments);
@@ -241,16 +242,40 @@ class Card {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
       });
-// mới chỉnh chỗ này chú ý
-      $("#addChecklist").click(function () {
-        if ($("#checklistInput").val().trim() != "") {
-          this.state.checklist.push($("#checklistInput").val());
-          this.renderChecklist();
-          $("#checklistInput").val("");
-        }
-      });
+      // mới chỉnh chỗ này chú ý
     });
+    this.btnChecklist = document.getElementById("addChecklist");
+    this.checklistInput = document.getElementById("checklistInput");
 
+    this.btnChecklist.addEventListener("click", () => {
+      if (this.checklistInput.value.trim() != "") {
+        this.state.checklist.push(this.checklistInput.value);
+        this.renderChecklist();
+        this.checklistInput.value = "";
+        this.btnCheckbox = document.getElementById("addCheckbox");
+        this.checkboxInput = document.getElementById("checkboxInput");
+      }
+    });
+    this.btnCheckbox = document.getElementById("addCheckbox");
+    this.checkboxInput = document.getElementById("checkboxInput");
+    function checkboxCard(params) {
+      return `
+      <li class="row">
+        <input type="checkbox" name="box1" class="col-sm-1"/>
+        <p class="col-sm-6" style="margin-left: -20px;">`+params+`</p>
+      </li>
+      `;
+    }
+    // $("#addCheckbox").onclick = function (params) {
+      
+    // }
+
+    this.btnCheckbox.addEventListener("click", () => {
+      if (this.checkboxInput.value != "") {
+        $("form ul").append(checkboxCard(this.checkboxInput.value));
+        this.checkboxInput.value = "";
+      }
+    });
     // due time
     $(function () {
       var sd = new Date(),
@@ -289,7 +314,7 @@ class Card {
         "Lê Đình Tài",
         "12/12/2020"
       );
-    });  
+    });
   }
 
   //Chỉnh comment
@@ -298,17 +323,10 @@ class Card {
     currentChecklistDOM.forEach((item) => {
       item.remove();
     });
-    this.state.comments.forEach((comment) => {
+    this.state.checklist.forEach((checkbox) => {
       // new Comment(comment, this.menuComments, this);
-      new Comment(
-        comment,
-        this.menuComments,
-        this,
-        "Lê Đình Tài",
-        "12/12/2020"
-      );
+      new Checklist(checkbox, this.menuChecklist, this);
     });
-    
   }
 }
 // để chỉnh sửa khi click vào text
@@ -425,28 +443,29 @@ class Comment {
   }
 }
 
-class Checklist{
-  constructor(title, place,card) {
+class Checklist {
+  constructor(title, place, card) {
     this.title = title;
     this.place = place;
     this.card = card;
     this.render();
-
   }
   render() {
     this.div = document.createElement("div");
-    this.title = document.createElement("div");
     this.div.className = "checklist";
-    this.progressBar= `
-    <h3 class="title-checklist">`+this.title+`/h3>
+    var progressBar =
+      `
+    <h5 class="title-checklist">` +
+      this.title +
+      `</h5>
     <div class="progressbar-container">
       <div class="progressbar-bar"></div>
       <div class="progressbar-label"></div>
     </div>
     `;
-    this.checkbox = `
+    var checkbox = `
     <div class="dropdown">
-      <button type="button"  id="btnAddCheckbox" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+      <button type="button" id="btnAddCheckbox" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
         Add item
       </button>
       <div class="dropdown-menu">
@@ -457,18 +476,19 @@ class Checklist{
       </div>
     </div>
     `;
+    // checkbox of checklist
+    
+    this.formCheckbox = document.createElement("form");
+    this.ulCheckbox = document.createElement("ul");
+
+    this.div.innerHTML = progressBar + checkbox;
+    this.div.append(this.formCheckbox);
+    // this.div.append(progressBar.innerHTML,checkbox.innerHTML);
     this.buttonAddCheck = document.createElement("button");
-    this.div.innerHTML = this.formatChecklist();
+    this.formCheckbox.append(this.ulCheckbox);
+
+    
     this.place.append(this.div);
-  }
-
-
-  formatChecklist() {
-    return (
-      `
-
-      `
-    );
   }
 }
 //-------------main------------
@@ -499,16 +519,15 @@ addTodoListButton.addEventListener("click", () => {
 
 // todoList1.input.value = "Xin chào";
 // todoList1.addToDo();
- // check box
- $(document).ready(function() {
-
+// check box
+$(document).ready(function () {
   // get box count
   var count = 0;
   var checked = 0;
 
   function countBoxes() {
-      count = $("input[type='checkbox']").length;
-      console.log(count);
+    count = $("input[type='checkbox']").length;
+    console.log(count);
   }
 
   countBoxes();
@@ -517,13 +536,13 @@ addTodoListButton.addEventListener("click", () => {
   // count checks
 
   function countChecked() {
-      checked = $("input:checked").length;
+    checked = $("input:checked").length;
 
-      var percentage = parseInt(((checked / count) * 100), 10);
-      $(".progressbar-bar").progressbar({
-          value: percentage
-      });
-      $(".progressbar-label").text(percentage + "%");
+    var percentage = parseInt((checked / count) * 100, 10);
+    $(".progressbar-bar").progressbar({
+      value: percentage,
+    });
+    $(".progressbar-label").text(percentage + "%");
   }
 
   countChecked();

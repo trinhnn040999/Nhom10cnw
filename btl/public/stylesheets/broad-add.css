@@ -111,7 +111,7 @@ button {
   padding: 0.5em;
   font-size: 1.1em;
 }
-
+.checklist,
 .comment {
   background-color: white;
   border: 1px solid #ccc;
@@ -162,9 +162,11 @@ input[type="checkbox"] {
 .ready {
   font-size: 1.5em;
 }
+
 .ui-progressbar-value {
   background:linear-gradient(to right,rgb(183, 194, 88), rgb(235, 123, 58),rgb(243, 82, 7));
 }
+
 .progressbar-container {
   position: relative;
   margin-left: 70px;
