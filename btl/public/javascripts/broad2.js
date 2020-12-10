@@ -1,30 +1,30 @@
 function checklist() {
-          $(document).ready(function () {
-          // get box count
-          var count = 0;
-          var checked = 0;
-    
-          function countBoxes() {
-            count = $("input[type='checkbox']").length;
-            console.log(count);
-          }
-    
-          countBoxes();
-          $(":checkbox").click(countBoxes);
-          // count checks
-          function countChecked() {
-            checked = $("input:checked").length;
-    
-            var percentage = parseInt((checked / count) * 100, 10);
-            $(".progressbar-bar").progressbar({
-              value: percentage,
-            });
-            $(".progressbar-label").text(percentage + "%");
-          }
-    
-          countChecked();
-          $(":checkbox").click(countChecked);
-        });
+  $(document).ready(function () {
+    // get box count
+    var count = 0;
+    var checked = 0;
+
+    function countBoxes() {
+      count = $("input[type='checkbox']").length;
+      console.log(count);
+    }
+
+    countBoxes();
+    $(":checkbox").click(countBoxes);
+    // count checks
+    function countChecked() {
+      checked = $("input:checked").length;
+
+      var percentage = parseInt((checked / count) * 100, 10);
+      $(".progressbar-bar").progressbar({
+        value: percentage,
+      });
+      $(".progressbar-label").text(percentage + "%");
+    }
+
+    countChecked();
+    $(":checkbox").click(countChecked);
+  });
 }
 
 let root = document.getElementById("root");
@@ -34,6 +34,9 @@ class todoList {
     // this.id =id;
     this.place = place;
     this.title = title;
+    this.state = {
+      text: title
+    };
     this.cardArray = [];
 
     this.render();
@@ -44,15 +47,10 @@ class todoList {
     this.cardArray.push(new Card(text, this.div, this));
   }
 
-  render() {
-    this.createToDoListElement();
-    this.place.append(this.todoListElement);
-  }
-
   createToDoListElement() {
     //Create elements
     this.h2 = document.createElement("h2");
-    this.h2.innerText = this.title;
+    // this.h2.innerText = this.state.text;
     this.input = document.createElement("input");
     this.input.classList.add("comment");
     this.button = document.createElement("button");
@@ -81,14 +79,19 @@ class todoList {
     this.todoListElement.append(this.button);
     this.todoListElement.append(this.div);
     this.todoListElement.classList.add("todoList");
+  }
+
+  render() {
+    this.createToDoListElement();
+    this.place.append(this.todoListElement);
 
     this.editableTitle = new EditableText(
-      this.title,
-      "h2",
+      this.state.text,
       this.h2,
       this,
-      "text",
-      "input"
+      "title",
+      "input",
+      "h2"
     );
   }
 }
@@ -165,70 +168,69 @@ class Card {
     this.menuLeft.className = "menu-left col-sm-8";
     //Add inner Text
     this.progressBar.innerHTML = `
-      <div class="progressbar-container">
-        <div class="progressbar-bar"></div>
-        <div class="progressbar-label"></div>
-      </div> `;
+<div class="progressbar-container">
+<div class="progressbar-bar"></div>
+<div class="progressbar-label"></div>
+</div> `;
     this.menuRight.innerHTML = ` <nav>
-        <ul>
-            <li class="title-select">
-                ADD TO CARD
-            </li>
-            <li class="select-menu">
-            <div class="dropdown">
-            <button type="button" class="btn btn-light dropdown-toggle" id="btn-member" data-toggle="dropdown">
-            <i class="fas fa-user"></i> Members
-            </button>
-            <div class="dropdown-menu" style= "width :100%;">
-                    <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                    <input type="text" class="form-control" placeholder="Search members" id="searchUser">
-                    </div> 
-                    <ul id="users">
-                      <li class="dropdown-item">Link 1</li>
-                      <li class="dropdown-item">Siêu nhân đỏ</li>
-                      <li class="dropdown-item">CHuối gay</li>
-                    </ul>         
-            </div>
+<ul>
+    <li class="title-select">
+        ADD TO CARD
+    </li>
+    <li class="select-menu">
+    <div class="dropdown">
+    <button type="button" class="btn btn-light dropdown-toggle" id="btn-member" data-toggle="dropdown">
+    <i class="fas fa-user"></i> Members
+    </button>
+    <div class="dropdown-menu" style= "width :100%;">
+            <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+            <input type="text" class="form-control" placeholder="Search members" id="searchUser">
+            </div> 
+            <ul id="users">
+              <li class="dropdown-item">Link 1</li>
+              <li class="dropdown-item">Siêu nhân đỏ</li>
+              <li class="dropdown-item">CHuối gay</li>
+            </ul>         
+    </div>
+  </div>
+    </li>
+    <li class="select-menu">
+    <div class="dropdown">
+        <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+        <i class="fas fa-calendar-check"></i> Checklist
+        </button>
+      <div class="dropdown-menu">
+          <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+              <input type="text" class="form-control" placeholder="Title..." id="checkboxInput">
+              <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add checklist</button>
           </div>
-            </li>
-            <li class="select-menu">
-            <div class="dropdown">
-                <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                <i class="fas fa-calendar-check"></i> Checklist
-                </button>
-              <div class="dropdown-menu">
-                  <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                      <input type="text" class="form-control" placeholder="Title..." id="checkboxInput">
-                      <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add checklist</button>
-                  </div>
-              </div>
-            </div>
-            </li>
-            <li class="select-menu">
-            <div class="dropdown">
-              <button type="button" class="btn btn-light dropdown-toggle" id="btn-due" data-toggle="dropdown">
-                  <i class="far fa-calendar-alt"></i> Due Date
-              </button>
-              <div class="dropdown-menu">
-                  <form id="form" name="form" class="form-inline">
-                      <ul style="flex: 1 0 220px; text-align: left;">
-                          <li>
-                              <label for="startDate" style="justify-content: left; margin-left: 10px;">Start Date:</label>
-                              <input id="startDate" name="startDate" type="text" class="form-control" style="margin:10px; " />
-                          </li>
-                          <li>
-                              <label for="endDate" style="justify-content: left; margin-left: 10px;">End Date:</label>
-                              <input id="endDate" name="endDate" type="text" class="form-control" style="margin: 10px;" />
-                          </li>
-                      </ul>
-                      <button type="submit" class="btn btn-success" style="text-align: center; margin: 10px;">Ok</button>
-                  </form>
-              </div>
-            </div>
-            </li>
-
-        </ul>
-    </nav>`;
+      </div>
+    </div>
+    </li>
+    <li class="select-menu">
+    <div class="dropdown">
+      <button type="button" class="btn btn-light dropdown-toggle" id="btn-due" data-toggle="dropdown">
+          <i class="far fa-calendar-alt"></i> Due Date
+      </button>
+      <div class="dropdown-menu">
+          <form id="form" name="form" class="form-inline">
+              <ul style="flex: 1 0 220px; text-align: left;">
+                  <li>
+                      <label for="startDate" style="justify-content: left; margin-left: 10px;">Start Date:</label>
+                      <input id="startDate" name="startDate" type="text" class="form-control" style="margin:10px; " />
+                  </li>
+                  <li>
+                      <label for="endDate" style="justify-content: left; margin-left: 10px;">End Date:</label>
+                      <input id="endDate" name="endDate" type="text" class="form-control" style="margin: 10px;" />
+                  </li>
+              </ul>
+              <button type="submit" class="btn btn-success" style="text-align: center; margin: 10px;">Ok</button>
+          </form>
+      </div>
+    </div>
+    </li>
+</ul>
+</nav>`;
 
     this.commentsButton.innerText = "Add";
     this.commentsInput.placeholder = "Write a comment...";
@@ -267,19 +269,19 @@ class Card {
 
     this.editableDescription = new EditableText(
       this.state.description,
-      "p",
       this.menuDescription,
       this,
       "description",
-      "textarea"
+      "textarea",
+      "p"
     );
     this.editableTitle = new EditableText(
       this.state.text,
-      "h5",
       this.menuTitle,
       this,
       "text",
-      "input"
+      "input",
+      "h5"
     );
 
     this.renderComments();
@@ -306,29 +308,28 @@ class Card {
         //   // get box count
         //   var count = 0;
         //   var checked = 0;
-    
+
         //   function countBoxes() {
         //     count = $("input[type='checkbox']").length;
         //     console.log(count);
         //   }
-    
+
         //   countBoxes();
         //   $(":checkbox").click(countBoxes);
         //   // count checks
         //   function countChecked() {
         //     checked = $("input:checked").length;
-    
+
         //     var percentage = parseInt((checked / count) * 100, 10);
         //     $(".progressbar-bar").progressbar({
         //       value: percentage,
         //     });
         //     $(".progressbar-label").text(percentage + "%");
         //   }
-    
+
         //   countChecked();
         //   $(":checkbox").click(countChecked);
         // });
-
       }
     });
     this.btnCheckbox = document.getElementById("addCheckbox");
@@ -336,13 +337,13 @@ class Card {
     function checkboxCard(params) {
       return (
         `
-      <li class="row">
-        <input type="checkbox" name="box1" class="col-sm-1"/>
-        <p class="col-sm-6" style="margin-left: -20px;">` +
+<li class="row">
+<input type="checkbox" name="box1" class="col-sm-1"/>
+<p class="col-sm-6" style="margin-left: -20px;">` +
         params +
         `</p>
-      </li>
-      `
+</li>
+`
       );
     }
     // $("#addCheckbox").onclick = function (params) {
@@ -437,28 +438,26 @@ class Card {
 }
 // để chỉnh sửa khi click vào text
 class EditableText {
-  constructor(text,element="p",place, card, property, typeOfInput) {
+  constructor(text, place, card, property, typeOfInput, element = "p") {
     this.text = text;
+    this.elementContainer = element;
     this.place = place;
     this.card = card;
-    this.element =element;
     this.property = property;
     this.typeOfInput = typeOfInput;
     this.render();
   }
 
   render() {
-    
     this.div = document.createElement("div");
-    this.elementContainer = document.createElement(this.element);
+    this.p = document.createElement(this.elementContainer);
+    this.p.innerText = this.text;
 
-    this.elementContainer.innerText = this.text;
-
-    this.elementContainer.addEventListener("click", () => {
+    this.p.addEventListener("click", () => {
       this.showEditableTextArea.call(this);
     });
 
-    this.div.append(this.elementContainer);
+    this.div.append(this.p);
     this.place.append(this.div);
   }
 
@@ -468,18 +467,18 @@ class EditableText {
     this.input = document.createElement(this.typeOfInput);
     this.saveButton = document.createElement("button");
 
-    this.elementContainer.remove();
+    this.p.remove();
     this.input.value = oldText;
     this.saveButton.innerText = "Save";
     this.saveButton.className = "btn-save";
     this.input.classList.add("comment");
 
     this.saveButton.addEventListener("click", () => {
+      debugger
       this.text = this.input.value;
       this.card.state[this.property] = this.input.value;
-      console.log(this.card.state[this.property])
       if (this.property == "text") {
-        this.card.elementContainer.innerText = this.input.value;
+        this.card.p.innerText = this.input.value;
       }
       this.div.remove();
       this.render();
@@ -532,22 +531,22 @@ class Comment {
   formatComment() {
     return (
       `<div class="media">
-        <img class="round mr-3 mt-3" width="30" height="30" avatar="` +
+<img class="round mr-3 mt-3" width="30" height="30" avatar="` +
       this.user +
       `">
-        <div class="media-body">
-            <h6>` +
+<div class="media-body">
+    <h6>` +
       this.user +
       `<small><i>   ` +
       this.date +
       `</i></small></h6>
-            <p>
-            ` +
+    <p>
+    ` +
       this.text +
       `
-            </p>
-        </div>
-    </div>`
+    </p>
+</div>
+</div>`
     );
   }
 }
@@ -562,12 +561,13 @@ class Checklist {
   render() {
     this.li = document.createElement("li");
     this.li.className = "row";
-    this.li.innerHTML = `
-      <input type="checkbox" name="box1" class="col-sm-1"/>
-      <p class="col-sm-11" style="margin-left: -20px;">` +
+    this.li.innerHTML =
+      `
+<input type="checkbox" name="box1" class="col-sm-1"/>
+<p class="col-sm-11" style="margin-left: -20px;">` +
       this.title +
       `</p>
-    `;
+`;
     this.place.append(this.li);
   }
 }
@@ -593,14 +593,12 @@ addTodoListButton.addEventListener("click", () => {
     });
   }
 });
-for (let i =0 ; i<10;i++){
+for (let i = 0; i < 10; i++) {
   let todoList1 = new todoList(root);
-  todoList1.input.value = "Xin chào"+i;
-  todoList1.addToDo();
 }
 
-
-
+// todoList1.input.value = "Xin chào";
+// todoList1.addToDo();
 // check box
 $(document).ready(function () {
   // get box count
