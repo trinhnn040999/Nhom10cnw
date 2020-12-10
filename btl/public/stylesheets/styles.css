@@ -256,8 +256,6 @@ a.white {
     cursor: text;
     transition: all 0.2s ease;
 }
-
-
 /* IE10+ hack to solve lower label text position compared to the rest of the browsers */
 
 @media screen and (-ms-high-contrast: active),
@@ -300,7 +298,6 @@ screen and (-ms-high-contrast: none) {
     padding-bottom: 0.5rem;
     height: 3rem;
 }
-
 
 /* IE10+ hack to solve lower label text position compared to the rest of the browsers */
 
