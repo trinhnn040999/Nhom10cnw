@@ -438,7 +438,6 @@ class EditableText {
   render() {
     this.div = document.createElement("div");
     this.p = document.createElement("p");
-
     this.p.innerText = this.text;
 
     this.p.addEventListener("click", () => {
@@ -489,7 +488,7 @@ class EditableText {
 
     this.div.append(this.input);
 
-    if (this.typeOfInput == "textarea") {
+    if (this.typeOfInput == "textarea" || this.typeOfInput == "input") {
       this.div.append(this.saveButton);
     }
 
@@ -581,8 +580,6 @@ addTodoListButton.addEventListener("click", () => {
 });
 for (let i =0 ; i<10;i++){
 let todoList1 = new todoList(root);
-let todoList2 = new todoList(root);
-let todoList3 = new todoList(root);
 }
 
 
