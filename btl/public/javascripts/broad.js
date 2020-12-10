@@ -368,8 +368,8 @@
              })
              .then(data1 => {
 
-                 console.log('card')
-                 console.log(data1)
+                 //  console.log('card')
+                 //  console.log(data1)
 
                  var data_task = data
                      // dua textCard vao data_task['title']
@@ -385,20 +385,14 @@
 
                  var title = data_task['title']
 
-                 console.log('data_task')
-                 console.log(data_task)
+                 //  console.log('data_task')
+                 //  console.log(data_task)
                  title.forEach(element => {
                      // tao cac todolist
                      let todo = new todoList(root, element['title'], element['id_card'])
 
                      try {
-                         //  var text_card = element['text_card']
-                         //  text_card.forEach(element => {
-                         //      todo.input.value = element
-                         //      todo.addToDo()
-                         //      todo.input.value = ''
-                         //  });
-                         //  console.log(element['text_card'][0])
+
                          for (var i = 0; i < element['text_card'].length; i++) {
                              todo.input.value = element['text_card'][i]
                              todo.addToDo(element['id'][i])
@@ -414,6 +408,32 @@
                          connectWith: ".sortable",
                      }).disableSelection();
                  });
+
+                 $(".todoList").draggable();
+                 $(".todoList").droppable({
+                     drop: function(event, ui) {
+
+                         // lấy ra di của thằng cữ
+                         var idTaskOld = ui.draggable.attr("id");
+                         console.log('idTaskOld')
+                         console.log(idTaskOld)
+                             // lấy của thằng cữ
+                         var idTaskNew = $(this).attr("id");
+                         console.log('idTaskNew')
+                         console.log(idTaskNew)
+                         var data = {
+                             'id': idTaskOld,
+                             'id_card': idTaskNew
+                         }
+                         $.ajax({
+                             type: 'POST',
+                             url: '/broad/draggable',
+                             data: data,
+                             dataType: 'json'
+                         })
+                     }
+                 });
+
              })
              .catch(err => {
                  console.log(err)
@@ -459,6 +479,7 @@
 
 
 
+<<<<<<< HEAD
  $(document).ready(function() {   
     $('ul[id^="sort"]').sortable({
         connectWith: ".sortable",
@@ -477,4 +498,32 @@
             console.log(idTaskNew);
         }
     });
+=======
+ $('ul[id^="sort"]').sortable({
+     connectWith: ".sortable",
+ }).disableSelection();
+
+ //  $(".todoList").draggable();
+ //  $(".todoList").droppable({
+ //      drop: function(event, ui) {
+ //          console.log('ahihi')
+ //              //  // lấy ra di của thằng cữ
+ //              //  var idTaskOld = ui.draggable.attr("id");
+ //              //  console.log('idTaskOld')
+ //              //  console.log(idTaskOld)
+ //              //      // lấy của thằng cữ
+ //              //  var idTaskNew = $(this).attr("id");
+ //              //  console.log('idTaskNew')
+ //              //  console.log(idTaskNew)
+ //      }
+ //  });
+
+ $(document).ready(function() {
+     $("#searchUser").on("keyup", function() {
+         var value = $(this).val().toLowerCase();
+         $("#users li").filter(function() {
+             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+         });
+     });
+>>>>>>> 1d9973bd480f39ce39bf48008ab815d4a8547bea
  });

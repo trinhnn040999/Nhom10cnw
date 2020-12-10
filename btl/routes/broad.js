@@ -64,6 +64,19 @@ app.post('/create_card', function(req, res, next) {
     })
 })
 
+app.post('/draggable', function(req, res, next) {
+    var card = {
+        'id': req.body.id.split('/')[1],
+        'id_card': req.body.id_card
+    }
+    console.log(card['id_card'])
+    console.log(card['id'])
+    connection.query('UPDATE card set id_card=? where id=?', [card['id_card'], card['id']], (error, results, fields) => {
+        if (error) throw error
+        console.log('draggable success')
+    })
+})
+
 app.post('/delete_card', function(req, res, next) {
     var id = req.body.id
     connection.query('delete from card where id =? ', id, (err, results, fields) => {
