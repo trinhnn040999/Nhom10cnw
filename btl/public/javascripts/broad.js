@@ -22,9 +22,9 @@
 
      createToDoListElement() {
          //Create elements
-         this.form = document.createElement('form')
-         this.form.setAttribute('method', 'POST')
-         this.form.setAttribute('action', '/broad/createCard/' + this.id)
+         //  this.form = document.createElement('form')
+         //  this.form.setAttribute('method', 'POST')
+         //  this.form.setAttribute('action', '/broad/createCard/' + this.id)
 
          this.h2 = document.createElement('h2');
          this.h2.innerText = this.title;
@@ -36,8 +36,8 @@
          this.button.innerText = 'Add';
          this.button.classList.add("btn-save");
          this.button.id = "to-do-list-button";
-         this.button.setAttribute('type', 'submit')
-             // ul bao card
+         //  this.button.setAttribute('type', 'submit')
+         // ul bao card
          this.ul = document.createElement('ul');
          this.ul.classList.add('sortable');
          this.ul.classList.add('ui-sortable');
@@ -50,32 +50,37 @@
          //Add Event listener
          this.button.addEventListener('click', () => {
              if (this.input.value != "") {
-                 this.addToDo.call(this);
-                 //  this.input.value = "";
-                 //  $.ajax({
-                 //      type: 'POST',
-                 //      data: data,
-                 //      dataType: 'json',
-                 //      url: '/createCard'
-                 //  })
+                 debugger
+                 this.addToDo.call(this, '0');
+                 this.input.value = "";
+                 var data = {
+                     'id_card': this.id,
+                     'text_card': this.input.value
+                 }
+                 $.ajax({
+                     type: 'POST',
+                     url: '/broad/createCard',
+                     data: data,
+                     dataType: 'json'
+                 })
              }
          });
 
          //Append elements to the to-do list element
-         this.todoListElement.append(this.form);
+         //  this.todoListElement.append(this.form);
 
          this.todoListElement.append(this.h2);
-         this.form.append(this.input)
-             //  this.todoListElement.append(this.input);
-         this.form.append(this.button)
-             //  this.todoListElement.append(this.button);
+         //  this.form.append(this.input)
+         this.todoListElement.append(this.input);
+         //  this.form.append(this.button)
+         this.todoListElement.append(this.button);
          this.todoListElement.append(this.ul);
      }
  }
 
 
  class Card {
-     constructor(text, place, todoList, id) {
+     constructor(text, place, todoList, id = '') {
 
          this.place = place;
          this.todoList = todoList;
@@ -108,7 +113,6 @@
              var data = {
                  'id': this.id
              }
-
              $.ajax({
                  type: 'POST',
                  url: '/broad/delete_card',

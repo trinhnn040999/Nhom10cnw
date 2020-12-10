@@ -54,23 +54,8 @@ app.post('/createTodo', function(req, res, next) {
 
 })
 
-app.post('/createCard/:id_title', function(req, res, next) {
-    var id_title = req.params.id_title
-    var card = {
-        'id_card': id_title,
-        'text_card': req.body.textCard
-    }
-    if (card['text_card'].length == 0) {
-        res.render('broad', { fullname: req.cookies.fullname })
-    } else {
-        connection.query('INSERT INTO card SET ?', card, function(error, results, fields) {
-            if (error) throw error
-            else {
-                console.log('insert card title success!')
-                res.render('broad', { fullname: req.cookies.fullname })
-            }
-        })
-    }
+app.post('/createCard', function(req, res, next) {
+    console.log(req.body.data)
 })
 
 app.post('/delete_card', function(req, res, next) {
