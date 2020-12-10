@@ -12,7 +12,7 @@
 
      addToDo() {
          let text = this.input.value;
-         this.cardArray.push(new Card(text, this.div, this));
+         this.cardArray.push(new Card(text, this.ul, this));
      }
 
      render() {
@@ -24,6 +24,7 @@
          //Create elements
          this.form = document.createElement('form')
          this.form.setAttribute('method', 'POST')
+         this.form.setAttribute('action', '/broad/createCard/' + this.id)
 
          this.h2 = document.createElement('h2');
          this.h2.innerText = this.title;
@@ -37,10 +38,10 @@
          this.button.id = "to-do-list-button";
          this.button.setAttribute('type', 'submit')
              // ul bao card
-         this.div = document.createElement('ul');
-         this.div.classList.add('sortable');
-         this.div.classList.add('ui-sortable');
-         this.div.id = 'sort';
+         this.ul = document.createElement('ul');
+         this.ul.classList.add('sortable');
+         this.ul.classList.add('ui-sortable');
+         this.ul.id = 'sort';
          // bao ngoài cùng
          this.todoListElement = document.createElement('div');
          this.todoListElement.classList.add("todoList");
@@ -50,7 +51,7 @@
          this.button.addEventListener('click', () => {
              if (this.input.value != "") {
                  this.addToDo.call(this);
-                 this.input.value = "";
+                 //  this.input.value = "";
              }
          });
 
@@ -62,7 +63,7 @@
              //  this.todoListElement.append(this.input);
          this.form.append(this.button)
              //  this.todoListElement.append(this.button);
-         this.todoListElement.append(this.div);
+         this.todoListElement.append(this.ul);
      }
  }
 
@@ -356,7 +357,7 @@
 
                  title.forEach(element => {
                      // tao cac todolist
-                     let todo = new todoList(root, element['title'])
+                     let todo = new todoList(root, element['title'], element['id_card'])
 
                      try {
                          var text_card = element['text_card']

@@ -40,13 +40,38 @@ app.post('/createTodo', function(req, res, next) {
         'id': id_broad,
         'title': titleName
     }
-    connection.query('INSERT INTO title SET ?', title, function(error, results, fields) {
-        if (error) throw error
-        else {
-            console.log('insert title success!')
-            res.render('broad', { fullname: req.cookies.fullname })
-        }
-    })
+    if (title['title'].length == 0) {
+        res.render('broad', { fullname: req.cookies.fullname })
+    } else {
+        connection.query('INSERT INTO title SET ?', title, function(error, results, fields) {
+            if (error) throw error
+            else {
+                console.log('insert title success!')
+                res.render('broad', { fullname: req.cookies.fullname })
+            }
+        })
+    }
+
+})
+
+app.post('/createCard/:id_title', function(req, res, next) {
+    var id_title = req.params.id_title
+    var card = {
+        'id_card': id_title,
+        'text_card': req.body.textCard
+    }
+    if (card['text_card'].length == 0) {
+        res.render('broad', { fullname: req.cookies.fullname })
+    } else {
+        connection.query('INSERT INTO card SET ?', card, function(error, results, fields) {
+            if (error) throw error
+            else {
+                console.log('insert card title success!')
+                res.render('broad', { fullname: req.cookies.fullname })
+            }
+        })
+    }
+
 })
 
 
