@@ -456,3 +456,32 @@
      countChecked();
      $(":checkbox").click(countChecked);
  });
+
+
+ $(function() {
+     $('ul[id^="sort"]').sortable({
+         connectWith: ".sortable",
+     }).disableSelection();
+
+     $(".todoList").draggable();
+     $(".todoList").droppable({
+         drop: function(event, ui) {
+             // lấy ra di của thằng cữ
+             var idTaskOld = ui.draggable.attr("id");
+             console.log('idTaskOld')
+             console.log(idTaskOld)
+                 // lấy của thằng cữ
+             var idTaskNew = $(this).attr("id");
+             console.log('idTaskNew')
+             console.log(idTaskNew)
+         }
+     });
+ });
+ $(document).ready(function() {
+     $("#searchUser").on("keyup", function() {
+         var value = $(this).val().toLowerCase();
+         $("#users li").filter(function() {
+             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+         });
+     });
+ });
