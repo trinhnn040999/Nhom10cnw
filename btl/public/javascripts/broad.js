@@ -45,14 +45,15 @@
          // bao ngoài cùng
          this.todoListElement = document.createElement('div');
          this.todoListElement.classList.add("todoList");
-         //  
+         this.todoListElement.setAttribute('id', this.id)
+             //  
 
          //Add Event listener
          this.button.addEventListener('click', () => {
              if (this.input.value != "") {
                  debugger
                  this.addToDo.call(this, '0');
-                 this.input.value = "";
+                 //  this.input.value = "";
                  var data = {
                      'id_card': this.id,
                      'text_card': this.input.value
@@ -65,6 +66,7 @@
                      data: data,
                      dataType: 'json'
                  });
+                 this.input.value = "";
              }
          });
 
@@ -294,7 +296,7 @@
 
          this.div.append(this.input);
 
-         if (this.typeOfInput == "textarea") {
+         if (this.typeOfInput == "textarea" || this.typeOfInput == "input") {
              this.div.append(this.saveButton);
          }
 

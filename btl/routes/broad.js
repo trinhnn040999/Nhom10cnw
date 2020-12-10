@@ -55,7 +55,13 @@ app.post('/createTodo', function(req, res, next) {
 })
 
 app.post('/create_card', function(req, res, next) {
-    console.log(req.body.data)
+    var card = {
+        'id_card': req.body.id_card,
+        'text_card': req.body.text_card
+    }
+    connection.query('insert into card set ?', card, function(error, results, fields) {
+        if (error) throw error
+    })
 })
 
 app.post('/delete_card', function(req, res, next) {

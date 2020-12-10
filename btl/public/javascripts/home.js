@@ -1,12 +1,12 @@
 let broads = document.getElementById('broads');
 
 
-// createBroad('ML-intership')
-// createBroad('ML-intership_2')
-// createBroad('ML-intership_1')
+// showBroad('ML-intership')
+// showBroad('ML-intership_2')
+// showBroad('ML-intership_1')
 
-
-function createBroad(broadName, id) {
+// hien thi cac bang ra ma hinh
+function showBroad(broadName, id) {
     let a = document.createElement('a')
     a.setAttribute("href", '/broad/' + id)
 
@@ -22,7 +22,6 @@ function createBroad(broadName, id) {
 }
 
 
-
 $.ajax({
         url: '/api',
         type: 'get'
@@ -30,9 +29,15 @@ $.ajax({
     .then(data => {
         console.log(data)
         data.forEach(element => {
-            createBroad(element['broadName'], element['id'])
+            showBroad(element['broadName'], element['id'])
         });
     })
     .catch(err => {
         console.log(err)
     })
+
+// tao them bang
+var button = document.getElementById('createBroad')
+button.addEventListener('click', () => {
+
+})

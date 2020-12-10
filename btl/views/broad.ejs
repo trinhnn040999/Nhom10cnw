@@ -34,17 +34,24 @@
     
 </div>
 
-<div id="root">
-</div>
-    <script>
-        $(function () {
-            $('ul[id^="sort"]').sortable(
-                {
-                    connectWith: ".sortable",
-                }).disableSelection();
-        });
-        
-    </script>
+<div id="root" class="lists-container"></div>
+    
+    <script> 
+        $(function () { 
+            $('ul[id^="sort"]').sortable( {
+                connectWith: ".sortable", }).disableSelection(); 
+            $( ".todoList" ).draggable(); 
+            $( ".todoList" ).droppable({ 
+            drop: function( event, ui ) {  
+                var idTaskOld = ui.draggable.attr("id");
+                console.log('idTaskOld')
+                console.log(idTaskOld)
+                var idTaskNew =$(this).attr("id");
+                console.log('idTaskNew')
+                console.log(idTaskNew)
+
+                } }); }); 
+    </script> 
     <script src="/javascripts/jquery.min.js"></script>
     <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="/javascripts/popper.min.js"></script>
