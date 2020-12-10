@@ -521,32 +521,10 @@ class Checklist {
     this.li.className = "row";
     this.li.innerHTML = `
       <input type="checkbox" name="box1" class="col-sm-1"/>
-      <p class="col-sm-6" style="margin-left: -20px;">` +
+      <p class="col-sm-11" style="margin-left: -20px;">` +
       this.title +
       `</p>
     `;
-    console.log(this.li)
-    var checkbox1 = `
-    <div class="dropdown">
-      <button type="button" id="btnAddCheckbox" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-        Add item
-      </button>
-      <div class="dropdown-menu">
-          <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-            <input type="text" class="form-control" placeholder="title item" id="checkboxInput">
-            <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add an item</button>
-          </div>
-      </div>
-    </div>
-    `;
-    // checkbox of checklist
-    // this.div = document.createElement("div");
-    // this.div.className = "checklist";
-    // this.formCheckbox = document.createElement("form");
-    // this.ulCheckbox = document.createElement("ul");
-    // this.ulCheckbox.innerHTML = liCheckbox;
-    // this.formCheckbox.append(this.ulCheckbox);
-    // this.div.append(this.formCheckbox);
     this.place.append(this.li);
   }
 }
