@@ -1,3 +1,32 @@
+function checklist() {
+          $(document).ready(function () {
+          // get box count
+          var count = 0;
+          var checked = 0;
+    
+          function countBoxes() {
+            count = $("input[type='checkbox']").length;
+            console.log(count);
+          }
+    
+          countBoxes();
+          $(":checkbox").click(countBoxes);
+          // count checks
+          function countChecked() {
+            checked = $("input:checked").length;
+    
+            var percentage = parseInt((checked / count) * 100, 10);
+            $(".progressbar-bar").progressbar({
+              value: percentage,
+            });
+            $(".progressbar-label").text(percentage + "%");
+          }
+    
+          countChecked();
+          $(":checkbox").click(countChecked);
+        });
+}
+
 let root = document.getElementById("root");
 
 class todoList {
@@ -261,33 +290,33 @@ class Card {
         this.state.checklist.push(this.checklistInput.value);
         this.renderChecklist();
         this.checklistInput.value = "";
-
-        $(document).ready(function () {
-          // get box count
-          var count = 0;
-          var checked = 0;
+        checklist();
+        // $(document).ready(function () {
+        //   // get box count
+        //   var count = 0;
+        //   var checked = 0;
     
-          function countBoxes() {
-            count = $("input[type='checkbox']").length;
-            console.log(count);
-          }
+        //   function countBoxes() {
+        //     count = $("input[type='checkbox']").length;
+        //     console.log(count);
+        //   }
     
-          countBoxes();
-          $(":checkbox").click(countBoxes);
-          // count checks
-          function countChecked() {
-            checked = $("input:checked").length;
+        //   countBoxes();
+        //   $(":checkbox").click(countBoxes);
+        //   // count checks
+        //   function countChecked() {
+        //     checked = $("input:checked").length;
     
-            var percentage = parseInt((checked / count) * 100, 10);
-            $(".progressbar-bar").progressbar({
-              value: percentage,
-            });
-            $(".progressbar-label").text(percentage + "%");
-          }
+        //     var percentage = parseInt((checked / count) * 100, 10);
+        //     $(".progressbar-bar").progressbar({
+        //       value: percentage,
+        //     });
+        //     $(".progressbar-label").text(percentage + "%");
+        //   }
     
-          countChecked();
-          $(":checkbox").click(countChecked);
-        });
+        //   countChecked();
+        //   $(":checkbox").click(countChecked);
+        // });
 
       }
     });
@@ -550,10 +579,12 @@ addTodoListButton.addEventListener("click", () => {
     });
   }
 });
+for (let i =0 ; i<10;i++){
+let todoList1 = new todoList(root);
+let todoList2 = new todoList(root);
+let todoList3 = new todoList(root);
+}
 
-// let todoList1 = new todoList(root);
-// let todoList2 = new todoList(root);
-// let todoList3 = new todoList(root);
 
 // todoList1.input.value = "Xin chào";
 // todoList1.addToDo();

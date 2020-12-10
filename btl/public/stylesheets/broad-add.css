@@ -12,11 +12,22 @@ button {
   margin-left: 0.5em;
 }
 
-#root {
-  margin: 1em;
-  /*border: 1px solid grey;*/
-  /*display: flex;*/
-  min-width: 1200px;
+/* Lists */
+
+.lists-container::-webkit-scrollbar {
+  height: 2.4rem;
+}
+
+.lists-container::-webkit-scrollbar-thumb {
+  background-color: #66a3c7;
+  border: 0.8rem solid #0079bf;
+  border-top-width: 0;
+}
+
+.lists-container {
+  display: flex;
+  align-items: start;
+  padding: 0 0.8rem 0.8rem;
 }
 
 .todoList {
@@ -26,8 +37,14 @@ button {
   background: rgb(235, 235, 235);
   padding: 0.7em;
   margin: 1em 0 1em 1em;
-
   float: left;
+  flex: 0 0 27rem;
+  display: flex;
+  flex-direction: column;
+  /*background-color: #e2e4e6;
+  max-height: calc(100vh - 11.8rem);
+  border-radius: 0.3rem;
+  margin-right: 1rem; */
 }
 
 .todoList h2 {
@@ -152,7 +169,7 @@ ul.sortable {
 .ui-sortable-placeholder {
   visibility: inherit !important;
   background: transparent;
-  border: #666 2px dashed;
+  border: rgb(131, 125, 125) 2px dashed;
   padding: 8px 10px;
   margin: 10px;
 }
