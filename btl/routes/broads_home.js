@@ -289,8 +289,10 @@ app.get('/textCard', function(req, res, next) {
                 let obj = {}
                 obj['id_card'] = element
                 obj['text_card'] = []
+                obj['id'] = []
                 same_id_card.forEach(element => {
                     obj['text_card'].push(element['text_card'])
+                    obj['id'].push(element['id'])
                 });
                 task.push(obj)
             });

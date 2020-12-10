@@ -71,8 +71,14 @@ app.post('/createCard/:id_title', function(req, res, next) {
             }
         })
     }
-
 })
 
+app.post('/delete_card', function(req, res, next) {
+    var id = req.body.id
+    connection.query('delete from card where id =? ', id, (err, results, fields) => {
+        if (err) throw err
+        console.log('delete card success')
+    })
+})
 
 module.exports = app;

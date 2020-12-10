@@ -10,9 +10,9 @@
          this.render();
      }
 
-     addToDo() {
+     addToDo(id_) {
          let text = this.input.value;
-         this.cardArray.push(new Card(text, this.ul, this));
+         this.cardArray.push(new Card(text, this.ul, this, id_));
      }
 
      render() {
@@ -31,7 +31,7 @@
          this.input = document.createElement('input');
          this.input.classList.add("comment");
          this.input.setAttribute('type', 'text')
-         this.input.setAttribute('name', 'textCard')
+         this.input.setAttribute('name', 'textCard' + '/' + this.id)
          this.button = document.createElement('button');
          this.button.innerText = 'Add';
          this.button.classList.add("btn-save");
@@ -52,6 +52,12 @@
              if (this.input.value != "") {
                  this.addToDo.call(this);
                  //  this.input.value = "";
+                 //  $.ajax({
+                 //      type: 'POST',
+                 //      data: data,
+                 //      dataType: 'json',
+                 //      url: '/createCard'
+                 //  })
              }
          });
 
@@ -69,7 +75,7 @@
 
 
  class Card {
-     constructor(text, place, todoList) {
+     constructor(text, place, todoList, id) {
 
          this.place = place;
          this.todoList = todoList;
@@ -78,12 +84,14 @@
              description: "Click to write a description...",
              comments: []
          }
+         this.id = id
          this.render();
      }
 
      render() {
          this.card = document.createElement('li');
          this.card.classList.add("card-item");
+         this.card.setAttribute('id', 'id_on_card/' + this.id)
          this.card.addEventListener('click', (e) => {
              if (e.target != this.deleteButton) {
                  this.showMenu.call(this);
@@ -97,6 +105,16 @@
          this.deleteButton.innerText = "X";
          this.deleteButton.addEventListener('click', () => {
              this.deleteCard.call(this);
+             var data = {
+                 'id': this.id
+             }
+
+             $.ajax({
+                 type: 'POST',
+                 url: '/broad/delete_card',
+                 data: data,
+                 dataType: 'json'
+             });
          });
 
          this.card.append(this.p);
@@ -341,7 +359,10 @@
                  type: 'get'
              })
              .then(data1 => {
+
+                 console.log('card')
                  console.log(data1)
+
                  var data_task = data
                      // dua textCard vao data_task['title']
                  for (var i = 0; i < data_task['title'].length; i++) {
@@ -351,21 +372,30 @@
                          return x['id_card'] == id_card
                      })
                      data_task['title'][i]['text_card'] = a[0]['text_card']
+                     data_task['title'][i]['id'] = a[0]['id']
                  }
 
                  var title = data_task['title']
 
+                 console.log('data_task')
+                 console.log(data_task)
                  title.forEach(element => {
                      // tao cac todolist
                      let todo = new todoList(root, element['title'], element['id_card'])
 
                      try {
-                         var text_card = element['text_card']
-                         text_card.forEach(element => {
-                             todo.input.value = element
-                             todo.addToDo()
+                         //  var text_card = element['text_card']
+                         //  text_card.forEach(element => {
+                         //      todo.input.value = element
+                         //      todo.addToDo()
+                         //      todo.input.value = ''
+                         //  });
+                         //  console.log(element['text_card'][0])
+                         for (var i = 0; i < element['text_card'].length; i++) {
+                             todo.input.value = element['text_card'][i]
+                             todo.addToDo(element['id'][i])
                              todo.input.value = ''
-                         });
+                         }
                      } catch {}
 
                  });
