@@ -57,12 +57,14 @@
                      'id_card': this.id,
                      'text_card': this.input.value
                  }
+                 console.log('data')
+                 console.log(data)
                  $.ajax({
                      type: 'POST',
-                     url: '/broad/createCard',
+                     url: '/broad/create_card',
                      data: data,
                      dataType: 'json'
-                 })
+                 });
              }
          });
 

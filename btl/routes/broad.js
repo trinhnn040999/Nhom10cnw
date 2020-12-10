@@ -54,7 +54,7 @@ app.post('/createTodo', function(req, res, next) {
 
 })
 
-app.post('/createCard', function(req, res, next) {
+app.post('/create_card', function(req, res, next) {
     console.log(req.body.data)
 })
 
