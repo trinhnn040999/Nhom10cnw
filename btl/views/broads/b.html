@@ -16,6 +16,11 @@
     <link href="../../public/stylesheets/swiper.css" rel="stylesheet">
     <link href="../../public/stylesheets/magnific-popup.css" rel="stylesheet">
     <link href="../../public/stylesheets/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <link rel='stylesheet prefetch'
+        href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+
     <link href="../../public/stylesheets/broad-add.css" rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css">
@@ -97,7 +102,7 @@
         <button id="addTodoListButton" class="btn-save">Add new list</button>
     </div>
 
-    <div id="root"></div>
+    <div id="root" class="lists-container"></div>
 
 
     <script>
@@ -142,6 +147,8 @@
             countChecked();
             $(":checkbox").click(countChecked);
         });
+        
+        
     </script>
     <script src="../../public/javascripts/jquery.min.js"></script>
     <!-- jQuery for Bootstrap's JavaScript plugins -->
