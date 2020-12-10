@@ -33,7 +33,6 @@ class todoList {
   constructor(place, title = "List") {
     // this.id =id;
     this.place = place;
-    this.title = title;
     this.state = {
       text: title
     };
