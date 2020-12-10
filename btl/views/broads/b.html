@@ -111,8 +111,19 @@
                 {
                     connectWith: ".sortable",
                 }).disableSelection();
-        });
 
+            $( ".todoList" ).draggable();
+            $( ".todoList" ).droppable({
+            drop: function( event, ui ) {
+                // lấy ra di của thằng cữ
+                var idTaskOld = ui.draggable.attr("id");
+                
+                // lấy của thằng cữ
+                var idTaskNew =$(this).attr("id");
+                
+            }
+            });
+        });
         $(document).ready(function () {
             $("#searchUser").on("keyup", function () {
                 var value = $(this).val().toLowerCase();

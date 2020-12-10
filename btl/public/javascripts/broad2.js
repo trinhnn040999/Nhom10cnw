@@ -81,6 +81,15 @@ class todoList {
     this.todoListElement.append(this.button);
     this.todoListElement.append(this.div);
     this.todoListElement.classList.add("todoList");
+
+    this.editableTitle = new EditableText(
+      this.title,
+      "h2",
+      this.h2,
+      this,
+      "text",
+      "input"
+    );
   }
 }
 
@@ -258,6 +267,7 @@ class Card {
 
     this.editableDescription = new EditableText(
       this.state.description,
+      "p",
       this.menuDescription,
       this,
       "description",
@@ -265,6 +275,7 @@ class Card {
     );
     this.editableTitle = new EditableText(
       this.state.text,
+      "h5",
       this.menuTitle,
       this,
       "text",
@@ -426,25 +437,28 @@ class Card {
 }
 // để chỉnh sửa khi click vào text
 class EditableText {
-  constructor(text, place, card, property, typeOfInput) {
+  constructor(text,element="p",place, card, property, typeOfInput) {
     this.text = text;
     this.place = place;
     this.card = card;
+    this.element =element;
     this.property = property;
     this.typeOfInput = typeOfInput;
     this.render();
   }
 
   render() {
+    
     this.div = document.createElement("div");
-    this.p = document.createElement("p");
-    this.p.innerText = this.text;
+    this.elementContainer = document.createElement(this.element);
 
-    this.p.addEventListener("click", () => {
+    this.elementContainer.innerText = this.text;
+
+    this.elementContainer.addEventListener("click", () => {
       this.showEditableTextArea.call(this);
     });
 
-    this.div.append(this.p);
+    this.div.append(this.elementContainer);
     this.place.append(this.div);
   }
 
@@ -454,7 +468,7 @@ class EditableText {
     this.input = document.createElement(this.typeOfInput);
     this.saveButton = document.createElement("button");
 
-    this.p.remove();
+    this.elementContainer.remove();
     this.input.value = oldText;
     this.saveButton.innerText = "Save";
     this.saveButton.className = "btn-save";
@@ -463,8 +477,9 @@ class EditableText {
     this.saveButton.addEventListener("click", () => {
       this.text = this.input.value;
       this.card.state[this.property] = this.input.value;
+      console.log(this.card.state[this.property])
       if (this.property == "text") {
-        this.card.p.innerText = this.input.value;
+        this.card.elementContainer.innerText = this.input.value;
       }
       this.div.remove();
       this.render();
@@ -579,12 +594,13 @@ addTodoListButton.addEventListener("click", () => {
   }
 });
 for (let i =0 ; i<10;i++){
-let todoList1 = new todoList(root);
+  let todoList1 = new todoList(root);
+  todoList1.input.value = "Xin chào"+i;
+  todoList1.addToDo();
 }
 
 
-// todoList1.input.value = "Xin chào";
-// todoList1.addToDo();
+
 // check box
 $(document).ready(function () {
   // get box count
