@@ -41,6 +41,7 @@ button {
   flex: 0 0 19rem;
   display: flex;
   flex-direction: column;
+  max-height: calc(100vh - 20rem);
   /*background-color: #e2e4e6;
   max-height: calc(100vh - 11.8rem);
   border-radius: 0.3rem;
@@ -162,6 +163,7 @@ ul {
   padding: 0;
   margin: 0;
   height: 100%;
+  overflow-y: auto;
 }
 ul.sortable {
   padding-bottom: 10px;
