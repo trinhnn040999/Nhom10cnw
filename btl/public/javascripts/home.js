@@ -37,7 +37,7 @@ $.ajax({
     })
 
 // tao them bang
-var button = document.getElementById('createBroad')
+var button = document.getElementById('create_Broad')
 var broad_name = document.getElementById('broadName')
 
 button.addEventListener('click', () => {
@@ -54,6 +54,7 @@ button.addEventListener('click', () => {
                         'broadName': broad_name.value
                     }
                     // post
+                showBroad(broad_name.value, 1)
 
             })
             .catch(err => {
