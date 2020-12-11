@@ -38,6 +38,26 @@ $.ajax({
 
 // tao them bang
 var button = document.getElementById('createBroad')
-button.addEventListener('click', () => {
+var broad_name = document.getElementById('broadName')
 
+button.addEventListener('click', () => {
+    if (broad_name.value.trim() != "") {
+        $.ajax({
+                type: 'GET',
+                url: '/get/email'
+            })
+            .then(data => {
+                console.log(data)
+                var email = data['email']
+                var data = {
+                        'email': email,
+                        'broadName': broad_name.value
+                    }
+                    // post
+
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 })

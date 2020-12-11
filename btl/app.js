@@ -16,7 +16,7 @@ var update = require('./routes/update')
 const { authenticate } = require('passport');
 var broads_home = require('./routes/broads_home')
 var broad = require('./routes/broad')
-
+var get = require('./routes/get')
 
 //Define MySQL parameter in Config.js file.
 var connection = mysql.createConnection({
@@ -54,13 +54,12 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/', function(req, res) {
-    if(req.cookies.username === undefined){
+    if (req.cookies.username === undefined) {
         res.render('index', {
             username: '10-DTP helps teams be more collaborative and do more' +
                 '10-DTP boards, lists, and cards enable fun, flexible, and worthy project organizations to team and prioritize project'
         });
-    }
-    else{
+    } else {
         res.redirect("/home");
     }
 });
@@ -74,10 +73,10 @@ app.get('/gmail', function(req, res) {
             console.log(results.length)
             if (results.length > 0) {
                 //tai khoan da ton tai
-                res.cookie('username', results[0]['username'], {expire: 900000 + Date.now()});
-                res.cookie('email', results[0]['email'], {expire: 900000 + Date.now()});
-                res.cookie('sdt', results[0]['sdt'], {expire: 900000 + Date.now()});
-                res.cookie('fullname', results[0]['fullname'], {expire: 900000 + Date.now()});
+                res.cookie('username', results[0]['username'], { expire: 900000 + Date.now() });
+                res.cookie('email', results[0]['email'], { expire: 900000 + Date.now() });
+                res.cookie('sdt', results[0]['sdt'], { expire: 900000 + Date.now() });
+                res.cookie('fullname', results[0]['fullname'], { expire: 900000 + Date.now() });
                 res.render('home', { fullname: results[0]['fullname'] })
             } else {
                 // tai khoan chua ton tai
@@ -90,10 +89,9 @@ app.get('/gmail', function(req, res) {
 });
 
 app.get('/home', function(req, res) {
-    if(req.cookies.username === undefined){
+    if (req.cookies.username === undefined) {
         res.redirect("/");
-    }
-    else{
+    } else {
         res.render('home', { fullname: req.cookies.fullname });
     }
 });
@@ -158,6 +156,9 @@ app.get('/activity', function(req, res) {
 
 // bang
 app.use('/broad', broad)
+
+// get
+app.use('/get', get)
 
 // xử lý phần đăng kí
 app.use('/register', register)
