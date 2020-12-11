@@ -1920,7 +1920,7 @@ a:hover.back-to-top {
 @media (min-width: 992px) {
     /* Navigation */
     .navbar-custom {
-        padding: 2.125rem 1.5rem 2.125rem 2rem;
+        padding: 1rem 1.5rem 1rem 2rem;
         box-shadow: none;
         background: transparent;
     }
@@ -2277,10 +2277,10 @@ pre {
     border-radius: 50%;
 }
 
-.icon-menu {
+/* .icon-menu {
     width: 40px;
     height: 40px;
-}
+} */
 
 .intro {
     height: 40px;
@@ -2289,7 +2289,7 @@ pre {
     justify-content: left;
     padding-left: 10px;
     padding-right: 10px;
-    line-height: 40px;
+    line-height: 30px;
 }
 
 .infor .email {
