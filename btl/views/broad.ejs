@@ -28,20 +28,88 @@
 <body>
     <!-- Navigation -->
     <% include ./includes/menu_home.ejs %>
-
-    <div class="content"></div>
-    <div id="addTodoListDiv">
-
-        <form action="/broad/createTodo" method="POST">
-            <input id="addTodoListInput" type="text" class="comment" name='titleName' />
-            <button type="submit" id="addTodoListButton" class="btn-save">Add new list</button>
-        </form>
-
+    <div class="header-board">
+        <ul class="nav">
+            <li class="nav-item">
+                <div id="addTodoListDiv">
+                    <input id="addTodoListInput" class="comment"
+                        style="height: 37px; margin-top: 0px; margin-left: 100px;">
+                    <button id="addTodoListButton" class="btn-save" style="height: 37px; margin-top: 0px;">Add
+                        List</button>
+                </div>
+            </li>
+            <li class="title-board nav-item">
+                <h4>Title của bảng</h4>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-light" id="btnStar"><i class="far fa-star"></i></button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-light" id="btnModifyTeam">Private Team</button>
+            </li>
+            <li class="nav-item">
+                <div class="dropdown">
+                    <button type="button" id="memberTeam" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                        Member Team
+                    </button>
+                    <div class="dropdown-menu" style="padding: 10px 20px 20px 20px;">
+                        <div class="intro dropdown-item" style="margin-top: 10px;">
+                            <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                            <div class="infor">
+                                <div class="name">Lê Đình Tài</div>
+                            </div>
+                        </div>
+                        <div class="intro dropdown-item" style="margin-top: 10px;">
+                            <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                            <div class="infor">
+                                <div class="name">Trần abc</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="dropdown">
+                    <button type="button" id="inviteTeam" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                        Invite
+                    </button>
+                    <div class="dropdown-menu" style="padding: 10px 20px 20px 20px;">
+                        <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                            <input type="text" class="form-control" placeholder="Search user..." id="inviteInput">
+                        </div>
+                        <ul id="users">
+                            <li class="dropdown-item">
+                                <div class="intro" style="margin-top: 10px;">
+                                    <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                                    <div class="infor">
+                                        <div class="name">Lê Đình Tài</div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-light" id="changeBackground">Change background</button>
+            </li>
+        </ul>
     </div>
+    <div class="content"></div>
 
     <div id="root" class="lists-container"></div>
     <script>
         $(function () {
+            $("#btnStar").click(function () {
+                if ($("i.fa-star").css("color") == "rgb(236, 142, 19)")
+                    $("i.fa-star").css("color", "black");
+                else $("i.fa-star").css("color", "rgb(236, 142, 19)");
+            });
+            $("#btnModifyTeam").click(function () {
+                if ($("#btnModifyTeam").text() == "Private Team")
+                    $("#btnModifyTeam").text("Public Team");
+                else $("#btnModifyTeam").text("Private Team");
+            });
             $('ul[id^="sort"]').sortable({
                 connectWith: ".sortable",
             }).disableSelection();
