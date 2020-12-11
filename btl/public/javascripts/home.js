@@ -1,10 +1,5 @@
 let broads = document.getElementById('broads');
 
-
-// showBroad('ML-intership')
-// showBroad('ML-intership_2')
-// showBroad('ML-intership_1')
-
 // hien thi cac bang ra ma hinh
 function showBroad(broadName, id) {
     let a = document.createElement('a')
@@ -21,7 +16,7 @@ function showBroad(broadName, id) {
     broads.append(a)
 }
 
-
+// hien thi bang ra trang Home
 $.ajax({
         url: '/api',
         type: 'get'
@@ -50,10 +45,11 @@ button.addEventListener('click', () => {
                 console.log(data)
                 var email = data['email']
                 var data = {
-                    'email': email,
-                    'broadName': broad_name.value
-                }
-
+                        'email': email,
+                        'broadName': broad_name.value
+                    }
+                    // dua du lieu de serve xu ly
+                    // cap nhat co so du lieu
                 $.ajax({
                     type: "POST",
                     url: "/broad/create_broad",
@@ -69,7 +65,6 @@ button.addEventListener('click', () => {
                         showBroad(data['broadName'], id['id'])
                     })
                     // showBroad(broad_name.value, 1)
-
 
             })
             .catch(err => {
