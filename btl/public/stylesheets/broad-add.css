@@ -41,18 +41,19 @@ button {
   flex: 0 0 17rem;
   display: flex;
   flex-direction: column;
-  max-height: 72vh;
+  max-height: 70vh;
   max-width: 270px;
-  /*background-color: #e2e4e6;
-  max-height: calc(100vh - 11.8rem);
-  border-radius: 0.3rem;
-  margin-right: 1rem; */
 }
 
 .todoList h2 {
   font-size: 1em;
   margin-bottom: 0.5em;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.todoList .row {
+  margin: 0px;
+  justify-content: space-between;
 }
 
 #to-do-list-button {
@@ -82,7 +83,7 @@ button {
   font-size: 13px;
 }
 
-.content-bottom .nav{
+.content-bottom .nav {
   justify-content: space-between;
   margin-top: -17px;
 }
@@ -207,8 +208,13 @@ ul li.row {
   padding: 0.5em;
   margin-top: 0.5em;
 }
-ul {
+ul{
   list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+.todoList ul {
   padding: 0;
   margin: 0;
   height: 100%;
@@ -224,6 +230,10 @@ ul.sortable {
   padding: 8px 10px;
   margin: 10px;
 }
+input.comment{
+  height: 37px;
+}
+
 
 .content {
   margin-top: 150px;
