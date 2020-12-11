@@ -6,7 +6,7 @@ function checklist() {
 
     function countBoxes() {
       count = $("input[type='checkbox']").length;
-      console.log(count);
+      console.log("count : " + count);
     }
 
     countBoxes();
@@ -14,12 +14,14 @@ function checklist() {
     // count checks
     function countChecked() {
       checked = $("input:checked").length;
-
-      var percentage = parseInt((checked / count) * 100, 10);
-      $(".progressbar-bar").progressbar({
-        value: percentage,
-      });
-      $(".progressbar-label").text(percentage + "%");
+      console.log("checked : " + checked);
+      if (count !== 0) {
+        var percentage = parseInt((checked / count) * 100, 10);
+        $(".progressbar-bar").progressbar({
+          value: percentage,
+        });
+        $(".progressbar-label").text(percentage + "%");
+      }
     }
 
     countChecked();
@@ -32,7 +34,7 @@ function formatDate(date) {
   const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
   const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
   const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
-  return (`${da}/${mo}`);
+  return `${da}/${mo}`;
 }
 
 let root = document.getElementById("root");
@@ -110,12 +112,18 @@ class Card {
       text: text,
       endDate: endDate,
       description: "Click to write a description...",
-      checklist: [],
+      checklist: [{ title: "xin chào", checked: "checked" }],
       comments: [],
     };
     this.render();
   }
-
+  getCountChecked(){
+    let count =0;
+    this.state.checklist.forEach((c) => {
+      if(c.checked =="checked") count ++;
+    });
+    return count;
+  }
   // render html
   render() {
     this.card = document.createElement("li");
@@ -151,21 +159,21 @@ class Card {
       `
     <ul class="nav">
       <li class="nav-item disabled date">
-          <i class="fas fa-hourglass-start"></i>` +
-          this.state.endDate +
-      `
-      </li>
+          <i class="fas fa-hourglass-start"></i><span>` +
+      this.state.endDate +
+      `</span></li>
       <li class="nav-item disabled number-comment" >
-          <i class="fas fa-comments"></i> ` +
-          this.state.comments.length +
-      `
+          <i class="fas fa-comments"></i> <span>` +
+      this.state.comments.length +
+      `</span>
       </li>
       <li class="nav-item disabled number-check">
-          <i class="far fa-check-square"></i> ` +
-      0 +
-      `/` +
+          <i class="far fa-check-square"></i>
+          <span class="checked">` +
+      this.getCountChecked() +
+      `</span>/<span class="sum">` +
       this.state.checklist.length +
-      `
+      `</span>
       </li>
     </ul>
     `
@@ -285,7 +293,7 @@ class Card {
     this.commentsButton.addEventListener("click", () => {
       if (this.commentsInput.value != "") {
         this.state.comments.push(this.commentsInput.value);
-        this.divBottom.innerHTML =this.addContentBottom();
+        this.divBottom.innerHTML = this.addContentBottom();
         this.renderComments();
         this.commentsInput.value = "";
       }
@@ -340,43 +348,19 @@ class Card {
 
     this.btnChecklist.addEventListener("click", () => {
       if (this.checklistInput.value.trim() != "") {
-        this.state.checklist.push(this.checklistInput.value);
+        var checkbox = {
+          title: this.checklistInput.value,
+          checked: this.checklistInput.checked,
+        };
+        this.state.checklist.push(checkbox);
         this.renderChecklist();
-        this.divBottom.innerHTML =this.addContentBottom();
+        this.divBottom.innerHTML = this.addContentBottom();
         this.checklistInput.value = "";
         checklist();
       }
     });
-    this.btnCheckbox = document.getElementById("addCheckbox");
-    this.checkboxInput = document.getElementById("checkboxInput");
-    
-    // check box
-    $(document).ready(function () {
-      // get box count
-      var count = 0;
-      var checked = 0;
 
-      function countBoxes() {
-        count = $("input[type='checkbox']").length;
-        console.log(count);
-      }
-
-      countBoxes();
-      $(":checkbox").click(countBoxes);
-      // count checks
-      function countChecked() {
-        checked = $("input:checked").length;
-
-        var percentage = parseInt((checked / count) * 100, 10);
-        $(".progressbar-bar").progressbar({
-          value: percentage,
-        });
-        $(".progressbar-label").text(percentage + "%");
-      }
-
-      countChecked();
-      $(":checkbox").click(countChecked);
-    });
+    checklist();
     // due time
     $(function () {
       var sd = new Date(),
@@ -426,7 +410,7 @@ class Card {
     });
     this.state.checklist.forEach((checkbox) => {
       // new Comment(comment, this.menuComments, this);
-      new Checklist(checkbox, this.ulCheckbox, this);
+      new Checklist(checkbox.title, this.ulCheckbox, this, checkbox.checked);
     });
   }
 }
@@ -546,7 +530,11 @@ class Comment {
 }
 
 class Checklist {
-  constructor(title, place, card) {
+  constructor(title, place, card, checked = "") {
+    this.state = {
+      text: title,
+      checked: checked,
+    };
     this.title = title;
     this.place = place;
     this.card = card;
@@ -557,9 +545,11 @@ class Checklist {
     this.li.className = "row";
     this.li.innerHTML =
       `
-<input type="checkbox" name="box1" class="col-sm-1"/>
-<p class="col-sm-11" style="margin-left: -20px;">` +
-      this.title +
+  <input type="checkbox" name="box1" class="col-sm-1"/` +
+      this.state.checked +
+      `>
+  <p class="col-sm-11" style="margin-left: -20px;">` +
+      this.state.text +
       `</p>
 `;
     this.place.append(this.li);
@@ -594,31 +584,4 @@ for (let i = 0; i < 10; i++) {
 // todoList1.input.value = "Xin chào";
 // todoList1.addToDo();
 // check box
-$(document).ready(function () {
-  // get box count
-  var count = 0;
-  var checked = 0;
-
-  function countBoxes() {
-    count = $("input[type='checkbox']").length;
-    console.log(count);
-  }
-
-  countBoxes();
-  $(":checkbox").click(countBoxes);
-
-  // count checks
-
-  function countChecked() {
-    checked = $("input:checked").length;
-
-    var percentage = parseInt((checked / count) * 100, 10);
-    $(".progressbar-bar").progressbar({
-      value: percentage,
-    });
-    $(".progressbar-label").text(percentage + "%");
-  }
-
-  countChecked();
-  $(":checkbox").click(countChecked);
-});
+checklist();

@@ -193,6 +193,7 @@ button {
 
 ul li.row {
   margin-left: 0px;
+  width: 90%;
 }
 .commentsInput {
   margin-right: 0.5em;
