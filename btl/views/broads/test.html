@@ -31,7 +31,7 @@
         <input id="addTodoListInput" class="comment">
         <button id="addTodoListButton" class="btn-save" onclick="updateSord()">Add new list</button>
     </div>
-    <h3 class="title-checklist">Xin chào</h3>
+    <!-- <h3 class="title-checklist">Xin chào</h3>
     <div class="progressbar-container">
         <div class="progressbar-bar"></div>
         <div class="progressbar-label"></div>
@@ -52,8 +52,8 @@
             </li>
         </ul>
     </form>
-    <div class="ready"></div>
-    <div class="dropdown">
+    <div class="ready"></div> -->
+    <!-- <div class="dropdown">
         <button type="button"  id="btnAddCheckbox" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
             Add item
         </button>
@@ -63,9 +63,55 @@
             <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add an item</button>
           </div>
       </div>
+    </div> -->
+    <div id="root" class="lists-container">
+        <div class="todoList ui-draggable ui-draggable-handle ui-droppable" style="position: relative;">
+            <h2>
+                <div>
+                    <h2>abcx</h2>
+                </div>
+            </h2><input class="comment"><button class="btn-save" id="to-do-list-button">Add</button>
+            <ul class="sortable ui-sortable" id="sort">
+                <li class="card-item">
+                    <div class="content-top">
+                        <p>sd1111111111111111111111111111111111111111111111</p><button>X</button>
+                    </div>
+                    <div class="content-bottom">
+                        <ul class="nav">
+                            <li class="nav-item disabled date">
+                                <i class="fas fa-hourglass-start"></i> 11 Dec
+                            </li>
+                            <li class="nav-item disabled number-comment" >
+                                <i class="fas fa-comments"></i> 3
+                            </li>
+                            <li class="nav-item disabled number-check">
+                                <i class="far fa-check-square"></i> 4/6
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="card-item">
+                    <div class="content-top">
+                        <p>sd1111111111111111111111111111111111111111111111</p><button>X</button>
+                    </div>
+                    <div class="content-bottom">
+                        <ul class="nav">
+                            <li class="nav-item disabled date">
+                                <i class="fas fa-hourglass-start"></i> 11 Dec
+                            </li>
+                            <li class="nav-item disabled number-comment" >
+                                <i class="fas fa-comments"></i> 3
+                            </li>
+                            <li class="nav-item disabled number-check">
+                                <i class="far fa-check-square"></i> 4/6
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-    
-    <div id="root"></div>
+
     <script>
         $(function () {
             $('ul[id^="sort"]').sortable(
