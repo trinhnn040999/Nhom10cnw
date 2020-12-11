@@ -10,8 +10,15 @@ function checklist() {
     }
 
     countBoxes();
-    $(":checkbox").click(countBoxes);
+    $(":checkbox").click(() => {
+      debugger;
+      countBoxes();
+      //   if ($(":checkbox").is(":checked")) {
+      //     $("li.row p.col-sm-11").css("text-decoration", "none");
+      //   } else $("li.row p.col-sm-11").css("text-decoration", "line-through");
+    });
     // count checks
+
     function countChecked() {
       checked = $("input:checked").length;
       console.log("checked : " + checked);
@@ -25,7 +32,9 @@ function checklist() {
     }
 
     countChecked();
-    $(":checkbox").click(countChecked);
+    $(":checkbox").click(() => {
+      countChecked();
+    });
   });
 }
 // format date theo định dạng
@@ -59,11 +68,16 @@ class todoList {
     //Create elements
     this.h2 = document.createElement("h2");
     // this.h2.innerText = this.state.text;
+    this.divAdd = document.createElement("div");
+    this.divAdd.className = "row";
     this.input = document.createElement("input");
     this.input.classList.add("comment");
+    this.input.className = "comment col-sm-8";
     this.button = document.createElement("button");
     this.button.innerText = "Add";
     this.button.classList.add("btn-save");
+    this.button.className = "btn-save col-sm-3";
+    this.divAdd.append(this.input, this.button);
     this.button.id = "to-do-list-button";
     // ul bao card
     this.div = document.createElement("ul");
@@ -83,8 +97,8 @@ class todoList {
 
     //Append elements to the to-do list element
     this.todoListElement.append(this.h2);
-    this.todoListElement.append(this.input);
-    this.todoListElement.append(this.button);
+    this.todoListElement.append(this.divAdd);
+    // this.todoListElement.append(this.button);
     this.todoListElement.append(this.div);
     this.todoListElement.classList.add("todoList");
   }
@@ -117,10 +131,10 @@ class Card {
     };
     this.render();
   }
-  getCountChecked(){
-    let count =0;
+  getCountChecked() {
+    let count = 0;
     this.state.checklist.forEach((c) => {
-      if(c.checked =="checked") count ++;
+      if (c.checked == "checked") count++;
     });
     return count;
   }
@@ -452,7 +466,6 @@ class EditableText {
     this.input.classList.add("comment");
 
     this.saveButton.addEventListener("click", () => {
-      debugger;
       this.text = this.input.value;
       this.card.state[this.property] = this.input.value;
       if (this.property == "text") {
@@ -541,6 +554,8 @@ class Checklist {
     this.render();
   }
   render() {
+    var lineThrough =
+      this.state.checked == "checked" ? "text-decoration: line-through;" : "";
     this.li = document.createElement("li");
     this.li.className = "row";
     this.li.innerHTML =
@@ -548,7 +563,9 @@ class Checklist {
   <input type="checkbox" name="box1" class="col-sm-1"/` +
       this.state.checked +
       `>
-  <p class="col-sm-11" style="margin-left: -20px;">` +
+  <p class="col-sm-11" style="margin-left: -20px; ` +
+      lineThrough +
+      `">` +
       this.state.text +
       `</p>
 `;
