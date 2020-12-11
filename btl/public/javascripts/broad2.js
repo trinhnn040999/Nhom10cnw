@@ -131,7 +131,7 @@ class Card {
     this.p.innerText = this.state.text;
     this.divTop.className = "content-top";
     this.divBottom.className = "content-bottom";
-    this.divBottom.innerHTML = this.addContentBottom(this.state.endDate,this.state.comments.length, 0,this.state.checklist.length);
+    this.divBottom.innerHTML = this.addContentBottom();
     this.deleteButton = document.createElement("button");
     this.deleteButton.innerText = "X";
     this.deleteButton.addEventListener("click", () => {
@@ -146,25 +146,25 @@ class Card {
     this.place.append(this.card);
   }
 
-  addContentBottom(date, countComment = 0, doneCheck = 0, sumCheck = 0) {
+  addContentBottom() {
     return (
       `
     <ul class="nav">
       <li class="nav-item disabled date">
           <i class="fas fa-hourglass-start"></i>` +
-      date +
+          this.state.endDate +
       `
       </li>
       <li class="nav-item disabled number-comment" >
           <i class="fas fa-comments"></i> ` +
-      countComment +
+          this.state.comments.length +
       `
       </li>
       <li class="nav-item disabled number-check">
           <i class="far fa-check-square"></i> ` +
-      doneCheck +
+      0 +
       `/` +
-      sumCheck +
+      this.state.checklist.length +
       `
       </li>
     </ul>
@@ -285,6 +285,7 @@ class Card {
     this.commentsButton.addEventListener("click", () => {
       if (this.commentsInput.value != "") {
         this.state.comments.push(this.commentsInput.value);
+        this.divBottom.innerHTML =this.addContentBottom();
         this.renderComments();
         this.commentsInput.value = "";
       }
@@ -341,6 +342,7 @@ class Card {
       if (this.checklistInput.value.trim() != "") {
         this.state.checklist.push(this.checklistInput.value);
         this.renderChecklist();
+        this.divBottom.innerHTML =this.addContentBottom();
         this.checklistInput.value = "";
         checklist();
       }
