@@ -85,4 +85,8 @@ app.post('/delete_card', function(req, res, next) {
     })
 })
 
+app.post('create_broad', function(req, res, next) {
+
+})
+
 module.exports = app;

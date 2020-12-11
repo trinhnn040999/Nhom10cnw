@@ -54,6 +54,12 @@ button.addEventListener('click', () => {
                         'broadName': broad_name.value
                     }
                     // post
+                $.ajax({
+                    type: "POST",
+                    url: "/broad/create_broad",
+                    data: data,
+                    dataType: "json",
+                });
                 showBroad(broad_name.value, 1)
 
             })
