@@ -6,7 +6,7 @@ function checklist() {
 
     function countBoxes() {
       count = $("input[type='checkbox']").length;
-      console.log(count);
+      console.log("count : "+count);
     }
 
     countBoxes();
@@ -14,12 +14,14 @@ function checklist() {
     // count checks
     function countChecked() {
       checked = $("input:checked").length;
-
-      var percentage = parseInt((checked / count) * 100, 10);
-      $(".progressbar-bar").progressbar({
-        value: percentage,
-      });
-      $(".progressbar-label").text(percentage + "%");
+      console.log("checked : "+checked);
+      if(count !==0){
+        var percentage = parseInt((checked / count) * 100, 10);
+        $(".progressbar-bar").progressbar({
+          value: percentage,
+        });
+        $(".progressbar-label").text(percentage + "%");
+      }
     }
 
     countChecked();
@@ -32,7 +34,7 @@ function formatDate(date) {
   const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
   const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
   const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
-  return (`${da}/${mo}`);
+  return `${da}/${mo}`;
 }
 
 let root = document.getElementById("root");
@@ -152,12 +154,12 @@ class Card {
     <ul class="nav">
       <li class="nav-item disabled date">
           <i class="fas fa-hourglass-start"></i>` +
-          this.state.endDate +
+      this.state.endDate +
       `
       </li>
       <li class="nav-item disabled number-comment" >
           <i class="fas fa-comments"></i> ` +
-          this.state.comments.length +
+      this.state.comments.length +
       `
       </li>
       <li class="nav-item disabled number-check">
@@ -285,7 +287,7 @@ class Card {
     this.commentsButton.addEventListener("click", () => {
       if (this.commentsInput.value != "") {
         this.state.comments.push(this.commentsInput.value);
-        this.divBottom.innerHTML =this.addContentBottom();
+        this.divBottom.innerHTML = this.addContentBottom();
         this.renderComments();
         this.commentsInput.value = "";
       }
@@ -342,41 +344,15 @@ class Card {
       if (this.checklistInput.value.trim() != "") {
         this.state.checklist.push(this.checklistInput.value);
         this.renderChecklist();
-        this.divBottom.innerHTML =this.addContentBottom();
+        this.divBottom.innerHTML = this.addContentBottom();
         this.checklistInput.value = "";
         checklist();
       }
     });
     this.btnCheckbox = document.getElementById("addCheckbox");
     this.checkboxInput = document.getElementById("checkboxInput");
-    
-    // check box
-    $(document).ready(function () {
-      // get box count
-      var count = 0;
-      var checked = 0;
 
-      function countBoxes() {
-        count = $("input[type='checkbox']").length;
-        console.log(count);
-      }
-
-      countBoxes();
-      $(":checkbox").click(countBoxes);
-      // count checks
-      function countChecked() {
-        checked = $("input:checked").length;
-
-        var percentage = parseInt((checked / count) * 100, 10);
-        $(".progressbar-bar").progressbar({
-          value: percentage,
-        });
-        $(".progressbar-label").text(percentage + "%");
-      }
-
-      countChecked();
-      $(":checkbox").click(countChecked);
-    });
+    checklist();
     // due time
     $(function () {
       var sd = new Date(),
@@ -594,31 +570,4 @@ for (let i = 0; i < 10; i++) {
 // todoList1.input.value = "Xin chào";
 // todoList1.addToDo();
 // check box
-$(document).ready(function () {
-  // get box count
-  var count = 0;
-  var checked = 0;
-
-  function countBoxes() {
-    count = $("input[type='checkbox']").length;
-    console.log(count);
-  }
-
-  countBoxes();
-  $(":checkbox").click(countBoxes);
-
-  // count checks
-
-  function countChecked() {
-    checked = $("input:checked").length;
-
-    var percentage = parseInt((checked / count) * 100, 10);
-    $(".progressbar-bar").progressbar({
-      value: percentage,
-    });
-    $(".progressbar-label").text(percentage + "%");
-  }
-
-  countChecked();
-  $(":checkbox").click(countChecked);
-});
+checklist();
