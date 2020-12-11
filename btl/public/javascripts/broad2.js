@@ -31,7 +31,6 @@ let root = document.getElementById("root");
 
 class todoList {
   constructor(place, title = "List") {
-    // this.id =id;
     this.place = place;
     this.state = {
       text: title
@@ -96,13 +95,14 @@ class todoList {
 }
 
 class Card {
-  constructor(text, place, todoList) {
+  constructor(text, place, todoList,endDate='') {
     this.place = place;
     this.todoList = todoList;
     this.state = {
       text: text,
+      endDate : endDate,
       description: "Click to write a description...",
-      checklist: ["xin chào"],
+      checklist: [],
       comments: [],
     };
     this.render();

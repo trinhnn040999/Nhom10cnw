@@ -66,9 +66,12 @@ button {
   padding: 0.5em;
   font-size: 0.9em;
   position: relative;
+  cursor: grabbing;
+}
+
+.content-top{
   display: flex;
   justify-content: space-between;
-  cursor: grabbing;
 }
 
 .card-item button {
