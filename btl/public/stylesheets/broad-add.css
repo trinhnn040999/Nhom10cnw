@@ -38,10 +38,11 @@ button {
   padding: 0.7em;
   margin: 1em 0 1em 1em;
   float: left;
-  flex: 0 0 19rem;
+  flex: 0 0 17rem;
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 20rem);
+  max-height: 72vh;
+  max-width: 270px;
   /*background-color: #e2e4e6;
   max-height: calc(100vh - 11.8rem);
   border-radius: 0.3rem;
@@ -51,6 +52,7 @@ button {
 .todoList h2 {
   font-size: 1em;
   margin-bottom: 0.5em;
+  overflow-x: hidden;
 }
 
 #to-do-list-button {
@@ -67,11 +69,49 @@ button {
   font-size: 0.9em;
   position: relative;
   cursor: grabbing;
+  overflow-x: hidden;
 }
 
-.content-top{
+.content-top {
   display: flex;
   justify-content: space-between;
+}
+
+.content-bottom {
+  padding: 0px 8px;
+  font-size: 13px;
+}
+
+.content-bottom .nav{
+  justify-content: space-between;
+  margin-top: -17px;
+}
+
+.content-top p {
+  padding: 0.5em;
+  overflow-x: hidden;
+  color: #172b4d;
+}
+
+.date {
+  background: rgba(233, 102, 102, 0.712);
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 7px;
+}
+
+.number-comment {
+  background: rgba(128, 128, 128, 0.733);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 7px;
+}
+
+.number-check {
+  background: rgba(98, 216, 210, 0.726);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 7px;
 }
 
 .card-item button {
@@ -144,14 +184,14 @@ button {
   overflow: auto;
 }
 
-.checklist{
+.checklist {
   margin-top: 0.5em;
   padding: 0.5em;
   font-size: 0.8em;
   overflow: auto;
 }
 
-ul li.row{
+ul li.row {
   margin-left: 0px;
 }
 .commentsInput {
@@ -184,7 +224,7 @@ ul.sortable {
   margin: 10px;
 }
 
-.content{
+.content {
   margin-top: 150px;
 }
 /* start checked */
@@ -198,7 +238,12 @@ input[type="checkbox"] {
 }
 
 .ui-progressbar-value {
-  background:linear-gradient(to right,rgb(183, 194, 88), rgb(235, 123, 58),rgb(243, 82, 7));
+  background: linear-gradient(
+    to right,
+    rgb(183, 194, 88),
+    rgb(235, 123, 58),
+    rgb(243, 82, 7)
+  );
 }
 
 .progressbar-container {

@@ -26,6 +26,14 @@ function checklist() {
     $(":checkbox").click(countChecked);
   });
 }
+// format date theo định dạng
+function formatDate(date) {
+  const d = date;
+  const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
+  const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
+  const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+  return (`${da}/${mo}`);
+}
 
 let root = document.getElementById("root");
 
@@ -33,7 +41,7 @@ class todoList {
   constructor(place, title = "List") {
     this.place = place;
     this.state = {
-      text: title
+      text: title,
     };
     this.cardArray = [];
 
@@ -95,12 +103,12 @@ class todoList {
 }
 
 class Card {
-  constructor(text, place, todoList,endDate='') {
+  constructor(text, place, todoList, endDate = formatDate(new Date())) {
     this.place = place;
     this.todoList = todoList;
     this.state = {
       text: text,
-      endDate : endDate,
+      endDate: endDate,
       description: "Click to write a description...",
       checklist: [],
       comments: [],
@@ -108,6 +116,7 @@ class Card {
     this.render();
   }
 
+  // render html
   render() {
     this.card = document.createElement("li");
     this.card.classList.add("card-item");
@@ -116,20 +125,51 @@ class Card {
         this.showMenu.call(this);
       }
     });
-
+    this.divTop = document.createElement("div");
+    this.divBottom = document.createElement("div");
     this.p = document.createElement("p");
     this.p.innerText = this.state.text;
-
+    this.divTop.className = "content-top";
+    this.divBottom.className = "content-bottom";
+    this.divBottom.innerHTML = this.addContentBottom(this.state.endDate,this.state.comments.length, 0,this.state.checklist.length);
     this.deleteButton = document.createElement("button");
     this.deleteButton.innerText = "X";
     this.deleteButton.addEventListener("click", () => {
       this.deleteCard.call(this);
     });
+    this.divTop.append(this.p);
+    this.divTop.append(this.deleteButton);
 
-    this.card.append(this.p);
-    this.card.append(this.deleteButton);
+    this.card.append(this.divTop);
+    this.card.append(this.divBottom);
 
     this.place.append(this.card);
+  }
+
+  addContentBottom(date, countComment = 0, doneCheck = 0, sumCheck = 0) {
+    return (
+      `
+    <ul class="nav">
+      <li class="nav-item disabled date">
+          <i class="fas fa-hourglass-start"></i>` +
+      date +
+      `
+      </li>
+      <li class="nav-item disabled number-comment" >
+          <i class="fas fa-comments"></i> ` +
+      countComment +
+      `
+      </li>
+      <li class="nav-item disabled number-check">
+          <i class="far fa-check-square"></i> ` +
+      doneCheck +
+      `/` +
+      sumCheck +
+      `
+      </li>
+    </ul>
+    `
+    );
   }
 
   deleteCard() {
@@ -303,58 +343,11 @@ class Card {
         this.renderChecklist();
         this.checklistInput.value = "";
         checklist();
-        // $(document).ready(function () {
-        //   // get box count
-        //   var count = 0;
-        //   var checked = 0;
-
-        //   function countBoxes() {
-        //     count = $("input[type='checkbox']").length;
-        //     console.log(count);
-        //   }
-
-        //   countBoxes();
-        //   $(":checkbox").click(countBoxes);
-        //   // count checks
-        //   function countChecked() {
-        //     checked = $("input:checked").length;
-
-        //     var percentage = parseInt((checked / count) * 100, 10);
-        //     $(".progressbar-bar").progressbar({
-        //       value: percentage,
-        //     });
-        //     $(".progressbar-label").text(percentage + "%");
-        //   }
-
-        //   countChecked();
-        //   $(":checkbox").click(countChecked);
-        // });
       }
     });
     this.btnCheckbox = document.getElementById("addCheckbox");
     this.checkboxInput = document.getElementById("checkboxInput");
-    function checkboxCard(params) {
-      return (
-        `
-<li class="row">
-<input type="checkbox" name="box1" class="col-sm-1"/>
-<p class="col-sm-6" style="margin-left: -20px;">` +
-        params +
-        `</p>
-</li>
-`
-      );
-    }
-    // $("#addCheckbox").onclick = function (params) {
-
-    // }
-
-    // this.btnCheckbox.addEventListener("click", () => {
-    //   if (this.checkboxInput.value != "") {
-    //     $("form ul").append(checkboxCard(this.checkboxInput.value));
-    //     this.checkboxInput.value = "";
-    //   }
-    // });
+    
     // check box
     $(document).ready(function () {
       // get box count
@@ -473,7 +466,7 @@ class EditableText {
     this.input.classList.add("comment");
 
     this.saveButton.addEventListener("click", () => {
-      debugger
+      debugger;
       this.text = this.input.value;
       this.card.state[this.property] = this.input.value;
       if (this.property == "text") {
