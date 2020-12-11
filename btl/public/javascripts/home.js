@@ -50,17 +50,26 @@ button.addEventListener('click', () => {
                 console.log(data)
                 var email = data['email']
                 var data = {
-                        'email': email,
-                        'broadName': broad_name.value
-                    }
-                    // post
+                    'email': email,
+                    'broadName': broad_name.value
+                }
+
                 $.ajax({
                     type: "POST",
                     url: "/broad/create_broad",
                     data: data,
                     dataType: "json",
                 });
-                showBroad(broad_name.value, 1)
+
+                $.ajax({
+                        type: 'GET',
+                        url: '/api/get_id_broad'
+                    })
+                    .then(id => {
+                        showBroad(data['broadName'], id['id'])
+                    })
+                    // showBroad(broad_name.value, 1)
+
 
             })
             .catch(err => {

@@ -85,8 +85,23 @@ app.post('/delete_card', function(req, res, next) {
     })
 })
 
-app.post('create_broad', function(req, res, next) {
-
+app.post('/create_broad', function(req, res, next) {
+    var email = req.body.email
+    var broadName = req.body.broadName
+    var broad = {
+        'email': email,
+        'broadName': broadName
+    }
+    console.log(broad)
+    connection.query('INSERT INTO broad SET ?', broad, function(error, results, fields) {
+        if (error) throw error
+        else {
+            console.log('create broad success!!')
+                // res.render('home', { fullname: req.cookies.fullname });
+        }
+    })
 })
+
+
 
 module.exports = app;

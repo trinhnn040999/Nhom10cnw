@@ -24,7 +24,7 @@ var connection = mysql.createConnection({
 });
 
 app.get('/', function(req, res, next) {
-    connection.query('SELECT broad.id, broad.email , broad.broadName, title.title FROM broad, title WHERE broad.id = title.id and broad.email = ? ',
+    connection.query('SELECT broad.id, broad.email , broad.broadName FROM broad WHERE broad.email = ? ',
         req.cookies['email'], (error, results, fields) => {
             let task = []
             var same_id = {}
@@ -46,6 +46,17 @@ app.get('/', function(req, res, next) {
             res.json(task)
 
         });
+})
+
+app.get('/get_id_broad', function(req, res, next) {
+    var query = 'select id from broad where email = ?'
+    connection.query(query, req.cookies['email'], (error, results, fields) => {
+        var id = {}
+        results.forEach(element => {
+            id['id'] = element['id']
+        });
+        res.json(id)
+    })
 })
 
 
