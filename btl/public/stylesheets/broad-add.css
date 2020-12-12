@@ -1,5 +1,7 @@
 body{
   background: #0079bf;
+  height: 100vh;
+  overflow-y: hidden;
 }
 button {
   outline: none;
@@ -7,18 +9,35 @@ button {
 }
 
 .header-board{
-  background:rgba(255, 255, 255, 0.164);
-  margin-top: 120px;
-  height: 50px;
+  background: #ffffff;
   font-size: 13px;
+  justify-content: space-between;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  top: 90px;
+  z-index: 3;
+  border-top: 1px solid rgba(128, 128, 128, 0.137);
 }
+
 .header-board .nav {
   padding-top: 6px;
   padding-bottom: 5px;
-  justify-content: space-between;
+}
+
+@media (max-width: 1100px){
+  .header-board .right {
+    display: none;
+  }
+  .comment{
+    margin-right: 3px;
+    width: 70%;
+  }
+  #to-do-list-button{
+    width: 20%;
+  }
 }
 .header-board .nav .nav-item{
-  margin-left: 10px;
   margin-right: 10px;
 }
 .header-board .nav .nav-item button{
@@ -31,7 +50,6 @@ button {
 
 .title-board{
   color: #172b4d;
-  padding-left: 10px;
   padding-top: 3px;
 }
 /* Lists */
@@ -94,7 +112,9 @@ button {
   cursor: grabbing;
   overflow-x: hidden;
 }
-
+.content{
+  margin-top: 140px;
+}
 .content-top {
   display: flex;
   justify-content: space-between;

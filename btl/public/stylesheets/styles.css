@@ -2127,13 +2127,10 @@ a:hover.back-to-top {
     }
     /* end of extra pages */
 }
-
-
 /* end of min-width width 992px */
 
 
 /* Min-width width 1200px */
-
 @media (min-width: 1200px) {
     /* Navigation */
     .navbar-custom {

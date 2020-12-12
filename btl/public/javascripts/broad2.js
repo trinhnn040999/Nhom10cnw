@@ -37,6 +37,16 @@ function checklist() {
     });
   });
 }
+function sortTable(){
+  $(function () {
+    $('ul[id^="sort"]')
+      .sortable({
+        connectWith: ".sortable",
+      })
+      .disableSelection();
+  });
+}
+
 // format date theo định dạng
 function formatDate(date) {
   const d = date;
@@ -602,3 +612,4 @@ for (let i = 0; i < 10; i++) {
 // todoList1.addToDo();
 // check box
 checklist();
+sortTable();
