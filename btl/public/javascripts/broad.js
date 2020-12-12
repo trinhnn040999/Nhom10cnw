@@ -584,34 +584,65 @@ addTodoListButton.addEventListener("click", () => {
         var data = {
             'titleName': addTodoListInput.value
         }
+        console.log(data['titleName'])
         $.ajax({
             type: 'POST',
             url: '/broad/createTodo',
             data: data,
             dataType: 'json'
         })
+
         $.ajax({
                 type: 'GET',
                 url: '/api/get_id_title'
             })
-            .then(data => {
-                var id_card
-                data.forEach(element => {
-                    id_card = element['id']
+            .then(data_id => {
+                var id_card = 0
+                data_id.forEach(element => {
+                    id_card = element['id_card']
                 });
-                new todoList(root, addTodoListInput.value, id_card);
+                console.log('id_card')
+                console.log(id_card)
+                let toto = new todoList(root, data['titleName'], id_card);
+
+                $(function() {
+                    $('ul[id^="sort"]')
+                        .sortable({
+                            connectWith: ".sortable",
+                        })
+                        .disableSelection();
+                });
+
+                $(".todoList").draggable();
+                $(".todoList").droppable({
+                    drop: function(event, ui) {
+                        // lấy ra di của thằng cữ
+                        var idTaskOld = ui.draggable.attr("id");
+                        console.log("idTaskOld");
+                        console.log(idTaskOld);
+                        // lấy của thằng cữ
+                        var idTaskNew = $(this).attr("id");
+                        console.log("idTaskNew");
+                        console.log(idTaskNew);
+                        var data = {
+                            id: idTaskOld,
+                            id_card: idTaskNew,
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "/broad/draggable",
+                            data: data,
+                            dataType: "json",
+                        });
+                    },
+                });
             })
             .catch(err => {
                 console.log(err)
             })
+
         addTodoListInput.value = "";
-        $(function() {
-            $('ul[id^="sort"]')
-                .sortable({
-                    connectWith: ".sortable",
-                })
-                .disableSelection();
-        });
+
     }
 });
 
