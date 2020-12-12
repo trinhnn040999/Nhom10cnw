@@ -47,12 +47,12 @@ app.post('/createTodo', function(req, res, next) {
             if (error) throw error
             else {
                 console.log('insert title success!')
-                res.render('broad', { fullname: req.cookies.fullname })
             }
         })
     }
 
 })
+
 
 app.post('/create_card', function(req, res, next) {
     var card = {
