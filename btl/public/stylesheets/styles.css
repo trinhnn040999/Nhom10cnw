@@ -723,7 +723,7 @@ screen and (-ms-high-contrast: none) {
 
 .navbar-custom .navbar-brand.logo-image img {
     width: 20rem;
-    height: 4rem;
+    height: 3rem;
 }
 
 .navbar-custom .navbar-brand.logo-text {
@@ -748,7 +748,6 @@ screen and (-ms-high-contrast: none) {
 .navbar-custom .nav-item .nav-link.active {
     color: #00bfd8;
 }
-
 
 /* Dropdown Menu */
 
@@ -1922,7 +1921,7 @@ a:hover.back-to-top {
     .navbar-custom {
         padding: 1rem 1.5rem 1rem 2rem;
         box-shadow: none;
-        background: transparent;
+        background: #fff;
     }
     .navbar-custom .navbar-nav {
         margin-top: 0;
@@ -2138,7 +2137,7 @@ a:hover.back-to-top {
 @media (min-width: 1200px) {
     /* Navigation */
     .navbar-custom {
-        padding: 2.125rem 5rem 2.125rem 5rem;
+        padding: 1rem 5rem 1rem 5rem;
     }
     .navbar-custom.top-nav-collapse {
         padding: 0.5rem 5rem 0.5rem 5rem;
