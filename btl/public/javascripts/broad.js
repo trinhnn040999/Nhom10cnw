@@ -651,7 +651,7 @@ addTodoListButton.addEventListener("click", () => {
 //đoạn code bị lỗi
 
 // 1 mảng li chứa element để click vào thì ra đối tượng cần invite
-var member = document.getElementsByClassName("inviteMember")[0];
+var member = document.getElementsByClassName("inviteMember");
 // input này để tìm trong cơ sở dữ liệu, nhấn enter sẽ lấy ra đối tượng đổ vào member có class là inviteMember. dùng ejs thì cộng chuỗi...
 
 $('#inviteInput').on('keydown', function(e) {
@@ -660,6 +660,14 @@ $('#inviteInput').on('keydown', function(e) {
         console.log("xin chào");
     }
 });
+
+    var i;
+    for (i = 0; i < member.length; i++) {
+        member[i].addEventListener("click", () => {
+        // click vào đối tượng
+        console.log("xin chào member");
+      })
+    }
 
 
 // let add = document.getElementById("addmember");

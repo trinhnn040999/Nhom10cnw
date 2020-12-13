@@ -32,7 +32,7 @@ button {
 }
 
 
-@media (max-width: 1200px){
+@media (max-width: 1210px){
   div.header-board {
     display: inline;
     top: 74px !important;
