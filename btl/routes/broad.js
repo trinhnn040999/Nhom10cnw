@@ -102,6 +102,16 @@ app.post('/create_broad', function(req, res, next) {
     })
 })
 
+app.post('/update_favourite', function(req, res, next) {
+    var favourite = req.body.favourite
+    var id = req.cookies['id_broad']
+    console.log(favourite)
+    var query = 'update broad set favourite = ? where id = ?'
+    connection.query(query, [favourite, id], (error, results, fields) => {
+        if (error) throw error
+        console.log('update favourtie success!')
+    })
+})
 
 
 module.exports = app;

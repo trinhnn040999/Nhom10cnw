@@ -229,4 +229,15 @@ app.get('/textCard', function(req, res, next) {
             res.json(task)
         });
 })
+
+app.get('/favourite', function(req, res, next) {
+    var id_board = req.cookies['id_broad']
+    var query = 'SELECT favourite FROM broad WHERE id=?'
+    connection.query(query, id_board, (error, results, fields) => {
+        res.json(results)
+    })
+})
+
+
+
 module.exports = app;

@@ -784,3 +784,71 @@ $(document).ready(function() {
         },
     });
 });
+
+$.ajax({
+        type: 'GET',
+        url: '/api/favourite'
+    })
+    .then(data => {
+        if (data[0]['favourite'] == '0') {
+            $("i.fa-star").css("color", "black");
+        } else {
+            $("i.fa-star").css("color", "rgb(236, 142, 19)");
+        }
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+
+
+$(function() {
+    $("#btnStar").click(function() {
+        if ($("i.fa-star").css("color") == "rgb(236, 142, 19)") {
+            $("i.fa-star").css("color", "black");
+            var data = {
+                'favourite': '0'
+            }
+            $.ajax({
+                type: "POST",
+                url: "/broad/update_favourite",
+                data: data,
+                dataType: "json",
+            });
+        } else {
+            $("i.fa-star").css("color", "rgb(236, 142, 19)");
+            var data = {
+                'favourite': '1'
+            }
+            $.ajax({
+                type: "POST",
+                url: "/broad/update_favourite",
+                data: data,
+                dataType: "json",
+            });
+        }
+    });
+    $("#btnModifyTeam").click(function() {
+        if ($("#btnModifyTeam").text() == "Private Team")
+            $("#btnModifyTeam").text("Public Team");
+        else $("#btnModifyTeam").text("Private Team");
+    });
+    $('ul[id^="sort"]').sortable({
+        connectWith: ".sortable",
+    }).disableSelection();
+
+    $(".todoList").draggable();
+    $(".todoList").droppable({
+        drop: function(event, ui) {
+            debugger
+            // lấy ra di của thằng cữ
+            var idTaskOld = ui.draggable.attr("id");
+            console.log('idTaskOld')
+            console.log(idTaskOld)
+                // lấy của thằng cữ
+            var idTaskNew = $(this).attr("id");
+            console.log('idTaskNew')
+            console.log(idTaskNew)
+        }
+    });
+});

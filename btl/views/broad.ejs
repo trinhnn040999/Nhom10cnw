@@ -35,7 +35,9 @@
                     <h4>Title của bảng</h4>
                 </li>
                 <li class="nav-item" style="margin-left: -5px;">
-                    <button class="btn btn-light" id="btnStar"><i class="far fa-star"></i></button>
+                    <button class="btn btn-light" id="btnStar">
+                        <i class="far fa-star"></i>
+                    </button>
                 </li>
                 <li class="nav-item">
                     <div id="addTodoListDiv">
@@ -102,38 +104,6 @@
     </div>
     <div class="content"></div>
     <div id="root" class="lists-container"></div>
-    <script>
-        $(function () {
-            $("#btnStar").click(function () {
-                if ($("i.fa-star").css("color") == "rgb(236, 142, 19)")
-                    $("i.fa-star").css("color", "black");
-                else $("i.fa-star").css("color", "rgb(236, 142, 19)");
-            });
-            $("#btnModifyTeam").click(function () {
-                if ($("#btnModifyTeam").text() == "Private Team")
-                    $("#btnModifyTeam").text("Public Team");
-                else $("#btnModifyTeam").text("Private Team");
-            });
-            $('ul[id^="sort"]').sortable({
-                connectWith: ".sortable",
-            }).disableSelection();
-            
-            $(".todoList").draggable();
-            $(".todoList").droppable({
-                drop: function (event, ui) {
-                    debugger
-                    // lấy ra di của thằng cữ
-                    var idTaskOld = ui.draggable.attr("id");
-                    console.log('idTaskOld')
-                    console.log(idTaskOld)
-                    // lấy của thằng cữ
-                    var idTaskNew = $(this).attr("id");
-                    console.log('idTaskNew')
-                    console.log(idTaskNew)
-                }
-            });
-        });
-    </script>
     <script src="/javascripts/jquery.min.js"></script>
     <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="/javascripts/popper.min.js"></script>
