@@ -69,6 +69,16 @@ app.get('/get_id_broad', function(req, res, next) {
     })
 })
 
+app.get('/get_broadName', function(req, res, next) {
+    var query = 'select broadName from broad where email = ?'
+    connection.query(query, req.cookies['email'], (error, results, fields) => {
+        var broadName = {}
+        results.forEach(element => {
+            broadName['broadName'] = element['broadName']
+        });
+        res.json(broadName)
+    })
+})
 app.get('/test', function(req, res, next) {
     connection.query("SELECT broad.id, broad.email, broad.broadName, title.title, title.id_card, " +
         "card.text_card FROM broad, title, card WHERE broad.id = title.id " +
