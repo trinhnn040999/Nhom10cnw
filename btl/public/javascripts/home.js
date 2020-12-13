@@ -83,19 +83,20 @@ function show_boards_star(id, broadName) {
     let a = document.createElement('a')
     a.setAttribute('href', '/broad/' + id)
     let button = document.createElement('button')
-    button.classList.add('btn-light')
+
     button.classList.add('btn')
-
-
+    button.classList.add('btn-light')
     let img = document.createElement('img')
     img.setAttribute('width', '30')
     img.setAttribute('height', '30')
     img.setAttribute('src', '/images/header-background.jpg')
     button.append(img)
+    button.append(broadName)
+
     show_star.append(li)
     li.append(a)
     a.append(button)
-    button.innerText = broadName
+
 }
 
 $.ajax({
