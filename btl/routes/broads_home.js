@@ -256,6 +256,7 @@ app.get('/get_broad_star', function(req, res, next) {
     })
 })
 
+<<<<<<< HEAD
 app.get('/search', function(req, res, next) {
     var data = {
         'username': req.body.username,
@@ -267,5 +268,18 @@ app.get('/search', function(req, res, next) {
 })
 
 
+=======
+app.get('/search', function(req, res, next){
+    var data = {
+        'username': req.body.username ,
+    };
+    connection.query("select * from accounts where username like '%" + data['username'] + "%'"+"email LIKE '%"+ data['username']+"%'" ,(err, results, fields)=>{
+        if(err) throw err
+        console.log("success");
+    } );
+
+
+})
+>>>>>>> a2ffb7df8ef8263907d462848b75c3db0f9807d8
 
 module.exports = app;
