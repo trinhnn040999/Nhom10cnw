@@ -447,6 +447,7 @@ class Card {
     });
 
     $(document).ready(function () {
+      LetterAvatar.transform();
       $("#searchUser").on("keyup", function () {
         var value = $(this).val().toLowerCase();
         $("#users li").filter(function () {
