@@ -88,9 +88,11 @@ app.post('/delete_card', function(req, res, next) {
 app.post('/create_broad', function(req, res, next) {
     var email = req.body.email
     var broadName = req.body.broadName
+    var favourite = req.body.favourite
     var broad = {
         'email': email,
-        'broadName': broadName
+        'broadName': broadName,
+        'favourite': favourite
     }
     console.log(broad)
     connection.query('INSERT INTO broad SET ?', broad, function(error, results, fields) {
@@ -112,6 +114,8 @@ app.post('/update_favourite', function(req, res, next) {
         console.log('update favourtie success!')
     })
 })
+
+
 
 
 module.exports = app;

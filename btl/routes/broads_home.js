@@ -238,6 +238,13 @@ app.get('/favourite', function(req, res, next) {
     })
 })
 
+app.get('/get_broad_star', function(req, res, next) {
+    var email = 'nguyenthithuan1591999@gmail.com'
+    var query = 'SELECT * FROM broad WHERE broad.favourite=? and broad.email = ?'
+    connection.query(query, ['1', email], (error, results, fields) => {
+        res.json(results)
+    })
+})
 
 
 module.exports = app;
