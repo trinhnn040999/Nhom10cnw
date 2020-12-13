@@ -11,7 +11,6 @@ function checklist() {
 
     countBoxes();
     $(":checkbox").click(() => {
-      debugger;
       countBoxes();
       //   if ($(":checkbox").is(":checked")) {
       //     $("li.row p.col-sm-11").css("text-decoration", "none");
@@ -178,10 +177,12 @@ class Card {
       text: text,
       endDate: endDate,
       description: "Click to write a description...",
-      checklist: [{ title: "xin chào", checked: "checked" }],
+      // { title: "xin chào", checked: "checked" }
+      checklist: [],
       comments: [],
     };
     this.render();
+    LetterAvatar.transform();
   }
   getCountChecked() {
     let count = 0;
@@ -311,11 +312,32 @@ class Card {
                 <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <input type="text" class="form-control" placeholder="Search members" id="searchUser">
                 </div> 
-                <ul id="users">
-                  <li class="dropdown-item">Link 1</li>
-                  <li class="dropdown-item">Siêu nhân đỏ</li>
-                  <li class="dropdown-item">CHuối gay</li>
-                </ul>         
+                <ul id="users" style="height:200px;overflow:auto;">
+                    <li class="dropdown-item">
+                      <div class="intro" id="users1" style="margin-top: 10px;">
+                          <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                          <div class="infor">
+                            <div class="name">Lê Đình Tài</div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="dropdown-item">
+                      <div class="intro" id="users2" style="margin-top: 10px;">
+                          <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                          <div class="infor">
+                            <div class="name">Siêu nhân đỏ</div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="dropdown-item">
+                      <div class="intro" id="users3" style="margin-top: 10px;">
+                          <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                          <div class="infor">
+                            <div class="name">Lê Văn Luyện</div>
+                          </div>
+                      </div>
+                  </li>
+                </ul>
         </div>
       </div>
         </li>
