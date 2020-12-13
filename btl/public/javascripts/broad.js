@@ -651,8 +651,15 @@ addTodoListButton.addEventListener("click", () => {
 //đoạn code bị lỗi
 
 // 1 mảng li chứa element để click vào thì ra đối tượng cần invite
-var member = document.getElementsByClassName("inviteMember");
+
 // input này để tìm trong cơ sở dữ liệu, nhấn enter sẽ lấy ra đối tượng đổ vào member có class là inviteMember. dùng ejs thì cộng chuỗi...
+
+
+var button_1 = document.getElementById('inviteTeam')
+button_1.addEventListener("click", () => {
+    let ul = document.getElementById('users')
+    ul.innerText = ''
+})
 
 $('#inviteInput').on('keydown', function(e) {
     if (e.which == 13) {
@@ -687,16 +694,49 @@ $('#inviteInput').on('keydown', function(e) {
                         img.classList.add('icon-menu')
                         img.setAttribute('width', '30')
                         img.setAttribute('height', '30')
-                        img.setAttribute('avatar', element['fullname'])
+                        img.setAttribute('avatar', element['username'])
                         let div2 = document.createElement('div')
                         div.append(div2)
                         div2.classList.add('infor')
                         let div3 = document.createElement('div')
                         div2.append(div3)
                         div3.classList.add('name')
-                        div3.append(element['fullname'])
+                        div3.setAttribute('id', 'name')
+                        div3.append(element['username'])
 
                         LetterAvatar.transform()
+                    });
+
+                    let inviteInput = document.getElementById('inviteInput')
+                    inviteInput.value = ''
+                    var member = document.getElementsByClassName("inviteMember");
+                    // console.log(member)
+                    var members = []
+                        // var i;
+                    for (i = 0; i < member.length; i++) {
+                        // member[i].addEventListener("click", () => {
+                        //     // click vào đối tượng
+                        //     console.log(member[i]);
+                        // })
+                        members.push(member[i])
+
+
+                    }
+                    var i = 0
+                    members.forEach(element => {
+                        console.log(element)
+                        element.addEventListener('click', () => {
+                            var username = element.lastChild.lastChild.lastChild.textContent
+                            var data = {
+                                'username': username
+                            }
+                            $.ajax({
+                                type: 'POST',
+                                url: '/api/invite',
+                                data: data,
+                                dataType: 'json'
+                            })
+                        })
                     });
 
                 })
@@ -707,13 +747,7 @@ $('#inviteInput').on('keydown', function(e) {
     }
 });
 
-var i;
-for (i = 0; i < member.length; i++) {
-    member[i].addEventListener("click", () => {
-        // click vào đối tượng
-        console.log("xin chào member");
-    })
-}
+
 
 
 // let add = document.getElementById("addmember");

@@ -269,4 +269,25 @@ app.post('/search', function(req, res, next) {
 
 })
 
+app.post('/invite', function(req, res, next) {
+    var username = req.body.username
+
+    connection.query('select * from accounts where username=?', username, (error, results, next) => {
+        var email = results[0]['email']
+        var broad = {
+            'id': req.cookies['id_broad'],
+            'email': email,
+            'broadName': req.cookies['broadName'],
+            'favourite': '0'
+        }
+        try {
+            connection.query('insert into broad set ?', broad, (error, results, next) => {
+                console.log('invite success')
+            })
+        } catch {}
+
+    })
+    var query = 'insert into broad '
+
+})
 module.exports = app;
