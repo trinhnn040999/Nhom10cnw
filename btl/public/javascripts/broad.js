@@ -784,6 +784,7 @@ $(document).ready(function() {
         },
     });
 });
+<<<<<<< HEAD
 
 $.ajax({
         type: 'GET',
@@ -852,3 +853,5 @@ $(function() {
         }
     });
 });
+=======
+>>>>>>> e20f69cac3f71c128d750aba28a68d0df5b7e201
