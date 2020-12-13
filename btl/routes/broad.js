@@ -30,7 +30,12 @@ var connection = mysql.createConnection({
 
 app.get('/:id', function(req, res, next) {
     res.cookie('id_broad', req.params.id)
-    res.render('broad', { fullname: req.cookies.fullname })
+    var query = 'select * from broad where id = ?'
+    connection.query(query, req.params.id, (error, results, fields) => {
+        if (error) throw error
+        res.cookie('broadName', results[0]['broadName'])
+        res.render('broad', { fullname: req.cookies.fullname })
+    })
 })
 
 app.post('/createTodo', function(req, res, next) {
