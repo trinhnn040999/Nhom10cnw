@@ -54,6 +54,21 @@ app.post('/createTodo', function(req, res, next) {
 })
 
 
+app.post('/invite', function(req, res, next){
+    var newmember = {
+        'id' : req.body.id,
+        'email' : req.body.email,
+        'broadName': req.body.broadName
+    }
+    console.log(newmember['id'])
+    console.log(newmember['email'])
+    console.log(newmember['broadName'])
+    connection.query('insert into broad set ?', newmember, (err, results, fields)=>{
+        if(err) throw err
+        console.log('Invite Sucess!!!')
+    })
+})
+
 app.post('/create_card', function(req, res, next) {
     var card = {
         'id_card': req.body.id_card,
