@@ -11,7 +11,6 @@ function checklist() {
 
     countBoxes();
     $(":checkbox").click(() => {
-      debugger;
       countBoxes();
       //   if ($(":checkbox").is(":checked")) {
       //     $("li.row p.col-sm-11").css("text-decoration", "none");
@@ -37,7 +36,7 @@ function checklist() {
     });
   });
 }
-function sortTable(){
+function sortTable() {
   $(function () {
     $('ul[id^="sort"]')
       .sortable({
@@ -47,13 +46,55 @@ function sortTable(){
   });
 }
 
+function dateTime() {
+  // due time
+  $(function () {
+    $("#startDate").datetimepicker({
+      timepicker: true,
+      datepicker: true,
+      format: "Y-m-d H:i", // formatDate
+      hours12: false,
+      step: 1,
+      onShow: function () {
+        this.setOptions({
+          maxDate: $("#endDate").val() ? $("#endDate").val() : false,
+        });
+      },
+    });
+    $("#endDate").datetimepicker({
+      timepicker: true,
+      datepicker: true,
+      format: "Y-m-d H:i",
+      hours12: false,
+      step: 1,
+      onShow: function () {
+        this.setOptions({
+          minDate: $("#startDate").val() ? $("#startDate").val() : false,
+        });
+      },
+    });
+  });
+}
 // format date theo định dạng
-function formatDate(date) {
+function formatMinDate(date) {
   const d = date;
   const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
   const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
   const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+  const hour = new Intl.DateTimeFormat("en", { hour: "numeric" }).format(d);
+  const minute = new Intl.DateTimeFormat("en", { minute: "2-digit" }).format(d);
   return `${da}/${mo}`;
+}
+
+function formatDate(date) {
+  const d = date;
+  var space = "  ";
+  const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
+  const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
+  const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+  const hour = new Intl.DateTimeFormat("en", { hour: "numeric" }).format(d);
+  const minute = new Intl.DateTimeFormat("en", { minute: "2-digit" }).format(d);
+  return `${da}/${mo}/${ye}${space}${hour}:${minute}`;
 }
 
 let root = document.getElementById("root");
@@ -129,17 +170,19 @@ class todoList {
 }
 
 class Card {
-  constructor(text, place, todoList, endDate = formatDate(new Date())) {
+  constructor(text, place, todoList, endDate = formatMinDate(new Date())) {
     this.place = place;
     this.todoList = todoList;
     this.state = {
       text: text,
       endDate: endDate,
       description: "Click to write a description...",
-      checklist: [{ title: "xin chào", checked: "checked" }],
+      // { title: "xin chào", checked: "checked" }
+      checklist: [],
       comments: [],
     };
     this.render();
+    LetterAvatar.transform();
   }
   getCountChecked() {
     let count = 0;
@@ -239,69 +282,100 @@ class Card {
     this.menuLeft.className = "menu-left col-sm-8";
     //Add inner Text
     this.progressBar.innerHTML = `
-<div class="progressbar-container">
-<div class="progressbar-bar"></div>
-<div class="progressbar-label"></div>
-</div> `;
+      <div class="progressbar-container">
+        <div class="progressbar-bar"></div>
+        <div class="progressbar-label"></div>
+      </div> `;
     this.menuRight.innerHTML = ` <nav>
-<ul>
-    <li class="title-select">
-        ADD TO CARD
+      <ul>
+      <li>
+      <div class="dueDate">
+        <div class="start row" style="margin-bottom:5px;">
+          <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:green;">Start: </div>
+          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:green;"></button>
+        </div>
+        <div class="end row" >
+          <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:red;">End: </div>
+          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:red;"></button>
+        </div>
+      </div>
     </li>
-    <li class="select-menu">
-    <div class="dropdown">
-    <button type="button" class="btn btn-light dropdown-toggle" id="btn-member" data-toggle="dropdown">
-    <i class="fas fa-user"></i> Members
-    </button>
-    <div class="dropdown-menu" style= "width :100%;">
-            <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-            <input type="text" class="form-control" placeholder="Search members" id="searchUser">
-            </div> 
-            <ul id="users">
-              <li class="dropdown-item">Link 1</li>
-              <li class="dropdown-item">Siêu nhân đỏ</li>
-              <li class="dropdown-item">CHuối gay</li>
-            </ul>         
-    </div>
-  </div>
-    </li>
-    <li class="select-menu">
-    <div class="dropdown">
-        <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-        <i class="fas fa-calendar-check"></i> Checklist
+        <li class="title-select">
+            ADD TO CARD
+        </li>
+        <li class="select-menu">
+        <div class="dropdown">
+        <button type="button" class="btn btn-light dropdown-toggle" id="btn-member" data-toggle="dropdown">
+        <i class="fas fa-user"></i> Members
         </button>
-      <div class="dropdown-menu">
-          <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-              <input type="text" class="form-control" placeholder="Title..." id="checkboxInput">
-              <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add checklist</button>
+        <div class="dropdown-menu" style= "width :100%;">
+                <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                <input type="text" class="form-control" placeholder="Search members" id="searchUser">
+                </div> 
+                <ul id="users" style="height:200px;overflow:auto;">
+                    <li class="dropdown-item member-list">
+                      <div class="intro" id="users1" style="margin-top: 10px;">
+                          <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                          <div class="infor">
+                            <div class="name">Lê Đình Tài</div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="dropdown-item member-list">
+                      <div class="intro" id="users2" style="margin-top: 10px;">
+                          <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                          <div class="infor">
+                            <div class="name">Siêu nhân đỏ</div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="dropdown-item member-list">
+                      <div class="intro" id="users3" style="margin-top: 10px;">
+                          <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                          <div class="infor">
+                            <div class="name">Lê Văn Luyện</div>
+                          </div>
+                      </div>
+                  </li>
+                </ul>
+        </div>
+      </div>
+        </li>
+        <li class="select-menu">
+        <div class="dropdown">
+            <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-calendar-check"></i> Checklist
+            </button>
+          <div class="dropdown-menu">
+              <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                  <input type="text" class="form-control" placeholder="Title..." id="checkboxInput">
+                  <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add checklist</button>
+              </div>
           </div>
-      </div>
-    </div>
-    </li>
-    <li class="select-menu">
-    <div class="dropdown">
-      <button type="button" class="btn btn-light dropdown-toggle" id="btn-due" data-toggle="dropdown">
-          <i class="far fa-calendar-alt"></i> Due Date
-      </button>
-      <div class="dropdown-menu">
-          <form id="form" name="form" class="form-inline">
+        </div>
+        </li>
+        <li class="select-menu">
+        <div class="dropdown">
+          <button type="button" class="btn btn-light dropdown-toggle" id="btn-due" data-toggle="dropdown">
+              <i class="far fa-calendar-alt"></i> Due Date
+          </button>
+          <div class="dropdown-menu">
               <ul style="flex: 1 0 220px; text-align: left;">
-                  <li>
-                      <label for="startDate" style="justify-content: left; margin-left: 10px;">Start Date:</label>
-                      <input id="startDate" name="startDate" type="text" class="form-control" style="margin:10px; " />
-                  </li>
-                  <li>
-                      <label for="endDate" style="justify-content: left; margin-left: 10px;">End Date:</label>
-                      <input id="endDate" name="endDate" type="text" class="form-control" style="margin: 10px;" />
-                  </li>
+                <li>
+                  <label style="justify-content: left; margin-left: 10px;">Start Date:</label>
+                  <input id="startDate" name="startDate" type="text" class="form-control" style="margin:10px; width:200px;" autocomplete="off"/>
+                </li>
+                <li>
+                  <label style="justify-content: left; margin-left: 10px;">End Date:</label>
+                  <input id="endDate" name="endDate" type="text" class="form-control" style="margin: 10px; width:200px;" autocomplete="off"/>
+                </li>
               </ul>
-              <button type="submit" class="btn btn-success" style="text-align: center; margin: 10px;">Ok</button>
-          </form>
-      </div>
-    </div>
-    </li>
-</ul>
-</nav>`;
+              <button class="btn btn-success" id="btnDueDate" style="text-align: center; margin: 10px; width:200px;">Ok</button>
+          </div>
+          </div>
+          </li>
+      </ul>
+      </nav>`;
 
     this.commentsButton.innerText = "Add";
     this.commentsInput.placeholder = "Write a comment...";
@@ -358,15 +432,38 @@ class Card {
 
     this.renderComments();
     this.renderChecklist();
+
+    this.btnDueDate = document.getElementById("btnDueDate");
+
+    this.btnDueDate.addEventListener("click", () => {
+      var start = $("#startDate").val().trim();
+      var end = $("#endDate").val().trim();
+      if (start != "" && end != "") {
+        this.state.endDate = formatMinDate(new Date(end));
+        this.divBottom.innerHTML = this.addContentBottom();
+        $(".start button").text(formatDate(new Date(start)));
+        $(".end button").text(formatDate(new Date(end)));
+      }
+    });
+
     $(document).ready(function () {
+      LetterAvatar.transform();
       $("#searchUser").on("keyup", function () {
         var value = $(this).val().toLowerCase();
-        $("#users li").filter(function () {
+        $("#users li").filter(function (x) {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
       });
       // mới chỉnh chỗ này chú ý
     });
+    var elementsMember = document.getElementsByClassName("member-list");
+    var i;
+    for (i = 0; i < elementsMember.length; i++) {
+      elementsMember[i].addEventListener("click", () => {
+        // code thêm member ở đây
+      })
+    }
+
     this.btnChecklist = document.getElementById("addCheckbox");
     this.checklistInput = document.getElementById("checkboxInput");
 
@@ -385,28 +482,7 @@ class Card {
     });
 
     checklist();
-    // due time
-    $(function () {
-      var sd = new Date(),
-        ed = new Date();
-
-      $("#startDate").datetimepicker({
-        pickTime: false,
-        format: "YYYY/MM/DD",
-        defaultDate: sd,
-        maxDate: ed,
-      });
-
-      $("#endDate").datetimepicker({
-        pickTime: false,
-        format: "YYYY/MM/DD",
-        defaultDate: ed,
-        minDate: sd,
-      });
-
-      //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
-      bindDateRangeValidation($("#form"), "startDate", "endDate");
-    });
+    dateTime();
   }
   //Chỉnh comment
   renderComments() {
@@ -613,3 +689,4 @@ for (let i = 0; i < 10; i++) {
 // check box
 checklist();
 sortTable();
+dateTime();

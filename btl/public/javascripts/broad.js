@@ -646,7 +646,40 @@ addTodoListButton.addEventListener("click", () => {
     }
 });
 
+
+
+//đoạn code bị lỗi
+
+// 1 mảng li chứa element để click vào thì ra đối tượng cần invite
+var member = document.getElementsByClassName("inviteMember")[0];
+// input này để tìm trong cơ sở dữ liệu, nhấn enter sẽ lấy ra đối tượng đổ vào member có class là inviteMember. dùng ejs thì cộng chuỗi...
+
+$('#inviteInput').on('keydown', function(e) {
+    if (e.which == 13) {
+        e.preventDefault();
+        console.log("xin chào");
+    }
+});
+
+
+// let add = document.getElementById("addmember");
+// add.addEventListener("click", () => {
+//     if (member_email.value.trim() != "") {
+//        var data3 = {
+//             'email': member_email.value
+//         };
+//         $.ajax({
+//             type: "POST",
+//             url: "/broad/invite",
+//             data = data3,
+//             dataType = "json",
+//         });
+//     }
+// });
+//đoạn code bị lỗi
 // dua du lieu vao broad
+
+
 $.ajax({
         url: "/api/broad",
         type: "get",

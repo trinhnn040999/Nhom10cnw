@@ -54,6 +54,21 @@ app.post('/createTodo', function(req, res, next) {
 })
 
 
+app.post('/invite', function(req, res, next){
+    var newmember = {
+        'id' : req.cookies.id_broad,
+        'email' : req.body.email,
+        'broadName': req.cookies.broadName
+    }
+    console.log(newmember['id']);
+    console.log(newmember['email']);
+    console.log(newmember['broadName']);
+    connection.query('insert into broad set ?', newmember, (err, results, fields)=>{
+        if(err) throw err
+        console.log('Invite Sucess!!!');
+    })
+})
+
 app.post('/create_card', function(req, res, next) {
     var card = {
         'id_card': req.body.id_card,
@@ -116,6 +131,10 @@ app.post('/update_favourite', function(req, res, next) {
 })
 
 
+<<<<<<< HEAD
 
 
 module.exports = app;
+=======
+module.exports = app;
+>>>>>>> e4a302e46bf177a133017d2dd81aa0b01d2977c2
