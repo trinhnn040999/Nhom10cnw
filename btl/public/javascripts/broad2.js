@@ -77,14 +77,25 @@ function dateTime() {
   });
 }
 // format date theo định dạng
-function formatDate(date) {
+function formatMinDate(date) {
   const d = date;
   const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
   const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
   const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
   const hour = new Intl.DateTimeFormat("en", { hour: "numeric" }).format(d);
   const minute = new Intl.DateTimeFormat("en", { minute: "2-digit" }).format(d);
-  return `${da}/${mo} ${hour}:${minute}`;
+  return `${da}/${mo}`;
+}
+
+function formatDate(date) {
+  const d = date;
+  var space ="  "
+  const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
+  const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
+  const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+  const hour = new Intl.DateTimeFormat("en", { hour: "numeric" }).format(d);
+  const minute = new Intl.DateTimeFormat("en", { minute: "2-digit" }).format(d);
+  return `${da}/${mo}/${ye}${space}${hour}:${minute}`;
 }
 
 let root = document.getElementById("root");
@@ -160,7 +171,7 @@ class todoList {
 }
 
 class Card {
-  constructor(text, place, todoList, endDate = formatDate(new Date())) {
+  constructor(text, place, todoList, endDate = formatMinDate(new Date())) {
     this.place = place;
     this.todoList = todoList;
     this.state = {
@@ -270,67 +281,79 @@ class Card {
     this.menuLeft.className = "menu-left col-sm-8";
     //Add inner Text
     this.progressBar.innerHTML = `
-<div class="progressbar-container">
-<div class="progressbar-bar"></div>
-<div class="progressbar-label"></div>
-</div> `;
+      <div class="progressbar-container">
+        <div class="progressbar-bar"></div>
+        <div class="progressbar-label"></div>
+      </div> `;
     this.menuRight.innerHTML = ` <nav>
-<ul>
-    <li class="title-select">
-        ADD TO CARD
+      <ul>
+      <li>
+      <div class="dueDate">
+        <div class="start row" style="margin-bottom:5px;">
+          <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:green;">Start: </div>
+          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:green;"></button>
+        </div>
+        <div class="end row" >
+          <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:red;">End: </div>
+          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:red;"></button>
+        </div>
+      </div>
     </li>
-    <li class="select-menu">
-    <div class="dropdown">
-    <button type="button" class="btn btn-light dropdown-toggle" id="btn-member" data-toggle="dropdown">
-    <i class="fas fa-user"></i> Members
-    </button>
-    <div class="dropdown-menu" style= "width :100%;">
-            <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-            <input type="text" class="form-control" placeholder="Search members" id="searchUser">
-            </div> 
-            <ul id="users">
-              <li class="dropdown-item">Link 1</li>
-              <li class="dropdown-item">Siêu nhân đỏ</li>
-              <li class="dropdown-item">CHuối gay</li>
-            </ul>         
-    </div>
-  </div>
-    </li>
-    <li class="select-menu">
-    <div class="dropdown">
-        <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-        <i class="fas fa-calendar-check"></i> Checklist
+        <li class="title-select">
+            ADD TO CARD
+        </li>
+        <li class="select-menu">
+        <div class="dropdown">
+        <button type="button" class="btn btn-light dropdown-toggle" id="btn-member" data-toggle="dropdown">
+        <i class="fas fa-user"></i> Members
         </button>
-      <div class="dropdown-menu">
-          <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-              <input type="text" class="form-control" placeholder="Title..." id="checkboxInput">
-              <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add checklist</button>
+        <div class="dropdown-menu" style= "width :100%;">
+                <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                <input type="text" class="form-control" placeholder="Search members" id="searchUser">
+                </div> 
+                <ul id="users">
+                  <li class="dropdown-item">Link 1</li>
+                  <li class="dropdown-item">Siêu nhân đỏ</li>
+                  <li class="dropdown-item">CHuối gay</li>
+                </ul>         
+        </div>
+      </div>
+        </li>
+        <li class="select-menu">
+        <div class="dropdown">
+            <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-calendar-check"></i> Checklist
+            </button>
+          <div class="dropdown-menu">
+              <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                  <input type="text" class="form-control" placeholder="Title..." id="checkboxInput">
+                  <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add checklist</button>
+              </div>
           </div>
-      </div>
-    </div>
-    </li>
-    <li class="select-menu">
-    <div class="dropdown">
-      <button type="button" class="btn btn-light dropdown-toggle" id="btn-due" data-toggle="dropdown">
-          <i class="far fa-calendar-alt"></i> Due Date
-      </button>
-      <div class="dropdown-menu">
-          <ul style="flex: 1 0 220px; text-align: left;">
-            <li>
-              <label style="justify-content: left; margin-left: 10px;">Start Date:</label>
-              <input id="startDate" name="startDate" type="text" class="form-control" style="margin:10px; width:200px;" autocomplete="off"/>
-            </li>
-            <li>
-              <label style="justify-content: left; margin-left: 10px;">End Date:</label>
-              <input id="endDate" name="endDate" type="text" class="form-control" style="margin: 10px; width:200px;" autocomplete="off"/>
-            </li>
-          </ul>
-          <button class="btn btn-success" id="btnDueDate" style="text-align: center; margin: 10px; width:200px;">Ok</button>
-      </div>
-    </div>
-    </li>
-</ul>
-</nav>`;
+        </div>
+        </li>
+        <li class="select-menu">
+        <div class="dropdown">
+          <button type="button" class="btn btn-light dropdown-toggle" id="btn-due" data-toggle="dropdown">
+              <i class="far fa-calendar-alt"></i> Due Date
+          </button>
+          <div class="dropdown-menu">
+              <ul style="flex: 1 0 220px; text-align: left;">
+                <li>
+                  <label style="justify-content: left; margin-left: 10px;">Start Date:</label>
+                  <input id="startDate" name="startDate" type="text" class="form-control" style="margin:10px; width:200px;" autocomplete="off"/>
+                </li>
+                <li>
+                  <label style="justify-content: left; margin-left: 10px;">End Date:</label>
+                  <input id="endDate" name="endDate" type="text" class="form-control" style="margin: 10px; width:200px;" autocomplete="off"/>
+                </li>
+              </ul>
+              <button class="btn btn-success" id="btnDueDate" style="text-align: center; margin: 10px; width:200px;">Ok</button>
+          </div>
+          </div>
+          </li>
+      </ul>
+      </nav>`;
 
     this.commentsButton.innerText = "Add";
     this.commentsInput.placeholder = "Write a comment...";
@@ -394,8 +417,10 @@ class Card {
       var start = $("#startDate").val().trim();
         var end = $("#endDate").val().trim();
         if (start != "" && end != "") {
-          this.state.endDate = formatDate(new Date(end));
+          this.state.endDate = formatMinDate(new Date(end));
           this.divBottom.innerHTML = this.addContentBottom();
+          $(".start button").text(formatDate(new Date(start)));
+          $(".end button").text(formatDate(new Date(end)));
         }
     });
 
