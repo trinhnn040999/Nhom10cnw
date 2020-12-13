@@ -88,7 +88,7 @@ function formatMinDate(date) {
 
 function formatDate(date) {
   const d = date;
-  var space ="  "
+  var space = "  ";
   const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
   const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
   const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
@@ -313,7 +313,7 @@ class Card {
                 <input type="text" class="form-control" placeholder="Search members" id="searchUser">
                 </div> 
                 <ul id="users" style="height:200px;overflow:auto;">
-                    <li class="dropdown-item">
+                    <li class="dropdown-item member-list">
                       <div class="intro" id="users1" style="margin-top: 10px;">
                           <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
                           <div class="infor">
@@ -321,7 +321,7 @@ class Card {
                           </div>
                       </div>
                   </li>
-                  <li class="dropdown-item">
+                  <li class="dropdown-item member-list">
                       <div class="intro" id="users2" style="margin-top: 10px;">
                           <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
                           <div class="infor">
@@ -329,7 +329,7 @@ class Card {
                           </div>
                       </div>
                   </li>
-                  <li class="dropdown-item">
+                  <li class="dropdown-item member-list">
                       <div class="intro" id="users3" style="margin-top: 10px;">
                           <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
                           <div class="infor">
@@ -437,25 +437,34 @@ class Card {
 
     this.btnDueDate.addEventListener("click", () => {
       var start = $("#startDate").val().trim();
-        var end = $("#endDate").val().trim();
-        if (start != "" && end != "") {
-          this.state.endDate = formatMinDate(new Date(end));
-          this.divBottom.innerHTML = this.addContentBottom();
-          $(".start button").text(formatDate(new Date(start)));
-          $(".end button").text(formatDate(new Date(end)));
-        }
+      var end = $("#endDate").val().trim();
+      if (start != "" && end != "") {
+        this.state.endDate = formatMinDate(new Date(end));
+        this.divBottom.innerHTML = this.addContentBottom();
+        $(".start button").text(formatDate(new Date(start)));
+        $(".end button").text(formatDate(new Date(end)));
+      }
     });
 
     $(document).ready(function () {
       LetterAvatar.transform();
       $("#searchUser").on("keyup", function () {
         var value = $(this).val().toLowerCase();
-        $("#users li").filter(function () {
+        $("#users li").filter(function (x) {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
       });
       // mới chỉnh chỗ này chú ý
     });
+    var elementsMember = document.getElementsByClassName("member-list");
+    elementsMember.forEach((e) => {
+      e.addEventListener("click", () => {
+        e.style.backgroundColor = "red";
+        console("e: "+e);
+      })
+      
+    });
+
     this.btnChecklist = document.getElementById("addCheckbox");
     this.checklistInput = document.getElementById("checkboxInput");
 
