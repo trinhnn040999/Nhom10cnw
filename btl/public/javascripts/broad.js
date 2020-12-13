@@ -650,9 +650,18 @@ addTodoListButton.addEventListener("click", () => {
 
 //đoạn code bị lỗi
 
+// 1 mảng li chứa element để click vào thì ra đối tượng cần invite
+var member = document.getElementsByClassName("inviteMember");
+// input này để tìm trong cơ sở dữ liệu, nhấn enter sẽ lấy ra đối tượng đổ vào member có class là inviteMember. dùng ejs thì cộng chuỗi...
+
+$('#inviteInput').on('keydown', function(e) {
+    if (e.which == 13) {
+        e.preventDefault();
+        console.log("xin chào");
+    }
+});
 
 
-// let member_email = document.getElementById("inviteInput");
 // let add = document.getElementById("addmember");
 // add.addEventListener("click", () => {
 //     if (member_email.value.trim() != "") {

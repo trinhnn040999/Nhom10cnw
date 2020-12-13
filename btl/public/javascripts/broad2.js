@@ -457,13 +457,12 @@ class Card {
       // mới chỉnh chỗ này chú ý
     });
     var elementsMember = document.getElementsByClassName("member-list");
-    elementsMember.forEach((e) => {
-      e.addEventListener("click", () => {
-        e.style.backgroundColor = "red";
-        console("e: "+e);
+    var i;
+    for (i = 0; i < elementsMember.length; i++) {
+      elementsMember[i].addEventListener("click", () => {
+        // code thêm member ở đây
       })
-      
-    });
+    }
 
     this.btnChecklist = document.getElementById("addCheckbox");
     this.checklistInput = document.getElementById("checkboxInput");
