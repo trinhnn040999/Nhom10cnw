@@ -646,7 +646,31 @@ addTodoListButton.addEventListener("click", () => {
     }
 });
 
+
+
+//đoạn code bị lỗi
+
+
+
+// let member_email = document.getElementById("inviteInput");
+// let add = document.getElementById("addmember");
+// add.addEventListener("click", () => {
+//     if (member_email.value.trim() != "") {
+//        var data3 = {
+//             'email': member_email.value
+//         };
+//         $.ajax({
+//             type: "POST",
+//             url: "/broad/invite",
+//             data = data3,
+//             dataType = "json",
+//         });
+//     }
+// });
+//đoạn code bị lỗi
 // dua du lieu vao broad
+
+
 $.ajax({
         url: "/api/broad",
         type: "get",
