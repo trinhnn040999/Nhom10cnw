@@ -256,16 +256,16 @@ app.get('/get_broad_star', function(req, res, next) {
     })
 })
 
-app.get('/search', function(req, res, next) {
+app.post('/search', function(req, res, next) {
     var data = {
-        'username': req.body.username,
+        'name_search': req.body.name_search,
     };
-    connection.query("select * from accounts where username like '%" + data['username'] + "%'" + "email LIKE '%" + data['username'] + "%'", (err, results, fields) => {
-        if (err) throw err
-        console.log("success");
-        res.json(results)
-    });
-
+    connection.query("select * from accounts where username like '%" + data['name_search'] + "%' or " + "email LIKE '%" + data['name_search'] + "%'",
+        (err, results, fields) => {
+            if (err) throw err
+            console.log("success");
+            res.json(results)
+        });
 
 })
 

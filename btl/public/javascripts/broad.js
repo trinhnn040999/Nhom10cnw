@@ -657,7 +657,53 @@ var member = document.getElementsByClassName("inviteMember");
 $('#inviteInput').on('keydown', function(e) {
     if (e.which == 13) {
         e.preventDefault();
-        console.log("xin chào");
+        console.log($('#inviteInput').val());
+        var search = $('#inviteInput').val()
+        if (search != '') {
+            var data = {
+                'name_search': search
+            }
+            $.ajax({
+                    type: "POST",
+                    url: '/api/search',
+                    data: data,
+                    dataType: 'json'
+                })
+                .then(data => {
+                    console.log(data)
+                    let ul = document.getElementById('users')
+                    data.forEach(element => {
+                        let li = document.createElement('li')
+                        ul.append(li)
+                        li.classList.add('dropdown-item')
+                        li.classList.add('inviteMember')
+                        let div = document.createElement('div')
+                        li.append(div)
+                        div.classList.add('intro')
+                        div.setAttribute('style', 'margin-top: 10px;')
+                        let img = document.createElement('img')
+                        div.append(img)
+                        img.classList.add('round')
+                        img.classList.add('icon-menu')
+                        img.setAttribute('width', '30')
+                        img.setAttribute('height', '30')
+                        img.setAttribute('avatar', element['fullname'])
+                        let div2 = document.createElement('div')
+                        div.append(div2)
+                        div2.classList.add('infor')
+                        let div3 = document.createElement('div')
+                        div2.append(div3)
+                        div3.classList.add('name')
+                        div3.append(element['fullname'])
+
+                        LetterAvatar.transform()
+                    });
+
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }
 });
 
