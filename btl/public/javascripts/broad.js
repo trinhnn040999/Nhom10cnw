@@ -661,13 +661,13 @@ $('#inviteInput').on('keydown', function(e) {
     }
 });
 
-    var i;
-    for (i = 0; i < member.length; i++) {
-        member[i].addEventListener("click", () => {
+var i;
+for (i = 0; i < member.length; i++) {
+    member[i].addEventListener("click", () => {
         // click vào đối tượng
         console.log("xin chào member");
-      })
-    }
+    })
+}
 
 
 // let add = document.getElementById("addmember");
@@ -694,6 +694,8 @@ $.ajax({
     })
     .then((data) => {
         // lay du lieu tu textCard
+        let titleBoard = document.getElementById('titleBoard')
+        titleBoard.innerText = data['broadName']
         $.ajax({
                 url: "/api/textCard",
                 type: "get",

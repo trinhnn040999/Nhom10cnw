@@ -256,5 +256,16 @@ app.get('/get_broad_star', function(req, res, next) {
     })
 })
 
+app.get('/search', function(req, res, next) {
+    var data = {
+        'username': req.body.username,
+    };
+    connection.query("select username from accounts where username like '%" + data['username'] + "%'", (err, results, fields) => {
+        if (err) throw err
+        console.log("success");
+    });
+})
+
+
 
 module.exports = app;
