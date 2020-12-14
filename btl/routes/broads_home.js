@@ -298,6 +298,7 @@ app.get('/get_user', function(req, res, next) {
     })
 })
 
+
 app.post('/change_text_card', function(req, res, next) {
     var card = {
         'id': req.body.id,
@@ -312,5 +313,13 @@ app.post('/change_text_card', function(req, res, next) {
 })
 
 
+app.get('/memberteam', function(req, res, next) {
+    var id_broad = req.cookies['id_broad'];
+    connection.query("select * from accounts where email in(select email from broad where broad.id =?) ", id_broad, (error, results, fields) => {
+
+        console.log(results[0]['username']);
+        res.json(results)
+    })
+})
 
 module.exports = app;

@@ -765,8 +765,21 @@ $('#inviteInput').on('keydown', function(e) {
     }
 });
 
-
-
+$(document).ready(function () {
+    $(".inviteMember").click(function (e) {
+      e.preventDefault();
+      console.log("e: "+e)
+    });
+  });
+// let i;
+// for (i = 0; i < member.length; i++) {
+//     console.log("i "+i);
+//     member[i].addEventListener("click", () => {
+//         console.log("ii "+i);
+//         // click vào đối tượng
+//         console.log(i+"/"+member[i]);
+//     })
+// }
 
 // let add = document.getElementById("addmember");
 // add.addEventListener("click", () => {
@@ -993,3 +1006,45 @@ $(function() {
         }
     });
 });
+
+
+
+
+function showMember(user_name, member) {
+    let div1 = document.createElement(div);
+    div1.classList.add("intro dropdown-item");
+    div1.setAttribute("style","margin-top: 10px;");
+    let img = document.createElement(img);
+    img.classList.add("round icon-menu");
+    img.setAttribute("width", "30");
+    img.setAttribute("height", "30");
+    img.setAttribute("avatar",  user_name);
+    let div2 = document.createElement(div);
+    div2.classList.add("infor");
+    let div3 = document.createElement(div);
+    div3.classList.add("name");
+    div3.innerText = user_name;
+    div2.append(div3);
+    div1.append(img);
+    div1.append(div2);
+    member.append(div1);
+}
+let member1 = document.getElementById('member');
+let button1 = document.getElementById('memberTeam');
+//C:\Users\admin\Desktop\New folder\Nhom10cnw\btl
+
+button1.addEventListener('click', () => {
+$.ajax({
+    url: '/api/memberteam',
+    type: 'get'
+})
+.then(data => {
+    console.log(data)
+    data.forEach(element => {
+        showMember(element['username'], member1)
+    });
+})
+.catch(err => {
+    console.log(err)
+})
+})
