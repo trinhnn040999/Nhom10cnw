@@ -1193,7 +1193,7 @@ function showMember(user_name) {
     img.setAttribute('class','round icon-menu');
     img.setAttribute('width', '30');
     img.setAttribute('height', '30');
-    img.setAttribute('avatar', "Lê Đình Tài");
+    img.setAttribute('src', "/images/default_avatar.png");
     let div2 = document.createElement('div');
     div2.setAttribute('class','infor');
     let div3 = document.createElement('div');
