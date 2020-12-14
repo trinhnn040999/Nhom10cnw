@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext"
+        rel="stylesheet">
     <link href="/stylesheets/bootstrap.css" rel="stylesheet">
     <link href="/stylesheets/fontawesome-all.css" rel="stylesheet">
     <link href="/stylesheets/swiper.css" rel="stylesheet">
@@ -16,6 +17,12 @@
     <!-- Favicon  -->
     <link rel="icon" href="images/icon.svg">
 </head>
+<script>
+    function hindElert() {
+        $(".alert.alert-success").css("display", "none");
+    }
+    setTimeout(hindElert, 3000)
+</script>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
@@ -26,7 +33,8 @@
         <a class="navbar-brand logo-image" href="index.ejs"><img src="images/logo.svg" alt="alternative"></a>
 
         <!-- Mobile Menu Toggle Button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-awesome fas fa-bars"></span>
             <span class="navbar-toggler-awesome fas fa-times"></span>
         </button>
@@ -37,47 +45,50 @@
             <div class="signin-signup">
                 <form action="/auth" class="sign-in-form" method="POST">
                     <% if(thongBao) { %>
-                    <h1 style='color:<%= color %>'><%= thongBao %></h1>
-                    
-                    <% } %>
-                    <h2 class="title"></h2>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="username" placeholder="Username" required/>
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="Password" required/>
-                    </div>
-                    <input type="submit" value="Login" class="btn solid" />
+                        <div class="alert alert-success">
+                            <strong style='color:<%= color %>'>
+                                <%= thongBao %>
+                            </strong>
+                        </div>
+                        <% } %>
+                            <h2 class="title">Sign in</h2>
+                            <div class="input-field">
+                                <i class="fas fa-user"></i>
+                                <input type="text" name="username" placeholder="Username" required />
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" name="password" placeholder="Password" required />
+                            </div>
+                            <input type="submit" value="Login" class="btn solid" />
 
-                    <p class="social-text">Or</p>
-                    <div class="social-media">
-                        <a href="/auth/facebook" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="/auth/google" class="social-icon">
-                            <i class="fab fa-google"></i>
-                        </a>
-                    </div>
-                    <a href="./forgot.html" class="forgot">Forgot Password</a>
+                            <p class="social-text">Or</p>
+                            <div class="social-media">
+                                <a href="/auth/facebook" class="social-icon">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="/auth/google" class="social-icon">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                            </div>
+                            <a href="./forgot.html" class="forgot">Forgot Password</a>
                 </form>
 
                 <form action="register" class="sign-up-form" id='form-1' method="POST">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input id="fullname" type="text" placeholder="UserName" name="username" required/>
+                        <input id="fullname" type="text" placeholder="UserName" name="username" required />
                         <span class="form-message"></span>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input id="email" type="email" placeholder="Email" name="email" required/>
+                        <input id="email" type="email" placeholder="Email" name="email" required />
                         <span class="form-message"></span>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input id="password" type="password" placeholder="Password" name="password" required/>
+                        <input id="password" type="password" placeholder="Password" name="password" required />
                         <span class="form-message"></span>
                     </div>
                     <div class="input-field">
@@ -98,8 +109,8 @@
                         Enter your personal details and start journey with us
                     </p>
                     <button class="btn transparent" id="sign-up-btn">
-            Sign up
-        </button>
+                        Sign up
+                    </button>
                 </div>
                 <img src="/images/log.svg" class="image" alt="" />
             </div>
@@ -110,8 +121,8 @@
                         To keep connected with us please login with your personal info
                     </p>
                     <button class="btn transparent" id="sign-in-btn">
-            Sign in
-        </button>
+                        Sign in
+                    </button>
                 </div>
                 <img src="/images/register.svg" class="image" alt="" />
             </div>
@@ -132,7 +143,10 @@
             ]
         });
     </script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/javascripts/broad.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 </body>
 
 </html>
