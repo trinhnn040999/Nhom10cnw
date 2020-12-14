@@ -567,7 +567,7 @@ class EditableText {
         this.p = document.createElement(this.elementContainer);
         this.p.innerText = this.text;
 
-        this.p.addEventListener("click", () => {
+        this.p.addEventListener("dbclick", () => {
             this.showEditableTextArea.call(this);
         });
 
