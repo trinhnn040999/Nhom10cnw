@@ -180,6 +180,7 @@ class Card {
       // { title: "xin chào", checked: "checked" }
       checklist: [],
       comments: [],
+      members: ["Sieu nhan gao"],
     };
     this.render();
     LetterAvatar.transform();
@@ -258,6 +259,7 @@ class Card {
     this.menu = document.createElement("div");
     this.menuContainer = document.createElement("div");
     this.menuTitle = document.createElement("div");
+    this.menuMember = document.createElement("ul");
     this.menuDescription = document.createElement("div");
     this.commentsInput = document.createElement("input");
     this.commentsButton = document.createElement("button");
@@ -272,6 +274,7 @@ class Card {
     //Add class names
     this.menuChecklist.className = "menuChecklist checklist";
     this.menu.className = "menu row";
+    this.menuMember.className = "menuMember list-group list-group-horizontal";
     this.menuContainer.className = "menuContainer";
     this.menuTitle.className = "menuTitle";
     this.menuDescription.className = "menuDescription";
@@ -310,31 +313,35 @@ class Card {
         </button>
         <div class="dropdown-menu" style= "width :100%;">
                 <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                <input type="text" class="form-control" placeholder="Search members" id="searchUser">
+                <input type="text" class="form-control" placeholder="Search members" id="searchUser" autocomplete="off">
                 </div> 
                 <ul id="users" style="height:200px;overflow:auto;">
-                    <li class="dropdown-item member-list">
+                    <li class="dropdown-item member-list" style="position: relative;">
                       <div class="intro" id="users1" style="margin-top: 10px;">
                           <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
                           <div class="infor">
                             <div class="name">Lê Đình Tài</div>
                           </div>
+                          <span class='add_card_member'><i class="fas fa-plus" style="color:gray;"></i></span>
                       </div>
                   </li>
-                  <li class="dropdown-item member-list">
+                  <li class="title-select"> MEMBER CARD </li>
+                  <li class="dropdown-item member-card" style="position: relative;">
                       <div class="intro" id="users2" style="margin-top: 10px;">
                           <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
                           <div class="infor">
                             <div class="name">Siêu nhân đỏ</div>
                           </div>
+                          <span class='delete_card_member' style="position:absolute;top:10px;right:4px;">x</span>
                       </div>
                   </li>
-                  <li class="dropdown-item member-list">
-                      <div class="intro" id="users3" style="margin-top: 10px;">
+                  <li class="dropdown-item member-card" style="position: relative;">
+                      <div class="intro" id="users2" style="margin-top: 10px;">
                           <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
                           <div class="infor">
-                            <div class="name">Lê Văn Luyện</div>
+                            <div class="name">Siêu nhân đỏ</div>
                           </div>
+                          <span class='delete_card_member' style="position:absolute;top:10px;right:4px;">x</span>
                       </div>
                   </li>
                 </ul>
@@ -402,6 +409,7 @@ class Card {
     this.menu.append(this.menuLeft);
     this.menu.append(this.menuRight);
     this.menuLeft.append(this.menuTitle);
+    this.menuLeft.append(this.menuMember);
     this.menuLeft.append(this.progressBar);
     this.menuLeft.append(this.menuDescription);
     this.menuLeft.append(this.menuChecklist);
@@ -432,6 +440,7 @@ class Card {
 
     this.renderComments();
     this.renderChecklist();
+    this.renderMembers();
 
     this.btnDueDate = document.getElementById("btnDueDate");
 
@@ -450,19 +459,43 @@ class Card {
       LetterAvatar.transform();
       $("#searchUser").on("keyup", function () {
         var value = $(this).val().toLowerCase();
-        $("#users li").filter(function (x) {
+        $("#users li.member-list").filter(function (x) {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
       });
-      // mới chỉnh chỗ này chú ý
     });
-    var elementsMember = document.getElementsByClassName("member-list");
-    var i;
-    for (i = 0; i < elementsMember.length; i++) {
-      elementsMember[i].addEventListener("click", () => {
-        // code thêm member ở đây
-      })
+    this.memberList = document.getElementsByClassName("member-list");
+    var members = [];
+    for (var i = 0; i < this.memberList.length; i++) {
+      members.push(this.memberList[i]);
     }
+    members.forEach((element) => {
+      element.addEventListener("click", () => {
+        var name = element.textContent;
+        if (!this.state.members.includes(name.trim())) {
+          this.state.members.push(name.trim());
+          this.renderMembers();
+        }
+      });
+    });
+    // thêm thành viên thì click chỗ này
+    // this.memberList = document.getElementsByClassName("member-list");
+    // for (var i = 0; i < this.memberList.length; ++i) {
+    //   this.memberList[i].onclick = function (e) {
+    //     console.log(this);
+    //     if (!this.state.members.includes(e.target.lastChild.textContent)) {
+    //       this.state.members.push(e.target.lastChild.textContent);
+    //       this.renderMembers();
+    //     }
+    //   };
+    // }
+    // var elementsMember = document.getElementsByClassName("member-list");
+    // var i;
+    // for (i = 0; i < elementsMember.length; i++) {
+    //   elementsMember[i].addEventListener("click", () => {
+    //     // code thêm member ở đây
+    //   })
+    // }
 
     this.btnChecklist = document.getElementById("addCheckbox");
     this.checklistInput = document.getElementById("checkboxInput");
@@ -483,6 +516,23 @@ class Card {
 
     checklist();
     dateTime();
+  }
+  formatMember(name) {
+    return `
+    <li class="list-group-item" style="background: transparent;border: none;">
+      <img class="round icon-menu" style="margin-top:-9px; margin-left:0px;" width="30" height="30" avatar="${name}">
+    </li>
+    `;
+  }
+  renderMembers() {
+    let members = Array.from(this.menuMember.childNodes);
+    members.forEach((member) => {
+      member.remove();
+    });
+    this.state.members.forEach((member) => {
+      $(".menuMember").append(this.formatMember(member));
+    });
+    LetterAvatar.transform();
   }
   //Chỉnh comment
   renderComments() {
@@ -690,7 +740,7 @@ for (let i = 0; i < 10; i++) {
 checklist();
 sortTable();
 dateTime();
-$(document).on('click', '.inviteMember', function(e){
+$(document).on("click", ".inviteMember", function (e) {
   console.log($(this).children().children().next().text());
-  console.log($(this).children().children().attr('src'));
-})
+  console.log($(this).children().children().attr("src"));
+});

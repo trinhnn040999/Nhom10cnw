@@ -102,8 +102,8 @@ class todoList {
   constructor(place, title = "List", id) {
     this.place = place;
     this.state = {
-        text: title,
-      };
+      text: title,
+    };
     this.cardArray = [];
     this.id = id;
     this.render();
@@ -111,9 +111,7 @@ class todoList {
 
   addToDo(id_) {
     let text = this.input.value;
-    this.cardArray.push(
-      new Card(text,this.div, id_)
-    );
+    this.cardArray.push(new Card(text, this.div, id_));
   }
 
   //   render() {
@@ -192,7 +190,13 @@ class todoList {
 }
 
 class Card {
-  constructor(text, place, todoList, endDate = formatMinDate(new Date()),id = "") {
+  constructor(
+    text,
+    place,
+    todoList,
+    endDate = formatMinDate(new Date()),
+    id = ""
+  ) {
     this.place = place;
     this.todoList = todoList;
     this.state = {
@@ -202,6 +206,7 @@ class Card {
       //mảng gồm đối tượng checklist ntn{ title: "xin chào", checked: "checked" }
       checklist: [],
       comments: [],
+      members: ["Sieu nhan gao"]
     };
     this.id = id;
     this.render();
@@ -289,6 +294,7 @@ class Card {
     this.menu = document.createElement("div");
     this.menuContainer = document.createElement("div");
     this.menuTitle = document.createElement("div");
+    this.menuMember = document.createElement("ul");
     this.menuDescription = document.createElement("div");
     this.commentsInput = document.createElement("input");
     this.commentsButton = document.createElement("button");
@@ -303,6 +309,7 @@ class Card {
     //Add class names
     this.menuChecklist.className = "menuChecklist checklist";
     this.menu.className = "menu row";
+    this.menuMember.className = "menuMember list-group list-group-horizontal";
     this.menuContainer.className = "menuContainer";
     this.menuTitle.className = "menuTitle";
     this.menuDescription.className = "menuDescription";
@@ -313,100 +320,104 @@ class Card {
     this.menuLeft.className = "menu-left col-sm-8";
     //Add inner Text
     this.progressBar.innerHTML = `
-    <div class="progressbar-container">
-      <div class="progressbar-bar"></div>
-      <div class="progressbar-label"></div>
-    </div> `;
+      <div class="progressbar-container">
+        <div class="progressbar-bar"></div>
+        <div class="progressbar-label"></div>
+      </div> `;
     this.menuRight.innerHTML = ` <nav>
-    <ul>
-    <li>
-    <div class="dueDate">
-      <div class="start row" style="margin-bottom:5px;">
-        <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:green;">Start: </div>
-        <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:green;"></button>
-      </div>
-      <div class="end row" >
-        <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:red;">End: </div>
-        <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:red;"></button>
-      </div>
-    </div>
-  </li>
-      <li class="title-select">
-          ADD TO CARD
-      </li>
-      <li class="select-menu">
-      <div class="dropdown">
-      <button type="button" class="btn btn-light dropdown-toggle" id="btn-member" data-toggle="dropdown">
-      <i class="fas fa-user"></i> Members
-      </button>
-      <div class="dropdown-menu" style= "width :100%;">
-              <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-              <input type="text" class="form-control" placeholder="Search members" id="searchUser">
-              </div> 
-              <ul id="users" style="height:200px;overflow:auto;">
-                  <li class="dropdown-item member-list">
-                    <div class="intro" id="users1" style="margin-top: 10px;">
-                        <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
-                        <div class="infor">
-                          <div class="name">Lê Đình Tài</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="dropdown-item member-list">
-                    <div class="intro" id="users2" style="margin-top: 10px;">
-                        <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
-                        <div class="infor">
-                          <div class="name">Siêu nhân đỏ</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="dropdown-item member-list">
-                    <div class="intro" id="users3" style="margin-top: 10px;">
-                        <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
-                        <div class="infor">
-                          <div class="name">Lê Văn Luyện</div>
-                        </div>
-                    </div>
-                </li>
-              </ul>
-      </div>
-    </div>
-      </li>
-      <li class="select-menu">
-      <div class="dropdown">
-          <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-          <i class="fas fa-calendar-check"></i> Checklist
-          </button>
-        <div class="dropdown-menu">
-            <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                <input type="text" class="form-control" placeholder="Title..." id="checkboxInput">
-                <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add checklist</button>
-            </div>
+      <ul>
+      <li>
+      <div class="dueDate">
+        <div class="start row" style="margin-bottom:5px;">
+          <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:green;">Start: </div>
+          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:green;"></button>
+        </div>
+        <div class="end row" >
+          <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:red;">End: </div>
+          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:red;"></button>
         </div>
       </div>
-      </li>
-      <li class="select-menu">
-      <div class="dropdown">
-        <button type="button" class="btn btn-light dropdown-toggle" id="btn-due" data-toggle="dropdown">
-            <i class="far fa-calendar-alt"></i> Due Date
+    </li>
+        <li class="title-select">
+            ADD TO CARD
+        </li>
+        <li class="select-menu">
+        <div class="dropdown">
+        <button type="button" class="btn btn-light dropdown-toggle" id="btn-member" data-toggle="dropdown">
+        <i class="fas fa-user"></i> Members
         </button>
-        <div class="dropdown-menu">
-            <ul style="flex: 1 0 220px; text-align: left;">
-              <li>
-                <label style="justify-content: left; margin-left: 10px;">Start Date:</label>
-                <input id="startDate" name="startDate" type="text" class="form-control" style="margin:10px; width:200px;" autocomplete="off"/>
-              </li>
-              <li>
-                <label style="justify-content: left; margin-left: 10px;">End Date:</label>
-                <input id="endDate" name="endDate" type="text" class="form-control" style="margin: 10px; width:200px;" autocomplete="off"/>
-              </li>
-            </ul>
-            <button class="btn btn-success" id="btnDueDate" style="text-align: center; margin: 10px; width:200px;">Ok</button>
+        <div class="dropdown-menu" style= "width :100%;">
+                <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                <input type="text" class="form-control" placeholder="Search members" id="searchUser" autocomplete="off">
+                </div> 
+                <ul id="users" style="height:200px;overflow:auto;">
+                    <li class="dropdown-item member-list" style="position: relative;">
+                      <div class="intro" id="users1" style="margin-top: 10px;">
+                          <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                          <div class="infor">
+                            <div class="name">Lê Đình Tài</div>
+                          </div>
+                          <span class='add_card_member'><i class="fas fa-plus" style="color:gray;"></i></span>
+                      </div>
+                  </li>
+                  <li class="title-select"> MEMBER CARD </li>
+                  <li class="dropdown-item member-card" style="position: relative;">
+                      <div class="intro" id="users2" style="margin-top: 10px;">
+                          <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                          <div class="infor">
+                            <div class="name">Siêu nhân đỏ</div>
+                          </div>
+                          <span class='delete_card_member' style="position:absolute;top:10px;right:4px;">x</span>
+                      </div>
+                  </li>
+                  <li class="dropdown-item member-card" style="position: relative;">
+                      <div class="intro" id="users2" style="margin-top: 10px;">
+                          <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
+                          <div class="infor">
+                            <div class="name">Siêu nhân đỏ</div>
+                          </div>
+                          <span class='delete_card_member' style="position:absolute;top:10px;right:4px;">x</span>
+                      </div>
+                  </li>
+                </ul>
         </div>
+      </div>
+        </li>
+        <li class="select-menu">
+        <div class="dropdown">
+            <button type="button"  id="btn-check" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-calendar-check"></i> Checklist
+            </button>
+          <div class="dropdown-menu">
+              <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                  <input type="text" class="form-control" placeholder="Title..." id="checkboxInput">
+                  <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add checklist</button>
+              </div>
+          </div>
         </div>
         </li>
-    </ul>
-    </nav>`;
+        <li class="select-menu">
+        <div class="dropdown">
+          <button type="button" class="btn btn-light dropdown-toggle" id="btn-due" data-toggle="dropdown">
+              <i class="far fa-calendar-alt"></i> Due Date
+          </button>
+          <div class="dropdown-menu">
+              <ul style="flex: 1 0 220px; text-align: left;">
+                <li>
+                  <label style="justify-content: left; margin-left: 10px;">Start Date:</label>
+                  <input id="startDate" name="startDate" type="text" class="form-control" style="margin:10px; width:200px;" autocomplete="off"/>
+                </li>
+                <li>
+                  <label style="justify-content: left; margin-left: 10px;">End Date:</label>
+                  <input id="endDate" name="endDate" type="text" class="form-control" style="margin: 10px; width:200px;" autocomplete="off"/>
+                </li>
+              </ul>
+              <button class="btn btn-success" id="btnDueDate" style="text-align: center; margin: 10px; width:200px;">Ok</button>
+          </div>
+          </div>
+          </li>
+      </ul>
+      </nav>`;
 
     this.commentsButton.innerText = "Add";
     this.commentsInput.placeholder = "Write a comment...";
@@ -429,10 +440,10 @@ class Card {
     });
 
     //Append
-
     this.menu.append(this.menuLeft);
     this.menu.append(this.menuRight);
     this.menuLeft.append(this.menuTitle);
+    this.menuLeft.append(this.menuMember);
     this.menuLeft.append(this.progressBar);
     this.menuLeft.append(this.menuDescription);
     this.menuLeft.append(this.menuChecklist);
@@ -465,8 +476,10 @@ class Card {
 
     this.renderComments();
     this.renderChecklist();
+    this.renderMembers();
 
     this.btnDueDate = document.getElementById("btnDueDate");
+
     this.btnDueDate.addEventListener("click", () => {
       var start = $("#startDate").val().trim();
       var end = $("#endDate").val().trim();
@@ -479,22 +492,28 @@ class Card {
     });
 
     $(document).ready(function () {
+      LetterAvatar.transform();
       $("#searchUser").on("keyup", function () {
         var value = $(this).val().toLowerCase();
-        $("#users li").filter(function () {
+        $("#users li.member-list").filter(function (x) {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
       });
-      // mới chỉnh chỗ này chú ý
     });
-    // đoạn này bug giống tối
-    var elementsMember = document.getElementsByClassName("member-list");
-    var i;
-    for (i = 0; i < elementsMember.length; i++) {
-      elementsMember[i].addEventListener("click", () => {
-        // code thêm member ở đây
-      });
+    this.memberList = document.getElementsByClassName("member-list");
+    var members = [];
+    for (var i = 0; i < this.memberList.length; i++) {
+      members.push(this.memberList[i]);
     }
+    members.forEach((element) => {
+      element.addEventListener("click", () => {
+        var name = element.textContent;
+        if (!this.state.members.includes(name.trim())) {
+          this.state.members.push(name.trim());
+          this.renderMembers();
+        }
+      });
+    });
     this.btnChecklist = document.getElementById("addCheckbox");
     this.checklistInput = document.getElementById("checkboxInput");
 
@@ -515,7 +534,16 @@ class Card {
     checklist();
     dateTime();
   }
-
+  renderMembers() {
+    let members = Array.from(this.menuMember.childNodes);
+    members.forEach((member) => {
+      member.remove();
+    });
+    this.state.members.forEach((member) => {
+      $(".menuMember").append(this.formatMember(member));
+    });
+    LetterAvatar.transform();
+  }
   //Chỉnh comment
   renderComments() {
     let currentCommentsDOM = Array.from(this.menuComments.childNodes);
@@ -534,7 +562,13 @@ class Card {
       );
     });
   }
-
+  formatMember(name) {
+    return `
+    <li class="list-group-item" style="background: transparent;border: none;">
+      <img class="round icon-menu" style="margin-top:-9px; margin-left:0px;" width="30" height="30" avatar="${name}">
+    </li>
+    `;
+  }
   //tạo checklist
   renderChecklist() {
     let currentChecklistDOM = Array.from(this.ulCheckbox.childNodes);
