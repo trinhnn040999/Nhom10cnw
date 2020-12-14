@@ -112,8 +112,8 @@ class todoList {
 
     addToDo(id_, description) {
         let text = this.input.value;
-        console.log('name')
-        console.log(text)
+        // console.log('name')
+        // console.log(text)
         this.cardArray.push(
             new Card(text, this.div, this, id_, description)
         );
@@ -240,7 +240,7 @@ class Card {
                 this.showMenu.call(this);
             }
         });
-        console.log(this.id)
+        // console.log(this.id)
         this.divTop = document.createElement("div");
         this.divBottom = document.createElement("div");
         this.p = document.createElement("p");
@@ -269,6 +269,27 @@ class Card {
         this.card.append(this.divBottom);
 
         this.place.append(this.card);
+
+        var date_ = {
+            id: this.id
+        }
+        $.ajax({
+                type: 'POST',
+                url: '/api/date_detail_card',
+                data: date_,
+                dataType: 'json'
+            })
+            .then(data => {
+                console.log(data)
+                var start = data['start']
+                if (start == null) start = ''
+                var end = data['end']
+                if (end == null) end = ''
+                this.state.endDate = formatMinDate(new Date(end));
+                this.divBottom.innerHTML = this.addContentBottom();
+                $(".start button").text(formatDate(new Date(start)));
+                $(".end button").text(formatDate(new Date(end)));
+            })
     }
 
     addContentBottom() {
@@ -494,10 +515,54 @@ class Card {
 
         this.btnDueDate = document.getElementById("btnDueDate");
 
+
+        //lay thong tin ve startDate va endDate
+        var date_ = {
+            id: this.id
+        }
+        $.ajax({
+                type: 'POST',
+                url: '/api/date_detail_card',
+                data: date_,
+                dataType: 'json'
+            })
+            .then(data => {
+                this.divBottom.innerHTML = this.addContentBottom();
+
+                var start = data['start']
+                console.log(start)
+                if (start == null) start = ''
+                else $(".start button").text(formatDate(new Date(start)));
+
+                var end = data['end']
+                console.log(end)
+                if (end == null) end = ''
+                else {
+                    $(".end button").text(formatDate(new Date(end)));
+                    this.state.endDate = formatMinDate(new Date(end));
+
+                }
+
+
+
+            })
+
         this.btnDueDate.addEventListener("click", () => {
             var start = $("#startDate").val().trim();
             var end = $("#endDate").val().trim();
             if (start != "" && end != "") {
+                var date_1 = {
+                    id: this.id,
+                    start: start,
+                    end: end
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/update_date_time',
+                    data: date_1,
+                    dataType: 'json'
+                })
+
                 this.state.endDate = formatMinDate(new Date(end));
                 this.divBottom.innerHTML = this.addContentBottom();
                 $(".start button").text(formatDate(new Date(start)));
@@ -781,7 +846,7 @@ addTodoListButton.addEventListener("click", () => {
         var data = {
             titleName: addTodoListInput.value,
         };
-        console.log(data["titleName"]);
+        // console.log(data["titleName"]);
         $.ajax({
             type: "POST",
             url: "/broad/createTodo",
@@ -798,8 +863,8 @@ addTodoListButton.addEventListener("click", () => {
                 data_id.forEach((element) => {
                     id_card = element["id_card"];
                 });
-                console.log("id_card");
-                console.log(id_card);
+                // console.log("id_card");
+                // console.log(id_card);
                 let toto = new todoList(root, data["titleName"], id_card);
 
                 sortTable();
@@ -809,12 +874,12 @@ addTodoListButton.addEventListener("click", () => {
                     drop: function(event, ui) {
                         // lấy ra di của thằng cữ
                         var idTaskOld = ui.draggable.attr("id");
-                        console.log("idTaskOld");
-                        console.log(idTaskOld);
+                        // console.log("idTaskOld");
+                        // console.log(idTaskOld);
                         // lấy của thằng cữ
                         var idTaskNew = $(this).attr("id");
-                        console.log("idTaskNew");
-                        console.log(idTaskNew);
+                        // console.log("idTaskNew");
+                        // console.log(idTaskNew);
                         var data = {
                             id: idTaskOld,
                             id_card: idTaskNew,
@@ -851,7 +916,7 @@ button_1.addEventListener("click", () => {
 $("#inviteInput").on("keydown", function(e) {
     if (e.which == 13) {
         e.preventDefault();
-        console.log($("#inviteInput").val());
+        // console.log($("#inviteInput").val());
         var search = $("#inviteInput").val();
         if (search != "") {
             var data = {
@@ -864,7 +929,7 @@ $("#inviteInput").on("keydown", function(e) {
                     dataType: "json",
                 })
                 .then((data) => {
-                    console.log(data);
+                    // console.log(data);
                     let ul = document.getElementById("users");
                     data.forEach((element) => {
                         let li = document.createElement("li");
@@ -909,7 +974,7 @@ $("#inviteInput").on("keydown", function(e) {
                     }
                     var i = 0;
                     members.forEach((element) => {
-                        console.log(element);
+                        // console.log(element);
                         element.addEventListener("click", () => {
                             var username = element.lastChild.lastChild.lastChild.textContent;
                             var data = {
@@ -994,17 +1059,13 @@ $.ajax({
 
                 var title = data_task["title"];
 
-                //  console.log('data_task')
-                //  console.log(data_task)
+
                 title.forEach((element) => {
-                    // tao cac todolist
                     let todo = new todoList(root, element["title"], element["id_card"]);
 
                     try {
                         for (var i = 0; i < element["text_card"].length; i++) {
-                            // todo.input.value = element["text_card"][i];
-                            // console.log('text card')
-                            // console.log(element["text_card"][i])
+
                             var data4 = {
                                 id: element['id'][i]
                             }
@@ -1015,8 +1076,8 @@ $.ajax({
                                     dataType: 'json'
                                 })
                                 .then(data => {
-                                    console.log('text card')
-                                    console.log(data[0]['text_card'])
+                                    // console.log('text card')
+                                    // console.log(data[0]['text_card'])
                                     todo.input.value = data[0]['text_card']
                                     todo.addToDo(data[0]['id'], data[0]['description']);
                                     todo.input.value = "";
@@ -1040,12 +1101,12 @@ $.ajax({
                     drop: function(event, ui) {
                         // lấy ra di của thằng cữ
                         var idTaskOld = ui.draggable.attr("id");
-                        console.log("idTaskOld");
-                        console.log(idTaskOld);
+                        // console.log("idTaskOld");
+                        // console.log(idTaskOld);
                         // lấy của thằng cữ
                         var idTaskNew = $(this).attr("id");
-                        console.log("idTaskNew");
-                        console.log(idTaskNew);
+                        // console.log("idTaskNew");
+                        // console.log(idTaskNew);
                         var data = {
                             id: idTaskOld,
                             id_card: idTaskNew,
@@ -1063,7 +1124,7 @@ $.ajax({
                 console.log(err);
             });
 
-        console.log(data);
+        // console.log(data);
     })
     .catch((err) => {
         console.log(err);
@@ -1111,12 +1172,12 @@ $(document).ready(function() {
         drop: function(event, ui) {
             // lấy ra di của thằng cữ
             var idTaskOld = ui.draggable.attr("id");
-            console.log("idTaskOld");
-            console.log(idTaskOld);
+            // console.log("idTaskOld");
+            // console.log(idTaskOld);
             // lấy của thằng cữ
             var idTaskNew = $(this).attr("id");
-            console.log("idTaskNew");
-            console.log(idTaskNew);
+            // console.log("idTaskNew");
+            // console.log(idTaskNew);
         },
     });
 });
@@ -1175,29 +1236,30 @@ $(function() {
             debugger;
             // lấy ra di của thằng cữ
             var idTaskOld = ui.draggable.attr("id");
-            console.log("idTaskOld");
-            console.log(idTaskOld);
+            // console.log("idTaskOld");
+            // console.log(idTaskOld);
             // lấy của thằng cữ
             var idTaskNew = $(this).attr("id");
-            console.log("idTaskNew");
-            console.log(idTaskNew);
+            // console.log("idTaskNew");
+            // console.log(idTaskNew);
         },
     });
 });
 let member1 = document.getElementById("member1");
+
 function showMember(user_name) {
     let div1 = document.createElement('div');
-    div1.setAttribute('class','intro dropdown-item');
+    div1.setAttribute('class', 'intro dropdown-item');
     div1.setAttribute('style', 'margin-top: 10px;');
     let img = document.createElement('img');
-    img.setAttribute('class','round icon-menu');
+    img.setAttribute('class', 'round icon-menu');
     img.setAttribute('width', '30');
     img.setAttribute('height', '30');
     img.setAttribute('src', "/images/default_avatar.png");
     let div2 = document.createElement('div');
-    div2.setAttribute('class','infor');
+    div2.setAttribute('class', 'infor');
     let div3 = document.createElement('div');
-    div3.setAttribute('class','name');
+    div3.setAttribute('class', 'name');
     div3.innerText = user_name;
     div2.append(div3);
     div1.append(img);
@@ -1214,7 +1276,7 @@ button1.addEventListener("click", () => {
             type: "get",
         })
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             data.forEach((element) => {
                 showMember(element['username']);
             });

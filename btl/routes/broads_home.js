@@ -261,4 +261,31 @@ app.post('/get_description', function(req, res, next) {
     })
 })
 
+// xu ly phan startDate va endStart theo id
+app.post('/date_detail_card', function(req, res, next) {
+    var id = req.body.id
+    connection.query('SELECT * FROM detail_card WHERE  detail_card.id=?', id, (error, results, fields) => {
+        // console.log(results)
+        res.json(results[0])
+    })
+})
+
+// update date time cua card
+app.post('/update_date_time', function(req, res, next) {
+    var id = req.body.id
+    console.log(id)
+    var start = req.body.start
+    var end = req.body.end
+    console.log(typeof start)
+    console.log(typeof end)
+    connection.query('UPDATE detail_card  set start=?, end=? where id= ?', [start, end, id], (error, results, fields) => {
+        if (error) throw error
+            // console.log(results)
+            // res.json(results[0])
+        else console.log('update date tiem success!')
+    })
+})
+
+
+
 module.exports = app;
