@@ -690,3 +690,7 @@ for (let i = 0; i < 10; i++) {
 checklist();
 sortTable();
 dateTime();
+$(document).on('click', '.inviteMember', function(e){
+  console.log($(this).children().children().next().text());
+  console.log($(this).children().children().attr('src'));
+})
