@@ -256,17 +256,38 @@ app.get('/get_broad_star', function(req, res, next) {
     })
 })
 
-app.get('/search', function(req, res, next) {
+app.post('/search', function(req, res, next) {
     var data = {
-        'username': req.body.username,
+        'name_search': req.body.name_search,
     };
-    connection.query("select * from accounts where username like '%" + data['username'] + "%'" + "email LIKE '%" + data['username'] + "%'", (err, results, fields) => {
-        if (err) throw err
-        console.log("success");
-        res.json(results)
-    });
-
+    connection.query("select * from accounts where username like '%" + data['name_search'] + "%' or " + "email LIKE '%" + data['name_search'] + "%'",
+        (err, results, fields) => {
+            if (err) throw err
+            console.log("success");
+            res.json(results)
+        });
 
 })
 
+app.post('/invite', function(req, res, next) {
+    var username = req.body.username
+
+    connection.query('select * from accounts where username=?', username, (error, results, next) => {
+        var email = results[0]['email']
+        var broad = {
+            'id': req.cookies['id_broad'],
+            'email': email,
+            'broadName': req.cookies['broadName'],
+            'favourite': '0'
+        }
+        try {
+            connection.query('insert into broad set ?', broad, (error, results, next) => {
+                console.log('invite success')
+            })
+        } catch {}
+
+    })
+    var query = 'insert into broad '
+
+})
 module.exports = app;
