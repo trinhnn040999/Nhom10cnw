@@ -183,7 +183,51 @@
         </ul>
     </div>
     <div class="content"></div>
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Dropdown button
+        </button>
+        <div class="dropdown-menu">
+            <ul class="change_background">
+                <li class="dropdown-item">
+                    <button style="background:url('../../public/images/background/bg1.gif') no-repeat"></button>
+                    <span>Tree cute</span>
+                </li>
+                <li class="dropdown-item">
+                    <button style="background:url('../../public/images/background/bg2.gif') no-repeat"></button>
+                    <span>Paper</span>
+                </li>
+                <li class="dropdown-item">
+                    <button style="background:url('../../public/images/background/bg3.jpg') no-repeat"></button>
+                    <span>Wall origin</span>
+                </li>
+                <li class="dropdown-item">
+                    <button style="background:url('../../public/images/background/bg4.jpg') no-repeat"></button>
+                    <span>wall white</span>
+                </li>
+                <li class="dropdown-item">
+                    <button style="background:url('../../public/images/background/bg5.jpg') no-repeat"></button>
+                    <span>Covit-19</span>
+                </li>
+                <li class="dropdown-item">
+                    <button style="background:url('../../public/images/background/bg6.png') no-repeat"></button>
+                    <span>Gift</span>
+                </li>
+                <li class="dropdown-item">
+                    <button style="background:#0079bf"></button>
+                    <span >Blue</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <button onclick="changeBackgroundType2(bgs[2])">xxxxxxxx</button>
     <script>
+        function myFunction() {
+            document.body.style.background = `lightblue  url('../../public/images/background/bg1.gif') no-repeat fixed center`;
+        }
+    </script>
+    <script>
+
         $(function () {
             $("#btnStar").click(function () {
                 if ($("i.fa-star").css("color") == "rgb(236, 142, 19)")
@@ -219,6 +263,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../../public/javascripts/broad2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="../../public/javascripts/changeBackgroud.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 </body>

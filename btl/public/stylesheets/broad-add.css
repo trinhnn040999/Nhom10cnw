@@ -1,11 +1,31 @@
 body {
-  background: #0079bf;
+  background:lightblue  url('/images/background/bg1.gif') no-repeat fixed center;
   height: 100vh;
   overflow-y: hidden;
 }
 button {
   outline: none;
   cursor: pointer;
+}
+ul.change_background{
+  height: 200px;
+  width: 200px;
+  overflow: auto;
+}
+.change_background li{
+  height: 40px;
+  width: 40px;
+  margin-top: 5px;
+}
+.change_background button{
+  height: 40px;
+  width: 40px;
+  background-size: auto auto;
+}
+
+.change_background button{
+  margin-right: 10px;
+  margin-left: -10px;
 }
 
 .header-board {
