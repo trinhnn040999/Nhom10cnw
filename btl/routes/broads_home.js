@@ -287,7 +287,30 @@ app.post('/invite', function(req, res, next) {
         } catch {}
 
     })
-    var query = 'insert into broad '
-
 })
+
+app.get('/get_user', function(req, res, next) {
+    var id_board = req.cookies['id_broad']
+    var query = 'SELECT accounts.username, accounts.email, broad.id, broad.broadName, broad.favourite FROM accounts, broad WHERE accounts.email=broad.email and broad.id=?'
+    connection.query(query, id_board, (error, results, next) => {
+        if (error) throw error
+        res.json(results)
+    })
+})
+
+app.post('/change_text_card', function(req, res, next) {
+    var card = {
+        'id': req.body.id,
+        'text_card': req.body.text_card
+    }
+
+    var query = 'update card set text_card = ? where id=?'
+    connection.query(query, [card['text_card'], card['id']], (error, results, next) => {
+        if (error) throw error
+        console.log('update success')
+    })
+})
+
+
+
 module.exports = app;

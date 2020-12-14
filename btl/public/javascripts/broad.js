@@ -131,7 +131,6 @@ class Card {
         this.id = id;
         this.render();
     }
-
     render() {
         this.card = document.createElement("li");
         this.card.classList.add("card-item");
@@ -339,7 +338,8 @@ class Card {
             this,
             "description",
             "textarea",
-            "p"
+            "p",
+            this.id
         );
         this.editableTitle = new EditableText(
             this.state.text,
@@ -347,7 +347,8 @@ class Card {
             this,
             "text",
             "input",
-            "h5"
+            "h5",
+            this.id
         );
 
         this.renderComments();
@@ -439,7 +440,7 @@ class Card {
 
 // để chỉnh sửa khi click vào text
 class EditableText {
-    constructor(text, place, card, property, typeOfInput, element = "p") {
+    constructor(text, place, card, property, typeOfInput, element = "p", id) {
         this.text = text;
         this.elementContainer = element;
         this.place = place;
@@ -447,6 +448,7 @@ class EditableText {
         this.property = property;
         this.typeOfInput = typeOfInput;
         this.render();
+        this.id = id;
     }
 
     render() {
@@ -472,15 +474,31 @@ class EditableText {
         this.input.value = oldText;
         this.saveButton.innerText = "Save";
         this.saveButton.className = "btn-save";
+        this.saveButton.setAttribute('id', 'change_text_card/' + this.id)
         this.input.classList.add("comment");
 
         this.saveButton.addEventListener("click", () => {
-            debugger;
+            console.log('OK')
+                // debugger;
+            var data = {
+                'id': this.id,
+                'text_card': this.input.value
+            }
+            console.log(data)
+            $.ajax({
+                type: 'POST',
+                url: '/api/change_text_card',
+                data: data,
+                dataType: 'json'
+            })
             this.text = this.input.value;
             this.card.state[this.property] = this.input.value;
             if (this.property == "text") {
                 this.card.p.innerText = this.input.value;
             }
+            $.ajax({
+
+            })
             this.div.remove();
             this.render();
         });
