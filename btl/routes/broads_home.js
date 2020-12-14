@@ -304,14 +304,12 @@ app.post('/change_text_card', function(req, res, next) {
         'id': req.body.id,
         'text_card': req.body.text_card
     }
-
-    var query = 'update card set text_card = ? where id=?'
+    var query = 'UPDATE card set text_card = ? where id=?'
     connection.query(query, [card['text_card'], card['id']], (error, results, next) => {
         if (error) throw error
         console.log('update success')
     })
 })
-
 
 app.get('/memberteam', function(req, res, next) {
     var id_broad = req.cookies['id_broad'];
