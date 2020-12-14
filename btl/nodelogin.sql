@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2020 at 06:53 PM
+-- Generation Time: Dec 14, 2020 at 03:01 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -75,13 +75,17 @@ CREATE TABLE `broad` (
 --
 
 INSERT INTO `broad` (`id`, `email`, `broadName`, `favourite`) VALUES
-(1, 'nguyenthithuan1591999@gmail.com', 'ML-intership', 0),
-(2, 'nguyenthithuan1591999@gmail.com', 'ML-intership_1', 0),
+(1, 'nguyenquyduc1591999@gmail.com', 'ML-intership', 1),
+(1, 'nguyenquyphuc1591999@gmail.com', 'ML-intership', 1),
+(1, 'nguyenthithuan1591999@gmail.com', 'ML-intership', 1),
+(2, 'nguyenthithuan1591999@gmail.com', 'ML-intership_1', 1),
 (3, 'nguyenquyphuc1591999@gmail.com', 'Học tiếng anh', 0),
 (4, 'nguyenquyphuc1591999@gmail.com', 'Học tiếng nhật', 0),
-(6, 'nguyenthithuan1591999@gmail.com', 'Đồ án tốt nghiệp cử nhân', 0),
-(13, 'nguyenthithuan1591999@gmail.com', 'test', 0),
-(14, 'nguyenthithuan1591999@gmail.com', 'as', 0);
+(6, 'nguyenthithuan1591999@gmail.com', 'Đồ án tốt nghiệp cử nhân', 1),
+(13, 'nguyenthithuan1591999@gmail.com', 'test', 1),
+(14, 'nguyenthithuan1591999@gmail.com', 'as', 1),
+(15, 'nguyenthithuan1591999@gmail.com', 'Đồ án tốt nghiệp kĩ sư', 0),
+(19, 'nguyenthithuan1591999@gmail.com', 'assddd', 0);
 
 -- --------------------------------------------------------
 
@@ -100,62 +104,73 @@ CREATE TABLE `card` (
 --
 
 INSERT INTO `card` (`id_card`, `text_card`, `id`) VALUES
-(1, 'nhận dạng chũ viết tay', 2),
-(3, 'Lập trình java cơ bản', 4),
-(2, 'Học tiếng anh', 5),
-(17, 'Học tiếng Nhật', 6),
-(3, 'Lập trình C cơ bản', 7),
-(4, 'lập trình beckend cơ bản', 8),
-(5, 'lập trình hướng đối tượng', 9),
-(16, 'Học bảng chữ cai tiếng nhật', 26),
-(17, 'Học ngữ pháp tiếng nhất', 27),
-(19, 'Học bảng chứ cái Thái Lan', 28),
-(19, 'Học ngữ pháp ', 29),
-(28, 'Học bảng chữ cái', 30),
-(16, 'Luyện nghe', 31),
-(17, 'Luyện đọc', 32),
-(45, 'test', 34),
-(48, 'Luyện nghe tiếng thái lan', 36),
-(6, 'Ngữ pháp loại 1', 38),
-(1, 'deep learning', 39),
-(1, 'machien learning cơ bản', 40),
-(2, 'Học tiếng thái lan', 41),
-(2, 'Học tiếng Tây Ban Nha', 42),
-(2, 'Lập trình nodejs', 43),
-(3, 'Lập trình python cơ bản', 46),
-(2, 'asd', 47),
-(1, 'test', 48),
-(1, 'asdf', 49),
-(1, 'a', 50),
-(53, 'test', 51),
-(55, 'test', 52),
-(55, 'á', 53),
-(56, 'á', 54),
-(57, 'asd', 55),
-(60, 'as', 56),
-(58, 'as', 57),
-(59, 'as', 58),
-(68, 'ád', 59),
-(68, 'ád', 60),
-(70, 'ád', 61),
-(69, 'sà', 62),
-(69, 'sfd', 63),
-(70, 'f', 64),
-(70, 'h', 65),
-(70, 'as', 66),
-(70, 'afd', 67),
-(74, 'ads', 68),
-(48, 'as', 69),
-(48, 'as', 70),
-(48, 'as', 71),
-(80, 'asd', 75),
-(79, 'fx', 78),
-(85, 'as', 80),
-(75, 'as', 81),
-(75, 'sf', 82),
-(75, 'saf', 83),
-(75, 'xv', 84),
-(75, 'zxv', 85);
+(1, 'Machine learning 1', 115),
+(1, 'deep learning', 116),
+(1, 'Machine learning', 117),
+(1, 'ML', 118),
+(1, 'ML', 119),
+(2, 'Học tiếng anh', 126),
+(2, 'Học ngữ pháp tiếng anh', 127),
+(2, 'Học tiếng trung', 128),
+(3, 'Học bảng chữ cái', 129),
+(16, 'Hoc ngữ pháp', 130),
+(3, 'Luyện nghe', 131),
+(16, 'Luyện đọc', 132);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `check_list`
+--
+
+CREATE TABLE `check_list` (
+  `id` bigint(20) NOT NULL,
+  `checklist` varchar(100) NOT NULL,
+  `tick` tinyint(1) DEFAULT NULL,
+  `id_checklist` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_card`
+--
+
+CREATE TABLE `detail_card` (
+  `id` bigint(20) NOT NULL,
+  `description` longtext NOT NULL,
+  `start` varchar(100) DEFAULT NULL,
+  `end` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `detail_card`
+--
+
+INSERT INTO `detail_card` (`id`, `description`, `start`, `end`) VALUES
+(115, 'anh yêu em rất nhiều\n', NULL, NULL),
+(116, 'Click to write a description...', NULL, NULL),
+(117, 'Click to write a description...', NULL, NULL),
+(118, 'Click to write a description...', NULL, NULL),
+(119, 'Click to write a description...', NULL, NULL),
+(126, 'Click to write a description...', NULL, NULL),
+(127, 'Click to write a description...', NULL, NULL),
+(128, 'Click to write a description...', NULL, NULL),
+(129, 'Click to write a description...', NULL, NULL),
+(130, 'Click to write a description...', NULL, NULL),
+(131, 'Click to write a description...', NULL, NULL),
+(132, 'Click to write a description...', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member_card`
+--
+
+CREATE TABLE `member_card` (
+  `id` bigint(20) NOT NULL,
+  `username` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -205,7 +220,13 @@ INSERT INTO `title` (`id`, `title`, `id_card`) VALUES
 (14, 'as', 87),
 (14, 'sàd', 88),
 (14, 'sa', 89),
-(14, 'sf', 90);
+(14, 'sf', 90),
+(6, 'as', 91),
+(6, 'af', 92),
+(6, 'dc', 93),
+(13, 'ad', 94),
+(13, 'a', 95),
+(15, 'as', 96);
 
 --
 -- Indexes for dumped tables
@@ -230,6 +251,24 @@ ALTER TABLE `card`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `check_list`
+--
+ALTER TABLE `check_list`
+  ADD PRIMARY KEY (`id_checklist`);
+
+--
+-- Indexes for table `detail_card`
+--
+ALTER TABLE `detail_card`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `member_card`
+--
+ALTER TABLE `member_card`
+  ADD PRIMARY KEY (`id`,`username`);
+
+--
 -- Indexes for table `title`
 --
 ALTER TABLE `title`
@@ -243,25 +282,31 @@ ALTER TABLE `title`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` bigint(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `broad`
 --
 ALTER TABLE `broad`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+
+--
+-- AUTO_INCREMENT for table `check_list`
+--
+ALTER TABLE `check_list`
+  MODIFY `id_checklist` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `title`
 --
 ALTER TABLE `title`
-  MODIFY `id_card` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id_card` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
