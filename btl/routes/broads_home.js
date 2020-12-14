@@ -290,4 +290,14 @@ app.post('/invite', function(req, res, next) {
     var query = 'insert into broad '
 
 })
+
+app.get('/memberteam', function(req, res, next){
+    var id_broad = req.cookies['id_broad'];
+    connection.query("select * from accounts where email in(select email from broad where broad.id =?) ", id_broad, (error, results, fields)=>{
+
+        console.log(results[0]['username']);
+        res.json(results)
+    } ) 
+})
+
 module.exports = app;
