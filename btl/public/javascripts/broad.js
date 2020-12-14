@@ -747,8 +747,21 @@ $('#inviteInput').on('keydown', function(e) {
     }
 });
 
-
-
+$(document).ready(function () {
+    $(".inviteMember").click(function (e) {
+      e.preventDefault();
+      console.log("e: "+e)
+    });
+  });
+// let i;
+// for (i = 0; i < member.length; i++) {
+//     console.log("i "+i);
+//     member[i].addEventListener("click", () => {
+//         console.log("ii "+i);
+//         // click vào đối tượng
+//         console.log(i+"/"+member[i]);
+//     })
+// }
 
 // let add = document.getElementById("addmember");
 // add.addEventListener("click", () => {
