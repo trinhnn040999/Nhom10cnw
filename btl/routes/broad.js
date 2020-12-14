@@ -81,6 +81,18 @@ app.post('/create_card', function(req, res, next) {
     }
     connection.query('insert into card set ?', card, function(error, results, fields) {
         if (error) throw error
+        connection.query('SELECT * FROM card ORDER BY card.id DESC LIMIT 1', (error, results, fields) => {
+            var description = {
+                'id': results[0]['id'],
+                'description': 'Click to write a description...'
+            }
+            connection.query('insert into detail_card set ?', description, (error, results, fields) => {
+                if (error) throw error
+                else {
+                    console.log('OK')
+                }
+            })
+        })
     })
 })
 
@@ -101,6 +113,10 @@ app.post('/draggable', function(req, res, next) {
 app.post('/delete_card', function(req, res, next) {
     var id = req.body.id
     connection.query('delete from card where id =? ', id, (err, results, fields) => {
+        if (err) throw err
+        console.log('delete card success')
+    })
+    connection.query('delete from detail_card where id =? ', id, (err, results, fields) => {
         if (err) throw err
         console.log('delete card success')
     })

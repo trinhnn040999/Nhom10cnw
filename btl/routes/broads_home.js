@@ -58,6 +58,7 @@ app.get('/get_id_title', function(req, res, next) {
     })
 })
 
+// lay id board cuoi cung theo email
 app.get('/get_id_broad', function(req, res, next) {
     var query = 'select id from broad where email = ?'
     connection.query(query, req.cookies['email'], (error, results, fields) => {
@@ -69,6 +70,7 @@ app.get('/get_id_broad', function(req, res, next) {
     })
 })
 
+//lay ten broad cuoi cung theo email
 app.get('/get_broadName', function(req, res, next) {
     var query = 'select broadName from broad where email = ?'
     connection.query(query, req.cookies['email'], (error, results, fields) => {
@@ -79,95 +81,8 @@ app.get('/get_broadName', function(req, res, next) {
         res.json(broadName)
     })
 })
-app.get('/test', function(req, res, next) {
-    connection.query("SELECT broad.id, broad.email, broad.broadName, title.title, title.id_card, " +
-        "card.text_card FROM broad, title, card WHERE broad.id = title.id " +
-        "and card.id_card = title.id_card and broad.email = ?",
-        'nguyenthithuan1591999@gmail.com', (error, results, fields) => {
-            if (results.length == 0) {
-                connection.query('SELECT broad.id, broad.email , broad.broadName, title.title FROM broad, title WHERE broad.id = title.id and broad.email = ? ',
-                    'nguyenthithuan1591999@gmail.com', (error, results, fields) => {
-                        let task = []
-                        var same_id = {}
-                        console.log(results)
 
-                        results.forEach(element => {
-                            same_id[element['id']] = 0
-                        });
-
-                        for (var id_ in same_id) {
-                            let obj_same_id = results.filter(function(x) {
-                                return x['id'] == id_
-                            })
-                            let obj = {}
-                            obj['id'] = obj_same_id[0]['id']
-                            obj['broadName'] = obj_same_id[0]['broadName']
-                            obj['email'] = obj_same_id[0]['email']
-                            obj['title'] = []
-                            obj_same_id.forEach(element => {
-                                let obj_title = {}
-                                obj_title['title'] = element['title']
-                                obj_title['id_card'] = ''
-                                obj_title['text_card'] = []
-
-                                obj['title'].push(obj_title)
-                            });
-                            task.push(obj)
-                        }
-                        task.forEach(element => {
-                            if (element['id'] == 1) {
-                                res.json(element)
-                            }
-                        });
-                    });
-            }
-            var task = []
-            var id = {}
-            var id_card = {}
-            results.forEach(element => {
-                id[element['id']] = 0
-                id_card[element['id_card']] = 0
-            });
-
-            for (i in id) {
-                var same_id = results.filter(function(x) {
-                    return x['id'] == i
-                })
-                var obj = {}
-                obj['id'] = i
-                obj['email'] = same_id[0]['email']
-                obj['broadName'] = same_id[0]['broadName']
-                obj['title'] = []
-
-                for (j in id_card) {
-                    var same_id_card = same_id.filter(function(x) {
-                            return x['id_card'] == j
-                        })
-                        // console.log(j)
-                    var obj_title = {}
-
-                    try {
-                        obj_title['title'] = same_id_card[0]['title']
-                        obj_title['id_card'] = same_id_card[0]['id_card']
-                        obj_title['text_card'] = []
-                        same_id_card.forEach(element => {
-                            obj_title['text_card'].push(element['text_card'])
-                        });
-                        obj['title'].push(obj_title)
-                    } catch {
-                        continue
-                    }
-                }
-                task.push(obj)
-            }
-            task.forEach(element => {
-                if (element['id'] == 1) {
-                    res.json(element)
-                }
-            });
-        });
-})
-
+//lay cac board cua email
 app.get('/broad', function(req, res, next) {
     connection.query('SELECT broad.id, broad.email , broad.broadName, title.title, title.id_card FROM broad, title WHERE broad.id = title.id and broad.email = ? ',
         req.cookies['email'], (error, results, fields) => {
@@ -215,6 +130,7 @@ app.get('/broad', function(req, res, next) {
         });
 })
 
+// lay tat ca cac text card theo id_card
 app.get('/textCard', function(req, res, next) {
 
     connection.query('SELECT * FROM card ',
@@ -240,6 +156,7 @@ app.get('/textCard', function(req, res, next) {
         });
 })
 
+// lay thong tin vavourite theo id_board
 app.get('/favourite', function(req, res, next) {
     var id_board = req.cookies['id_broad']
     var query = 'SELECT favourite FROM broad WHERE id=?'
@@ -269,6 +186,7 @@ app.post('/search', function(req, res, next) {
 
 })
 
+//moi them thanh vien bang cach tim kiem theo username
 app.post('/invite', function(req, res, next) {
     var username = req.body.username
 
@@ -298,11 +216,11 @@ app.get('/get_user', function(req, res, next) {
     })
 })
 
-
+// thay doi text card theo id
 app.post('/change_text_card', function(req, res, next) {
     var card = {
         'id': req.body.id,
-        'text_card': req.body.text_card
+        'text_card': req.body.text
     }
     var query = 'UPDATE card set text_card = ? where id=?'
     connection.query(query, [card['text_card'], card['id']], (error, results, next) => {
@@ -316,6 +234,29 @@ app.get('/memberteam', function(req, res, next) {
     connection.query("select * from accounts where email in(select email from broad where broad.id =?) ", id_broad, (error, results, fields) => {
 
         console.log(results[0]['username']);
+        res.json(results)
+    })
+})
+
+// thay doi description theo id
+app.post('/change_description', function(req, res, next) {
+    var card = {
+        'id': req.body.id,
+        'description': req.body.text
+    }
+    console.log(card)
+    var query = 'UPDATE detail_card set description = ? where id=?'
+    connection.query(query, [card['description'], card['id']], (error, results, next) => {
+        if (error) throw error
+        console.log('update success')
+    })
+})
+
+// lay description theo id
+app.post('/get_description', function(req, res, next) {
+    var id = req.body.id
+    connection.query('SELECT card.id, detail_card.description, card.text_card FROM card, detail_card WHERE card.id = detail_card.id and card.id=?', id, (error, results, fields) => {
+        console.log(results)
         res.json(results)
     })
 })
