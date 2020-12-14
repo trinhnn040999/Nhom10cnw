@@ -90,6 +90,10 @@ app.post('/create_card', function(req, res, next) {
                 if (error) throw error
                 else {
                     console.log('OK')
+                    connection.query('SELECT card.id, detail_card.description FROM card, detail_card WHERE card.id = detail_card.id and card.id=?', description['id'], (error, results, fields) => {
+                        console.log(results)
+                        res.json(results[0])
+                    })
                 }
             })
         })

@@ -153,7 +153,7 @@ class todoList {
         //Add Event listener
         this.button.addEventListener("click", () => {
             if (this.input.value != "") {
-                this.addToDo.call(this, "0");
+
                 //  this.input.value = "";
                 var data = {
                     id_card: this.id,
@@ -162,13 +162,17 @@ class todoList {
                 console.log("data");
                 console.log(data);
                 $.ajax({
-                    type: "POST",
-                    url: "/broad/create_card",
-                    data: data,
-                    dataType: "json",
-                });
-                this.input.value = "";
-                window.location.reload();
+                        type: "POST",
+                        url: "/broad/create_card",
+                        data: data,
+                        dataType: "json",
+                    })
+                    .then(data => {
+                        this.addToDo.call(this, data['id'], data['description']);
+                        this.input.value = "";
+                    })
+
+                // window.location.reload();
             }
         });
 
