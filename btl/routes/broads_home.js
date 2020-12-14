@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var config = require('../configuration/config')
 var mysql = require('mysql');
+const e = require('express')
 var app = express()
     // thiet lap views va public
 app.set('views', __dirname + '/../views');
@@ -286,6 +287,57 @@ app.post('/update_date_time', function(req, res, next) {
     })
 })
 
+// lay check list theo id
+app.post('/checklist', function(req, res, next) {
+    var id = req.body.id
+    console.log(id)
+    var query = 'select * from check_list where id=?'
+    connection.query(query, id, (error, results, fields) => {
+        if (error) throw error
+        else {
+            console.log(results)
+            res.json(results)
+        }
+    })
+})
+
+app.post('/insert_checklist', function(req, res, next) {
+    var id = req.body.id
+    var checklist_name = req.body.checklist_name
+    var tick = req.body.tick
+    var check_list = {
+        'id': id,
+        'checklist_name': checklist_name,
+        'tick': tick
+    }
+    console.log(check_list)
+    connection.query('insert into check_list set ? ', check_list, (error, results, fields) => {
+        if (error) throw error
+        else console.log('insert checklist thanh cong')
+    })
+})
+
+app.post('/update_checkbox', function(req, res, next) {
+    var id_checklist = req.body.id_checklist.split(' ')[1]
+    connection.query("SELECT * FROM check_list WHERE id_checklist = ?", id_checklist, (error, results, next) => {
+        var tick = results[0]['tick']
+        if (tick == ' ') {
+            connection.query('update check_list set tick = ? where id_checklist = ?', ['checked', results[0]['id_checklist']],
+                (error, results, fields) => {
+                    if (error) throw error
+                    else console.log('update check box success!')
+                }
+            )
+        } else {
+            connection.query('update check_list set tick = ? where id_checklist = ?', [' ', results[0]['id_checklist']],
+                (error, results, fields) => {
+                    if (error) throw error
+                    else console.log('update check box success!')
+                }
+            )
+        }
+    })
+})
 
 
 module.exports = app;

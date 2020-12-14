@@ -215,7 +215,7 @@ class Card {
             text: text,
             endDate: endDate,
             description: description,
-            //mảng gồm đối tượng checklist ntn{ title: "xin chào", checked: "checked" }
+            //mảng gồm đối tượng checklist ntn{ title: "xin chào", checked: "checked", id_checklist:'id' }
             checklist: [],
             comments: [],
             members: ["Sieu nhan gao"]
@@ -223,6 +223,27 @@ class Card {
         this.id = id;
         this.render();
         LetterAvatar.transform();
+        // hien thi check list ra ben ngoai
+        var id_on_checklis = {
+                id: this.id
+            } // goi api dua ve tim kiem theo id va lay du lieu len
+        $.ajax({
+                type: 'POST',
+                url: '/api/checklist',
+                data: id_on_checklis,
+                dataType: 'json'
+            })
+            .then(data => {
+                data.forEach(element => {
+                    var check_obj = {
+                            title: element['checklist_name'],
+                            checked: element['tick'],
+                            id_checklist: element['id_checklist']
+                        } //dua check list vao mang
+                    this.state.checklist.push(check_obj)
+                });
+
+            })
     }
     getCountChecked() {
         let count = 0;
@@ -460,6 +481,16 @@ class Card {
         //Event listeners
         this.menuContainer.addEventListener("click", (e) => {
             console.log(e.target);
+            var check_ = {
+                id: this.id,
+                id_checklist: e.target.name
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/api/update_checkbox',
+                data: check_,
+                dataType: 'json'
+            })
             if (e.target.classList.contains("menuContainer")) {
                 this.menuContainer.remove();
             }
@@ -605,6 +636,17 @@ class Card {
                 this.state.checklist.push(checkbox);
                 this.renderChecklist();
                 this.divBottom.innerHTML = this.addContentBottom();
+                var insert_checklist = {
+                    id: this.id,
+                    checklist_name: this.checklistInput.value,
+                    tick: ' '
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/insert_checklist',
+                    dataType: 'json',
+                    data: insert_checklist
+                })
                 this.checklistInput.value = "";
                 checklist();
             }
@@ -650,13 +692,21 @@ class Card {
         }
         //tạo checklist
     renderChecklist() {
+
+        console.log(this.state.checklist)
+
         let currentChecklistDOM = Array.from(this.ulCheckbox.childNodes);
         currentChecklistDOM.forEach((item) => {
             item.remove();
         });
         this.state.checklist.forEach((checkbox) => {
             // new Comment(comment, this.menuComments, this);
-            new Checklist(checkbox.title, this.ulCheckbox, this, checkbox.checked);
+            console.log(checkbox)
+            new Checklist(checkbox.title, this.ulCheckbox, this, checkbox.checked, checkbox.id_checklist);
+            // var a = document.getElementsByName('box ' + checkbox.id_checklist)
+            // a.addEventListener('click', () => {
+            //     console.log("OK")
+            // })
         });
     }
 }
@@ -803,7 +853,7 @@ class Comment {
 }
 
 class Checklist {
-    constructor(title, place, card, checked = "") {
+    constructor(title, place, card, checked, id_checklist) {
         this.state = {
             text: title,
             checked: checked,
@@ -811,6 +861,7 @@ class Checklist {
         this.title = title;
         this.place = place;
         this.card = card;
+        this.id_checklist = id_checklist
         this.render();
     }
     render() {
@@ -820,7 +871,7 @@ class Checklist {
         this.li.className = "row";
         this.li.innerHTML =
             `
-    <input type="checkbox" name="box1" class="col-sm-1"/` +
+    <input type="checkbox" id = 'tick' name="box ` + this.id_checklist + `"class="col-sm-1"/` +
             this.state.checked +
             `>
     <p class="col-sm-11" style="margin-left: -20px; ` +
