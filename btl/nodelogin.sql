@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 14, 2020 at 03:01 PM
+-- Generation Time: Dec 15, 2020 at 05:19 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -78,6 +78,8 @@ INSERT INTO `broad` (`id`, `email`, `broadName`, `favourite`) VALUES
 (1, 'nguyenquyduc1591999@gmail.com', 'ML-intership', 1),
 (1, 'nguyenquyphuc1591999@gmail.com', 'ML-intership', 1),
 (1, 'nguyenthithuan1591999@gmail.com', 'ML-intership', 1),
+(2, 'nguyenquyduc1591999@gmail.com', 'ML-intership_1', 0),
+(2, 'nguyenquyphuc1591999@gmail.com', 'ML-intership_1', 0),
 (2, 'nguyenthithuan1591999@gmail.com', 'ML-intership_1', 1),
 (3, 'nguyenquyphuc1591999@gmail.com', 'Học tiếng anh', 0),
 (4, 'nguyenquyphuc1591999@gmail.com', 'Học tiếng nhật', 0),
@@ -113,9 +115,10 @@ INSERT INTO `card` (`id_card`, `text_card`, `id`) VALUES
 (2, 'Học ngữ pháp tiếng anh', 127),
 (2, 'Học tiếng trung', 128),
 (3, 'Học bảng chữ cái', 129),
-(16, 'Hoc ngữ pháp', 130),
+(19, 'Hoc ngữ pháp', 130),
 (3, 'Luyện nghe', 131),
-(16, 'Luyện đọc', 132);
+(16, 'Luyện đọc', 132),
+(4, 'Học machine learning cơ bản', 133);
 
 -- --------------------------------------------------------
 
@@ -125,10 +128,29 @@ INSERT INTO `card` (`id_card`, `text_card`, `id`) VALUES
 
 CREATE TABLE `check_list` (
   `id` bigint(20) NOT NULL,
-  `checklist` varchar(100) NOT NULL,
-  `tick` tinyint(1) DEFAULT NULL,
+  `checklist_name` varchar(100) NOT NULL,
+  `tick` varchar(100) NOT NULL,
   `id_checklist` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `check_list`
+--
+
+INSERT INTO `check_list` (`id`, `checklist_name`, `tick`, `id_checklist`) VALUES
+(115, 'test', ' ', 1),
+(115, 'home', ' ', 2),
+(115, 'as', ' ', 3),
+(116, 'cơ bản', ' ', 4),
+(126, 'Chương 1', '', 5),
+(118, 'cơ bản', '', 6),
+(133, 'KNN', 'checked', 7),
+(133, 'Phân cụm', 'checked', 8),
+(133, 'Hồi quy tuyến tính', 'checked', 9),
+(133, 'CNN', ' ', 14),
+(133, 'CNN', ' ', 15),
+(133, 'CNN', ' ', 16),
+(133, 'CNN', ' ', 17);
 
 -- --------------------------------------------------------
 
@@ -139,8 +161,8 @@ CREATE TABLE `check_list` (
 CREATE TABLE `detail_card` (
   `id` bigint(20) NOT NULL,
   `description` longtext NOT NULL,
-  `start` varchar(100) DEFAULT NULL,
-  `end` varchar(100) DEFAULT NULL
+  `start` text DEFAULT NULL,
+  `end` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -148,18 +170,19 @@ CREATE TABLE `detail_card` (
 --
 
 INSERT INTO `detail_card` (`id`, `description`, `start`, `end`) VALUES
-(115, 'anh yêu em rất nhiều\n', NULL, NULL),
-(116, 'Click to write a description...', NULL, NULL),
-(117, 'Click to write a description...', NULL, NULL),
-(118, 'Click to write a description...', NULL, NULL),
-(119, 'Click to write a description...', NULL, NULL),
-(126, 'Click to write a description...', NULL, NULL),
-(127, 'Click to write a description...', NULL, NULL),
-(128, 'Click to write a description...', NULL, NULL),
-(129, 'Click to write a description...', NULL, NULL),
+(115, 'anh yêu em rất nhiều\n', '2020-12-14 22:56', '2020-12-16 22:56'),
+(116, 'Click to write a description...', '2020-12-14 23:08', '2020-12-16 23:08'),
+(117, 'Click to write a description...', '2020-12-15 09:25', '2020-12-31 09:25'),
+(118, 'Click to write a description...', '2020-12-31 09:25', '2021-01-28 09:25'),
+(119, 'Click to write a description...', '2020-12-15 09:25', '2020-12-31 09:25'),
+(126, 'Click to write a description...', '2020-12-19 23:15', '2020-12-31 23:15'),
+(127, 'Click to write a description...', '2020-12-15 09:26', '2020-12-31 09:26'),
+(128, 'Click to write a description...', '2020-12-16 09:26', '2020-12-31 09:26'),
+(129, 'Click to write a description...', '2020-12-14 23:15', '2020-12-17 23:15'),
 (130, 'Click to write a description...', NULL, NULL),
-(131, 'Click to write a description...', NULL, NULL),
-(132, 'Click to write a description...', NULL, NULL);
+(131, 'Click to write a description...', '2020-12-16 09:26', '2020-12-31 09:26'),
+(132, 'Click to write a description...', '2020-12-16 09:26', '2020-12-31 09:26'),
+(133, 'Click to write a description...', '2020-12-15 10:35', '2020-12-31 10:35');
 
 -- --------------------------------------------------------
 
@@ -294,13 +317,13 @@ ALTER TABLE `broad`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `check_list`
 --
 ALTER TABLE `check_list`
-  MODIFY `id_checklist` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_checklist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `title`
