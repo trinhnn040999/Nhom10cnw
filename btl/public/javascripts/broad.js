@@ -303,7 +303,7 @@ class Card {
                 dataType: 'json'
             })
             .then(data => {
-                console.log(data)
+
                 var start = data['start']
                 if (start == null) start = ''
                 var end = data['end']
@@ -312,6 +312,30 @@ class Card {
                 this.divBottom.innerHTML = this.addContentBottom();
                 $(".start button").text(formatDate(new Date(start)));
                 $(".end button").text(formatDate(new Date(end)));
+            })
+
+        var data_id = {
+                id: this.id
+            }
+            // su dung api de truyen ve id card va lay len data chua thong tin comment
+        $.ajax({
+                type: 'POST',
+                url: '/api/comment',
+                dataType: 'json',
+                data: data_id
+            })
+            .then(data => {
+
+                data.forEach(element => {
+
+                    var comment = {
+                            'content': element['text_comment'],
+                            'username': element['username'],
+                            'date': element['date']
+                        }
+                        // dua du lieu vao mang
+                    this.state.comments.push(comment)
+                });
             })
     }
 
@@ -340,14 +364,14 @@ class Card {
         `
         );
     }
-    
-        show_memberOfCard(fullname, id){
+
+    show_memberOfCard(fullname, id) {
         let li = document.createElement('li');
         li.setAttribute('class', 'dropdown-item member-list');
-        li.setAttribute('style','position: relative;' );
+        li.setAttribute('style', 'position: relative;');
         let div1 = document.createElement('div');
-        div1.setAttribute('class','intro');
-        div1.setAttribute('id', 'users'+ id);
+        div1.setAttribute('class', 'intro');
+        div1.setAttribute('id', 'users' + id);
         div1.setAttribute('style', 'margin-top: 10px;');
         let div2 = document.createElement('div');
         let span = document.createElement('span');
@@ -539,10 +563,28 @@ class Card {
         // event thêm
         this.commentsButton.addEventListener("click", () => {
             if (this.commentsInput.value != "") {
-                this.state.comments.push(this.commentsInput.value);
-                this.divBottom.innerHTML = this.addContentBottom();
-                this.renderComments();
-                this.commentsInput.value = "";
+                $.ajax({
+                        type: "GET",
+                        url: '/api/get_username'
+                    })
+                    .then(data => {
+                        console.log(data)
+                        var today = new Date()
+                        var date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate()
+                        var hour = today.getHours() + ':' + today.getMinutes()
+                        console.log(date + ' ' + hour)
+                        var comment = {
+                            'username': data,
+                            'content': this.commentsInput.value,
+                            'date': date + ' ' + hour
+                        }
+                        console.log(comment)
+                        this.state.comments.push(comment);
+                        this.divBottom.innerHTML = this.addContentBottom();
+                        this.renderComments();
+                        this.commentsInput.value = "";
+
+                    })
             }
         });
 
@@ -586,27 +628,27 @@ class Card {
         this.renderMembers();
 
         this.btnDueDate = document.getElementById("btnDueDate");
-         this.showmember = document.getElementById('usersmember');
+        this.showmember = document.getElementById('usersmember');
         this.showmember.innerHTML = '';
         this.showmember.innerText = '    Member in this card';
         //this.showmember.innerHTML = '';
 
 
-                              var data6 = {
-                    id_card: this.id
-                };
-                  $.ajax({
-                      url: "/api/memberOfCard",
-                      type: 'POST',
-                      data: data6,
-                      dataType: 'json'
-                  }) 
-                  .then((data9)=>{
-                      console.log(data9.length);
-                      data9.forEach((element) => {
-                          this.showmember.append( this.show_memberOfCard(element['username'], element['id']));
-                      });
-                  });
+        var data6 = {
+            id_card: this.id
+        };
+        $.ajax({
+                url: "/api/memberOfCard",
+                type: 'POST',
+                data: data6,
+                dataType: 'json'
+            })
+            .then((data9) => {
+                console.log(data9.length);
+                data9.forEach((element) => {
+                    this.showmember.append(this.show_memberOfCard(element['username'], element['id']));
+                });
+            });
 
 
 
@@ -636,9 +678,6 @@ class Card {
                     this.state.endDate = formatMinDate(new Date(end));
 
                 }
-
-
-
             })
 
         this.btnDueDate.addEventListener("click", () => {
@@ -732,12 +771,14 @@ class Card {
             console.log(this.state.checklist[i]['id_checklist'])
             var tick = 'tick ' + this.state.checklist[i]['id_checklist']
             var checkbox = document.getElementById(tick)
-            checkboxs.push(checkbox)
 
+            checkboxs.push(checkbox)
         }
-        console.log('done')
+        console.log('checkboxs')
+        console.log(checkboxs)
         checkboxs.forEach(element => {
             element.addEventListener('click', () => {
+                debugger
                 var id_checklist = element.id
                 var data = {
                     id_checklist: id_checklist
@@ -748,6 +789,18 @@ class Card {
                     data: data,
                     dataType: 'json'
                 })
+                id_checklist = id_checklist.split(" ")[1]
+                for (var i = 0; i < this.state.checklist.length; i++) {
+                    if (this.state.checklist[i]['id_checklist'] == id_checklist) {
+                        if (this.state.checklist[i]['checked'] != 'checked') {
+                            this.state.checklist[i]['checked'] = 'checked'
+                        } else {
+                            this.state.checklist[i]['checked'] = " "
+                        }
+                    }
+                }
+                this.state.checklist
+                checklist()
             })
         });
         dateTime();
@@ -771,26 +824,13 @@ class Card {
         });
         this.state.comments.forEach((comment) => {
             // new Comment(comment, this.menuComments, this);
-            var today = new Date()
-            var date = today.getFullYear() + '/' + today.getMonth() + '/' + today.getDate()
-            var hour = today.getHours() + ':' + today.getMinutes()
-
-            $.ajax({
-                    type: "GET",
-                    url: '/api/get_username'
-                })
-                .then(data => {
-                    console.log(data)
-                    new Comment(
-                        comment,
-                        this.menuComments,
-                        this,
-                        data,
-                        formatDate(new Date(date + ' ' + hour))
-                    );
-                })
-
-
+            new Comment(
+                comment['content'],
+                this.menuComments,
+                this,
+                comment['username'],
+                formatDate(new Date(comment['date']))
+            );
         });
     }
     formatMember(name) {

@@ -331,6 +331,7 @@ app.post('/memberOfCard', function(req, res, next) {
     });
 })
 
+// cap nhat check box 
 app.post('/update_checkbox', function(req, res, next) {
     var id_checklist = req.body.id_checklist.split(' ')[1]
     console.log(id_checklist)
@@ -359,4 +360,21 @@ app.get('/get_username', function(req, res, next) {
     res.json(req.cookies['username'])
 })
 
+app.post('/comment', function(req, res, next) {
+    var id = req.body.id
+    console.log('comment : ' + id)
+    connection.query('SELECT * FROM comment WHERE id = ? ORDER BY id_comment DESC', id, (error, results, fields) => {
+        if (error) throw error
+        else { res.json(results) }
+    })
+})
+
+// app.get('/comment', function(req, res, next) {
+//     var id = req.body.id
+//     console.log('comment : ' + id)
+//     connection.query('SELECT * FROM comment WHERE id = ? ORDER BY id_comment DESC', id, (error, results, fields) => {
+//         if (error) throw error
+//         else { res.json(results) }
+//     })
+// })
 module.exports = app;
