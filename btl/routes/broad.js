@@ -30,11 +30,23 @@ var connection = mysql.createConnection({
 
 app.get('/:id', function(req, res, next) {
     res.cookie('id_broad', req.params.id)
-    var query = 'select * from broad where id = ?'
-    connection.query(query, req.params.id, (error, results, fields) => {
+    var email = req.cookies['email']
+    console.log(email)
+    console.log(req.params.id)
+    connection.query('SELECT * FROM broad WHERE id = ? and email=?', [req.params.id, email], (error, results, fields) => {
         if (error) throw error
-        res.cookie('broadName', results[0]['broadName'])
-        res.render('broad', { fullname: req.cookies.fullname })
+        else {
+            if (results.length != 0) {
+                var query = 'select * from broad where id = ?'
+                connection.query(query, req.params.id, (error, results, fields) => {
+                    if (error) throw error
+                    res.cookie('broadName', results[0]['broadName'])
+                    res.render('broad', { fullname: req.cookies.fullname })
+                })
+            } else {
+                res.render("login", { thongBao: '', color: 'red' })
+            }
+        }
     })
 })
 

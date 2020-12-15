@@ -394,20 +394,43 @@ app.post('/change_background', function(req, res, next) {
         'id': id,
         'id_background': id_background
     }
+    console.log(background)
     connection.query('select * from background where id = ?', id, (error, results, fields) => {
         if (error) throw error
         else {
+            // neu co ket qua thi ton tai back ground
             if (results.length == 0) {
+                // neu khong ton tai thi insert them background
                 connection.query('insert into background set ?', background, (error, results, fields) => {
                     if (error) throw error
                     else {
                         console.log('insert background success!!')
                     }
                 })
+            } else {
+                //neu ton tai thi cap nhau background
+                connection.query('update background set id_background = ? where id = ?', [id_background, id], (error, results, fields) => {
+                    if (error) throw error
+                    else {
+                        console.log('update background success!!')
+                    }
+                })
             }
         }
     })
 
+})
+
+app.get('/id_background', function(req, res, next) {
+    var id = req.cookies['id_broad']
+    console.log(id)
+    connection.query("SELECT id_background FROM background WHERE id = ?", id, (error, results, fields) => {
+        if (error) throw error
+        else {
+            console.log('OK!!' + results)
+            res.json(results[0])
+        }
+    })
 })
 
 module.exports = app;
