@@ -446,11 +446,11 @@ class Card {
       <div class="dueDate">
         <div class="start row" style="margin-bottom:5px;">
           <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:green;">Start: </div>
-          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:green;"></button>
+          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 200px; color:green;"></button>
         </div>
         <div class="end row" >
           <div class="label" style="flex: 0 0 50px;  padding-top:10px; color:red;">End: </div>
-          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 185px; color:red;"></button>
+          <button disabled="disabled" class="btn btn-light" style="flex: 0 0 200px; color:red;"></button>
         </div>
       </div>
     </li>
@@ -794,7 +794,6 @@ class Card {
         console.log(checkboxs)
         checkboxs.forEach(element => {
             element.addEventListener('click', () => {
-                debugger
                 var id_checklist = element.id
                 var data = {
                     id_checklist: id_checklist
@@ -815,7 +814,7 @@ class Card {
                         }
                     }
                 }
-                this.state.checklist
+                this.divBottom.innerHTML = this.addContentBottom();
                 checklist()
             })
         });
