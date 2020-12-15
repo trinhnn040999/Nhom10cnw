@@ -243,6 +243,7 @@ ul.change_background{
   left: 0;
   background-color: rgb(235, 235, 235);
   width: 850px;
+  height: 90vh;
   min-height: 300px;
   max-height: 80vh;
   overflow: auto;

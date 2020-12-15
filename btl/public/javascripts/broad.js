@@ -794,7 +794,6 @@ class Card {
         console.log(checkboxs)
         checkboxs.forEach(element => {
             element.addEventListener('click', () => {
-                debugger
                 var id_checklist = element.id
                 var data = {
                     id_checklist: id_checklist
@@ -815,7 +814,7 @@ class Card {
                         }
                     }
                 }
-                this.state.checklist
+                this.divBottom.innerHTML = this.addContentBottom();
                 checklist()
             })
         });
