@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 15, 2020 at 05:19 AM
+-- Generation Time: Dec 15, 2020 at 02:08 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -106,7 +106,7 @@ CREATE TABLE `card` (
 --
 
 INSERT INTO `card` (`id_card`, `text_card`, `id`) VALUES
-(1, 'Machine learning 1', 115),
+(1, 'Machine learning 123', 115),
 (1, 'deep learning', 116),
 (1, 'Machine learning', 117),
 (1, 'ML', 118),
@@ -115,7 +115,7 @@ INSERT INTO `card` (`id_card`, `text_card`, `id`) VALUES
 (2, 'Học ngữ pháp tiếng anh', 127),
 (2, 'Học tiếng trung', 128),
 (3, 'Học bảng chữ cái', 129),
-(19, 'Hoc ngữ pháp', 130),
+(2, 'Hoc ngữ pháp', 130),
 (3, 'Luyện nghe', 131),
 (16, 'Luyện đọc', 132),
 (4, 'Học machine learning cơ bản', 133);
@@ -139,8 +139,8 @@ CREATE TABLE `check_list` (
 
 INSERT INTO `check_list` (`id`, `checklist_name`, `tick`, `id_checklist`) VALUES
 (115, 'test', ' ', 1),
-(115, 'home', ' ', 2),
-(115, 'as', ' ', 3),
+(115, 'home', 'checked', 2),
+(115, 'as', 'checked', 3),
 (116, 'cơ bản', ' ', 4),
 (126, 'Chương 1', '', 5),
 (118, 'cơ bản', '', 6),
@@ -150,7 +150,31 @@ INSERT INTO `check_list` (`id`, `checklist_name`, `tick`, `id_checklist`) VALUES
 (133, 'CNN', ' ', 14),
 (133, 'CNN', ' ', 15),
 (133, 'CNN', ' ', 16),
-(133, 'CNN', ' ', 17);
+(133, 'CNN', ' ', 17),
+(115, 'CNN', 'checked', 18);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` bigint(20) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `text_comment` text NOT NULL,
+  `id_comment` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`id`, `username`, `date`, `text_comment`, `id_comment`) VALUES
+(115, 'phucnq', '2020-12-14 22:56', 'bài tập ở phần nào ạ', 1),
+(115, 'nguyenquyphuc', '2020-12-16 22:56', 'Học giống hôm qua nhé', 2),
+(116, 'phucnq', '2020-12-31 09:25', 'chúng tắt bắt đầu vào sáng thứ 2 à', 3);
 
 -- --------------------------------------------------------
 
@@ -170,7 +194,7 @@ CREATE TABLE `detail_card` (
 --
 
 INSERT INTO `detail_card` (`id`, `description`, `start`, `end`) VALUES
-(115, 'anh yêu em rất nhiều\n', '2020-12-14 22:56', '2020-12-16 22:56'),
+(115, 'anh yêu em rất nhiều\nGối ạ', '2020-12-14 22:56', '2020-12-16 22:56'),
 (116, 'Click to write a description...', '2020-12-14 23:08', '2020-12-16 23:08'),
 (117, 'Click to write a description...', '2020-12-15 09:25', '2020-12-31 09:25'),
 (118, 'Click to write a description...', '2020-12-31 09:25', '2021-01-28 09:25'),
@@ -179,7 +203,7 @@ INSERT INTO `detail_card` (`id`, `description`, `start`, `end`) VALUES
 (127, 'Click to write a description...', '2020-12-15 09:26', '2020-12-31 09:26'),
 (128, 'Click to write a description...', '2020-12-16 09:26', '2020-12-31 09:26'),
 (129, 'Click to write a description...', '2020-12-14 23:15', '2020-12-17 23:15'),
-(130, 'Click to write a description...', NULL, NULL),
+(130, 'Click to write a description...', '2020-12-15 11:22', '2020-12-31 11:22'),
 (131, 'Click to write a description...', '2020-12-16 09:26', '2020-12-31 09:26'),
 (132, 'Click to write a description...', '2020-12-16 09:26', '2020-12-31 09:26'),
 (133, 'Click to write a description...', '2020-12-15 10:35', '2020-12-31 10:35');
@@ -194,6 +218,13 @@ CREATE TABLE `member_card` (
   `id` bigint(20) NOT NULL,
   `username` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `member_card`
+--
+
+INSERT INTO `member_card` (`id`, `username`) VALUES
+(115, 'phucnq');
 
 -- --------------------------------------------------------
 
@@ -280,6 +311,12 @@ ALTER TABLE `check_list`
   ADD PRIMARY KEY (`id_checklist`);
 
 --
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id_comment`);
+
+--
 -- Indexes for table `detail_card`
 --
 ALTER TABLE `detail_card`
@@ -323,7 +360,13 @@ ALTER TABLE `card`
 -- AUTO_INCREMENT for table `check_list`
 --
 ALTER TABLE `check_list`
-  MODIFY `id_checklist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_checklist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `title`

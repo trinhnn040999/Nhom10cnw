@@ -568,18 +568,27 @@ class Card {
                         url: '/api/get_username'
                     })
                     .then(data => {
+                        debugger
                         console.log(data)
                         var today = new Date()
                         var date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate()
                         var hour = today.getHours() + ':' + today.getMinutes()
-                        console.log(date + ' ' + hour)
+                            // console.log(date + ' ' + hour)
                         var comment = {
                             'username': data,
                             'content': this.commentsInput.value,
                             'date': date + ' ' + hour
                         }
+                        var data_comment = {
+                            id: this.id,
+                            username: data,
+                            date: date + ' ' + hour,
+                            text: this.commentsInput.value
+                        }
                         console.log(comment)
                         this.state.comments.push(comment);
+                        var a = [1, 2, 3, 4]
+                        a.
                         this.divBottom.innerHTML = this.addContentBottom();
                         this.renderComments();
                         this.commentsInput.value = "";
