@@ -421,6 +421,7 @@ app.post('/change_background', function(req, res, next) {
 
 })
 
+// lay id background
 app.get('/id_background', function(req, res, next) {
     var id = req.cookies['id_broad']
     console.log(id)
@@ -430,6 +431,24 @@ app.get('/id_background', function(req, res, next) {
             console.log('OK!!' + results)
             res.json(results[0])
         }
+    })
+})
+
+// lay ra broad_start
+app.get('/get_broad_star', function(req, res, next) {
+    var email = req.cookies['email']
+    connection.query('select * from broad where email = ? and favourite=1', email, (error, results, fields) => {
+        if (error) throw error
+        res.json(results)
+    })
+})
+
+//lay tat ca cac bang cua broad
+app.get('/get_broad_personal', function(req, res, next) {
+    var email = req.cookies['email']
+    connection.query('select * from broad where email = ?', email, (error, results, fields) => {
+        if (error) throw error
+        res.json(results)
     })
 })
 
