@@ -340,6 +340,38 @@ class Card {
         `
         );
     }
+    
+        show_memberOfCard(fullname, id){
+        let li = document.createElement('li');
+        li.setAttribute('class', 'dropdown-item member-list');
+        li.setAttribute('style','position: relative;' );
+        let div1 = document.createElement('div');
+        div1.setAttribute('class','intro');
+        div1.setAttribute('id', 'users'+ id);
+        div1.setAttribute('style', 'margin-top: 10px;');
+        let div2 = document.createElement('div');
+        let span = document.createElement('span');
+        span.setAttribute('class', 'add_card_member');
+        let i = document.createElement('i');
+        i.setAttribute('class', 'fas fa-plus');
+        i.setAttribute('style', 'color:gray;')
+        span.append(i);
+        let div3 = document.createElement('div');
+        div3.setAttribute('class', 'name');
+        div3.innerText = fullname;
+        div2.setAttribute('class', 'infor');
+        let img = document.createElement('img');
+        img.setAttribute('class', 'round icon-menu');
+        img.setAttribute('width', '30');
+        img.setAttribute('height', '30');
+        img.setAttribute('src', '/images/default_avatar.png')
+        div2.append(div3);
+        div1.append(img);
+        div1.append(div2);
+        div1.append(span);
+        li.append(div1);
+        return li;
+    }
 
     deleteCard() {
         this.card.remove();
@@ -408,7 +440,7 @@ class Card {
                 <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <input type="text" class="form-control" placeholder="Search members" id="searchUser" autocomplete="off">
                 </div> 
-                <ul id="users" style="height:200px;overflow:auto;">
+                <ul id="usersmember" style="height:200px;overflow:auto;">
                     <li class="dropdown-item member-list" style="position: relative;">.
                       <div class="intro" id="users1" style="margin-top: 10px;">
                           <img class="round icon-menu" width="30" height="30" avatar="Lê Đình Tài">
@@ -554,6 +586,28 @@ class Card {
         this.renderMembers();
 
         this.btnDueDate = document.getElementById("btnDueDate");
+         this.showmember = document.getElementById('usersmember');
+        this.showmember.innerHTML = '';
+        this.showmember.innerText = '    Member in this card';
+        //this.showmember.innerHTML = '';
+
+
+                              var data6 = {
+                    id_card: this.id
+                };
+                  $.ajax({
+                      url: "/api/memberOfCard",
+                      type: 'POST',
+                      data: data6,
+                      dataType: 'json'
+                  }) 
+                  .then((data9)=>{
+                      console.log(data9.length);
+                      data9.forEach((element) => {
+                          this.showmember.append( this.show_memberOfCard(element['username'], element['id']));
+                      });
+                  });
+
 
 
         //lay thong tin ve startDate va endDate
