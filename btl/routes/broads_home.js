@@ -321,6 +321,16 @@ app.post('/insert_checklist', function(req, res, next) {
     })
 })
 
+
+app.post('/memberOfCard', function(req, res, next){
+    var id = req.body.id_card;
+    var query = 'select * from accounts where username in (select username from member_card where id = ?)' ;
+    connection.query(query, id, (err, results, fields)=>{
+        res.json(results);
+        console.log(results);
+    });
+})
+
 app.post('/update_checkbox', function(req, res, next) {
     var id_checklist = req.body.id_checklist.split(' ')[1]
     console.log(id_checklist)
