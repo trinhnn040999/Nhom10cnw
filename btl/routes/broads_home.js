@@ -399,7 +399,10 @@ app.post('/change_background', function(req, res, next) {
         else {
             if (results.length == 0) {
                 connection.query('insert into background set ?', background, (error, results, fields) => {
-
+                    if (error) throw error
+                    else {
+                        console.log('insert background success!!')
+                    }
                 })
             }
         }
