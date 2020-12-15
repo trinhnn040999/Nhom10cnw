@@ -17,6 +17,7 @@ const { authenticate } = require('passport');
 var broads_home = require('./routes/broads_home')
 var broad = require('./routes/broad')
 var get = require('./routes/get')
+var forgot = require('./routes/send_email')
 
 //Define MySQL parameter in Config.js file.
 var connection = mysql.createConnection({
@@ -62,6 +63,10 @@ app.get('/', function(req, res) {
     } else {
         res.redirect("/home");
     }
+});
+
+app.get('/forgot', function(req, res) {
+    res.render('forgot')
 });
 
 
@@ -168,7 +173,11 @@ app.use('/update', update)
 
 // xu ly phan luu profile
 app.use('/saveProfile', saveProfile)
+
+//api cua broad
 app.use('/api', broads_home)
 
+// chuc nang quen mat khau
+app.use('/forgot', forgot)
 
 module.exports = app;
