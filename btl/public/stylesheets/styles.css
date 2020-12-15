@@ -1899,6 +1899,9 @@ a:hover.back-to-top {
         flex: 0 0 10%;
         max-width: 100%;
     }
+    .content-main{
+        margin-left: 50px;
+    }
     .content .col-sm-3 nav ul.nav.nav-pills.nav-stacked{
         display: block; width: 150px;
     }
