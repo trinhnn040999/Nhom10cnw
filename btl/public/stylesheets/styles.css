@@ -1883,10 +1883,6 @@ a:hover.back-to-top {
     margin-top: 60px;
 }
 
-.broads{
-    margin-left: 40px;
-}
-
 @media (max-width: 1200px){
     .recommend{
         display: none;
@@ -1906,9 +1902,6 @@ a:hover.back-to-top {
     .content .col-sm-3 nav ul.nav.nav-pills.nav-stacked{
         display: block; width: 150px;
     }
-    /* div.col-sm-9 div.broads{
-        left: 50px;
-    } */
 }
 @media (max-width: 770px){
     .content .container .row .col-sm-3{
@@ -1934,11 +1927,6 @@ pre {
 .round {
     border-radius: 50%;
 }
-
-/* .icon-menu {
-    width: 40px;
-    height: 40px;
-} */
 
 .intro {
     height: 40px;
@@ -1975,7 +1963,7 @@ div.col-sm-9 div {
 
 .select-menu {
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .title-select {
