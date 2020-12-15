@@ -50,9 +50,11 @@ Colors:
 
 
 /******************************/
-body{
-    background:lightblue url('/images/background/bg1.gif') no-repeat fixed bottom;
+
+body {
+    background: lightblue url('/images/background/bg1.gif') no-repeat fixed bottom;
 }
+
 body,
 html {
     width: 100%;
@@ -258,6 +260,8 @@ a.white {
     cursor: text;
     transition: all 0.2s ease;
 }
+
+
 /* IE10+ hack to solve lower label text position compared to the rest of the browsers */
 
 @media screen and (-ms-high-contrast: active),
@@ -301,6 +305,7 @@ screen and (-ms-high-contrast: none) {
     height: 3rem;
 }
 
+
 /* IE10+ hack to solve lower label text position compared to the rest of the browsers */
 
 @media screen and (-ms-high-contrast: active),
@@ -318,8 +323,9 @@ screen and (-ms-high-contrast: none) {
     }
 }
 
-.col-sm-3 nav ul.nav.nav-pills.nav-stacked{
-    display: block; width: 255px;
+.col-sm-3 nav ul.nav.nav-pills.nav-stacked {
+    display: block;
+    width: 255px;
 }
 
 select {
@@ -754,6 +760,7 @@ screen and (-ms-high-contrast: none) {
 .navbar-custom .nav-item .nav-link.active {
     color: #00bfd8;
 }
+
 
 /* Dropdown Menu */
 
@@ -1328,7 +1335,6 @@ screen and (-ms-high-contrast: none) {
 }
 
 
-
 /****************************/
 
 
@@ -1421,6 +1427,8 @@ a.back-to-top {
 a:hover.back-to-top {
     background-color: #00a7bd;
 }
+
+
 /*****************************/
 
 
@@ -1743,10 +1751,13 @@ a:hover.back-to-top {
     }
     /* end of extra pages */
 }
+
+
 /* end of min-width width 992px */
 
 
 /* Min-width width 1200px */
+
 @media (min-width: 1200px) {
     /* Navigation */
     .navbar-custom {
@@ -1879,42 +1890,44 @@ a:hover.back-to-top {
     /* end of extra pages */
 }
 
-.recommend{
+.recommend {
     margin-top: 60px;
 }
 
-@media (max-width: 1200px){
-    .recommend{
+@media (max-width: 1200px) {
+    .recommend {
         display: none;
     }
-    .content .col-sm-8{
+    .content .col-sm-8 {
         max-width: 100%;
         flex: 0 0 100%;
     }
-    .content .col-sm-9{
+    .content .col-sm-9 {
         flex: 0 0 90%;
         max-width: 100%;
     }
-    .content .col-sm-3{
+    .content .col-sm-3 {
         flex: 0 0 10%;
         max-width: 100%;
     }
-    .content-main{
+    .content-main {
         margin-left: 50px;
     }
-    .content .col-sm-3 nav ul.nav.nav-pills.nav-stacked{
-        display: block; width: 150px;
+    .content .col-sm-3 nav ul.nav.nav-pills.nav-stacked {
+        display: block;
+        width: 150px;
     }
 }
-@media (max-width: 770px){
-    .content .container .row .col-sm-3{
+
+@media (max-width: 770px) {
+    .content .container .row .col-sm-3 {
         display: none;
     }
-    .content .col-sm-9{
+    .content .col-sm-9 {
         flex: 0 0 100%;
         max-width: 100%;
     }
-    .content .col-sm-8{
+    .content .col-sm-8 {
         max-width: 100%;
         flex: 0 0 100%;
         padding: 0;
@@ -1995,6 +2008,7 @@ div.col-sm-9 div {
 .content-main {
     position: relative;
 }
+
 
 /* Search */
 
