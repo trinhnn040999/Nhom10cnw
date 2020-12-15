@@ -50,7 +50,9 @@ Colors:
 
 
 /******************************/
-
+body{
+    background:lightblue url('/images/background/bg1.gif') no-repeat fixed bottom;
+}
 body,
 html {
     width: 100%;
@@ -2261,6 +2263,20 @@ a:hover.back-to-top {
         margin-left: 1.75rem;
     }
     /* end of extra pages */
+}
+
+@media (max-width: 1200px){
+    .recommend{
+        display: none;
+    }
+    .col-sm-8{
+        max-width: 100%;
+    }
+}
+@media (max-width: 770px){
+    .content .container .row .col-sm-3{
+        display: none;
+    }
 }
 
 pre {
