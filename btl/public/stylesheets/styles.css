@@ -1975,7 +1975,7 @@ div.col-sm-9 div {
 
 .select-menu {
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .title-select {
