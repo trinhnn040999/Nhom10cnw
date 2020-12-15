@@ -345,4 +345,9 @@ app.post('/update_checkbox', function(req, res, next) {
 })
 
 
+//lay username
+app.get('/get_username', function(req, res, next) {
+    res.json(req.cookies['username'])
+})
+
 module.exports = app;

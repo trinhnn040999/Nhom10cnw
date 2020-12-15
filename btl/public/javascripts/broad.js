@@ -699,16 +699,17 @@ class Card {
         dateTime();
     }
     renderMembers() {
-            let members = Array.from(this.menuMember.childNodes);
-            members.forEach((member) => {
-                member.remove();
-            });
-            this.state.members.forEach((member) => {
-                $(".menuMember").append(this.formatMember(member));
-            });
-            LetterAvatar.transform();
-        }
-        //Chỉnh comment
+        let members = Array.from(this.menuMember.childNodes);
+        members.forEach((member) => {
+            member.remove();
+        });
+        this.state.members.forEach((member) => {
+            $(".menuMember").append(this.formatMember(member));
+        });
+        LetterAvatar.transform();
+    }
+
+    //Chỉnh comment
     renderComments() {
         let currentCommentsDOM = Array.from(this.menuComments.childNodes);
         currentCommentsDOM.forEach((commentDOM) => {
@@ -716,14 +717,26 @@ class Card {
         });
         this.state.comments.forEach((comment) => {
             // new Comment(comment, this.menuComments, this);
+            var today = new Date()
+            var date = today.getFullYear() + '/' + today.getMonth() + '/' + today.getDate()
+            var hour = today.getHours() + ':' + today.getMinutes()
 
-            new Comment(
-                comment,
-                this.menuComments,
-                this,
-                "Lê Đình Tài",
-                "12/12/2020"
-            );
+            $.ajax({
+                    type: "GET",
+                    url: '/api/get_username'
+                })
+                .then(data => {
+                    console.log(data)
+                    new Comment(
+                        comment,
+                        this.menuComments,
+                        this,
+                        data,
+                        formatDate(new Date(date + ' ' + hour))
+                    );
+                })
+
+
         });
     }
     formatMember(name) {
