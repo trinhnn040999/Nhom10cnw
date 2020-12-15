@@ -52,7 +52,8 @@ Colors:
 /******************************/
 
 body {
-    background: lightblue url('/images/background/bg1.gif') no-repeat fixed bottom;
+    /* background:lightblue url('/images/background/bg1.gif') no-repeat fixed bottom; */
+    background: #fff;
 }
 
 body,
