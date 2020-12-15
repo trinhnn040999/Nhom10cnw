@@ -369,12 +369,42 @@ app.post('/comment', function(req, res, next) {
     })
 })
 
-// app.get('/comment', function(req, res, next) {
-//     var id = req.body.id
-//     console.log('comment : ' + id)
-//     connection.query('SELECT * FROM comment WHERE id = ? ORDER BY id_comment DESC', id, (error, results, fields) => {
-//         if (error) throw error
-//         else { res.json(results) }
-//     })
-// })
+// them comment vao co so du lieuj
+app.post('/insert_comment', function(req, res, next) {
+    var new_comment = {
+            'id': req.body.id,
+            'username': req.body.username,
+            'date': req.body.date,
+            'text_comment': req.body.text
+        }
+        //truy van
+    connection.query("insert into comment set ?", new_comment, (error, results, fields) => {
+        if (error) throw error
+        else {
+            console.log('insert comment success!!')
+        }
+    })
+})
+
+// thay doi background
+app.post('/change_background', function(req, res, next) {
+    var id_background = req.body.id_background
+    var id = req.cookies['id_broad']
+    var background = {
+        'id': id,
+        'id_background': id_background
+    }
+    connection.query('select * from background where id = ?', id, (error, results, fields) => {
+        if (error) throw error
+        else {
+            if (results.length == 0) {
+                connection.query('insert into background set ?', background, (error, results, fields) => {
+
+                })
+            }
+        }
+    })
+
+})
+
 module.exports = app;

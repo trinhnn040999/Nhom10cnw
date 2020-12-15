@@ -242,11 +242,13 @@ class Card {
                             checked: element['tick'],
                             id_checklist: element['id_checklist']
                         } //dua check list vao mang
-                    this.state.checklist.push(check_obj)
+                    this.state.checklist.unshift(check_obj)
                 });
-
+                this.divBottom.innerHTML = this.addContentBottom();
             })
+
     }
+
     getCountChecked() {
         let count = 0;
         this.state.checklist.forEach((c) => {
@@ -585,10 +587,15 @@ class Card {
                             date: date + ' ' + hour,
                             text: this.commentsInput.value
                         }
+
                         console.log(comment)
-                        this.state.comments.push(comment);
-                        var a = [1, 2, 3, 4]
-                        a.
+                        this.state.comments.unshift(comment);
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/insert_comment',
+                            data: data_comment,
+                            dataType: 'json'
+                        })
                         this.divBottom.innerHTML = this.addContentBottom();
                         this.renderComments();
                         this.commentsInput.value = "";
@@ -758,7 +765,7 @@ class Card {
                             checked: this.checklistInput.checked,
                             id_checklist: data['id_checklist']
                         };
-                        this.state.checklist.push(checkbox);
+                        this.state.checklist.unshift(checkbox);
                         this.renderChecklist();
                         this.divBottom.innerHTML = this.addContentBottom();
                         this.checklistInput.value = "";
@@ -821,6 +828,7 @@ class Card {
         });
         this.state.members.forEach((member) => {
             $(".menuMember").append(this.formatMember(member));
+            LetterAvatar.transform()
         });
         LetterAvatar.transform();
     }
