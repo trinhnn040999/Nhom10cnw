@@ -37,6 +37,8 @@ function checklist() {
     });
 }
 
+// var count = $("input[type='checkbox']").length;
+
 function sortTable() {
     $(function() {
         $('ul[id^="sort"]')
@@ -481,20 +483,27 @@ class Card {
         //Event listeners
         this.menuContainer.addEventListener("click", (e) => {
             console.log(e.target);
-            var check_ = {
-                id: this.id,
-                id_checklist: e.target.name
-            }
-            $.ajax({
-                type: 'POST',
-                url: '/api/update_checkbox',
-                data: check_,
-                dataType: 'json'
-            })
+            // var check_ = {
+            //     id: this.id,
+            //     id_checklist: e.target.name
+            // }
+            // $.ajax({
+            //     type: 'POST',
+            //     url: '/api/update_checkbox',
+            //     data: check_,
+            //     dataType: 'json'
+            // })
             if (e.target.classList.contains("menuContainer")) {
                 this.menuContainer.remove();
             }
         });
+
+
+        // for (checkbox in this.checkboxs) {
+        //     console.log('checkbox')
+        //     console.log(checkbox[0])
+        // }
+        // console.log('done')
         // event thêm
         this.commentsButton.addEventListener("click", () => {
             if (this.commentsInput.value != "") {
@@ -653,6 +662,35 @@ class Card {
         });
         // check box
         checklist();
+        console.log("OK")
+        var count = $("input[type='checkbox']").length;
+        console.log('count')
+        console.log(this.state.checklist)
+            // var checkbox = document.getElementById('tick 1')
+            // console.log(checkbox.id)
+        var checkboxs = []
+        for (var i = 0; i < this.state.checklist.length; i++) {
+            console.log(this.state.checklist[i]['id_checklist'])
+            var tick = 'tick ' + this.state.checklist[i]['id_checklist']
+            var checkbox = document.getElementById(tick)
+            checkboxs.push(checkbox)
+
+        }
+        console.log('done')
+        checkboxs.forEach(element => {
+            element.addEventListener('click', () => {
+                var id_checklist = element.id
+                var data = {
+                    id_checklist: id_checklist
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/update_checkbox',
+                    data: data,
+                    dataType: 'json'
+                })
+            })
+        });
         dateTime();
     }
     renderMembers() {
@@ -871,7 +909,7 @@ class Checklist {
         this.li.className = "row";
         this.li.innerHTML =
             `
-    <input type="checkbox" id = 'tick' name="box ` + this.id_checklist + `"class="col-sm-1"/` +
+    <input type="checkbox" id = 'tick ` + this.id_checklist + `' name="box ` + this.id_checklist + `"class="col-sm-1"/` +
             this.state.checked +
             `>
     <p class="col-sm-11" style="margin-left: -20px; ` +

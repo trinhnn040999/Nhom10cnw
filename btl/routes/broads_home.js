@@ -319,20 +319,21 @@ app.post('/insert_checklist', function(req, res, next) {
 
 app.post('/update_checkbox', function(req, res, next) {
     var id_checklist = req.body.id_checklist.split(' ')[1]
+    console.log(id_checklist)
     connection.query("SELECT * FROM check_list WHERE id_checklist = ?", id_checklist, (error, results, next) => {
         var tick = results[0]['tick']
-        if (tick == ' ') {
+        if (tick != 'checked') {
             connection.query('update check_list set tick = ? where id_checklist = ?', ['checked', results[0]['id_checklist']],
                 (error, results, fields) => {
                     if (error) throw error
-                    else console.log('update check box success!')
+                    else console.log('update check box success! null --> checked')
                 }
             )
         } else {
             connection.query('update check_list set tick = ? where id_checklist = ?', [' ', results[0]['id_checklist']],
                 (error, results, fields) => {
                     if (error) throw error
-                    else console.log('update check box success!')
+                    else console.log('update check box success! check --> null')
                 }
             )
         }
