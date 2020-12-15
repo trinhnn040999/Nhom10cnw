@@ -313,7 +313,11 @@ app.post('/insert_checklist', function(req, res, next) {
     console.log(check_list)
     connection.query('insert into check_list set ? ', check_list, (error, results, fields) => {
         if (error) throw error
-        else console.log('insert checklist thanh cong')
+        else
+            connection.query('SELECT id_checklist FROM check_list ORDER BY check_list.id_checklist DESC LIMIT 1', (error, results, fields) => {
+                console.log('insert checklist thanh cong')
+                res.json(results[0])
+            })
     })
 })
 

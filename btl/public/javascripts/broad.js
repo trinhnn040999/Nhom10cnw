@@ -638,26 +638,31 @@ class Card {
 
         this.btnChecklist.addEventListener("click", () => {
             if (this.checklistInput.value.trim() != "") {
-                var checkbox = {
-                    title: this.checklistInput.value,
-                    checked: this.checklistInput.checked,
-                };
-                this.state.checklist.push(checkbox);
-                this.renderChecklist();
-                this.divBottom.innerHTML = this.addContentBottom();
+
                 var insert_checklist = {
                     id: this.id,
                     checklist_name: this.checklistInput.value,
                     tick: ' '
                 }
                 $.ajax({
-                    type: 'POST',
-                    url: '/api/insert_checklist',
-                    dataType: 'json',
-                    data: insert_checklist
-                })
-                this.checklistInput.value = "";
-                checklist();
+                        type: 'POST',
+                        url: '/api/insert_checklist',
+                        dataType: 'json',
+                        data: insert_checklist
+                    })
+                    .then(data => {
+                        var checkbox = {
+                            title: this.checklistInput.value,
+                            checked: this.checklistInput.checked,
+                            id_checklist: data['id_checklist']
+                        };
+                        this.state.checklist.push(checkbox);
+                        this.renderChecklist();
+                        this.divBottom.innerHTML = this.addContentBottom();
+                        this.checklistInput.value = "";
+                        checklist();
+                    })
+
             }
         });
         // check box
