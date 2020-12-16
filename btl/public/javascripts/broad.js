@@ -919,17 +919,47 @@ $(document).ready(function() {
         });
         dateTime();
     }
-    renderMembers() {
+//     renderMembers() {
+//         let members = Array.from(this.menuMember.childNodes);
+//         members.forEach((member) => {
+//             member.remove();
+//         });
+//         this.state.members.forEach((member) => {
+//             $(".menuMember").append(this.formatMember(member));
+//             LetterAvatar.transform()
+//         });
+//         LetterAvatar.transform();
+//     }
+    
+    
+        renderMembers() {
         let members = Array.from(this.menuMember.childNodes);
         members.forEach((member) => {
             member.remove();
         });
-        this.state.members.forEach((member) => {
-            $(".menuMember").append(this.formatMember(member));
-            LetterAvatar.transform()
-        });
-        LetterAvatar.transform();
-    }
+        let p = this.id;
+        let data1999 = {
+            id_card: p
+        };
+        $.ajax({
+            type:'POST',
+            url:'/api/memberOfCard',
+            data:data1999,
+            dataType: 'json'
+        })
+        .then((data)=>{
+            //var i = 0;
+           // this.state.members = data['username'];
+            // data.forEach((element)=>{
+            //     this.state.members[i] = element[i]['username'];
+            //     i += 1;
+            // })
+            data.forEach((member) => {
+                $(".menuMember").append(this.formatMember(member['username']));
+                LetterAvatar.transform()
+            });
+        })
+
 
     //Chỉnh comment
     renderComments() {
