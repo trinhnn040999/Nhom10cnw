@@ -12,9 +12,6 @@ function checklist() {
         countBoxes();
         $(":checkbox").click(() => {
             countBoxes();
-            //   if ($(":checkbox").is(":checked")) {
-            //     $("li.row p.col-sm-11").css("text-decoration", "none");
-            //   } else $("li.row p.col-sm-11").css("text-decoration", "line-through");
         });
         // count checks
 
@@ -36,8 +33,6 @@ function checklist() {
         });
     });
 }
-
-// var count = $("input[type='checkbox']").length;
 
 function sortTable() {
     $(function() {
@@ -120,11 +115,6 @@ class todoList {
             new Card(text, this.div, this, id_, description)
         );
     }
-
-    //   render() {
-    //     this.createToDoListElement();
-    //     this.place.append(this.todoListElement);
-    //   }
 
     createToDoListElement() {
         //Create elements
@@ -221,7 +211,7 @@ class Card {
             //mảng gồm đối tượng checklist ntn{ title: "xin chào", checked: "checked", id_checklist:'id' }
             checklist: [],
             comments: [],
-            members: ["Sieu nhan gao"]
+            members: []
         };
         this.id = id;
         this.render();
@@ -558,28 +548,12 @@ class Card {
             //Event listeners
             this.menuContainer.addEventListener("click", (e) => {
                 console.log(e.target);
-                // var check_ = {
-                //     id: this.id,
-                //     id_checklist: e.target.name
-                // }
-                // $.ajax({
-                //     type: 'POST',
-                //     url: '/api/update_checkbox',
-                //     data: check_,
-                //     dataType: 'json'
-                // })
+
                 if (e.target.classList.contains("menuContainer")) {
                     this.menuContainer.remove();
                 }
             });
 
-
-            // for (checkbox in this.checkboxs) {
-            //     console.log('checkbox')
-            //     console.log(checkbox[0])
-            // }
-            // console.log('done')
-            // event thêm
             this.commentsButton.addEventListener("click", () => {
                 if (this.commentsInput.value != "") {
                     $.ajax({
@@ -691,7 +665,6 @@ class Card {
             $("#searchUser").on("keydown", function(e) {
                 if (e.which == 13) {
                     e.preventDefault();
-                    // console.log($("#inviteInput").val());
                     var search = $("#searchUser").val();
                     if (search != "") {
                         var data = {
@@ -742,10 +715,6 @@ class Card {
                                 var members_card = [];
                                 // var i;
                                 for (i = 0; i < member_card.length; i++) {
-                                    // member[i].addEventListener("click", () => {
-                                    //     // click vào đối tượng
-                                    //     console.log(member[i]);
-                                    // })
                                     members_card.push(member_card[i]);
                                 }
                                 var i = 0;
@@ -934,18 +903,6 @@ class Card {
             });
             dateTime();
         }
-        //     renderMembers() {
-        //         let members = Array.from(this.menuMember.childNodes);
-        //         members.forEach((member) => {
-        //             member.remove();
-        //         });
-        //         this.state.members.forEach((member) => {
-        //             $(".menuMember").append(this.formatMember(member));
-        //             LetterAvatar.transform()
-        //         });
-        //         LetterAvatar.transform();
-        //     }
-
 
     renderMembers() {
         let members = Array.from(this.menuMember.childNodes);
@@ -963,12 +920,7 @@ class Card {
                 dataType: 'json'
             })
             .then((data) => {
-                //var i = 0;
-                // this.state.members = data['username'];
-                // data.forEach((element)=>{
-                //     this.state.members[i] = element[i]['username'];
-                //     i += 1;
-                // })
+
                 data.forEach((member) => {
                     $(".menuMember").append(this.formatMember(member['username']));
                     LetterAvatar.transform()
@@ -1366,31 +1318,7 @@ $(document).ready(function() {
         console.log("e: " + e);
     });
 });
-// let i;
-// for (i = 0; i < member.length; i++) {
-//     console.log("i "+i);
-//     member[i].addEventListener("click", () => {
-//         console.log("ii "+i);
-//         // click vào đối tượng
-//         console.log(i+"/"+member[i]);
-//     })
-// }
 
-// let add = document.getElementById("addmember");
-// add.addEventListener("click", () => {
-//     if (member_email.value.trim() != "") {
-//        var data3 = {
-//             'email': member_email.value
-//         };
-//         $.ajax({
-//             type: "POST",
-//             url: "/broad/invite",
-//             data = data3,
-//             dataType = "json",
-//         });
-//     }
-// });
-//đoạn code bị lỗi
 // dua du lieu vao broad
 
 $.ajax({
@@ -1465,12 +1393,10 @@ $.ajax({
                     drop: function(event, ui) {
                         // lấy ra di của thằng cữ
                         var idTaskOld = ui.draggable.attr("id");
-                        // console.log("idTaskOld");
-                        // console.log(idTaskOld);
+
                         // lấy của thằng cữ
                         var idTaskNew = $(this).attr("id");
-                        // console.log("idTaskNew");
-                        // console.log(idTaskNew);
+
                         var data = {
                             id: idTaskOld,
                             id_card: idTaskNew,
@@ -1536,12 +1462,8 @@ $(document).ready(function() {
         drop: function(event, ui) {
             // lấy ra di của thằng cữ
             var idTaskOld = ui.draggable.attr("id");
-            // console.log("idTaskOld");
-            // console.log(idTaskOld);
-            // lấy của thằng cữ
+
             var idTaskNew = $(this).attr("id");
-            // console.log("idTaskNew");
-            // console.log(idTaskNew);
         },
     });
 });
@@ -1587,25 +1509,23 @@ $(function() {
             });
         }
     });
-    $("#btnModifyTeam").click(function() {
-        if ($("#btnModifyTeam").text() == "Private Team")
-            $("#btnModifyTeam").text("Public Team");
-        else $("#btnModifyTeam").text("Private Team");
-    });
+    // chỉnh private public
+    // $("#btnModifyTeam").click(function() {
+    //     if ($("#btnModifyTeam").text() == "Private Team")
+    //         $("#btnModifyTeam").text("Public Team");
+    //     else $("#btnModifyTeam").text("Private Team");
+    // });
     sortTable();
 
     $(".todoList").draggable();
     $(".todoList").droppable({
         drop: function(event, ui) {
-            debugger;
             // lấy ra di của thằng cữ
             var idTaskOld = ui.draggable.attr("id");
-            // console.log("idTaskOld");
-            // console.log(idTaskOld);
+
             // lấy của thằng cữ
             var idTaskNew = $(this).attr("id");
-            // console.log("idTaskNew");
-            // console.log(idTaskNew);
+
         },
     });
 });

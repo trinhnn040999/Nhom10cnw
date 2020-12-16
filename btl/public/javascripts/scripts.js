@@ -22,7 +22,6 @@
   /* Navbar Scripts */
   // jQuery to collapse the navbar on scroll
   $(window).on("scroll load", function () {
-    console.log("offset:" + $(".navbar").offset().top);
     if ($(".navbar").offset().top > 60) {
       $(".fixed-top").addClass("top-nav-collapse");
       $("#headerBroad").css("top", "74px");
