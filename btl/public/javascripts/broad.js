@@ -1601,7 +1601,7 @@ function showMember(user_name) {
     img.className = 'round icon-menu';
     img.setAttribute('width', '30');
     img.setAttribute('height', '30');
-    img.setAttribute('src', "/images/default_avatar.png");
+    //img.setAttribute('src', "/images/default_avatar.png");
     img.setAttribute("avatar", user_name);
     let div2 = document.createElement('div');
     div2.className = 'infor'
