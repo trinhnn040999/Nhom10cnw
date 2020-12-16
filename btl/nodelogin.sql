@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 15, 2020 at 02:08 PM
+-- Generation Time: Dec 16, 2020 at 04:00 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -60,6 +60,26 @@ CREATE TABLE `accounts_FB` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `background`
+--
+
+CREATE TABLE `background` (
+  `id` bigint(20) NOT NULL,
+  `id_background` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `background`
+--
+
+INSERT INTO `background` (`id`, `id_background`) VALUES
+(1, 2),
+(2, 2),
+(6, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `broad`
 --
 
@@ -86,7 +106,7 @@ INSERT INTO `broad` (`id`, `email`, `broadName`, `favourite`) VALUES
 (6, 'nguyenthithuan1591999@gmail.com', 'Đồ án tốt nghiệp cử nhân', 1),
 (13, 'nguyenthithuan1591999@gmail.com', 'test', 1),
 (14, 'nguyenthithuan1591999@gmail.com', 'as', 1),
-(15, 'nguyenthithuan1591999@gmail.com', 'Đồ án tốt nghiệp kĩ sư', 0),
+(15, 'nguyenthithuan1591999@gmail.com', 'Đồ án tốt nghiệp kĩ sư', 1),
 (19, 'nguyenthithuan1591999@gmail.com', 'assddd', 0);
 
 -- --------------------------------------------------------
@@ -118,7 +138,8 @@ INSERT INTO `card` (`id_card`, `text_card`, `id`) VALUES
 (2, 'Hoc ngữ pháp', 130),
 (3, 'Luyện nghe', 131),
 (16, 'Luyện đọc', 132),
-(4, 'Học machine learning cơ bản', 133);
+(4, 'Học machine learning cơ bản', 133),
+(17, 'Luyện nghe tiếng nhật', 134);
 
 -- --------------------------------------------------------
 
@@ -138,8 +159,8 @@ CREATE TABLE `check_list` (
 --
 
 INSERT INTO `check_list` (`id`, `checklist_name`, `tick`, `id_checklist`) VALUES
-(115, 'test', ' ', 1),
-(115, 'home', 'checked', 2),
+(115, 'test', 'checked', 1),
+(115, 'home', ' ', 2),
 (115, 'as', 'checked', 3),
 (116, 'cơ bản', ' ', 4),
 (126, 'Chương 1', '', 5),
@@ -151,7 +172,8 @@ INSERT INTO `check_list` (`id`, `checklist_name`, `tick`, `id_checklist`) VALUES
 (133, 'CNN', ' ', 15),
 (133, 'CNN', ' ', 16),
 (133, 'CNN', ' ', 17),
-(115, 'CNN', 'checked', 18);
+(115, 'CNN', ' ', 18),
+(115, 'CNN', ' ', 19);
 
 -- --------------------------------------------------------
 
@@ -174,7 +196,17 @@ CREATE TABLE `comment` (
 INSERT INTO `comment` (`id`, `username`, `date`, `text_comment`, `id_comment`) VALUES
 (115, 'phucnq', '2020-12-14 22:56', 'bài tập ở phần nào ạ', 1),
 (115, 'nguyenquyphuc', '2020-12-16 22:56', 'Học giống hôm qua nhé', 2),
-(116, 'phucnq', '2020-12-31 09:25', 'chúng tắt bắt đầu vào sáng thứ 2 à', 3);
+(116, 'phucnq', '2020-12-31 09:25', 'chúng tắt bắt đầu vào sáng thứ 2 à', 3),
+(115, 'phucnq', '2020-11-15 20:22', 'hôm qua học gì thế', 5),
+(115, 'phucnq', '2020-11-15 20:25', 'học toán rời rạc', 6),
+(115, 'phucnq', '2020-11-15 20:25', 'sssssss', 7),
+(115, 'phucnq', '2020-11-15 20:27', 'cai gi the', 8),
+(115, 'nguyenquyphuc', '2020-11-15 20:32', 'Cái đéo gì thế', 9),
+(115, 'nguyenquyphuc', '2020-11-15 20:32', 'Cái đéo gì thế', 10),
+(115, 'phucnq', '2020-11-15 20:34', 'wtf', 11),
+(115, 'phucnq', '2020-11-15 20:44', 'thằng cha mày', 12),
+(115, 'phucnq', '2020-11-15 20:44', 'thằng cha mày', 13),
+(134, 'phucnq', '2020-11-15 23:18', 'alo cái ai biết nghe ở trên kênh nào không', 14);
 
 -- --------------------------------------------------------
 
@@ -206,7 +238,8 @@ INSERT INTO `detail_card` (`id`, `description`, `start`, `end`) VALUES
 (130, 'Click to write a description...', '2020-12-15 11:22', '2020-12-31 11:22'),
 (131, 'Click to write a description...', '2020-12-16 09:26', '2020-12-31 09:26'),
 (132, 'Click to write a description...', '2020-12-16 09:26', '2020-12-31 09:26'),
-(133, 'Click to write a description...', '2020-12-15 10:35', '2020-12-31 10:35');
+(133, 'Click to write a description...', '2020-12-15 10:35', '2020-12-31 10:35'),
+(134, 'Nghe bảng chữ cái ở trên youtobe', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -293,6 +326,12 @@ ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`,`email`);
 
 --
+-- Indexes for table `background`
+--
+ALTER TABLE `background`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `broad`
 --
 ALTER TABLE `broad`
@@ -354,19 +393,19 @@ ALTER TABLE `broad`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT for table `check_list`
 --
 ALTER TABLE `check_list`
-  MODIFY `id_checklist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_checklist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `title`
