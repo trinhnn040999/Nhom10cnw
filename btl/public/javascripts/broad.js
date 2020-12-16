@@ -1595,23 +1595,26 @@ let member1 = document.getElementById("member1");
 
 function showMember(user_name) {
     let div1 = document.createElement('div');
-    div1.setAttribute('class', 'intro dropdown-item');
+    div1.className = 'intro dropdown-item';
     div1.setAttribute('style', 'margin-top: 10px;');
     let img = document.createElement('img');
-    img.setAttribute('class', 'round icon-menu');
+    img.className = 'round icon-menu';
     img.setAttribute('width', '30');
     img.setAttribute('height', '30');
     img.setAttribute('src', "/images/default_avatar.png");
+    img.setAttribute("avatar", user_name);
     let div2 = document.createElement('div');
-    div2.setAttribute('class', 'infor');
+    div2.className = 'infor'
     let div3 = document.createElement('div');
-    div3.setAttribute('class', 'name');
+    div3.className = 'name';
     div3.innerText = user_name;
     div2.append(div3);
     div1.append(img);
     div1.append(div2);
     member1.append(div1);
+    LetterAvatar.transform();
 }
+
 
 let button1 = document.getElementById("memberTeam");
 
