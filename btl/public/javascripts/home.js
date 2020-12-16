@@ -89,7 +89,7 @@ function show_boards_star(id, broadName) {
     let img = document.createElement('img')
     img.setAttribute('width', '30')
     img.setAttribute('height', '30')
-    img.setAttribute('src', '/images/header-background.jpg')
+    img.setAttribute('src', '/images/work2.png')
     button.append(img)
     button.append(broadName)
 

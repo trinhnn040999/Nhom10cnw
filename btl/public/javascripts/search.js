@@ -29,7 +29,7 @@ $(document).ready(function() {
                     span.append(img)
                     img.setAttribute('width', '40')
                     img.setAttribute('height', '40')
-                    img.setAttribute('src', '/images/header-background.jpg')
+                    img.setAttribute('src', '/images/work2.png')
                     span.append(element['broadName'])
                 });
             })
