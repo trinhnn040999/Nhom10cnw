@@ -2,10 +2,12 @@ var express = require('express')
 var passport = require('passport')
 var session = require('express-session')
 var cookieParser = require('cookie-parser')
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy
 var bodyParser = require('body-parser')
-var router = express.Router();
+var config = require('../configuration/config')
+var mysql = require('mysql');
 var app = express()
-
 
 app.set('views', __dirname + '/../views');
 app.set('view engine', 'ejs');
@@ -16,18 +18,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/../public'));
 
-
-// app.get('/', function(req, res) {
-//     req.logout();
-//     res.clearCookie("username");
-//     res.clearCookie("fullname");
-//     res.clearCookie("email");
-//     res.clearCookie("sdt");
-//     res.redirect('/');
-// });
+var connection = mysql.createConnection({
+    host: config.host,
+    user: config.username,
+    password: config.password,
+    database: config.database
+});
 
 var nodemailer = require('nodemailer');
-const { render } = require('./register')
+const { render, connect } = require('./register')
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -55,8 +54,13 @@ function send_email(taikhoan, matkhau) {
 app.post('/', function(req, res) {
     var email = req.body.email
     var password = req.cookies['password']
-    send_email(email, password)
-    res.render("login", { thongBao: '', color: 'red' })
+
+    connection.query('select * from accounts where email = ?', email, (error, results, fields) => {
+        console.log(results)
+        send_email(email, 'Your password: ' + results[0]['password'])
+        res.render("login", { thongBao: '', color: 'red' })
+    })
+
 });
 
 module.exports = app;

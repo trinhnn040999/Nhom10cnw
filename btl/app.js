@@ -97,7 +97,7 @@ app.get('/home', function(req, res) {
     if (req.cookies.username === undefined) {
         res.redirect("/");
     } else {
-        res.render('home', { fullname: req.cookies.fullname });
+        res.render('home', { fullname: req.cookies['fullname'] });
     }
 });
 
