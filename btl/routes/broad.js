@@ -44,7 +44,7 @@ app.get('/:id', function(req, res, next) {
                     res.render('broad', { fullname: req.cookies.fullname })
                 })
             } else {
-                res.render("login", { thongBao: '', color: 'red' })
+                res.render('home', { fullname: req.cookies['fullname'] });
             }
         }
     })

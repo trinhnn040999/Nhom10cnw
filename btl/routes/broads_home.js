@@ -167,7 +167,7 @@ app.get('/favourite', function(req, res, next) {
 })
 
 app.get('/get_broad_star', function(req, res, next) {
-    var email = 'nguyenthithuan1591999@gmail.com'
+    var email = req.cookies['email']
     var query = 'SELECT * FROM broad WHERE broad.favourite=? and broad.email = ?'
     connection.query(query, ['1', email], (error, results, fields) => {
         res.json(results)
@@ -478,9 +478,11 @@ app.post('/invitejoincard', function(req, res, next) {
     })
 })
 
-app.get('/get_board', function(req, res, next) {
+app.post('/get_post_board', function(req, res, next) {
     var email = req.cookies['email']
-    connection.query('select * from broad where email = ?', email, (error, results, fields) => {
+    var broadName = req.body.broadName
+    connection.query('select * from broad where email = ? and broadName like %?%', [email, broadName], (error, results, fields) => {
+        console.log(results)
         res.json(results)
     })
 })
