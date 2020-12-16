@@ -366,38 +366,51 @@ class Card {
         `
         );
     }
-
-    show_memberOfCard(fullname, id) {
+    
+    
+        show_memberOfCard(fullname, id) {
         let li = document.createElement('li');
-        li.setAttribute('class', 'dropdown-item member-list');
+       // li.setAttribute('class', 'dropdown-item member-list');
+        li.className = 'dropdown-item member-list';
         li.setAttribute('style', 'position: relative;');
         let div1 = document.createElement('div');
-        div1.setAttribute('class', 'intro');
+      //  div1.setAttribute('class', 'intro');
+        div1.className = 'intro';
         div1.setAttribute('id', 'users' + id);
         div1.setAttribute('style', 'margin-top: 10px;');
         let div2 = document.createElement('div');
         let span = document.createElement('span');
-        span.setAttribute('class', 'add_card_member');
+       // span.setAttribute('class', 'add_card_member');
+        span.className = 'add_card_member';
         let i = document.createElement('i');
-        i.setAttribute('class', 'fas fa-plus');
+       // i.setAttribute('class', 'fas fa-plus');
+        i.className = 'fas fa-plus';
         i.setAttribute('style', 'color:gray;')
         span.append(i);
         let div3 = document.createElement('div');
-        div3.setAttribute('class', 'name');
+       // div3.setAttribute('class', 'name');
+        div3.className = 'name';
         div3.innerText = fullname;
-        div2.setAttribute('class', 'infor');
+        //div2.setAttribute('class', 'infor');
+        div2.className = 'infor';
         let img = document.createElement('img');
-        img.setAttribute('class', 'round icon-menu');
+        //img.setAttribute('class', 'round icon-menu');
+        img.className = 'round icon-menu';
         img.setAttribute('width', '30');
         img.setAttribute('height', '30');
-        img.setAttribute('src', '/images/default_avatar.png')
+        img.setAttribute('avatar', fullname);
+       // img.setAttribute('src', '/images/default_avatar.png')
         div2.append(div3);
         div1.append(img);
         div1.append(div2);
         div1.append(span);
         li.append(div1);
+        LetterAvatar.transform();
         return li;
+        LetterAvatar.transform();
     }
+    
+
 
     deleteCard() {
         this.card.remove();
@@ -666,6 +679,7 @@ class Card {
                 console.log(data9.length);
                 data9.forEach((element) => {
                     this.showmember.append(this.show_memberOfCard(element['username'], element['id']));
+                    LetterAvatar.transform();
                 });
             });
 
