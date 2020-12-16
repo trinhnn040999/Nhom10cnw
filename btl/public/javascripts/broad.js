@@ -973,7 +973,8 @@ $(document).ready(function() {
                 LetterAvatar.transform()
             });
         })
-
+       LetterAvatar.transform();
+    }
 
     //Chỉnh comment
     renderComments() {
