@@ -53,12 +53,16 @@ function send_email(taikhoan, matkhau) {
 
 app.post('/', function(req, res) {
     var email = req.body.email
-    var password = req.cookies['password']
+        // var password = req.cookies['password']
 
     connection.query('select * from accounts where email = ?', email, (error, results, fields) => {
-        console.log(results)
-        send_email(email, 'Your password: ' + results[0]['password'])
-        res.render("login", { thongBao: '', color: 'red' })
+        if (results.length != 0) {
+            console.log(results)
+            send_email(email, 'Your password: ' + results[0]['password'])
+            res.render("login", { thongBao: '', color: 'red' })
+        } else {
+            res.render('login', { thongBao: 'Error, email does not exist', color: 'red' })
+        }
     })
 
 });

@@ -138,7 +138,9 @@ app.get('/profile', function(req, res) {
         setting: '',
         err: '',
         classProfile: 'tab-pane active',
-        classActivity: 'container tab-pane fade'
+        classActivity: 'container tab-pane fade',
+        classCard: 'container tab-pane fade'
+
     })
 });
 
@@ -154,10 +156,26 @@ app.get('/activity', function(req, res) {
         setting: '',
         err: '',
         classProfile: 'container tab-pane fade',
-        classActivity: 'tab-pane active'
+        classActivity: 'tab-pane active',
+        classCard: 'container tab-pane fade'
     })
 })
 
+app.get('/card', function(req, res) {
+    res.render('profile', {
+        fullname: req.cookies.fullname,
+        email: req.cookies.email,
+        sdt: req.cookies.sdt,
+        profile: '',
+        activity: '',
+        card: 'active',
+        setting: '',
+        err: '',
+        classProfile: 'container tab-pane fade',
+        classActivity: 'container tab-pane fade',
+        classCard: 'tab-pane active'
+    })
+})
 
 // bang
 app.use('/broad', broad)
