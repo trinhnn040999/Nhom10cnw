@@ -466,6 +466,9 @@ class Card {
                 <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <input type="text" class="form-control" placeholder="Search members" id="searchUser" autocomplete="off">
                 </div> 
+                <ul id="users_card">
+
+                </ul>
                 <ul id="usersmember" style="height:200px;overflow:auto;">
                     <li class="dropdown-item member-list" style="position: relative;">.
                       <div class="intro" id="users1" style="margin-top: 10px;">
