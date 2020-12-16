@@ -481,7 +481,9 @@ app.post('/invitejoincard', function(req, res, next) {
 app.post('/get_post_board', function(req, res, next) {
     var email = req.cookies['email']
     var broadName = req.body.broadName
-    connection.query('select * from broad where email = ? and broadName like %?%', [email, broadName], (error, results, fields) => {
+    console.log('email: ' + email)
+    console.log('broadName: ' + broadName)
+    connection.query('select * from broad where email = "' + email + '" and broadName like "%' + broadName + '%"', (error, results, fields) => {
         console.log(results)
         res.json(results)
     })
