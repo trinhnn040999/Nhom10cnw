@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 16, 2020 at 04:00 AM
+-- Generation Time: Dec 16, 2020 at 03:28 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -73,9 +73,10 @@ CREATE TABLE `background` (
 --
 
 INSERT INTO `background` (`id`, `id_background`) VALUES
-(1, 2),
+(1, 0),
 (2, 2),
-(6, 3);
+(6, 3),
+(12, 2);
 
 -- --------------------------------------------------------
 
@@ -98,16 +99,17 @@ INSERT INTO `broad` (`id`, `email`, `broadName`, `favourite`) VALUES
 (1, 'nguyenquyduc1591999@gmail.com', 'ML-intership', 1),
 (1, 'nguyenquyphuc1591999@gmail.com', 'ML-intership', 1),
 (1, 'nguyenthithuan1591999@gmail.com', 'ML-intership', 1),
-(2, 'nguyenquyduc1591999@gmail.com', 'ML-intership_1', 0),
-(2, 'nguyenquyphuc1591999@gmail.com', 'ML-intership_1', 0),
+(2, 'nguyenquyduc1591999@gmail.com', 'ML-intership_1', 1),
+(2, 'nguyenquyphuc1591999@gmail.com', 'ML-intership_1', 1),
 (2, 'nguyenthithuan1591999@gmail.com', 'ML-intership_1', 1),
-(3, 'nguyenquyphuc1591999@gmail.com', 'Học tiếng anh', 0),
+(3, 'nguyenquyphuc1591999@gmail.com', 'Học tiếng anh', 1),
 (4, 'nguyenquyphuc1591999@gmail.com', 'Học tiếng nhật', 0),
 (6, 'nguyenthithuan1591999@gmail.com', 'Đồ án tốt nghiệp cử nhân', 1),
-(13, 'nguyenthithuan1591999@gmail.com', 'test', 1),
-(14, 'nguyenthithuan1591999@gmail.com', 'as', 1),
+(13, 'nguyenthithuan1591999@gmail.com', 'test', 0),
+(14, 'nguyenthithuan1591999@gmail.com', 'as', 0),
 (15, 'nguyenthithuan1591999@gmail.com', 'Đồ án tốt nghiệp kĩ sư', 1),
-(19, 'nguyenthithuan1591999@gmail.com', 'assddd', 0);
+(19, 'nguyenthithuan1591999@gmail.com', 'assddd', 0),
+(20, 'nguyenquyduc1591999@gmail.com', 'Đồ án tốt nghiệp cử nhân', 0);
 
 -- --------------------------------------------------------
 
@@ -189,25 +191,6 @@ CREATE TABLE `comment` (
   `id_comment` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `comment`
---
-
-INSERT INTO `comment` (`id`, `username`, `date`, `text_comment`, `id_comment`) VALUES
-(115, 'phucnq', '2020-12-14 22:56', 'bài tập ở phần nào ạ', 1),
-(115, 'nguyenquyphuc', '2020-12-16 22:56', 'Học giống hôm qua nhé', 2),
-(116, 'phucnq', '2020-12-31 09:25', 'chúng tắt bắt đầu vào sáng thứ 2 à', 3),
-(115, 'phucnq', '2020-11-15 20:22', 'hôm qua học gì thế', 5),
-(115, 'phucnq', '2020-11-15 20:25', 'học toán rời rạc', 6),
-(115, 'phucnq', '2020-11-15 20:25', 'sssssss', 7),
-(115, 'phucnq', '2020-11-15 20:27', 'cai gi the', 8),
-(115, 'nguyenquyphuc', '2020-11-15 20:32', 'Cái đéo gì thế', 9),
-(115, 'nguyenquyphuc', '2020-11-15 20:32', 'Cái đéo gì thế', 10),
-(115, 'phucnq', '2020-11-15 20:34', 'wtf', 11),
-(115, 'phucnq', '2020-11-15 20:44', 'thằng cha mày', 12),
-(115, 'phucnq', '2020-11-15 20:44', 'thằng cha mày', 13),
-(134, 'phucnq', '2020-11-15 23:18', 'alo cái ai biết nghe ở trên kênh nào không', 14);
-
 -- --------------------------------------------------------
 
 --
@@ -276,7 +259,7 @@ CREATE TABLE `title` (
 --
 
 INSERT INTO `title` (`id`, `title`, `id_card`) VALUES
-(1, 'Todo', 1),
+(1, 'Todo1', 1),
 (1, 'Doing', 2),
 (1, 'Done', 3),
 (2, 'Doing', 4),
@@ -387,7 +370,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `broad`
 --
 ALTER TABLE `broad`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `card`
