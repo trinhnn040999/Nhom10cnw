@@ -196,7 +196,8 @@ class todoList {
             this,
             "title",
             "input",
-            "h2"
+            "h2",
+            this.id
         );
     }
 }
@@ -366,29 +367,29 @@ class Card {
         `
         );
     }
-    
-    
-        show_memberOfCard(fullname, id) {
+
+
+    show_memberOfCard(fullname, id) {
         let li = document.createElement('li');
-       // li.setAttribute('class', 'dropdown-item member-list');
+        // li.setAttribute('class', 'dropdown-item member-list');
         li.className = 'dropdown-item member-list';
         li.setAttribute('style', 'position: relative;');
         let div1 = document.createElement('div');
-      //  div1.setAttribute('class', 'intro');
+        //  div1.setAttribute('class', 'intro');
         div1.className = 'intro';
         div1.setAttribute('id', 'users' + id);
         div1.setAttribute('style', 'margin-top: 10px;');
         let div2 = document.createElement('div');
         let span = document.createElement('span');
-       // span.setAttribute('class', 'add_card_member');
+        // span.setAttribute('class', 'add_card_member');
         span.className = 'add_card_member';
         let i = document.createElement('i');
-       // i.setAttribute('class', 'fas fa-plus');
+        // i.setAttribute('class', 'fas fa-plus');
         i.className = 'fas fa-plus';
         i.setAttribute('style', 'color:gray;')
         span.append(i);
         let div3 = document.createElement('div');
-       // div3.setAttribute('class', 'name');
+        // div3.setAttribute('class', 'name');
         div3.className = 'name';
         div3.innerText = fullname;
         //div2.setAttribute('class', 'infor');
@@ -399,7 +400,7 @@ class Card {
         img.setAttribute('width', '30');
         img.setAttribute('height', '30');
         img.setAttribute('avatar', fullname);
-       // img.setAttribute('src', '/images/default_avatar.png')
+        // img.setAttribute('src', '/images/default_avatar.png')
         div2.append(div3);
         div1.append(img);
         div1.append(div2);
@@ -409,7 +410,7 @@ class Card {
         return li;
         LetterAvatar.transform();
     }
-    
+
 
 
     deleteCard() {
@@ -419,41 +420,41 @@ class Card {
     }
 
     showMenu() {
-        //Create elements
-        this.menu = document.createElement("div");
-        this.menuContainer = document.createElement("div");
-        this.menuTitle = document.createElement("div");
-        this.menuMember = document.createElement("ul");
-        this.menuDescription = document.createElement("div");
-        this.commentsInput = document.createElement("input");
-        this.commentsButton = document.createElement("button");
-        this.menuComments = document.createElement("div");
-        this.menuChecklist = document.createElement("div");
-        this.menuLeft = document.createElement("div");
-        this.menuRight = document.createElement("div");
-        this.progressBar = document.createElement("div");
-        this.checklist = document.createElement("div");
-        this.formCheckbox = document.createElement("form");
-        this.ulCheckbox = document.createElement("ul");
-        //Add class names
-        this.menuChecklist.className = "menuChecklist checklist";
-        this.menu.className = "menu row";
-        this.menuMember.className = "menuMember list-group list-group-horizontal";
-        this.menuContainer.className = "menuContainer";
-        this.menuTitle.className = "menuTitle";
-        this.menuDescription.className = "menuDescription";
-        this.menuComments.className = "menuComments";
-        this.commentsInput.className = "commentsInput comment";
-        this.commentsButton.className = "commentsButton btn-save";
-        this.menuRight.className = "menu-right col-sm-4";
-        this.menuLeft.className = "menu-left col-sm-8";
-        //Add inner Text
-        this.progressBar.innerHTML = `
+            //Create elements
+            this.menu = document.createElement("div");
+            this.menuContainer = document.createElement("div");
+            this.menuTitle = document.createElement("div");
+            this.menuMember = document.createElement("ul");
+            this.menuDescription = document.createElement("div");
+            this.commentsInput = document.createElement("input");
+            this.commentsButton = document.createElement("button");
+            this.menuComments = document.createElement("div");
+            this.menuChecklist = document.createElement("div");
+            this.menuLeft = document.createElement("div");
+            this.menuRight = document.createElement("div");
+            this.progressBar = document.createElement("div");
+            this.checklist = document.createElement("div");
+            this.formCheckbox = document.createElement("form");
+            this.ulCheckbox = document.createElement("ul");
+            //Add class names
+            this.menuChecklist.className = "menuChecklist checklist";
+            this.menu.className = "menu row";
+            this.menuMember.className = "menuMember list-group list-group-horizontal";
+            this.menuContainer.className = "menuContainer";
+            this.menuTitle.className = "menuTitle";
+            this.menuDescription.className = "menuDescription";
+            this.menuComments.className = "menuComments";
+            this.commentsInput.className = "commentsInput comment";
+            this.commentsButton.className = "commentsButton btn-save";
+            this.menuRight.className = "menu-right col-sm-4";
+            this.menuLeft.className = "menu-left col-sm-8";
+            //Add inner Text
+            this.progressBar.innerHTML = `
       <div class="progressbar-container">
         <div class="progressbar-bar"></div>
         <div class="progressbar-label"></div>
       </div> `;
-        this.menuRight.innerHTML = ` <nav>
+            this.menuRight.innerHTML = ` <nav>
       <ul>
       <li>
       <div class="dueDate">
@@ -551,402 +552,402 @@ class Card {
       </ul>
       </nav>`;
 
-        this.commentsButton.innerText = "Add";
-        this.commentsInput.placeholder = "Write a comment...";
+            this.commentsButton.innerText = "Add";
+            this.commentsInput.placeholder = "Write a comment...";
 
-        //Event listeners
-        this.menuContainer.addEventListener("click", (e) => {
-            console.log(e.target);
-            // var check_ = {
-            //     id: this.id,
-            //     id_checklist: e.target.name
-            // }
-            // $.ajax({
-            //     type: 'POST',
-            //     url: '/api/update_checkbox',
-            //     data: check_,
-            //     dataType: 'json'
-            // })
-            if (e.target.classList.contains("menuContainer")) {
-                this.menuContainer.remove();
-            }
-        });
-
-
-        // for (checkbox in this.checkboxs) {
-        //     console.log('checkbox')
-        //     console.log(checkbox[0])
-        // }
-        // console.log('done')
-        // event thêm
-        this.commentsButton.addEventListener("click", () => {
-            if (this.commentsInput.value != "") {
-                $.ajax({
-                        type: "GET",
-                        url: '/api/get_username'
-                    })
-                    .then(data => {
-                        debugger
-                        console.log(data)
-                        var today = new Date()
-                        var date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate()
-                        var hour = today.getHours() + ':' + today.getMinutes()
-                            // console.log(date + ' ' + hour)
-                        var comment = {
-                            'username': data,
-                            'content': this.commentsInput.value,
-                            'date': date + ' ' + hour
-                        }
-                        var data_comment = {
-                            id: this.id,
-                            username: data,
-                            date: date + ' ' + hour,
-                            text: this.commentsInput.value
-                        }
-
-                        console.log(comment)
-                        this.state.comments.unshift(comment);
-                        $.ajax({
-                            type: 'POST',
-                            url: '/api/insert_comment',
-                            data: data_comment,
-                            dataType: 'json'
-                        })
-                        this.divBottom.innerHTML = this.addContentBottom();
-                        this.renderComments();
-                        this.commentsInput.value = "";
-
-                    })
-            }
-        });
-
-        //Append
-        this.menu.append(this.menuLeft);
-        this.menu.append(this.menuRight);
-        this.menuLeft.append(this.menuTitle);
-        this.menuLeft.append(this.menuMember);
-        this.menuLeft.append(this.progressBar);
-        this.menuLeft.append(this.menuDescription);
-        this.menuLeft.append(this.menuChecklist);
-        this.menuLeft.append(this.commentsInput);
-        this.menuLeft.append(this.commentsButton);
-        this.menuLeft.append(this.menuComments);
-        this.formCheckbox.append(this.ulCheckbox);
-        this.menuChecklist.append(this.formCheckbox);
-        this.menuContainer.append(this.menu);
-        root.append(this.menuContainer);
-
-        this.editableDescription = new EditableText(
-            this.state.description,
-            this.menuDescription,
-            this,
-            "description",
-            "textarea",
-            "p",
-            this.id
-        );
-        this.editableTitle = new EditableText(
-            this.state.text,
-            this.menuTitle,
-            this,
-            "text",
-            "input",
-            "h5",
-            this.id
-        );
-
-        this.renderComments();
-        this.renderChecklist();
-        this.renderMembers();
-
-        this.btnDueDate = document.getElementById("btnDueDate");
-        this.showmember = document.getElementById('usersmember');
-        this.showmember.innerHTML = '';
-        this.showmember.innerText = '    Member in this card';
-        //this.showmember.innerHTML = '';
-
-
-        var data6 = {
-            id_card: this.id
-        };
-        $.ajax({
-                url: "/api/memberOfCard",
-                type: 'POST',
-                data: data6,
-                dataType: 'json'
-            })
-            .then((data9) => {
-                console.log(data9.length);
-                data9.forEach((element) => {
-                    this.showmember.append(this.show_memberOfCard(element['username'], element['id']));
-                    LetterAvatar.transform();
-                });
+            //Event listeners
+            this.menuContainer.addEventListener("click", (e) => {
+                console.log(e.target);
+                // var check_ = {
+                //     id: this.id,
+                //     id_checklist: e.target.name
+                // }
+                // $.ajax({
+                //     type: 'POST',
+                //     url: '/api/update_checkbox',
+                //     data: check_,
+                //     dataType: 'json'
+                // })
+                if (e.target.classList.contains("menuContainer")) {
+                    this.menuContainer.remove();
+                }
             });
 
-//////////////////////////////////////
-        
-var p = this.id;
-        
-$("#searchUser").on("keydown", function(e) {
-    if (e.which == 13) {
-        e.preventDefault();
-        // console.log($("#inviteInput").val());
-        var search = $("#searchUser").val();
-        if (search != "") {
-            var data = {
-                name_search: search,
-                id_card: p
+
+            // for (checkbox in this.checkboxs) {
+            //     console.log('checkbox')
+            //     console.log(checkbox[0])
+            // }
+            // console.log('done')
+            // event thêm
+            this.commentsButton.addEventListener("click", () => {
+                if (this.commentsInput.value != "") {
+                    $.ajax({
+                            type: "GET",
+                            url: '/api/get_username'
+                        })
+                        .then(data => {
+                            debugger
+                            console.log(data)
+                            var today = new Date()
+                            var date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate()
+                            var hour = today.getHours() + ':' + today.getMinutes()
+                                // console.log(date + ' ' + hour)
+                            var comment = {
+                                'username': data,
+                                'content': this.commentsInput.value,
+                                'date': date + ' ' + hour
+                            }
+                            var data_comment = {
+                                id: this.id,
+                                username: data,
+                                date: date + ' ' + hour,
+                                text: this.commentsInput.value
+                            }
+
+                            console.log(comment)
+                            this.state.comments.unshift(comment);
+                            $.ajax({
+                                type: 'POST',
+                                url: '/api/insert_comment',
+                                data: data_comment,
+                                dataType: 'json'
+                            })
+                            this.divBottom.innerHTML = this.addContentBottom();
+                            this.renderComments();
+                            this.commentsInput.value = "";
+
+                        })
+                }
+            });
+
+            //Append
+            this.menu.append(this.menuLeft);
+            this.menu.append(this.menuRight);
+            this.menuLeft.append(this.menuTitle);
+            this.menuLeft.append(this.menuMember);
+            this.menuLeft.append(this.progressBar);
+            this.menuLeft.append(this.menuDescription);
+            this.menuLeft.append(this.menuChecklist);
+            this.menuLeft.append(this.commentsInput);
+            this.menuLeft.append(this.commentsButton);
+            this.menuLeft.append(this.menuComments);
+            this.formCheckbox.append(this.ulCheckbox);
+            this.menuChecklist.append(this.formCheckbox);
+            this.menuContainer.append(this.menu);
+            root.append(this.menuContainer);
+
+            this.editableDescription = new EditableText(
+                this.state.description,
+                this.menuDescription,
+                this,
+                "description",
+                "textarea",
+                "p",
+                this.id
+            );
+            this.editableTitle = new EditableText(
+                this.state.text,
+                this.menuTitle,
+                this,
+                "text",
+                "input",
+                "h5",
+                this.id
+            );
+
+            this.renderComments();
+            this.renderChecklist();
+            this.renderMembers();
+
+            this.btnDueDate = document.getElementById("btnDueDate");
+            this.showmember = document.getElementById('usersmember');
+            this.showmember.innerHTML = '';
+            this.showmember.innerText = '    Member in this card';
+            //this.showmember.innerHTML = '';
+
+
+            var data6 = {
+                id_card: this.id
             };
             $.ajax({
-                    type: "POST",
-                    url: "/api/invite_member_join_card",
-                    data: data,
-                    dataType: "json",
+                    url: "/api/memberOfCard",
+                    type: 'POST',
+                    data: data6,
+                    dataType: 'json'
                 })
-                .then((data) => {
-                    // console.log(data);
-                    let ul = document.getElementById("users_card");
-                    data.forEach((element) => {
-                        let li = document.createElement("li");
-                        ul.append(li);
-                        li.classList.add("dropdown-item");
-                        li.classList.add("inviteMemberjoincard");
-                        let div = document.createElement("div");
-                        li.append(div);
-                        div.classList.add("intro");
-                        div.setAttribute("style", "margin-top: 10px;");
-                        let img = document.createElement("img");
-                        div.append(img);
-                        img.classList.add("round");
-                        img.classList.add("icon-menu");
-                        img.setAttribute("width", "30");
-                        img.setAttribute("height", "30");
-                        img.setAttribute("avatar", element["username"]);
-                        let div2 = document.createElement("div");
-                        div.append(div2);
-                        div2.classList.add("infor");
-                        let div3 = document.createElement("div");
-                        div2.append(div3);
-                        div3.classList.add("name");
-                        div3.setAttribute("id", "name");
-                        div3.append(element["username"]);
-
+                .then((data9) => {
+                    console.log(data9.length);
+                    data9.forEach((element) => {
+                        this.showmember.append(this.show_memberOfCard(element['username'], element['id']));
                         LetterAvatar.transform();
                     });
-
-                    let inviteInput = document.getElementById("searchUser");
-                    inviteInput.value = "";
-                    var member_card = document.getElementsByClassName("inviteMemberjoincard");
-                    // console.log(member)
-                    var members_card = [];
-                    // var i;
-                    for (i = 0; i < member_card.length; i++) {
-                        // member[i].addEventListener("click", () => {
-                        //     // click vào đối tượng
-                        //     console.log(member[i]);
-                        // })
-                        members_card.push(member_card[i]);
-                    }
-                    var i = 0;
-                    members_card.forEach((element) => {
-                        // console.log(element);
-                        element.addEventListener("click", () => {
-                            var username = element.lastChild.lastChild.lastChild.textContent;
-                            var data = {
-                                username: username,
-                                id_card: p
-                            };
-                            $.ajax({
-                                type: "POST",
-                                url: "/api/invitejoincard",
-                                data: data,
-                                dataType: "json"
-                            });
-                        });
-                    });
-                })
-                .catch((err) => {
-                    console.log(err);
                 });
-            }
-        }
-    });
-    
 
-$(document).ready(function() {
-    $(".inviteMemberjoincard").click(function(e) {
-        e.preventDefault();
-        console.log("e: " + e);
-    });
-});
-//////////////////////////////////
+            //////////////////////////////////////
 
-        //lay thong tin ve startDate va endDate
-        var date_ = {
-            id: this.id
-        }
-        $.ajax({
-                type: 'POST',
-                url: '/api/date_detail_card',
-                data: date_,
-                dataType: 'json'
-            })
-            .then(data => {
-                this.divBottom.innerHTML = this.addContentBottom();
+            var p = this.id;
 
-                var start = data['start']
-                console.log(start)
-                if (start == null) start = ''
-                else $(".start button").text(formatDate(new Date(start)));
-
-                var end = data['end']
-                console.log(end)
-                if (end == null) end = ''
-                else {
-                    $(".end button").text(formatDate(new Date(end)));
-                    this.state.endDate = formatMinDate(new Date(end));
-
-                }
-            })
-
-        this.btnDueDate.addEventListener("click", () => {
-            var start = $("#startDate").val().trim();
-            var end = $("#endDate").val().trim();
-            if (start != "" && end != "") {
-                var date_1 = {
-                    id: this.id,
-                    start: start,
-                    end: end
-                }
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/update_date_time',
-                    data: date_1,
-                    dataType: 'json'
-                })
-
-                this.state.endDate = formatMinDate(new Date(end));
-                this.divBottom.innerHTML = this.addContentBottom();
-                $(".start button").text(formatDate(new Date(start)));
-                $(".end button").text(formatDate(new Date(end)));
-            }
-        });
-
-        $(document).ready(function() {
-            LetterAvatar.transform();
-            $("#searchUser").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#users li.member-list").filter(function(x) {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                });
-            });
-        });
-        this.memberList = document.getElementsByClassName("member-list");
-        var members = [];
-        for (var i = 0; i < this.memberList.length; i++) {
-            members.push(this.memberList[i]);
-        }
-        members.forEach((element) => {
-            element.addEventListener("click", () => {
-                var name = element.textContent;
-                if (!this.state.members.includes(name.trim())) {
-                    this.state.members.push(name.trim());
-                    this.renderMembers();
-                }
-            });
-        });
-        this.btnChecklist = document.getElementById("addCheckbox");
-        this.checklistInput = document.getElementById("checkboxInput");
-
-        this.btnChecklist.addEventListener("click", () => {
-            if (this.checklistInput.value.trim() != "") {
-
-                var insert_checklist = {
-                    id: this.id,
-                    checklist_name: this.checklistInput.value,
-                    tick: ' '
-                }
-                $.ajax({
-                        type: 'POST',
-                        url: '/api/insert_checklist',
-                        dataType: 'json',
-                        data: insert_checklist
-                    })
-                    .then(data => {
-                        var checkbox = {
-                            title: this.checklistInput.value,
-                            checked: this.checklistInput.checked,
-                            id_checklist: data['id_checklist']
+            $("#searchUser").on("keydown", function(e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    // console.log($("#inviteInput").val());
+                    var search = $("#searchUser").val();
+                    if (search != "") {
+                        var data = {
+                            name_search: search,
+                            id_card: p
                         };
-                        this.state.checklist.unshift(checkbox);
-                        this.renderChecklist();
-                        this.divBottom.innerHTML = this.addContentBottom();
-                        this.checklistInput.value = "";
-                        checklist();
-                    })
+                        $.ajax({
+                                type: "POST",
+                                url: "/api/invite_member_join_card",
+                                data: data,
+                                dataType: "json",
+                            })
+                            .then((data) => {
+                                // console.log(data);
+                                let ul = document.getElementById("users_card");
+                                data.forEach((element) => {
+                                    let li = document.createElement("li");
+                                    ul.append(li);
+                                    li.classList.add("dropdown-item");
+                                    li.classList.add("inviteMemberjoincard");
+                                    let div = document.createElement("div");
+                                    li.append(div);
+                                    div.classList.add("intro");
+                                    div.setAttribute("style", "margin-top: 10px;");
+                                    let img = document.createElement("img");
+                                    div.append(img);
+                                    img.classList.add("round");
+                                    img.classList.add("icon-menu");
+                                    img.setAttribute("width", "30");
+                                    img.setAttribute("height", "30");
+                                    img.setAttribute("avatar", element["username"]);
+                                    let div2 = document.createElement("div");
+                                    div.append(div2);
+                                    div2.classList.add("infor");
+                                    let div3 = document.createElement("div");
+                                    div2.append(div3);
+                                    div3.classList.add("name");
+                                    div3.setAttribute("id", "name");
+                                    div3.append(element["username"]);
 
-            }
-        });
-        // check box
-        checklist();
-        console.log("OK")
-        var count = $("input[type='checkbox']").length;
-        console.log('count')
-        console.log(this.state.checklist)
-            // var checkbox = document.getElementById('tick 1')
-            // console.log(checkbox.id)
-        var checkboxs = []
-        for (var i = 0; i < this.state.checklist.length; i++) {
-            console.log(this.state.checklist[i]['id_checklist'])
-            var tick = 'tick ' + this.state.checklist[i]['id_checklist']
-            var checkbox = document.getElementById(tick)
+                                    LetterAvatar.transform();
+                                });
 
-            checkboxs.push(checkbox)
-        }
-        console.log('checkboxs')
-        console.log(checkboxs)
-        checkboxs.forEach(element => {
-            element.addEventListener('click', () => {
-                var id_checklist = element.id
-                var data = {
-                    id_checklist: id_checklist
+                                let inviteInput = document.getElementById("searchUser");
+                                inviteInput.value = "";
+                                var member_card = document.getElementsByClassName("inviteMemberjoincard");
+                                // console.log(member)
+                                var members_card = [];
+                                // var i;
+                                for (i = 0; i < member_card.length; i++) {
+                                    // member[i].addEventListener("click", () => {
+                                    //     // click vào đối tượng
+                                    //     console.log(member[i]);
+                                    // })
+                                    members_card.push(member_card[i]);
+                                }
+                                var i = 0;
+                                members_card.forEach((element) => {
+                                    // console.log(element);
+                                    element.addEventListener("click", () => {
+                                        var username = element.lastChild.lastChild.lastChild.textContent;
+                                        var data = {
+                                            username: username,
+                                            id_card: p
+                                        };
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "/api/invitejoincard",
+                                            data: data,
+                                            dataType: "json"
+                                        });
+                                    });
+                                });
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    }
                 }
-                $.ajax({
+            });
+
+
+            $(document).ready(function() {
+                $(".inviteMemberjoincard").click(function(e) {
+                    e.preventDefault();
+                    console.log("e: " + e);
+                });
+            });
+            //////////////////////////////////
+
+            //lay thong tin ve startDate va endDate
+            var date_ = {
+                id: this.id
+            }
+            $.ajax({
                     type: 'POST',
-                    url: '/api/update_checkbox',
-                    data: data,
+                    url: '/api/date_detail_card',
+                    data: date_,
                     dataType: 'json'
                 })
-                id_checklist = id_checklist.split(" ")[1]
-                for (var i = 0; i < this.state.checklist.length; i++) {
-                    if (this.state.checklist[i]['id_checklist'] == id_checklist) {
-                        if (this.state.checklist[i]['checked'] != 'checked') {
-                            this.state.checklist[i]['checked'] = 'checked'
-                        } else {
-                            this.state.checklist[i]['checked'] = " "
+                .then(data => {
+                    this.divBottom.innerHTML = this.addContentBottom();
+
+                    var start = data['start']
+                    console.log(start)
+                    if (start == null) start = ''
+                    else $(".start button").text(formatDate(new Date(start)));
+
+                    var end = data['end']
+                    console.log(end)
+                    if (end == null) end = ''
+                    else {
+                        $(".end button").text(formatDate(new Date(end)));
+                        this.state.endDate = formatMinDate(new Date(end));
+
+                    }
+                })
+
+            this.btnDueDate.addEventListener("click", () => {
+                var start = $("#startDate").val().trim();
+                var end = $("#endDate").val().trim();
+                if (start != "" && end != "") {
+                    var date_1 = {
+                        id: this.id,
+                        start: start,
+                        end: end
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/update_date_time',
+                        data: date_1,
+                        dataType: 'json'
+                    })
+
+                    this.state.endDate = formatMinDate(new Date(end));
+                    this.divBottom.innerHTML = this.addContentBottom();
+                    $(".start button").text(formatDate(new Date(start)));
+                    $(".end button").text(formatDate(new Date(end)));
+                }
+            });
+
+            $(document).ready(function() {
+                LetterAvatar.transform();
+                $("#searchUser").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#users li.member-list").filter(function(x) {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                    });
+                });
+            });
+            this.memberList = document.getElementsByClassName("member-list");
+            var members = [];
+            for (var i = 0; i < this.memberList.length; i++) {
+                members.push(this.memberList[i]);
+            }
+            members.forEach((element) => {
+                element.addEventListener("click", () => {
+                    var name = element.textContent;
+                    if (!this.state.members.includes(name.trim())) {
+                        this.state.members.push(name.trim());
+                        this.renderMembers();
+                    }
+                });
+            });
+            this.btnChecklist = document.getElementById("addCheckbox");
+            this.checklistInput = document.getElementById("checkboxInput");
+
+            this.btnChecklist.addEventListener("click", () => {
+                if (this.checklistInput.value.trim() != "") {
+
+                    var insert_checklist = {
+                        id: this.id,
+                        checklist_name: this.checklistInput.value,
+                        tick: ' '
+                    }
+                    $.ajax({
+                            type: 'POST',
+                            url: '/api/insert_checklist',
+                            dataType: 'json',
+                            data: insert_checklist
+                        })
+                        .then(data => {
+                            var checkbox = {
+                                title: this.checklistInput.value,
+                                checked: this.checklistInput.checked,
+                                id_checklist: data['id_checklist']
+                            };
+                            this.state.checklist.unshift(checkbox);
+                            this.renderChecklist();
+                            this.divBottom.innerHTML = this.addContentBottom();
+                            this.checklistInput.value = "";
+                            checklist();
+                        })
+
+                }
+            });
+            // check box
+            checklist();
+            console.log("OK")
+            var count = $("input[type='checkbox']").length;
+            console.log('count')
+            console.log(this.state.checklist)
+                // var checkbox = document.getElementById('tick 1')
+                // console.log(checkbox.id)
+            var checkboxs = []
+            for (var i = 0; i < this.state.checklist.length; i++) {
+                console.log(this.state.checklist[i]['id_checklist'])
+                var tick = 'tick ' + this.state.checklist[i]['id_checklist']
+                var checkbox = document.getElementById(tick)
+
+                checkboxs.push(checkbox)
+            }
+            console.log('checkboxs')
+            console.log(checkboxs)
+            checkboxs.forEach(element => {
+                element.addEventListener('click', () => {
+                    var id_checklist = element.id
+                    var data = {
+                        id_checklist: id_checklist
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/update_checkbox',
+                        data: data,
+                        dataType: 'json'
+                    })
+                    id_checklist = id_checklist.split(" ")[1]
+                    for (var i = 0; i < this.state.checklist.length; i++) {
+                        if (this.state.checklist[i]['id_checklist'] == id_checklist) {
+                            if (this.state.checklist[i]['checked'] != 'checked') {
+                                this.state.checklist[i]['checked'] = 'checked'
+                            } else {
+                                this.state.checklist[i]['checked'] = " "
+                            }
                         }
                     }
-                }
-                this.divBottom.innerHTML = this.addContentBottom();
-                checklist()
-            })
-        });
-        dateTime();
-    }
-//     renderMembers() {
-//         let members = Array.from(this.menuMember.childNodes);
-//         members.forEach((member) => {
-//             member.remove();
-//         });
-//         this.state.members.forEach((member) => {
-//             $(".menuMember").append(this.formatMember(member));
-//             LetterAvatar.transform()
-//         });
-//         LetterAvatar.transform();
-//     }
-    
-    
-        renderMembers() {
+                    this.divBottom.innerHTML = this.addContentBottom();
+                    checklist()
+                })
+            });
+            dateTime();
+        }
+        //     renderMembers() {
+        //         let members = Array.from(this.menuMember.childNodes);
+        //         members.forEach((member) => {
+        //             member.remove();
+        //         });
+        //         this.state.members.forEach((member) => {
+        //             $(".menuMember").append(this.formatMember(member));
+        //             LetterAvatar.transform()
+        //         });
+        //         LetterAvatar.transform();
+        //     }
+
+
+    renderMembers() {
         let members = Array.from(this.menuMember.childNodes);
         members.forEach((member) => {
             member.remove();
@@ -956,24 +957,24 @@ $(document).ready(function() {
             id_card: p
         };
         $.ajax({
-            type:'POST',
-            url:'/api/memberOfCard',
-            data:data1999,
-            dataType: 'json'
-        })
-        .then((data)=>{
-            //var i = 0;
-           // this.state.members = data['username'];
-            // data.forEach((element)=>{
-            //     this.state.members[i] = element[i]['username'];
-            //     i += 1;
-            // })
-            data.forEach((member) => {
-                $(".menuMember").append(this.formatMember(member['username']));
-                LetterAvatar.transform()
-            });
-        })
-       LetterAvatar.transform();
+                type: 'POST',
+                url: '/api/memberOfCard',
+                data: data1999,
+                dataType: 'json'
+            })
+            .then((data) => {
+                //var i = 0;
+                // this.state.members = data['username'];
+                // data.forEach((element)=>{
+                //     this.state.members[i] = element[i]['username'];
+                //     i += 1;
+                // })
+                data.forEach((member) => {
+                    $(".menuMember").append(this.formatMember(member['username']));
+                    LetterAvatar.transform()
+                });
+            })
+        LetterAvatar.transform();
     }
 
     //Chỉnh comment
@@ -1080,6 +1081,13 @@ class EditableText {
                 $.ajax({
                     type: 'POST',
                     url: "/api/change_description",
+                    data: data,
+                    dataType: 'json'
+                })
+            } else if (this.property == 'title') {
+                $.ajax({
+                    type: 'POST',
+                    url: "/api/change_title",
                     data: data,
                     dataType: 'json'
                 })

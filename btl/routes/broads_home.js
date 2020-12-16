@@ -489,4 +489,17 @@ app.post('/get_post_board', function(req, res, next) {
     })
 })
 
+// thay doi title card theo id
+app.post('/change_title', function(req, res, next) {
+    var title = {
+        'id_card': req.body.id,
+        'title': req.body.text
+    }
+    var query = 'UPDATE title set title = ? where id_card=?'
+    connection.query(query, [title['title'], title['id_card']], (error, results, next) => {
+        if (error) throw error
+        console.log('update success')
+    })
+})
+
 module.exports = app;
