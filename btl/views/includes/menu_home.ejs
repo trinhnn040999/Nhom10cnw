@@ -27,12 +27,29 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item search">
                     <!-- Search -->
-                    <div class="form-inline active-pink-3 active-pink-4">
-                        <i class="fas fa-search" aria-hidden="true"></i>
-                        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                            aria-label="Search">
+                    <div class="dropdown">
+                        <div class="form-inline active-pink-3 active-pink-4">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <input class="form-control form-control-sm ml-3 w-75 dropdown-toggle" type="text" placeholder="Search" data-toggle="dropdown" autocomplete="off"
+                                aria-label="Search">
+                        </div>
+                        <div class="dropdown-menu">
+                            <ul style="margin: 10px 10px; font-size: 16px; width: 300px;max-height: 500px; overflow: auto;">
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <span><img width="40" height="40"
+                                                    src="../public/images/contact-background.jpg" style="margin-right: 40px;"> CNWeb nhóm 10 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate odit dolorum, a quidem dignissimos quos eveniet dolorem eligendi soluta. Minus recusandae suscipit adipisci distinctio molestias, aut commodi esse quis tenetur?-=-==</span>
+                                    </a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <span><img width="40" height="40"
+                                                    src="../public/images/contact-background.jpg" style="margin-right: 40px;"> CNWeb nhóm 10</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-
                 </li>
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#header"><button class="btn btn-primary icon-menu"><i
@@ -64,7 +81,7 @@
                         </a>
                         <div class="dropdown-items-divide-hr"></div>
                         <a class="dropdown-item" href="#">
-                            <span class="item-text">Card</span>
+                            <span class="item-text">Help</span>
                         </a>
                         <a class="dropdown-item" href="#">
                             <span class="item-text">Setting</span>

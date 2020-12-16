@@ -45,13 +45,34 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item search">
-                    <!-- Search form -->
-                    <form class="form-inline active-pink-3 active-pink-4">
-                        <i class="fas fa-search" aria-hidden="true"></i>
-                        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                            aria-label="Search">
-                    </form>
+                    <!-- Search -->
+                    <div class="dropdown">
+                        <div class="form-inline active-pink-3 active-pink-4">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <input class="form-control form-control-sm ml-3 w-75 dropdown-toggle" type="text" placeholder="Search" data-toggle="dropdown" autocomplete="off"
+                                aria-label="Search">
+                        </div>
+                        <div class="dropdown-menu">
+                            <ul id="resultSearch" style="margin: 10px 10px; font-size: 16px; width: 300px;max-height: 500px; overflow: auto;">
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <span><img width="40" height="40"
+                                                    src="../public/images/contact-background.jpg" style="margin-right: 40px;"> CNWeb nhóm 10 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate odit dolorum, a quidem dignissimos quos eveniet dolorem eligendi soluta. Minus recusandae suscipit adipisci distinctio molestias, aut commodi esse quis tenetur?-=-==</span>
+                                    </a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a href="#">
+                                        <span><img width="40" height="40"
+                                                    src="../public/images/contact-background.jpg" style="margin-right: 40px;"> CNWeb nhóm 10</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </li>
+                <script>
+
+                </script>
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#header"><button class="btn btn-primary icon-menu"><i
                                 class="fas fa-home"></i></button> <span class="sr-only">(current)</span></a>
@@ -215,7 +236,7 @@
                 </li>
                 <li class="dropdown-item">
                     <button style="background:#0079bf"></button>
-                    <span >Blue</span>
+                    <span>Blue</span>
                 </li>
             </ul>
         </div>
@@ -241,7 +262,39 @@
             });
         });
     </script>
+    <button type="button" class="btn btn-primary" id="myBtn">Open Modal</button>
 
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#myBtn").click(function () {
+                $("#myModal").modal();
+            });
+        });
+    </script>
     <div id="root" class="lists-container"></div>
     <script src="../../public/javascripts/jquery.min.js"></script>
     <!-- jQuery for Bootstrap's JavaScript plugins -->
@@ -264,8 +317,12 @@
     <script src="../../public/javascripts/broad2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     <script src="../../public/javascripts/changeBackgroud.js"></script>
+    <script src="../../public/javascripts/search.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

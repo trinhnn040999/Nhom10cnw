@@ -651,7 +651,7 @@ screen and (-ms-high-contrast: none) {
 
 .spinner-wrapper {
     position: fixed;
-    z-index: 999999;
+    z-index: 999;
     top: 0;
     right: 0;
     bottom: 0;
@@ -2079,7 +2079,10 @@ a {
     margin-left: 40px;
 }
 
-
+/* modal */
+/* .modal-backdrop{
+    z-index: 1031;
+} */
 /* end search */
 
 

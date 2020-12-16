@@ -26,113 +26,31 @@
 </head>
 
 <body>
-
-    <div id="addTodoListDiv">
-        <input id="addTodoListInput" class="comment">
-        <button id="addTodoListButton" class="btn-save" onclick="updateSord()">Add new list</button>
-    </div>
-    <!-- <h3 class="title-checklist">Xin chào</h3>
-    <div class="progressbar-container">
-        <div class="progressbar-bar"></div>
-        <div class="progressbar-label"></div>
-    </div>
-    <form>        
-        <ul>
-            <li class="row">
-                <input type="checkbox" name="box1" class="col-sm-1"/>
-                <p class="col-sm-6" style="margin-left: -20px;">Xin chào Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi eligendi omnis vitae accusamus id dolore debitis? Enim officia nam facere provident, deserunt quis, voluptatibus adipisci saepe exercitationem aliquam, similique et.</p>
-            </li>
-            <li class="row">
-                <input type="checkbox" name="box1" class="col-sm-1"/>
-                <p class="col-sm-6" style="margin-left: -20px;">Xin chào Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi eligendi omnis vitae accusamus id dolore debitis? Enim officia nam facere provident, deserunt quis, voluptatibus adipisci saepe exercitationem aliquam, similique et.</p>
-            </li>
-            <li class="row">
-                <input type="checkbox" name="box1" class="col-sm-1"/>
-                <p class="col-sm-6" style="margin-left: -20px;">Xin chào Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi eligendi omnis vitae accusamus id dolore debitis? Enim officia nam facere provident, deserunt quis, voluptatibus adipisci saepe exercitationem aliquam, similique et.</p>
-            </li>
-        </ul>
-    </form>
-    <div class="ready"></div> -->
-    <!-- <div class="dropdown">
-        <button type="button"  id="btnAddCheckbox" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-            Add item
-        </button>
-      <div class="dropdown-menu">
-          <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-            <input type="text" class="form-control" placeholder="title item" id="checkboxInput">
-            <button class="btn btn-success" style="text-align: center; margin-top: 10px;" id="addCheckbox">Add an item</button>
-          </div>
-      </div>
-    </div> -->
-    <div id="root" class="lists-container">
-        <div class="todoList ui-draggable ui-draggable-handle ui-droppable" style="position: relative;">
-            <h2>
-                <div>
-                    <h2>abcx</h2>
-                </div>
-            </h2>
-            <div class="row" style="">
-                <input class="comment col-sm-8"><button class="btn-save col-sm-3" id="to-do-list-button">Add</button>
-            </div>
-            
-            <ul class="sortable ui-sortable" id="sort">
-                <li class="card-item">
-                    <div class="content-top">
-                        <p>sd1111111111111111111111111111111111111111111111</p><button>X</button>
-                    </div>
-                    <div class="content-bottom">
-                        <ul class="nav">
-                            <li class="nav-item disabled date">
-                                <i class="fas fa-hourglass-start"></i> 11 Dec
-                            </li>
-                            <li class="nav-item disabled number-comment" >
-                                <i class="fas fa-comments"></i> 3
-                            </li>
-                            <li class="nav-item disabled number-check">
-                                <i class="far fa-check-square"></i> 4/6
-                            </li>
-                        </ul>
-                    </div>
+    <div class="menuContainer" >
+        <div class="menu">
+            <i style="margin-left: 20px;">About 17,700 results</i>
+            <ul style="margin: 10px 70px; font-size: 20px;">
+                <li class="select-menu">
+                    <a href="#">
+                        <span><img width="60" height="60"
+                                    src="../public/images/contact-background.jpg" style="margin-right: 40px;"> CNWeb nhóm 10</span>
+                    </a>
                 </li>
-                <li class="card-item">
-                    <div class="content-top">
-                        <p>sd1111111111111111111111111111111111111111111111</p><button>X</button>
-                    </div>
-                    <div class="content-bottom">
-                        <ul class="nav">
-                            <li class="nav-item disabled date">
-                                <i class="fas fa-hourglass-start"></i> <span>11 Dec</span>
-                            </li>
-                            <li class="nav-item disabled number-comment" >
-                                <i class="fas fa-comments"></i> <span>4</span>
-                            </li>
-                            <li class="nav-item disabled number-check">
-                                <i class="far fa-check-square"></i> <span class="checked">6</span><span class="sum">7</span>
-                            </li>
-                        </ul>
-                    </div>
+                <li class="select-menu">
+                    <a href="#">
+                        <span><img width="60" height="60"
+                                    src="../public/images/contact-background.jpg" style="margin-right: 40px;"> CNWeb nhóm 10</span>
+                    </a>
+                </li>
+                <li class="select-menu">
+                    <a href="#">
+                        <span><img width="60" height="60"
+                                    src="../public/images/contact-background.jpg" style="margin-right: 40px;"> CNWeb nhóm 10</span>
+                    </a>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="dueDate">
-        <div class="start row" >
-            <div class="label" style="flex: 0 0 33%;">
-                Start: 
-            </div>
-            <button disabled="disabled" class="btn btn-light" style="flex: 0 0 67%;">12/12/2020 11am:45</button>
-        </div>
-    </div>
-    <button class="btn btn-light"></button>
-    <script>
-        $(function () {
-            $('ul[id^="sort"]').sortable(
-                {
-                    connectWith: ".sortable",
-                }).disableSelection();
-        });
-
-    </script>
     <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="../../public/javascripts/popper.min.js"></script>
     <!-- Popper tooltip library for Bootstrap -->
