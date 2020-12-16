@@ -452,4 +452,31 @@ app.get('/get_broad_personal', function(req, res, next) {
     })
 })
 
+app.post('/invite_member_join_card', function(req, res, next){
+    var id_broad = req.cookies['id_broad'];
+    var data = {
+        'name_search': req.body.name_search,
+        'id_card': req.body.id_card
+    };
+    //var query = "select * from (select * from broad where id = " + id_broad + ") where username like '%" + data['name_search'] + "%' and username not in (select username from member_card where id = " +  data['id_card'] + ")";
+    var query = "select * from accounts where email in (select email from broad where id =" + id_broad + ") AND username like '%" +data['name_search'] + "%'";
+    connection.query(query, (error, results, fields) =>{
+        console.log("show member join card success");
+        res.json(results);
+    })
+})
+
+//sau khi click them thanh vien vao card
+app.post('/invitejoincard', function(req, res, next){
+    var data = {
+        'id':req.body.id_card,
+        'username': req.body.username
+        
+    };
+    connection.query ("insert into member_card set ?", data, (error, results, next) =>{
+        console.log("invite member join card success ");
+    })
+})
+
+
 module.exports = app;
