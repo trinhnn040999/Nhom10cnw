@@ -1,9 +1,10 @@
 // Xử lý hàm search
 // Khi người dùng nhập key vào, nó sẽ lấy dữ liệu từ db đổ vào , cái này chỉ search broad thôi.
 $(document).ready(function(){
-    $("input.form-control.form-control-sm.ml-3.w-75").keydown(function(){
+    $("input.form-control.form-control-sm.ml-3.w-75.dropdown-toggle").keydown(function(){
+        $('#resultSearch').empty(); //Hàm xóa hết các li bên trong
         // Hàm append này chỉ cần thay nd CNWeb với link thẻ a, link img
-        $('li.nav-item.search .dropdown .dropdown-menu #resultSearch').append(
+        $('#resultSearch').append(
             `
             <li class="dropdown-item">
                 <a href="#">
