@@ -1005,19 +1005,14 @@ class Card {
     renderChecklist() {
 
         console.log(this.state.checklist)
-
         let currentChecklistDOM = Array.from(this.ulCheckbox.childNodes);
         currentChecklistDOM.forEach((item) => {
             item.remove();
         });
         this.state.checklist.forEach((checkbox) => {
-            // new Comment(comment, this.menuComments, this);
             console.log(checkbox)
             new Checklist(checkbox.title, this.ulCheckbox, this, checkbox.checked, checkbox.id_checklist);
-            // var a = document.getElementsByName('box ' + checkbox.id_checklist)
-            // a.addEventListener('click', () => {
-            //     console.log("OK")
-            // })
+
         });
     }
 }

@@ -1,3 +1,5 @@
+// cac router nhu la mot controller
+
 var express = require('express')
 var passport = require('passport')
 var session = require('express-session')
@@ -301,6 +303,8 @@ app.post('/checklist', function(req, res, next) {
     })
 })
 
+
+// them check list
 app.post('/insert_checklist', function(req, res, next) {
     var id = req.body.id
     var checklist_name = req.body.checklist_name
@@ -312,16 +316,18 @@ app.post('/insert_checklist', function(req, res, next) {
     }
     console.log(check_list)
     connection.query('insert into check_list set ? ', check_list, (error, results, fields) => {
+        // neu thay co loi xay ra
         if (error) throw error
         else
+        // neu khong co loi xay ra
             connection.query('SELECT id_checklist FROM check_list ORDER BY check_list.id_checklist DESC LIMIT 1', (error, results, fields) => {
-                console.log('insert checklist thanh cong')
-                res.json(results[0])
-            })
+            console.log('insert checklist thanh cong')
+            res.json(results[0])
+        })
     })
 })
 
-
+///????????
 app.post('/memberOfCard', function(req, res, next) {
     var id = req.body.id_card;
     var query = 'select * from accounts where username in (select username from member_card where id = ?)';
@@ -338,15 +344,19 @@ app.post('/update_checkbox', function(req, res, next) {
     connection.query("SELECT * FROM check_list WHERE id_checklist = ?", id_checklist, (error, results, next) => {
         var tick = results[0]['tick']
         if (tick != 'checked') {
+            //neu chua checked
             connection.query('update check_list set tick = ? where id_checklist = ?', ['checked', results[0]['id_checklist']],
                 (error, results, fields) => {
+                    // neu loi
                     if (error) throw error
                     else console.log('update check box success! null --> checked')
                 }
             )
         } else {
+            //neu da checked
             connection.query('update check_list set tick = ? where id_checklist = ?', [' ', results[0]['id_checklist']],
                 (error, results, fields) => {
+                    //neu loi
                     if (error) throw error
                     else console.log('update check box success! check --> null')
                 }
@@ -364,7 +374,9 @@ app.post('/comment', function(req, res, next) {
     var id = req.body.id
     console.log('comment : ' + id)
     connection.query('SELECT * FROM comment WHERE id = ? ORDER BY id_comment DESC', id, (error, results, fields) => {
+        // neu loi
         if (error) throw error
+            // neu khong loi chuyen du lieu len cho ajax    
         else { res.json(results) }
     })
 })
@@ -378,7 +390,9 @@ app.post('/insert_comment', function(req, res, next) {
             'text_comment': req.body.text
         }
         //truy van
+
     connection.query("insert into comment set ?", new_comment, (error, results, fields) => {
+        // neu loi
         if (error) throw error
         else {
             console.log('insert comment success!!')
@@ -426,8 +440,10 @@ app.get('/id_background', function(req, res, next) {
     var id = req.cookies['id_broad']
     console.log(id)
     connection.query("SELECT id_background FROM background WHERE id = ?", id, (error, results, fields) => {
+        //neu loi
         if (error) throw error
         else {
+            // neu khong loi thi chuyen du lieu cho ajax
             console.log('OK!!' + results)
             res.json(results[0])
         }
@@ -438,6 +454,7 @@ app.get('/id_background', function(req, res, next) {
 app.get('/get_broad_star', function(req, res, next) {
     var email = req.cookies['email']
     connection.query('select * from broad where email = ? and favourite=1', email, (error, results, fields) => {
+        // neu loi
         if (error) throw error
         res.json(results)
     })
