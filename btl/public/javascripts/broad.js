@@ -919,17 +919,47 @@ $(document).ready(function() {
         });
         dateTime();
     }
-    renderMembers() {
+//     renderMembers() {
+//         let members = Array.from(this.menuMember.childNodes);
+//         members.forEach((member) => {
+//             member.remove();
+//         });
+//         this.state.members.forEach((member) => {
+//             $(".menuMember").append(this.formatMember(member));
+//             LetterAvatar.transform()
+//         });
+//         LetterAvatar.transform();
+//     }
+    
+    
+        renderMembers() {
         let members = Array.from(this.menuMember.childNodes);
         members.forEach((member) => {
             member.remove();
         });
-        this.state.members.forEach((member) => {
-            $(".menuMember").append(this.formatMember(member));
-            LetterAvatar.transform()
-        });
-        LetterAvatar.transform();
-    }
+        let p = this.id;
+        let data1999 = {
+            id_card: p
+        };
+        $.ajax({
+            type:'POST',
+            url:'/api/memberOfCard',
+            data:data1999,
+            dataType: 'json'
+        })
+        .then((data)=>{
+            //var i = 0;
+           // this.state.members = data['username'];
+            // data.forEach((element)=>{
+            //     this.state.members[i] = element[i]['username'];
+            //     i += 1;
+            // })
+            data.forEach((member) => {
+                $(".menuMember").append(this.formatMember(member['username']));
+                LetterAvatar.transform()
+            });
+        })
+
 
     //Chỉnh comment
     renderComments() {
@@ -1565,23 +1595,26 @@ let member1 = document.getElementById("member1");
 
 function showMember(user_name) {
     let div1 = document.createElement('div');
-    div1.setAttribute('class', 'intro dropdown-item');
+    div1.className = 'intro dropdown-item';
     div1.setAttribute('style', 'margin-top: 10px;');
     let img = document.createElement('img');
-    img.setAttribute('class', 'round icon-menu');
+    img.className = 'round icon-menu';
     img.setAttribute('width', '30');
     img.setAttribute('height', '30');
-    img.setAttribute('src', "/images/default_avatar.png");
+    //img.setAttribute('src', "/images/default_avatar.png");
+    img.setAttribute("avatar", user_name);
     let div2 = document.createElement('div');
-    div2.setAttribute('class', 'infor');
+    div2.className = 'infor'
     let div3 = document.createElement('div');
-    div3.setAttribute('class', 'name');
+    div3.className = 'name';
     div3.innerText = user_name;
     div2.append(div3);
     div1.append(img);
     div1.append(div2);
     member1.append(div1);
+    LetterAvatar.transform();
 }
+
 
 let button1 = document.getElementById("memberTeam");
 
